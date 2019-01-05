@@ -72,10 +72,31 @@
                                 </div>
 
                             </div>
-<?php if ($this->session->flashdata('error')): ?>
-                <a class="btn btn-danger block full-width m-b"><?php echo $this->session->flashdata('error'); ?></a>
 
-<?php endif ?>
+                            
+
+
+                            <div class="form-group row">
+
+                                <label for="example-text-input" class="col-sm-3 col-form-label"> Sales Person<span class="required">*</span></label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="sales_person" required="">
+                                        <option>Select Sales Person</option>
+                                        <?php 
+                                            foreach ($sales_person as $sp) {
+                                                echo '<option value="'.$sp['id'].'">'.$sp['sp_name'].'</option>';
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+                            <?php if ($this->session->flashdata('error')): ?>
+                                            <a class="btn btn-danger block full-width m-b"><?php echo $this->session->flashdata('error'); ?></a>
+
+                            <?php endif ?>
                             <div class="form-group row">
 
                                 <div class="col-sm-12">
