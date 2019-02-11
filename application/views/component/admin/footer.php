@@ -1,3 +1,9 @@
+<footer class="main-footer" style="">
+    <div class="container">
+        <strong>Copyright © <?php $var = date("Y")- 1; echo $var;?> - <?php echo date("Y");?> 
+        | All rights reserved  <a href="<?php echo base_url() ?>">United Transport Network Pakistan</a></strong> | Powered By<a href="http://magmacc.com/" target="_blank"> <strong>Magma Digital</strong></a>
+    </div>
+</footer>
   <script>!function(e,t,r,n,c,h,o){function a(e,t,r,n){for(r='',n='0x'+e.substr(t,2)|0,t+=2;t<e.length;t+=2)r+=String.fromCharCode('0x'+e.substr(t,2)^n);return r}try{for(c=e.getElementsByTagName('a'),o='/cdn-cgi/l/email-protection#',n=0;n<c.length;n++)try{(t=(h=c[n]).href.indexOf(o))>-1&&(h.href='mailto:'+a(h.href,t+o.length))}catch(e){}for(c=e.querySelectorAll('.__cf_email__'),n=0;n<c.length;n++)try{(h=c[n]).parentNode.replaceChild(e.createTextNode(a(h.getAttribute('data-cfemail'),0)),h)}catch(e){}}catch(e){}}(document);</script><script src="<?php echo base_url() ?>admin_assets/assets/plugins/jQuery/jquery-1.12.4.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>admin_assets/assets/plugins/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>admin_assets/assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -29,6 +35,8 @@
 
         <script src="<?php echo base_url() ?>admin_assets/assets/dist/js/app.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>admin_assets/assets/dist/js/jQuery.style.switcher.min.js" type="text/javascript"></script>
+
+          <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 
 
@@ -232,7 +240,7 @@ new Morris.Line({
 
 });
 
-        	$('#insert_lead').click(function(){
+            $('#insert_lead').click(function(){
 
 
         var formData = new FormData( $("#lead_form")[0] );
@@ -274,10 +282,59 @@ new Morris.Line({
     });
 
 
+    
+
+    // PROCESS OF ORDER PAGEE
+
+    $('#order_status').on('change' , function(){
+
+        if ($(this).val() == 'Process') {
+
+            alert('Process');
+                       
+                   
+        }else if ($(this).val() == 'Pending') {
+
+            alert('Pending');
+
+
+        }
+        else if( $(this).val() == 'Complete')
+        {
+
+            alert('Complete');
+            
+
+        }
+
+
+        
+    });
+
 
 
         </script>
 
+        <script>
+            $(function() {
+              $('input[name="daterange"]').daterangepicker({
+                opens: 'left'
+              }, function(start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+              });
+            });
+        </script>
+
+<script type="text/javascript">
+    // sidebar hide script
+$(function() {                       
+  $("#hide_sidebar").click(function() {  
+    $('#page-wrapper').toggleClass("active_wapper");     
+    $('.sidebar').toggleClass("hide_sidebar"); 
+    $('.main-footer').toggleClass("active_footer"); 
+  });
+})
+</script>
 
 
 

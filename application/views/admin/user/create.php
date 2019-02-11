@@ -72,10 +72,14 @@
                                 </div>
 
                             </div>
-<?php if ($this->session->flashdata('error')): ?>
-                <a class="btn btn-danger block full-width m-b"><?php echo $this->session->flashdata('error'); ?></a>
 
-<?php endif ?>
+                            
+
+
+                            <?php if ($this->session->flashdata('error')): ?>
+                                            <a class="btn btn-danger block full-width m-b"><?php echo $this->session->flashdata('error'); ?></a>
+
+                            <?php endif ?>
                             <div class="form-group row">
 
                                 <div class="col-sm-12">

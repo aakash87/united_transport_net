@@ -1,0 +1,84 @@
+<?php
+class Reports_model extends MY_Model{
+
+	public function  vehicel_reports_profit_m($vehicel_id , $str_current_day , $str_last_day )
+	{
+		
+		$this->db->select('orders.* , cu.full_name');
+		$this->db->from('orders');
+
+		$this->db->join('customer cu' , 'orders.order_customer = cu.id' , 'left');
+
+		$this->db->where('orders.vehicel_of_vendor' , $vehicel_id);	
+
+	    $this->db->where('order_date >=' , $str_current_day );
+		$this->db->where('order_date <=' , $str_last_day );	
+
+		return $this->db->get()->result_array();
+	}
+
+	public function vehicels_exp_rep($vehicel_id , $str_current_day , $str_last_day )
+	{
+		$this->db->select('order_expense.*');
+		$this->db->from('order_expense');
+
+	    $this->db->where('vehicel_id' , $vehicel_id );
+	    $this->db->where('expense_date >=' , $str_current_day );
+		$this->db->where('expense_date <=' , $str_last_day );	
+
+		return $this->db->get()->result_array();
+	}
+
+	public function sales_person_ledger($sales_person_id)
+	{
+		$this->db->select('sales_person_ledger.* , cu.full_name , ' );
+		$this->db->from('sales_person_ledger');
+		$this->db->join('invoice inv' , 'inv.invoice_voucher_number =  sales_person_ledger.voucher_no' , 'left');
+		$this->db->join('customer cu' , 'cu.id =  sales_person_ledger.customer_id' , 'left');
+
+		$this->db->where('sales_person_ledger.sales_person_id' , $sales_person_id);
+
+
+		return $this->db->get()->result_array();
+	}
+
+	public function customer_ledger($customer_id)
+	{
+		$this->db->select('customer_ledger.* , cu.full_name , ' );
+		$this->db->from('customer_ledger');
+		$this->db->join('invoice inv' , 'inv.invoice_voucher_number =  customer_ledger.voucher_no' , 'left');
+		$this->db->join('customer cu' , 'cu.id =  customer_ledger.customer_id' , 'left');
+
+		$this->db->where('customer_ledger.customer_id' , $customer_id);
+
+		return $this->db->get()->result_array();
+	}
+	public function vendor_ledger($vendor_id)
+	{
+		$this->db->select('vendor_ledger.* , ven.vendor_name , ' );
+		$this->db->from('vendor_ledger');
+		
+		$this->db->join('vendor ven' , 'ven.id =  vendor_ledger.customer_id' , 'left');
+
+		$this->db->where('vendor_ledger.customer_id' , $vendor_id);
+
+		return $this->db->get()->result_array();
+	}
+	public function driver_ledger($driver_id)
+	{
+		$this->db->select('orders.* , o_expance.*, o_s_stop.*, cu.full_name ,  driv.First_Name as driver_name, vehicle.registration_number ' );
+		$this->db->from('orders');
+		$this->db->join('order_expense o_expance' , 'o_expance.order_id = orders.id' , 'left');
+		$this->db->join('order_second_stop o_s_stop' , 'o_s_stop.second_stop_order_id = orders.id' , 'left');
+		$this->db->join('customer cu' , 'orders.order_customer = cu.id' , 'left');
+		$this->db->join('drivers driv' , 'driv.id = orders.order_driver' , 'left');
+		$this->db->join('vehicle' , 'vehicle.id = orders.order_vehicle' , 'left');
+
+		$this->db->where('orders.order_driver' , $driver_id);
+
+		return $this->db->get()->result_array();
+	}
+
+
+
+}
