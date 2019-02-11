@@ -71,8 +71,27 @@
                                                     <input class="form-control" name="invoice_total_amount" type="text" value="<?php echo $invoice['invoice_total_amount']; ?>" id="example-text-input" placeholder="" readonly >
                                               </div>
                                         </div>
-                                        
+                                        <div class="form-group row">
 
+                                        <label for="example-text-input" class="col-sm-3 col-form-label">Select Bank</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control bank_id" data-live-search="true" name="bank_id" >
+                                                        <option>Select Bank</option>
+                                                        <?php foreach ($banks as $bank) : ?>
+                                                            <option value="<?php echo $bank['id']; ?>"><?php echo $bank['bank_name']; ?></option>
+                                                        <?php endforeach; ?>
+                                        
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                             <div class="form-group row">
+
+                                <label for="example-text-input" class="col-sm-3 col-form-label"> Bank Amount</label>
+                                        <div class="col-sm-9"><input class="form-control bank_amount" name="bank_amount" type="text" value="" id="example-text-input" placeholder="" readonly=""></div>
+
+                                    </div>
 
   <div class="form-group row">
 
@@ -119,3 +138,24 @@
 </div>
 <!-- /#wrapper -->
 <!-- START CORE PLUGINS -->
+<script type="text/javascript">
+    $('.bank_id').on('change' , function(){
+
+       var bankId = $(this).val();
+
+         $.ajax({
+             url: '<?php echo base_url();?>/admin/expense/get_bank_amount',
+
+             data: { bankId:bankId },
+
+             type: 'POST',
+
+             success:function(resp)
+             {
+                 $('.bank_amount').val(resp);
+
+             }
+         });
+    });
+
+</script>

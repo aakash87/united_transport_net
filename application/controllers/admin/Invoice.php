@@ -5,6 +5,7 @@
 	    {
 	        parent::__construct();
 	        $this->load->model('Invoice_model');
+	        $this->load->model('Expense_model');
 	        $this->module = 'invoice';
 	        $this->user_type = $this->session->userdata('user_type');
 	        $this->id = $this->session->userdata('user_id');
@@ -390,7 +391,7 @@
 			// die();
 			// echo '<pre>'; print_r($this->data['selected_data'] );
 
-
+			$this->data['banks'] = $this->Invoice_model->all_rows('bank');
 			$this->data['sales_person'] = $this->Invoice_model->all_rows('users');
 			$this->data['title'] = 'Create Order Invoice';
 
@@ -462,6 +463,25 @@
 	                  'reference'=> 'debit',
 	              );
 	              $this->Invoice_model->insert('sales_person_ledger', $data3);
+
+
+					$old_bank_amount = $this->input->post('bank_amount');
+					$bank_new_data = [
+						'amount'=> $old_bank_amount + $paid_amount_cu,
+					];
+                  	$this->Invoice_model->update('bank',$bank_new_data,array('id'=>$this->input->post('bank_id') ) );
+              	$this->data['bank_log_old_amount'] = $this->Invoice_model->get_last_record_bank_log('bank_deposit_log' , $this->input->post('bank_id'));
+              	$old_bank_log_balance = $this->data['bank_log_old_amount']['bank_total_amount'];
+	          		  // print_r($this->data['bank_log_old_amount']['bank_total_amount']);die();
+               $bank_log_data=array(
+
+	              'bank_d_id'=> $this->input->post('bank_id'),
+	              'bank_d_amount'=> $paid_amount_cu,
+	              'date'=>$this->input->post('invoice_paid_date'),
+	              'bank_total_amount'=> $old_bank_log_balance + $paid_amount_cu,
+	              'invoice_voucher_number'=> $this->input->post('invoice_voucher_number'),
+              	);
+              	$this->Invoice_model->insert('bank_deposit_log', $bank_log_data);
 
 				redirect('admin/invoice');
 

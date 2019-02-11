@@ -74,4 +74,10 @@ class Invoice_model extends MY_Model{
 		$result = $query->row_array();
 		return $result;
 	}
+	public function get_last_record_bank_log($table , $bank_d_id)
+	{
+		$query = $this->db->query("SELECT * FROM $table where bank_d_id = '$bank_d_id'  ORDER BY id DESC LIMIT 1");
+		$result = $query->row_array();
+		return $result;
+	}
 }
