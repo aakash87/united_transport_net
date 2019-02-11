@@ -72,6 +72,8 @@
                                               <th>S#</th>
                                               <th>Date</th>
                                               <th>Type</th>
+                                              <th>Ref #</th>
+                                              <th>Amount</th>
                                               <th>Debit</th>
                                               <th>Credit</th>
                                               <th>balance</th>
@@ -89,7 +91,10 @@
                                       <tr>
                                         <td><?php  echo $serial++; ?></td>
                                         <td><?php  echo $dep['date']; ?></td>
+                                        <td><?php  echo $dep['reference']; ?></td>
                                         <td><?php  echo $dep['ref_no']; ?></td>
+                                        <td><?php  $dabit_amount = $dep["bank_d_amount"];
+                                                 echo number_format($dabit_amount); ?></td>
                                         <td>
                                           <?php if ($dep["reference"] == 'Transfer' || $dep["reference"] == 'Expance') {
                                              $dabit_amount = $dep["bank_d_amount"];
@@ -124,6 +129,8 @@
                                               <td></td>
                                               <td></td>
                                               <td><strong>Total</strong></td>
+                                              <td></td>
+                                              <td></td>
                                               <td></td>
                                               <td></td>
                                               <td>

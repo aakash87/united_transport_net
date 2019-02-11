@@ -38,7 +38,7 @@
 					                  <div class="panel-body">
 					                    <div class="form-group row" >
 					                      
-					                        <div class="col-sm-4">
+					                        <div class="col-sm-10">
 
 					                             <input class="form-control" type="text" id="date_range_input" name="daterange" value="<?php echo  date("m/d/Y");?> - <?php echo  date("m/d/Y", strtotime(' +2 day'));?>" />
 					                         
@@ -63,24 +63,36 @@
 										<table id="dataTableExample2" class="table table-bordered table-striped table-hover">
 											<thead>
 												<tr>
-													<th>Id</th><th>Expense Title</th><th>Expense Description</th><th>Expense Amount</th><th>Date Of Submission</th><?php 
-														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
-													?>
-													<th>Action</th>
-													<?php } ?>
+													<th>Id</th>
+													<th>Expense Title</th>
+													<th>Expense Type</th>
+													<th>Expense Description</th>
+													<th>Ref #</th>
+													<th>Date Of Submission</th>
+													<th>Expense Amount</th>
+													
 												</tr>
 											</thead>
 										    <tbody>
 										    	<?php
 										    	$total=0;
+										    	// echo "<pre>";
+										    	// print_r($expense);
                                                      $i=1;
 										    		foreach ($expense as $module) {
 										    	?>
 												<tr>
-													<td><?php echo $module["id"] ?></td><td><?php echo $module["Expense_Title"] ?></td><td><?php echo $module["Expense_Description"] ?></td><td><?php echo $module["Expense_Amount"] ?></td><td><?php echo $module["Date_Of_Submission"] ?></td><?php 
+													<td><?php echo $module["id"] ?></td>
+													<td><?php echo $module["Expense_Title"] ?></td>
+													<td><?php echo $module["expense_cate_title"] ?></td>
+													<td><?php echo $module["Expense_Description"] ?></td>
+													<td><?php echo $module["Expense_Voucher"] ?></td>
+													<td><?php echo $module["Date_Of_Submission"] ?></td>
+													<td><?php echo $module["Expense_Amount"] ?></td>
+													<!-- <?php 
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
-													?>
-													<td>
+													?> -->
+													<!-- <td>
 														<?php 
 															if ($permission["edit"] == "1") {
 														?>
@@ -91,10 +103,10 @@
 														?>
 		                                                <a href="<?php echo base_url() ?>admin/expense/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a>
 		                                                <?php } ?>
-		                                                <!-- <button type="button" class="btn btn-purple" data-toggle="modal" onclick="get_showing(<?php echo $module["id"] ?>)"  data-target="#modal-lg">View Detail</button> -->
+		                                                <button type="button" class="btn btn-purple" data-toggle="modal" onclick="get_showing(<?php echo $module["id"] ?>)"  data-target="#modal-lg">View Detail</button>
 		                                                 <a data-toggle="modal" onclick="get_showing(<?php echo $module["id"] ?>)"  data-target="#modal-lg"><img src="<?php echo base_url() ?>assets/icons/view.png" title="" alt="" width="35" height="35"></a>
 	                                                </td>
-	                                                <?php } ?>
+	                                                <?php } ?> -->
 												</tr>
 												<?php
 												    $total+=$module['Expense_Amount'];
@@ -107,9 +119,10 @@
 													<td></td>
 													<td></td>
 													<td><strong>Total </strong></td>
+													<td></td>
+													<td></td>
+													<td></td>
 													<td><strong><?php echo number_format($total); ?></strong></td>
-													<td></td>
-													<td></td>
 												</tr>
 											</tfoot>
 										</table>

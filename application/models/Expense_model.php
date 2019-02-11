@@ -27,8 +27,9 @@ class Expense_model extends MY_Model{
 		public function get_expense_by_filter($str_current_day ,  $str_last_day)
 		{
 
-			$this->db->select('expense.*');
+			$this->db->select('expense.*, expense_category.expense_cate_title');
 			$this->db->from('expense');
+			$this->db->join('expense_category' , 'expense.exp_cat = expense_category.id' , 'left');
 		    $this->db->where('Date_Of_Submission >=' , $str_current_day );
 			$this->db->where('Date_Of_Submission <=' , $str_last_day );	
 			return $this->db->get()->result_array();

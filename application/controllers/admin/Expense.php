@@ -86,7 +86,8 @@ public function insert()
 			}
 			$voucher_code_plus_expense = $this->Expense_model->get_last_record_expense('expense');
 			$voucher_code_id_expense = $voucher_code_plus_expense['id'] + 1;
-			$voucher_code_expense = 'UBWS-EXP-00'. $voucher_code_id_expense;
+			// print_r($voucher_code_id_expense);die();
+			$voucher_code_expense = "EXP-".$voucher_code_id_expense."-".date('Y');
 			$data = [
 
 				// 'vehicle_id' => $this->input->post('vehicle_id'),

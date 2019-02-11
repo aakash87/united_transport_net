@@ -30,6 +30,7 @@
 											if ($permission["created"] == "1") {
 										?>
 										<a href="<?php echo base_url("admin/expense/create") ?>"><button class="btn btn-info pull-right">Add Expense</button></a>
+										<a href="<?php echo base_url("admin/expense/general_expenses_reports") ?>"><button class="btn btn-info pull-right">View Expance Report</button></a>
 										<?php } ?>
 									</div>
 								</div>
