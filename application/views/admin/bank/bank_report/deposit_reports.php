@@ -70,10 +70,11 @@
                                       <thead>
                                           <tr>
                                               <th>S#</th>
-                                              <th>Bank Name</th>
-                                              <th>Bank Transfer</th>
-                                              <th>Deposit Amount</th>
                                               <th>Date</th>
+                                              <th>Type</th>
+                                              <th>Debit</th>
+                                              <th>Credit</th>
+                                              <th>balance</th>
                                           </tr>
                                       </thead>
                                      <tbody>
@@ -81,33 +82,41 @@
                                           
                                           $serial = 1;
                                           $total_bank = 0;
-
+                                          // echo "<pre>";
+                                          // print_r($deposits);
                                           foreach ($deposits as $dep) : 
                                         ?>
                                       <tr>
                                         <td><?php  echo $serial++; ?></td>
+                                        <td><?php  echo $dep['date']; ?></td>
+                                        <td><?php  echo $dep['ref_no']; ?></td>
                                         <td>
-                                          <?php echo $dep['bank_name']; ?> <small>(<?php echo $dep['bank_total_amount'];  ?>)</small>
-                                          <?php if ($dep['bank_tran_amount'] > 0) : ?>
-                                            <br>
-                                            <small>Amount reduced from this bank</small>
-                                          <?php endif ?>
-                                          
+                                          <?php if ($dep["reference"] == 'Transfer' || $dep["reference"] == 'Expance') {
+                                             $dabit_amount = $dep["bank_d_amount"];
+                                                 echo number_format($dabit_amount);
+                                            } ?>
+                                               
+                                             </td>
+                                        <td>
+                                           <?php if ($dep["reference"] == 'Deposit' || $dep["reference"] == 'Invoice') {
+                                             $dabit_amount = $dep["bank_d_amount"];
+                                                 echo number_format($dabit_amount);
+                                            } ?>
                                         </td>
-                                        <td><?php echo $dep['btn']; ?> 
-                                        <?php if ($dep['bank_tran_amount'] > 0) : ?>
-                                          <small>(<?php echo $dep['bank_tran_amount'];  ?>)</small>
-                                          <?php else : ?>
-                                            <p>----</p>
-                                        <?php endif; ?>  
-
+                                        <td><?php  echo number_format($dep["bank_total_amount"])?></td>
+                                       
                                       </td>
-                                        <td><?php echo number_format($dep['bank_d_amount']); ?></td>
-                                        <?php  $total_bank += $dep['bank_d_amount'];  ?>
-                                        <td><?php echo $dep['date']; ?></td>
+                                       
                                         
                                       </tr>
-                                    <?php endforeach; ?>
+                                       <?php
+                                     $total_amount = $dep["bank_total_amount"];
+                                        if (isset($Balance_amount)) {
+                                           $total+=$total_amount;
+                                        }
+                                         
+                                     ?>
+                                      <?php endforeach; ?>
                                     </tbody>
                                       <tfoot>
                                         
@@ -115,7 +124,14 @@
                                               <td></td>
                                               <td></td>
                                               <td><strong>Total</strong></td>
-                                              <td><?php echo number_format($total_bank); ?></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td>
+                                                <strong><?php if(isset( $total_amount)){
+                                                  echo number_format($dep["bank_total_amount"]);}
+                                                  else{ echo "0";}?></strong>
+                                                    
+                                              </td>
                                           </tr>
                                         
                                       </tfoot>

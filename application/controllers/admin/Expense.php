@@ -146,6 +146,8 @@ public function insert()
 					'date'=>$this->input->post('Date_Of_Submission'),
 					'bank_total_amount'=> $old_bank_log_balance - $this->input->post('Expense_Amount'),
 					'expance_id'=> $id,
+					'ref_no'=> "EXP-".$id."-".date('Y'),
+					'reference'=> "Expance",
 					);
 					$this->Invoice_model->insert('bank_deposit_log', $bank_log_data);
 

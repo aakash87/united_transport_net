@@ -11,6 +11,7 @@
 	        parent::__construct();
 
 	        $this->load->model('Bank_model');
+	        $this->load->model('Expense_model');
 
 	        $this->module = 'bank';
 
@@ -189,17 +190,25 @@
 
 				$bank_id = $this->input->post('bank_id');
 				$this->data['bank_single'] = $this->Bank_model->get_row_single('bank',array('id'=>$bank_id));
-
-				 // print_r();
+				$last_record = $this->Expense_model->get_last_record_expense('bank_deposit_log');
+				$last_record_id = $last_record['id'] + 1;
+				 // print_r($last_record_id);
+				 // die();
 				if ($this->input->post('transfer_check') == 1) {
 					$total_amount = $this->data['bank_single']['amount'] - $this->input->post('amount');
+					$ref_no = "TR-".$last_record_id."-".date('Y');
+					$reference= "Transfer";
+
 				}
 				else{
 					$total_amount = $this->data['bank_single']['amount'] + $this->input->post('amount');
+					$ref_no = "DP-".$last_record_id."-".date('Y');
+					$reference = "Deposit";
 
 				}
 
-				// print_r($total_amount);
+				// print_r($last_record_id['id']);
+				// die();
 				$bank_transfer = $this->input->post('bank_transfer');
 				$deposit_data = [
 					'bank_d_id' => $bank_id,
@@ -207,6 +216,8 @@
 					'bank_tran_id' => $bank_transfer,
 					'bank_tran_amount' => $pluse_on_tran,
 					'bank_total_amount' => $total_amount,
+					'ref_no' => $ref_no,
+					'reference' => $reference,
 					'date' => $this->input->post('create_date')
 				];
 

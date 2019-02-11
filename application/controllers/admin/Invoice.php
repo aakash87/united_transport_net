@@ -480,6 +480,8 @@
 	              'date'=>$this->input->post('invoice_paid_date'),
 	              'bank_total_amount'=> $old_bank_log_balance + $paid_amount_cu,
 	              'invoice_voucher_number'=> $this->input->post('invoice_voucher_number'),
+	              'ref_no'=> "INV-".$this->input->post('invoice_voucher_number')."-".date('Y'),
+	              'reference'=> "Invoice",
               	);
               	$this->Invoice_model->insert('bank_deposit_log', $bank_log_data);
 
