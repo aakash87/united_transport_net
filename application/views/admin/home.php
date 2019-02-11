@@ -7,7 +7,7 @@
                     <i class=pe-7s-tools></i>
                 </div>
                 <div class=header-title>
-                    <h1>Pharm Evo</h1>
+                    <h1>United Transport Network</h1>
                     <small></small>
                     <ol class=breadcrumb>
                         <li><a href=index.html><i class=pe-7s-home></i> Home</a></li>
@@ -16,33 +16,33 @@
                 </div>
             </div>
             <div class=row>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                    <div class="statistic-box statistic-filled-3 border">
-                        <h2><span class="slight">View Slides</span></h2>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="statistic-box statistic-filled-3 border" style="border-radius: 5px; border-color: white; box-shadow: 10px 10px 5px #888888;">
+                        <h2><span class="slight">View Vehicle</span></h2>
                         <div class="small"></div>
                         <i class="ti-world statistic_icon"></i>
 
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                    <div class="statistic-box statistic-filled-1 border">
-                        <h2><span class="slight">View Clients</span></h2>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="statistic-box statistic-filled-1 border" style="border-radius: 5px; border-color: white; box-shadow: 10px 10px 5px #888888;">
+                        <h2><span class="slight">View Reports</span></h2>
                         <div class="small"></div>
                         <i class="ti-server statistic_icon"></i>
 
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                    <div class="statistic-box statistic-filled-2 border">
-                        <h2><span class="slight">Create  Clients</span></h2>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="statistic-box statistic-filled-2 border" style="border-radius: 5px; border-color: white; box-shadow: 10px 10px 5px #888888;">
+                        <h2><span class="slight">Expense</span></h2>
                         <div class="small"></div>
                         <i class="ti-user statistic_icon"></i>
 
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                    <div class="statistic-box statistic-filled-4 border">
-                       <h2><span class="slight">Create Slides</span></h2>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="statistic-box statistic-filled-4 border" style="border-radius: 5px; border-color: white; box-shadow: 10px 10px 5px #888888;">
+                       <h2><span class="slight">Orders</span></h2>
                         <div class="small"></div>
                         <i class="ti-bag statistic_icon"></i>
 

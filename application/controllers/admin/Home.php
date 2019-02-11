@@ -9,6 +9,8 @@ class Home extends MY_Controller {
         $this->load->model('Home_model');
         $this->module = 'dashboard';
         $this->user_type = $this->session->userdata('user_type');
+        $this->id = $this->session->userdata('user_id');
+
         $this->permission = $this->get_permission($this->module,$this->user_type);
     }
 
@@ -22,4 +24,43 @@ class Home extends MY_Controller {
 		$this->load->template('admin/home',$this->data);
 	}
 
+	public function count_notification()
+	{
+		if ($this->user_type == 1 ) {
+
+			$count_notification = $this->Home_model->count_notification_for_admin();
+
+			echo count($count_notification);
+		}
+
+		elseif ($this->user_type == 15) {
+			
+			$count_notification = $this->Home_model->count_notification_for_admin_sales($this->id , $this->user_type);
+			echo count($count_notification);
+		}
+	}
+
+
+	public function get_notification()
+	{
+
+		if ($this->user_type == 1 ) {
+
+			$this->data['count_notification'] = $this->Home_model->count_notification_for_admin();
+
+			$this->load->view('admin/templates/get_notification_list' , $this->data);
+
+			// print_r($this->data['count_notification']);
+		}
+
+		elseif ($this->user_type == 15) {
+			
+			$this->data['count_notification'] = $this->Home_model->count_notification_for_admin_sales($this->id , $this->user_type);
+			
+			$this->load->view('admin/templates/get_notification_list' , $this->data);
+			
+		}
+
+
+	}
 }

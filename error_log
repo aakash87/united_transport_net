@@ -1,0 +1,12 @@
+[10-Jan-2019 16:05:25 Asia/Karachi] PHP Fatal error:  Call to undefined method Vehicle_model::all_rows_by_owners() in /home/magmacon/public_html/utn/application/controllers/admin/Vehicle.php on line 19
+[10-Jan-2019 16:05:48 Asia/Karachi] PHP Fatal error:  Call to undefined method Vehicle_model::all_rows_by_owners() in /home/magmacon/public_html/utn/application/controllers/admin/Vehicle.php on line 19
+[10-Jan-2019 16:06:04 Asia/Karachi] PHP Fatal error:  Call to undefined method Vehicle_model::all_rows_by_owners() in /home/magmacon/public_html/utn/application/controllers/admin/Vehicle.php on line 19
+[10-Jan-2019 16:06:06 Asia/Karachi] PHP Fatal error:  Call to undefined method Vehicle_model::all_rows_by_owners() in /home/magmacon/public_html/utn/application/controllers/admin/Vehicle.php on line 19
+[10-Jan-2019 16:06:07 Asia/Karachi] PHP Fatal error:  Call to undefined method Vehicle_model::all_rows_by_owners() in /home/magmacon/public_html/utn/application/controllers/admin/Vehicle.php on line 19
+[10-Jan-2019 16:06:11 Asia/Karachi] PHP Fatal error:  Call to undefined method Vehicle_model::all_rows_by_owners() in /home/magmacon/public_html/utn/application/controllers/admin/Vehicle.php on line 19
+[10-Jan-2019 16:06:12 Asia/Karachi] PHP Fatal error:  Call to undefined method Vehicle_model::all_rows_by_owners() in /home/magmacon/public_html/utn/application/controllers/admin/Vehicle.php on line 19
+[10-Jan-2019 16:06:13 Asia/Karachi] PHP Fatal error:  Call to undefined method Vehicle_model::all_rows_by_owners() in /home/magmacon/public_html/utn/application/controllers/admin/Vehicle.php on line 19
+[11-Feb-2019 12:02:58 Asia/Karachi] PHP Fatal error:  Call to undefined method Expense_model::get_expense_with_category() in /home/magmacon/public_html/utn/application/controllers/admin/Expense.php on line 38
+[11-Feb-2019 12:04:23 Asia/Karachi] PHP Fatal error:  Call to undefined method Expense_model::get_expense_with_category() in /home/magmacon/public_html/utn/application/controllers/admin/Expense.php on line 38
+[11-Feb-2019 12:05:46 Asia/Karachi] PHP Fatal error:  Call to undefined method Expense_model::get_expense_with_category() in /home/magmacon/public_html/utn/application/controllers/admin/Expense.php on line 38
+[11-Feb-2019 12:05:49 Asia/Karachi] PHP Fatal error:  Call to undefined method Expense_model::get_expense_with_category() in /home/magmacon/public_html/utn/application/controllers/admin/Expense.php on line 38

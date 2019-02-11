@@ -10,7 +10,8 @@
         <meta name="author" content="">
         <title><?php echo $title?></title>
         <!-- FEVICON AND TOUCH ICON -->
-        <link rel="shortcut icon" href="<?php echo base_url() ?>admin_assets/assets/dist/img/ico/favicon.png" type="image/x-icon">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        <link rel="shortcut icon" href="<?php echo base_url() ?>admin_assets/images/fav_icon.png" type="image/x-icon">
         <link rel="apple-touch-icon" type="image/x-icon" href="<?php echo base_url() ?>admin_assets/assets/dist/img/ico/apple-touch-icon-57-precomposed.png">
         <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="<?php echo base_url() ?>admin_assets/assets/dist/img/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="<?php echo base_url() ?>admin_assets/assets/dist/img/ico/apple-touch-icon-114-precomposed.png">
@@ -60,6 +61,18 @@
     <script src="<?php echo base_url() ?>admin_assets/assets/dist/button/doc/script.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url() ?>admin_assets/assets/dist/button/js/bootstrap-toggle.js"></script>
+    <style type="text/css">
+        .active_wapper{
+            width: 100vw;
+            margin: 70px 0 0 0px !important;
+        }
+        .active_footer{
+            margin: 70px 0 0 0px !important;
+        }
+        .hide_sidebar{
+            display: none;
+        }
+    </style>
     </head>
     <body>
         <div id="wrapper" class="wrapper animsition">
@@ -76,15 +89,16 @@
                         <!--<span>AdminPage</span>-->
                     </a>
                 </div>
-                <div class="nav-container">
+                <div style="background-color: #9a0d0c;" class="nav-container">
                     <!-- /.navbar-header -->
                     <ul class="nav navbar-nav hidden-xs">
-                        <li><a id="fullscreen" href="#"><i class="material-icons">fullscreen</i> </a></li>
+                        <li><a id="hide_sidebar" href="#"><i class="fa fa-bars" style="color: black; font-size:20px"></i> </a></li>
+                        <li><a id="fullscreen" href="#"><i style="color: black;" class="material-icons">fullscreen</i> </a></li>
                         <!-- /.Fullscreen -->
                         <li class="hidden-xs">
-                            <a class="search-trigger" href="#">
+                           <!--  <a class="search-trigger" href="#">
                                 <i class="material-icons">search</i>
-                            </a>
+                            </a> -->
                             <div class="fullscreen-search-overlay" id="search-overlay">
                                 <a href="#" class="fullscreen-close" id="fullscreen-close-button"><i class="ti-close"></i></a>
                                 <div id="fullscreen-search-wrapper">
@@ -154,20 +168,34 @@
                         <!--        <li class="rad-dropmenu-footer"><a href="#">See All Tasks</a></li>-->
                         <!--    </ul>-->
                         <!--</li>-->
-                       
+
+
                         <!-- /.Dropdown -->
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="material-icons">person_add</i>
+                                <i class="material-icons" style="color: black;" >person_add</i>
                             </a>
                             <ul class="dropdown-menu dropdown-user">
-                                <li><a href="profile.html"><i class="ti-user"></i>&nbsp; Profile</a></li>
-                                <li><a href="mailbox.html"><i class="ti-email"></i>&nbsp; My Messages</a></li>
-                                <li><a href="lockscreen.html"><i class="ti-lock"></i>&nbsp; Lock Screen</a></li>
-                                <li><a href="#"><i class="ti-settings"></i>&nbsp; Settings</a></li>
-                                <li><a href="<?php echo base_url() ?>admin/destroy"><i class="ti-layout-sidebar-left"></i>&nbsp; Logout</a></li>
+                               <li><a href="#"><i class="ti-user"></i>&nbsp; <?php 
+                                 $datae = $this->db->query("SELECT * FROM `users` WHERE `id` = ".$_SESSION['user_id']."")->row_array();
+
+                                 echo $datae['name'];?></a></li>
+                                <li ><a href="<?php echo base_url() ?>admin/logout/destroy" style="color: black;"><i class="ti-layout-sidebar-left" ></i>&nbsp; Logout</a></li>
                             </ul><!-- /.dropdown-user -->
                         </li><!-- /.Dropdown -->
+
+                        <!-- <li class="dropdown" id="click_notification">
+                            <a class="dropdown-toggle"  data-toggle="dropdown" href="#">
+                                <i class="material-icons">chat</i>
+                                <span class="label label-danger" id="count_notification"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-messages" id="get_notification">
+                                <li class="rad-dropmenu-header"><a href="#">New Messages</a></li>
+                             
+
+                            </ul> 
+                        </li> -->
+
                         <li class="log_out">
                             <a href="<?php echo base_url() ?>admin/logout/destroy">
                                 <i class="material-icons">power_settings_new</i>
@@ -177,44 +205,65 @@
                 </div>
             </nav>
             <!-- /.Navigation -->
-            <div class="sidebar" role="navigation">
+            <div style="background-color: #f7faff;" class="sidebar" role="navigation">
+
                 <div class="sidebar-nav navbar-collapse">
+
                    <ul class="nav" id="side-menu">
-                      <li class="nav-heading "> <span>Main Navigation&nbsp;&nbsp;&nbsp;&nbsp;------</span></li>
-                      <?php 
-                        foreach ($menus as $menu) {
-                          echo '<li><a href="'.base_url('admin/'.$menu['url']).'" class="material-ripple"><i class="material-icons">'.$menu['icon'].'</i> '.$menu['name'].'</a></li>';
-                        }
-                      ?>
+
+                      <!--<li class="nav-heading " style="background-color: #ccc;" > <span>Main Navigation&nbsp;&nbsp;&nbsp;&nbsp;------</span></li>-->
+
+                      <?php
+                        if ($menus != null || $menus != '') : ?>
+                            <?php foreach ($menus as $me) : ?>
+                            <li>
+                                <a href="<?php echo base_url(); ?>admin/<?php echo $me['url'] ?>" title="<?php echo $me['name'] ?>" class="material-ripple"><i class="material-icons"><?php echo $me['icon'] ?></i><?php echo $me['name'] ?><?php if ( isset( $me['children'] ) && $me['children'] != NULL ): ?><span class="fa arrow"></span> <?php endif ?>
+                                </a>
+
+                                <?php if ( isset( $me['children'] ) && $me['children'] != NULL ): ?>
+                                        <ul class="nav nav-second-level">
+                                    <?php foreach ( $me['children'] as $sub_menu ): ?>
+                                            <li><a href="<?php echo base_url() ?>admin/<?php echo $sub_menu['url'] ?>" title="<?php echo $sub_menu['name'] ?>"><?php echo $sub_menu['name'] ?></a></li>
+                                    <?php endforeach ?>
+                                        </ul>
+                                <?php endif ?>
+
+                            </li> 
+                           
+                            <?php endforeach; ?>
+                        <?php endif ?>
                     </ul>
+
                 </div>
+
                 <!-- /.sidebar-collapse -->
+
             </div>
+
 
 
             <script>
             $('#click_notification').click(function(){
-                $(document).ready(function(){
                     $.ajax({
-                        url:"<?php echo base_url() ?>admin/get_notification",
+                        url:"<?php echo base_url() ?>admin/home/get_notification",
                         type:"get",
                         success:function(resp){
                             // console.log(resp);
                             $('#get_notification').html(resp);
+                            
                         }
                     });
                 });
-            });
 
             </script>
             <script>
             function count_notification(){
                 $(document).ready(function(){
                     $.ajax({
-                        url:"<?php echo base_url() ?>admin/count_notification",
+                        url:"<?php echo base_url() ?>admin/home/count_notification",
                         type:"get",
                         success:function(resp){
-                            // console.log(resp);
+                            console.log(resp);
                             $('#count_notification').html(resp);
                         }
                     });

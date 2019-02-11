@@ -14,10 +14,10 @@ class Home extends Front_Controller {
 		
 		$this->data['title'] = 'Dashboard';
 
-		$this->data['sliders'] = $this->Slider_model->all_rows('slider');
+// 		$this->data['sliders'] = $this->Slider_model->all_rows('slider');
 		
-		$this->load->view('home',$this->data);
-	
+// 		$this->load->view('home',$this->data);
+	    $this->load->view('admin/login');
 		
 		//$data['sliders']=$this->My_Model->all_rows($slider);
 		

@@ -39,7 +39,10 @@
 										<table id="dataTableExample2" class="table table-bordered table-striped table-hover">
 											<thead>
 												<tr>
-													<th>Id</th><th>First Name</th><th>Last Name</th><th>Phone Number</th><th>Address</th><?php 
+													<th>S#</th><th>Full Name</th><th>Company Name</th>
+													<th>Phone Number</th>
+													<th>Sales Person</th>
+													<th>Address</th><?php 
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
 													?>
 													<th>Action</th>
@@ -48,10 +51,13 @@
 											</thead>
 										    <tbody>
 										    	<?php
+										    		$s_number = 1;
 										    		foreach ($customer as $module) {
 										    	?>
 												<tr>
-													<td><?php echo $module["id"] ?></td><td><?php echo $module["First_Name"] ?></td><td><?php echo $module["Last_Name"] ?></td><td><?php echo $module["Phone_Number"] ?></td><td><?php echo $module["Address"] ?></td><?php 
+													<td><?php echo $s_number++; ?></td><td><?php echo $module["full_name"] ?></td><td><?php echo $module["company_name"] ?></td><td><?php echo $module["Phone_Number"] ?></td>
+													<td><?php echo $module["name"] ?></td>				
+													<td><?php echo $module["Address"] ?></td><?php 
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
 													?>
 													<td>

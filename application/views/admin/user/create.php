@@ -76,6 +76,7 @@
                             
 
 
+<<<<<<< HEAD
                             <div class="form-group row">
 
                                 <label for="example-text-input" class="col-sm-3 col-form-label"> Sales Person<span class="required">*</span></label>
@@ -93,6 +94,8 @@
                             </div>
 
 
+=======
+>>>>>>> master
                             <?php if ($this->session->flashdata('error')): ?>
                                             <a class="btn btn-danger block full-width m-b"><?php echo $this->session->flashdata('error'); ?></a>
 
