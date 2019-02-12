@@ -55,7 +55,7 @@
 										    		foreach ($bank as $module) {
 										    	?>
 												<tr>
-													<td><?php echo $serail_num++ ?></td><td><?php echo $module["bank_name"] ?></td><td><?php echo $module["bank_description"] ?></td><td><?php echo $module["amount"] ?></td><?php 
+													<td><?php echo $serail_num++ ?></td><td><?php echo $module["bank_name"] ?></td><td><?php echo $module["bank_description"] ?></td><td><?php echo number_format($module["amount"]) ?></td><?php 
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
 													?>
 													<td>

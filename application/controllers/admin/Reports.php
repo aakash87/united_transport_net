@@ -207,7 +207,18 @@
 			elseif ($this->user_type == 15) {
 				$this->data['sales_person'] = $this->Customer_model->get_sale_person_by($this->id);	
 			}
-			$this->data['sales_person_ledger'] = $this->Reports_model->sales_person_ledger($sales_person_id);
+			$explode_date = explode('-', $_POST['daterange']);
+
+			$current_date = $explode_date[0];
+			$str_currentdate = strtotime($current_date);
+			$str_current_day = date('Y-m-d' , $str_currentdate );
+
+			$last_date = $explode_date[1];
+			$str_last_date = strtotime($last_date);
+			$str_last_day = date('Y-m-d' , $str_last_date );
+			
+			$this->data['sales_person_ledger'] = $this->Reports_model->sales_person_ledger($sales_person_id , $str_current_day ,  $str_last_day);
+			
 			// echo "<pre>";	
 			// print_r($this->data['sales_person_ledger']);die();
 			$this->data['title'] = 'sales_person_ledger';
@@ -241,6 +252,7 @@
 		{
 			// print_r($_POST['customer']);die();
 			$customer_id = $_POST['customer'];
+			$daterange = $_POST['daterange'];
 			if ( $this->permission['view'] == '0' && $this->permission['view_all'] == '0' ) 
 			{
 				redirect('admin/home');
@@ -251,7 +263,17 @@
 			elseif ($this->user_type == 15) {
 				$this->data['customer'] = $this->Customer_model->all_rows('customer');
 			}
-			$this->data['customer_ledger'] = $this->Reports_model->customer_ledger($customer_id);
+			$explode_date = explode('-', $_POST['daterange']);
+
+			$current_date = $explode_date[0];
+			$str_currentdate = strtotime($current_date);
+			$str_current_day = date('Y-m-d' , $str_currentdate );
+
+			$last_date = $explode_date[1];
+			$str_last_date = strtotime($last_date);
+			$str_last_day = date('Y-m-d' , $str_last_date );
+			
+			$this->data['customer_ledger'] = $this->Reports_model->customer_ledger($customer_id , $str_current_day ,  $str_last_day);
 			// echo "<pre>";	
 			// print_r($this->data['customer_ledger']);die();
 			$this->data['title'] = 'customer_ledger';
@@ -295,7 +317,17 @@
 			elseif ($this->user_type == 15) {
 				$this->data['vendor'] = $this->Reports_model->all_rows('vendor');
 			}
-			$this->data['vendor_ledger'] = $this->Reports_model->vendor_ledger($vendor_id);
+			$explode_date = explode('-', $_POST['daterange']);
+
+			$current_date = $explode_date[0];
+			$str_currentdate = strtotime($current_date);
+			$str_current_day = date('Y-m-d' , $str_currentdate );
+
+			$last_date = $explode_date[1];
+			$str_last_date = strtotime($last_date);
+			$str_last_day = date('Y-m-d' , $str_last_date );
+			
+			$this->data['vendor_ledger'] = $this->Reports_model->vendor_ledger($vendor_id , $str_current_day ,  $str_last_day);
 			// echo "<pre>";	
 			// print_r($this->data['vendor_ledger']);die();
 			$this->data['title'] = 'vendor_ledger';

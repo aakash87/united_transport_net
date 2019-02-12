@@ -1,3 +1,102 @@
+<style type="text/css">
+  #myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 70px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 100%;
+  max-width: 316px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+.footer-ribbon:before {
+    border-right: 10px solid #646464;
+    border-top: 16px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 100%;
+    position: absolute;
+    top: 0;
+    width: 7px;
+}
+</style>
 <!-- /.Navbar  Static Side -->
 <div class="control-sidebar-bg"></div>
 <!-- Page Content -->
@@ -42,44 +141,51 @@
                              </div>
 
                             <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label"> Select Order Type <span class="required">*</span></label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label"> Order Type<span class="required">*</span></label>
                               <div class="col-sm-9">
                                  <select class="form-control" name="select_order_type"required="" id="select_order_type">
-                                    <option>Select Order Type</option>
+                                    <option value="">Select Order Type</option>
                                     <option value="30" <?php echo ($orders["order_type"] ==  30) ? 'selected': NULL;  ?> >Monthly Order </option>
                                     <option value="6" <?php echo ($orders["order_type"] ==  6) ? 'selected': NULL;  ?> >Weekly Order</option>
                                     <option value="1" <?php echo ($orders["order_type"] ==  1) ? 'selected': NULL;  ?> >Daily Order</option>
                                  </select>
                               </div>
                            </div>
-                           
 
                              <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Pickup date and time</label>
+                                <label for="" class="col-sm-3 col-form-label">Pickup Date/Time</label>
                                 <div class="col-sm-9">
-                                   <input class="form-control" name="pickup_date_and_time" type="text" value="<?php echo $orders["pickup_date_and_time"] ?>" id="" placeholder="" readonly >
+                                   <input class="form-control" name="pickup_date_and_time" type="text" value=" <?php 
+
+
+                                    $originalDate = $orders["pickup_date_and_time"];
+                                    $pickup_date_and_time = date("d-m-Y", strtotime($originalDate)); echo $pickup_date_and_time ;?> " id="" placeholder="" readonly >
                                 </div>
                              </div>
                              <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label"> dropoff date and time</label>
+                                <label for="" class="col-sm-3 col-form-label">Dropoff Date/Time</label>
                                 <div class="col-sm-9">
-                                   <input class="form-control" name="dropoff_date_and_time" type="text" value="<?php echo $orders["dropoff_date_and_time"] ?>" id="" placeholder="" readonly >
+                                   <input class="form-control" name="dropoff_date_and_time" type="text" value=" <?php 
+
+
+                                    $originalDate2 = $orders["dropoff_date_and_time"];
+                                    $dropoff_date_and_time = date("d-m-Y", strtotime($originalDate2)); echo $dropoff_date_and_time ;?> " id="" placeholder="" readonly >
                                 </div>
                              </div>
                              <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Pickup address</label>
+                                <label for="" class="col-sm-3 col-form-label">Pickup Address</label>
                                 <div class="col-sm-9">
                                    <textarea class="form-control" name="pickup_address" readonly ><?php echo $orders["pickup_address"]  ?></textarea>
                                 </div>
                              </div>
                              <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Drop off address</label>
+                                <label for="" class="col-sm-3 col-form-label">Dropoff Address</label>
                                 <div class="col-sm-9">
                                    <textarea class="form-control" name="drop_off_address" readonly ><?php echo $orders["drop_off_address"]   ?></textarea>
                                 </div>
                              </div>
                              <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Pickup location</label>
+                                <label for="" class="col-sm-3 col-form-label">Pickup Location</label>
                                 <div class="col-sm-9">
                                    <textarea class="form-control" name="pickup_location" readonly ><?php echo $orders["pickup_location"] ?></textarea>
                                 </div>
@@ -87,7 +193,7 @@
 
 
                     <div class="form-group row">
-                        <label for="" class="col-sm-3 col-form-label">Drop off location</label>
+                        <label for="" class="col-sm-3 col-form-label">Dropoff Location</label>
                         <div class="col-sm-9">
                            <textarea class="form-control" name="drop_off_location" readonly ><?php echo $orders["drop_off_location"] ?></textarea>
                         </div>
@@ -149,20 +255,20 @@
                            </div>
                         </div>
                         <div class="form-group row">
-                           <label for="example-text-input" class="col-sm-3 col-form-label">Vehicel of Vendor</label>
+                           <label for="example-text-input" class="col-sm-3 col-form-label">Assigned Vehicle</label>
                            <div class="col-sm-9">
                               <input class="form-control" name="vehicel_of_vendorID" type="hidden" value="<?php echo $orders['vehicel_of_vendor'] ?>" id="vehicel_of_vendorID" placeholder=""  >
                               <select class="form-control" name="vehicel_of_vendor" id="vehicel_of_vendor" value="">
-                                 <option value="">Select Vehicel Vendor</option>
+                                 <option value="">Select Vehicle Vendor</option>
                               </select>
                            </div>
                         </div>
                         <div class="form-group row">
-                           <label for="example-text-input" class="col-sm-3 col-form-label">Vehicel Type</label>
+                           <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Type</label>
                            <div class="col-sm-9"><input class="form-control" name="vehicle_type" type="text" value="" id="vehicle_type" placeholder="" readonly="" ></div>
                         </div>
                         <div class="form-group row">
-                           <label for="example-text-input" class="col-sm-3 col-form-label">Vehicel Bying</label>
+                           <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Buying</label>
                            <div class="col-sm-9">
                               <input class="form-control" name="builty_rates" type="text" value="" id="vehicle_bying" placeholder="" readonly="" >
                            </div>
@@ -176,12 +282,23 @@
                         </div>
 
                         <div class="form-group row">
+                           <label for="example-text-input" class="col-sm-3 col-form-label">Local Vendor Name</label>
+                           <div class="col-sm-9">
+                              <!-- <input class="form-control" name="ower_id" type="text" value="" d="example-text-input" placeholder="" > -->
+                              <select class="form-control" name="order_vendor_id"  value="" id="order_vendor_id" >
+                                 <option value="">Select Local Vendor</option>
+                                 <?php foreach ($local_vendor as $localvend) : ?>
+                                 <option value="<?php echo $localvend['id'] ?>" ><?php echo $localvend['vendor_name'] ?></option>
+                                 <?php endforeach; ?>    
+                              </select>
+                           </div>
+                        </div>
+                        <div class="form-group row">
                            <label for="example-text-input" class="col-sm-3 col-form-label"> Local Transport </label>
                            <div class="col-sm-9">
                               <input class="form-control" name="local_transport" type="text" value="<?php echo ($orders["local_transport"]) ? $orders["local_transport"] : NULL ; ?>" id=" local_transport" placeholder="" >
                            </div>
                         </div>
-
 
                         <div class="form-group row">
                            <label for="example-text-input" class="col-sm-3 col-form-label"> Labour Charges </label>
@@ -193,7 +310,7 @@
 
 
                         <div class="form-group row">
-                           <label for="example-text-input" class="col-sm-3 col-form-label"> Tention </label>
+                           <label for="example-text-input" class="col-sm-3 col-form-label"> Detention </label>
                            <div class="col-sm-9">
                               <input class="form-control" name="order_tenstion" type="text" value="<?php echo ($orders["order_tenstion"]) ? $orders["order_tenstion"] : NULL ; ?>" id="" placeholder="" >
                            </div>
@@ -209,84 +326,113 @@
                     </div>
                     <hr>
 
-                      <div class="col-md-6"  >
+                      <div class="col-md-12"  >
                           <?php $expense_count = 0; ?>
                      <?php foreach ($order_expense as $expense) : $expense_count++ ?>
-                     <div class="form-group row">
-                        <h4>Expense <?php echo $expense_count ?> </h4>
-                        <input type="hidden" value="<?php echo $expense['id'] ?>" name="expense_update_id[]">
-                        <label for="" class="col-sm-3 col-form-label"> expense Title </label>
-                        <div class="col-sm-9">
-                           <input class="form-control" name="expense_title_update[]" type="text" value="<?php echo $expense['expense_title'] ?>" id="" placeholder=""  >
-                        </div>
-                     </div>
-                     <div class="form-group row">
-                        <label for="" class="col-sm-3 col-form-label"> expense date </label>
-                        <div class="col-sm-9">
-                           <input class="form-control" name="expense_date_update[]" type="text" value="<?php echo $expense['expense_date'] ?>" id="" placeholder=""  >
-                        </div>
-                     </div>
-                     <div class="form-group row">
-                        <label for="" class="col-sm-3 col-form-label"> expense amount </label>
-                        <div class="col-sm-9">
-                           <input class="form-control" name="expense_amount_update[]" type="text" value="<?php echo $expense['expense_amount'] ?>" id="" placeholder=""  >
-                        </div>
-                     </div>
-                     <div class="form-group row">
-                        <label for="" class="col-sm-3 col-form-label"> expense description </label>
-                        <div class="col-sm-9">
-                           <input class="form-control" name="expense_description_update[]" type="text" value="<?php echo $expense['expense_description'] ?>" id="" placeholder=""  >
-                        </div>
-                     </div>
-                     <?php endforeach; ?>
-                    
+                      <div class="row panel-body" style="position: relative; clear: both;">
+                             <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;">                     
+                                 <span style="color: #FFF; font-size: 1.6em;">Expense <?php echo $expense_count ?> </span>
+                             </div>                                  
+                             <div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br>
+                                <div class="row">
+                                  <div class="form-group col-lg-4">
+                                    <label for="" class=""> Expense Title</label>
+                                    <input class="form-control" name="expense_title_update[]" type="text" value="<?php echo $expense['expense_title'] ?>" id="" placeholder=""  >
+                                  </div>
+                                  <div class="form-group col-lg-4">
+                                    <label for="" > Expense Date </label>
+                                    <input class="form-control" name="expense_date_update[]" type="date" value="<?php echo $expense['expense_date'] ?>" id="" placeholder="" >
+                                  </div>
+
+                                  <div class="form-group col-lg-4">
+                                  <label for="" class=""> Expense Amount </label>
+
+                                  <input class="form-control" name="expense_amount_update[]" type="text" value="<?php echo $expense['expense_amount'] ?>" id="" placeholder=""  >
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="form-group col-lg-12">
+                                    <label for="" class=""> Expense Description</label>
+                                    <textarea class="form-control" name="expense_description_update[]" rows="1"><?php echo $expense['expense_description'] ?></textarea>
+                                  </div>
+                                  
+                                </div>
+                            </div>
                       </div>
-                      <div class="col-md-6"  >
+                     <?php endforeach; ?>
                          <?php $order_second_stop_count = 0; ?>
                      <?php foreach ($order_second_stop as $order_second) : $order_second_stop_count++ ?>
-                     <div class="form-group row">
-                        <h4>2<sup>nd</sup>  Stop Detail <?php echo $order_second_stop_count ?> </h4>
-                        <input type="hidden" value="<?php echo $order_second['id'] ?>" name="second_stop_id[]">
-                        <label for="" class="col-sm-3 col-form-label"> Origin </label>
-                        <div class="col-sm-9">
-                           <input class="form-control" name="sec_stop_origin_update[]" type="text" value="<?php echo $order_second['sec_stop_origin'] ?>" id="" placeholder=""  >
+                      <div class="row panel-body" style="position: relative; clear: both;">
+                             <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;">                     
+                                 <span style="color: #FFF; font-size: 1.6em;">2<sup>nd</sup>  Stop Detail <?php echo $order_second_stop_count ?> </span>
+                             </div>                                  
+                             <div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br>
+                       <div class="row">
+                          <div class="form-group col-lg-4">
+                          <input type="hidden" value="<?php echo $order_second['id'] ?>" name="second_stop_id[]">
+                          <label for="" > Origin </label>
+                             <input class="form-control" name="sec_stop_origin_update[]" type="text" value="<?php echo $order_second['sec_stop_origin'] ?>" id="" placeholder=""  >
                         </div>
-                     </div>
-                     <div class="form-group row">
-                        <label for="" class="col-sm-3 col-form-label"> Destination </label>
-                        <div class="col-sm-9">
+                       <div class="form-group col-lg-4">
+                        <label for="" > Destination </label>
+                        
                            <input class="form-control" name="sec_stop_destination_update[]" type="text" value="<?php echo $order_second['sec_stop_destination'] ?>" id="" placeholder=""  >
-                        </div>
                      </div>
-                     <div class="form-group row">
-                        <label for="" class="col-sm-3 col-form-label"> Stop Amount </label>
-                        <div class="col-sm-9">
+                     <div class="form-group col-lg-4">
+                        <label for="" > Stop Amount </label>
+                      
                            <input class="form-control" name="sec_stop_amount_update[]" type="text" value="<?php echo $order_second['sec_stop_amount'] ?>" id="" placeholder=""  >
-                        </div>
                      </div>
+                   
+                      </div>
+                    </div>
+                  </div>
                      <?php endforeach; ?>
 
-                      </div>
 
 
                    
                      <!-- working -->
-                     <div class="field_wrapper_expense"></div>
-                     <div class="field_wrapper_add_second_step"></div>
+                     <div class="row panel-body" style="position: relative; clear: both;">
+                            <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;">                     
+                                <span style="color: #FFF; font-size: 1.6em;">Expense</span>
+                            </div>                                  
+                            <div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br>
+                              <div class="form-group row">
+                                 <div class="col-sm-12">
+                                    <button type="button"  class="btn btn-success pull-right add_button">Add Expanse</button>
+                                 </div>
+                                 
+                              </div>
+                             
+                     <div class="field_wrapper_expense" ></div>
+                   </div>
+                 </div>
+                     <div class="row panel-body" style="position: relative; clear: both;">
+                            <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;">                     
+                                <span style="color: #FFF; font-size: 1.6em;">Second Step</span>
+                            </div>                                  
+                            <div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br>
+                              <div class="form-group row">
+                                 <div class="col-sm-12">
+                                    <button type="button"  class="btn btn-success pull-right add_second_step">Add Second Step</button>
+                                 </div>
+                                 
+                              </div>
+                     <div class="field_wrapper_add_second_step" ></div>
+                   </div>
                      
 
 
-                     <div class="form-group row">
-                        <div class="col-sm-12">
-                           <button type="button"  class="btn btn-success pull-right add_button">Add Expanse</button>
-                           <button type="button"  class="btn btn-success pull-right add_second_step">Add Second Step</button>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-sm-12">
-                           <button type="submit" class="btn btn-primary pull-right">Submit</button>
-                        </div>
+                     
+                  </div>
+                  <div class="form-group row">
+                    
+                     <br>
+                     <br>
+                     <br>
+                     <div class="col-sm-12">
+                        <button type="submit" class="btn btn-primary pull-right">Submit</button>
                      </div>
                   </div>
                </div>
@@ -300,6 +446,7 @@
 </div>
 <!-- /#page-wrapper -->
 </div>
+
 <!-- /#wrapper -->
 <!-- START CORE PLUGINS -->
 <script type="text/javascript">
@@ -311,44 +458,40 @@
                        + '<div>'
                                
                             + '<div class="form-group row">'
-                                +'<label for="" class="col-sm-3 col-form-label"> expense Title </label>'
-                                 +'<div class="col-sm-9">'
-                                  +' <input class="form-control" name="expense_title[]" type="text" value="" id="" placeholder=""  ></div>'
+                               +'<div class="col-lg-4">'
+                                  +'<label for="" > Expense Title </label>'
+                                  +' <input class="form-control" name="expense_title[]" type="text" value="" id="" placeholder=""  >'
+                                +'</div>'
    
-                               +'</div>'   
+                               +'<div class="col-lg-4">'
+                                  +'<label for="" > Expense Date </label>'
+                                  +' <input class="form-control" name="expense_date[]" type="date" value="" id="" placeholder="" >'
+                                +'</div>'
                                
-                                + '<div class="form-group row">'
+                                + '<div class="col-lg-4">'
+                                     +'<label for="" class=""> Expense Amount </label>'
+                                        +' <input class="form-control" name="expense_amount[]" type="text" value="" id="" placeholder=""  >'
+                                +'</div>'  
    
-                                     +'<label for="" class="col-sm-3 col-form-label"> Expense Date </label>'
-   
-                                             +'<div class="col-sm-9">'
-                                              +' <input class="form-control" name="expense_date[]" type="date" value="" id="" placeholder=""  ></div>'
-                                             +'</div>'
+                                 +'</div>' 
+                                + '<div class=" row">'
+                                + '<div class="col-lg-12">'
+                                     +'<label for="" class="">  Expense Description </label>'
+
+                                        +' <textarea class="form-control" name="expense_description[]" rows="1"></textarea>'
+                                +'</div>'  
+                                +'</div>'  
+
+
+                                   
+                                + '<div class=" row">'
+                                + '<div class="col-lg-12">'
+                                        +'<label for="" class="" style="visibility: hidden;">  expense Description</label>'
+                                        +' <br>'
+                                        +' <a href="javascript:void(0);" class="remove_button"><button style="margin-bottom: 11px !important;"  type="button" class="btn btn-success pull-right">Delete</button></a>'
+                                +'</div>'
+                                +'</div><hr>'
                               
-   
-                                + '<div class="form-group row">'
-   
-                                     +'<label for="" class="col-sm-3 col-form-label"> expense expense_amount </label>'
-   
-                                             +'<div class="col-sm-9">'
-                                              +' <input class="form-control" name="expense_amount[]" type="text" value="" id="" placeholder=""  ></div>'
-                                             +'</div>'
-   
-   
-   
-                               +'</div>'  
-   
-   
-                                + '<div class="form-group row">'
-   
-                                     +'<label for="" class="col-sm-3 col-form-label"> expense Description </label>'
-   
-                                             +'<div class="col-sm-9">'
-                                              +' <input class="form-control" name="expense_description[]" type="text" value="" id="" placeholder=""  ></div>'
-                                             +'</div>'
-   
-   
-                               +'<a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a>'
                              
    
    
@@ -534,39 +677,50 @@
          var add_second_step = $('.add_second_step'); //Add button selector
          var wrapper_add_second_step = $('.field_wrapper_add_second_step'); //Input field wrapper
          var fieldHTML_add_second_step = '<div>'
-                         + '<div><hr>'
+                         + '<div>'
                                  
-                              + '<div class="form-group row">'
-                                  +'<label for="" class="col-sm-3 col-form-label"> origin </label>'
-                                   +'<div class="col-sm-9">'
+                             + '<div class="form-group row">'
+                               +'<div class="col-lg-4">'
+                                  +'<label for="" class=""> origin </label>'
+                                 
                                     +' <input class="form-control" name="sec_stop_origin[]" type="text" value="" id="" placeholder=""  ></div>'
    
-                                 +'</div>'   
+                                
                                  
-                                  + '<div class="form-group row">'
+                                   +'<div class="col-lg-4">'
    
-                                       +'<label for="" class="col-sm-3 col-form-label"> Destination </label>'
+                                       +'<label for="" class=""> Destination </label>'
    
-                                               +'<div class="col-sm-9">'
+                                               
                                                 +' <input class="form-control" name="sec_stop_destination[]" type="text" value="" id="" placeholder=""  ></div>'
-                                               +'</div>'
+                                               
                                 
    
-                                  + '<div class="form-group row">'
+                                  +'<div class="col-lg-4">'
    
-                                       +'<label for="" class="col-sm-3 col-form-label"> Rate </label>'
+                                       +'<label for="" class=""> Rate </label>'
    
-                                               +'<div class="col-sm-9">'
+                                             
                                                 +' <input class="form-control" name="sec_stop_amount[]" type="text" value="" id="" placeholder=""  ></div>'
                                                +'</div>'
    
                                  +'</div>'  
    
    
-                                 +'<a href="javascript:void(0);" class="remove_button_second_step"><img src="remove-icon.png"/></a>'
    
-   
-                                 +'</div>'   
+                                      + '<div class=" row">'
+                                      + '<div class="col-lg-12">'
+                                              +'<label for="" class="" style="visibility: hidden;">  expense Description</label>'
+                                              +' <br>'
+                                              +'<a href="javascript:void(0);" class="remove_button_second_step"><button style="margin-bottom: 11px !important;"  type="button" class="btn btn-success pull-right">Delete</button></a>'
+                                      +'</div>'
+                                      +'</div><hr>'
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     +'</div>'
    
    
          +'</div>'; //New input field html 

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>UTN</title>
 
     
     <style type="text/css">
@@ -531,7 +531,7 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
       
         <h2><?php echo $customer['full_name']; ?></h2>
        
-        <p><strong>inv_amount : </strong><?php echo $invoice['invoice_total_amount']?></p>
+        <p><strong>inv_amount : </strong><?php echo number_format($invoice['invoice_total_amount'])?></p>
         
 
     </div>
@@ -551,7 +551,7 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
                 <td class="td">Vehicle Rate</td>
                 <td class="td">Labor</td>
                 <td class="td">2nd Stop</td>
-                <td class="td">Tention</td>
+                <td class="td">Detention</td>
                 <td class="td">SSP Tax (%)</td>
                 <td class="td">Total</td>
 
@@ -563,18 +563,18 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
               foreach ($selected_data as $module) {
             ?>
               <tr>
-                <td class="td"><?php echo $module['order_date']; ?></td>
+                <td class="td"><?php echo $newDate = date("d-m-Y", strtotime($module['order_date'])); ?></td>
                 <td class="td"><?php echo $module['pickup_location']; ?></td>
                 <td class="td"><?php echo $module['drop_off_location']; ?></td>
                 <td class="td"><?php echo $module['registration_number']; ?></td>
-                <td class="td"><?php echo $module['order_total_amount']; ?></td>
-                <td class="td"><?php echo $module['labor_charges']; ?></td>
-                <td class="td"><?php echo $module['second_stop_amount']; ?></td>
-                <td class="td"><?php echo $module['order_tenstion']; ?></td>
+                <td class="td"><?php echo number_format($module['order_total_amount']); ?></td>
+                <td class="td"><?php echo number_format($module['labor_charges']); ?></td>
+                <td class="td"><?php echo number_format($module['second_stop_amount']); ?></td>
+                <td class="td"><?php echo number_format($module['order_tenstion']); ?></td>
                 <td class="td"><?php echo $module['ssp_percantage']; ?></td>
                 <td class="td">
                     <?php
-                        echo  $module['order_total_amount'] + $module['labor_charges'] +  $module['second_stop_amount'] + $module['order_tenstion'] + $module['ssp_percantage'];
+                        echo  number_format($module['order_total_amount'] + $module['labor_charges'] +  $module['second_stop_amount'] + $module['order_tenstion'] + $module['ssp_percantage']);
                     ?>
                     <?php $total_amount += $module['order_total_amount'] + $module['labor_charges'] +  $module['second_stop_amount'] + $module['order_tenstion'] + $module['ssp_percantage'];   ?>
                 </td>
@@ -592,7 +592,7 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
                 <td class="td"></td>
                 <td class="td"></td>
                 <td class="td">Total</td>
-                <td class="td"><?php echo $total_amount; ?></td>
+                <td class="td"><?php echo number_format($total_amount); ?></td>
             </tr>
         </table>
     </div>
@@ -612,8 +612,9 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
 
         <div class="total-heading"><p>Invoice Amount</p></div>
     
-        <div class="total-amount"><p>Rs:  <?php echo $invoice['invoice_total_amount']?></p></div>
+        <div class="total-amount"><p>Rs:  <?php echo number_format($invoice['invoice_total_amount'])?></p></div>
         <br>
+
         <?php echo date("01/m/Y");?>
     </div>
 

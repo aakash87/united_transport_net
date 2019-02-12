@@ -59,7 +59,8 @@
 				$this->data['sales_person'] = $this->Orders_model->get_sales_person($this->id );
 			}
 
-
+			
+			$this->data['city_list'] = $this->Orders_model->all_rows('city_list');
 			$this->data['vendor'] = $this->Orders_model->all_rows('vendor');
 			$this->data['title'] = 'Create Orders';$this->load->template('admin/orders/create',$this->data);
 		}
@@ -180,8 +181,9 @@
 				// die();
 
 				$this->data['vendor'] = $this->Orders_model->all_rows('vendor');
+				$this->data['local_vendor'] = $this->Orders_model->get_local_vendor();
 
-
+				// print_r($this->data['local_vendor']);
 				$this->load->template('admin/orders/templetes/process_of_order_by_admin',$this->data);
 
 

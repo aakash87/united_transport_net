@@ -136,6 +136,15 @@ class Orders_model extends MY_Model{
 		return $this->db->get()->row_array();
 
 	}
+	public function get_local_vendor()
+	{
+		$this->db->select('vendor.*' );
+		$this->db->from('vendor');
 
+		$this->db->where('vendor.vendor_type' , "Local" );
+
+		return $this->db->get()->result_array();
+
+	}
 	
 }

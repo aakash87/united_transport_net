@@ -30,8 +30,8 @@
                     <div class="panel-body">
                         <form action="<?php echo base_url()?>admin/reports/search_by_driver" method="POST" enctype="multipart/form-data" >
                             <div class="form-group row">
-                                <div class="form-group col-lg-12">
-                                   <label for="">Vehicle</label>
+                                <div class="form-group col-lg-6">
+                                    <label for="">Vehicle</label>
                                     <select class="form-control" name="driver" required="">
                                     <option value="">Select Vehicle</option>
                                     <?php 
@@ -40,6 +40,10 @@
                                        }
                                        ?>
                                  </select>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                   <label for="">Date</label>
+                                     <input class="form-control" type="text" id="date_range_input" name="daterange" value="<?php echo  date("m/d/Y");?> - <?php echo  date("m/d/Y", strtotime(' +2 day'));?>" />
                                 </div>
                             </div>
                             <div class="form-group row">

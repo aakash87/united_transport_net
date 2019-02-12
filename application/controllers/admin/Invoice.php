@@ -195,7 +195,7 @@
 
 			$data_invoice = [
 				'invoice_total_amount' =>  $final_amount ,
-				'invoice_voucher_number' => $invoice_code,
+				'invoice_voucher_number' => "INV-".$invoice_code."-".date('Y'),
 				'order_ids' =>  $order_ids,
 				'customer_id' => $this->input->post('customer_nameID'),
 				'sales_person_id' => $this->input->post('sales_person_id'),
@@ -206,7 +206,7 @@
 			$id = $this->Invoice_model->insert('invoice', $data_invoice);
 			$customer_ledger = [
 				'amount' =>  $final_amount ,
-				'voucher_no' => $invoice_code,
+				'voucher_no' => "INV-".$invoice_code."-".date('Y'),
 				'customer_id' => $this->input->post('customer_nameID'),
 				'balance'=> round($final_amount + $customer_old_amount['balance']),
 				'date' =>  date('Y-m-d'),
@@ -219,7 +219,7 @@
 
 			$sales_person_ledger = [
 				'amount' =>  $final_amount,
-				'voucher_no' => $invoice_code,
+				'voucher_no' => "INV-".$invoice_code."-".date('Y'),
 				'sales_person_id' => $this->input->post('sales_person_id'),
 				'customer_id' => $this->input->post('customer_nameID'),
 				'balance'=> round($final_amount + $sales_person_old_amount['balance']),

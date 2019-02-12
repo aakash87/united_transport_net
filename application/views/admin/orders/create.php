@@ -1,3 +1,5 @@
+<style type="text/css">    .dropdown-menu.open {    z-index: 9999;}</style>
+<style type="text/css">    .dropdown-menu1.open {    z-index: 9999;}</style>
 <!-- /.Navbar  Static Side -->
 <div class="control-sidebar-bg"></div>
 <!-- Page Content -->
@@ -26,7 +28,7 @@
                <div class="panel panel-bd ">
                   <div class="panel-heading">
                      <div class="panel-title">
-                        <h4>Add Orders</h4>
+                        <h4>Sale Order Form</h4>
                      </div>
                   </div>
                   <div class="panel-body">
@@ -37,10 +39,10 @@
                               <div class="col-sm-9"><input type="date" name="order_date" class="form-control" ></div>
                            </div>
                            <div class="form-group row" class="sales_person_id_div">
-                              <label for="example-text-input" class="col-sm-3 col-form-label"> Sales Person <span class="required">*</span></label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label"> Sales Person<span class="required">*</span></label>
                               <div class="col-sm-9">
                                  <select class="form-control" name="sales_person_id" id="sales_person_id" required="">
-                                    <option>Select Sales Person</option>
+                                    <option value="">Select Sales Person</option>
                                     <?php foreach ($sales_person as $sal_person) :?>
                                     <option value="<?php echo $sal_person['id']; ?>"><?php echo $sal_person['name']; ?></option>
                                     <?php endforeach; ?>
@@ -49,7 +51,7 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label"> Customer <span class="required">*</span></label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label"> Customer<span class="required">*</span></label>
                               <div class="col-sm-9">
                                  <select class="form-control" name="order_customer" id="customer_id" required="">
                                     <option>Select Customer</option>
@@ -58,10 +60,10 @@
                            </div>
 
                             <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label"> Select Order Type <span class="required">*</span></label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Order Type<span class="required">*</span></label>
                               <div class="col-sm-9">
                                  <select class="form-control" name="select_order_type"required="">
-                                    <option>Select Order Type</option>
+                                    <option value="">Select Order Type</option>
                                     <option value="30">Monthly Order </option>
                                     <option value="6" >Weekly Order</option>
                                     <option value="1" >Daily Order</option>
@@ -73,7 +75,7 @@
                               <div class="col-sm-9"><input class="form-control" name="pickup_date_and_time" type="date" value="" id="example-text-input" placeholder="" ></div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label"> dropoff date</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label"> Drop off date</label>
                               <div class="col-sm-9"><input class="form-control" name="dropoff_date_and_time" type="date" value="" id="example-text-input" placeholder="" ></div>
                            </div>
                            <!-- <div class="form-group row">
@@ -97,11 +99,30 @@
                         <div class="col-md-6">
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">Origin</label>
-                              <div class="col-sm-9"><input type="text" class="form-control" name="pickup_location" ></div>
+                              <div class="col-sm-9">
+                                <select class="form-control selectpicker" data-live-search="true" name="pickup_location">
+                                    <option>Select City</option>
+                                    <?php 
+                                    foreach ($city_list as $city) {
+                                        echo '<option value="'.$city['CityName'].'">'.$city['CityName'].'</option>';
+                                    }
+                                ?>
+                                </select>
+                              </div>
                            </div>
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">Destination</label>
-                              <div class="col-sm-9"><input type="text" name="drop_off_location" class="form-control" ></div>
+                              <div class="col-sm-9">
+
+                                <select class="form-control selectpicker" data-live-search="true" name="drop_off_location">
+                                    <option>Select City</option>
+                                    <?php 
+                                    foreach ($city_list as $city) {
+                                        echo '<option value="'.$city['CityName'].'">'.$city['CityName'].'</option>';
+                                    }
+                                ?>
+                                </select>
+                              </div>
                            </div>
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">Remarks</label>

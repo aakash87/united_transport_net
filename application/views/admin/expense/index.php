@@ -55,7 +55,7 @@
 										    		foreach ($expense as $module) {
 										    	?>
 												<tr>
-													<td><?php echo $s_number++ ?></td><td><?php echo $module["Expense_Title"] ?></td><td><?php echo $module["Expense_Description"] ?></td><td><?php echo $module["Expense_Amount"] ?></td><td><?php echo $module["Date_Of_Submission"] ?></td><?php 
+													<td><?php echo $s_number++ ?></td><td><?php echo $module["Expense_Title"] ?></td><td><?php echo $module["Expense_Description"] ?></td><td><?php echo number_format($module["Expense_Amount"]) ?></td><td><?php echo $module["Date_Of_Submission"] ?></td><?php 
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
 													?>
 													<td>

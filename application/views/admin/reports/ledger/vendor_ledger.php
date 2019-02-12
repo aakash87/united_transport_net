@@ -30,7 +30,7 @@
                     <div class="panel-body">
                         <form action="<?php echo base_url()?>admin/reports/search_by_vendor" method="POST" enctype="multipart/form-data" >
                             <div class="form-group row">
-                                <div class="form-group col-lg-12">
+                                <div class="form-group col-lg-6">
                                    <label for="">Vendor</label>
                                     <select class="form-control" name="vendor" required="">
                                     <option value="">Select Vendor</option>
@@ -40,6 +40,10 @@
                                        }
                                        ?>
                                  </select>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                   <label for="">Date</label>
+                                     <input class="form-control" type="text" id="date_range_input" name="daterange" value="<?php echo  date("m/d/Y");?> - <?php echo  date("m/d/Y", strtotime(' +2 day'));?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -71,7 +75,7 @@
                                    ?>
                                    <tr>
                                        <td><?php echo $s_number++; ?></td>
-                                       <td><?php echo $module["date"] ?></td>
+                                       <td><?php echo $newDate = date("d-m-Y", strtotime($module["date"])); ?></td>
                                        <td><?php echo $module["voucher_no"] ?></td>
                                        <td><?php echo $module["description"] ?></td>
                                        <td><?php  
@@ -95,7 +99,7 @@
                                                 $cr_in_total = $credit_amount + $invoice_amount;
                                            }
                                             ?></td>            
-                                       <td><?php echo $module["balance"] ?></td>
+                                       <td><?php echo number_format($module["balance"]) ?></td>
                                    </tr>
                                   <?php
                                     $total_amount = $module["balance"];
@@ -115,7 +119,7 @@
                                       <td></td>
                                       <td><strong><?php if(isset( $total_amount)){
                                          echo number_format($module["balance"]);}
-                                         else{ echo "0";}?></strong></td>
+                                         else{ echo " ";}?></strong></td>
                                       
                                    </tr>
                                </tbody>

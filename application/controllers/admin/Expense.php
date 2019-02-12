@@ -275,9 +275,8 @@ public function insert()
 
 			if ($this->input->server('REQUEST_METHOD') == 'POST') {
 
-
+				$exp_cat = $this->input->post('exp_cat');	
 				$explode_date = explode('-', $_POST['daterange']);
-
 				$current_date = $explode_date[0];
 				$str_currentdate = strtotime($current_date);
 				$str_current_day = date('Y-m-d' , $str_currentdate );
@@ -286,7 +285,7 @@ public function insert()
 				$str_last_date = strtotime($last_date);
 				$str_last_day = date('Y-m-d' , $str_last_date );
 
-				$this->data['expense'] = $this->Expense_model->get_expense_by_filter($str_current_day ,  $str_last_day);
+				$this->data['expense'] = $this->Expense_model->get_expense_by_filter($exp_cat , $str_current_day ,  $str_last_day);
 			}	
 			else
 			{
@@ -296,6 +295,7 @@ public function insert()
 
 			$this->data['title'] = 'Expense';
 			$this->data['permission'] = $this->permission;
+			$this->data['expense_type'] = $this->Expense_model->all_rows('expense_category');
 		 	$this->load->template('admin/expense/expense_reports/general_expenses_reports',$this->data);
 		 }
 

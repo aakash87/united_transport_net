@@ -55,34 +55,59 @@
                         <div class="col-md-6" >
                            <div class="form-group row">
                               <label for="" class="col-sm-3 col-form-label">Special Person </label>
+                              
+                               
                               <div class="col-sm-9">
-                                 <div class="radio radio-danger">
-                                    <input type="radio" name="special_person" class="special_person" id="special_person_yes" value="1">
+                                <div style="margin-top: 15px;">
+                                   <div class="radio radio-info radio-inline">
+                                       <input type="radio" name="special_person" class="special_person" id="special_person_yes" value="1">
                                     <label for="special_person_yes">Yes</label>
-                                 </div>
-                                 <div class="radio radio-danger">
-                                    <input type="radio" name="special_person" id="special_person_no" class="special_person" value="0" checked="">
+                                   </div>
+                                   <div class="radio radio-info radio-inline">
+                                       <input type="radio" name="special_person" id="special_person_no" class="special_person" value="0" checked="">
                                     <label for="special_person_no">No</label>
-                                 </div>
+                                   </div>
+                               </div> 
                               </div>
                            </div>
-                           <div class="field_wrapper_expense"></div>
                            <div class="form-group row">
+                              <label for="" class="col-sm-3 col-form-label">Type</label>
+                              
+
+                              <div class="col-sm-9">
+                                <div style="margin-top: 15px;">
+                                   <div class="radio radio-info radio-inline">
+                                       <input type="radio" name="vender_type" class="" id="vender_type_local" value="Local">
+                                    <label for="vender_type_local">Local</label>
+                                   </div>
+                                   <div class="radio radio-info radio-inline">
+                                       <input type="radio" name="vender_type" id="vender_type_domastic" class="" value="Domastic" checked="">
+                                    <label for="vender_type_domastic">Domastic</label>
+                                   </div>
+                               </div> 
+                              </div>
+                           </div>
+                           <!-- <div class="form-group row">
                               <div class="col-sm-12">
                                  <button type="button"  class="btn btn-success pull-right add_button">Add Vehicle</button>                                          
-                                 <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                               
                               </div>
-                           </div>
+                           </div> -->
+                           <div class="field_wrapper_expense"></div>
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <div class="col-sm-12">
+                           <button type="submit" class="btn btn-primary pull-right">Submit</button>
                         </div>
                      </div>
                   </div>
                </div>
-            </div>
+           
          </div>
       </form>
    </div>
-</div>
-</div>
+
 <!-- /.main content -->
 </div>
 <!-- /#page-wrapper -->
@@ -153,15 +178,21 @@
                                               +' <input class="form-control" name="vehicle_cc[]" type="text" value="" id="" placeholder=""  ></div>'
                                              +'</div>'
    
-   
-                               +'<a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a>'
+                                  + '<div class=" row">'
+                                  + '<div class="col-lg-12">'
+                                          +'<label for="" class="" style="visibility: hidden;">  expense Description</label>'
+                                          +' <br>'
+                                          +' <a href="javascript:void(0);" class="remove_button"><button style="margin-bottom: 11px !important;"  type="button" class="btn btn-success pull-right">Delete</button></a>'
+                                  +'</div>'
+                                  +'</div><hr>'
+                               
                              
    
    
    
    
    
-       +'</div><hr>'; //New input field html  
+       +'</div>'; //New input field html  
        var x = 1; //Initial field counter is 1
        
        //Once add button is clicked

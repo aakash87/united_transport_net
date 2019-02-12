@@ -55,7 +55,7 @@
                               <?php 
                                  if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
                                  ?>
-                              <th>Action</th>
+                              <th>Action<span style="visibility: hidden;">dsdsaas</span></th>
                               <?php } ?>
                            </tr>
                         </thead>
@@ -85,24 +85,24 @@
                                        Pending 
                                     <?php endif; ?>
                                  </td>
-                                 <td><?php echo $module['customer_paid_amount']; ?></td>
-                                 <td><?php echo $module['invoice_total_amount']; ?></td>
+                                 <td><?php echo number_format($module['customer_paid_amount']); ?></td>
+                                 <td><?php echo number_format($module['invoice_total_amount']); ?></td>
                                  <td>
                                     <?php 
                                        if ($permission["edit"] == "1") {
                                        ?>
-                                    <a href="<?php echo base_url() ?>admin/invoice/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="35" height="35"></a>
+                                    <a href="<?php echo base_url() ?>admin/invoice/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="25" height="25"></a>
                                     <?php } ?>
                                     <?php 
                                        if ($permission["deleted"] == "1") {
                                        ?>
-                                    <a href="<?php echo base_url() ?>admin/invoice/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a>
+                                    <a href="<?php echo base_url() ?>admin/invoice/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="25" height="25"></a>
                                     <?php } ?>
 
-                                    <a href="<?php echo base_url() ?>admin/invoice/pdf_view_of_invoice/<?php echo $module["invoiceID"] ?>" target="_blank">View Invoice PDF</a>
+                                    <a href="<?php echo base_url() ?>admin/invoice/pdf_view_of_invoice/<?php echo $module["invoiceID"] ?>" target="_blank"><img src="<?php echo base_url() ?>assets/img/view_report.png" title="View Invoice PDF" alt="View Invoice PDF" width="25" height="25"></a>
                                  <?php if ($module['invoice_status'] == 0) : ?>
                                     
-                                    <a href="<?php echo base_url() ?>admin/invoice/paid_invoice/<?php echo $module["invoiceID"] ?>" target="_blank">Paid Invoice</a>
+                                    <a href="<?php echo base_url() ?>admin/invoice/paid_invoice/<?php echo $module["invoiceID"] ?>" target="_blank"><img src="<?php echo base_url() ?>assets/img/payment_issue.png" title="Submit Invoice" alt="Submit Invoice" width="25" height="25"></a>
                                  <?php endif; ?>   
 
                                  </td>
@@ -117,8 +117,7 @@
 
             </div>
          </div>
-      </div>
-      <div style="height: 450px;"></div>
+     
    </div>
    <!-- /.main content -->
 </div>

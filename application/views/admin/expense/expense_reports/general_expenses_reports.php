@@ -36,22 +36,32 @@
 
 								 <form method="post" action="<?php echo base_url() ?>admin/expense/general_expenses_reports" enctype="multipart/form-data">
 					                  <div class="panel-body">
+					                    
+					                    <div class="form-group row">
+					                        <div class="form-group col-lg-6">
+					                           <label for="">Expense Type</label>
+					                            <select class="form-control" name="exp_cat">
+					                            <option value="">Select Expense Type</option>
+					                            <?php 
+					                               foreach ($expense_type as $exp_type) {
+					                                   echo '<option value="'.$exp_type['id'].'">'.$exp_type['expense_cate_title'].'</option>';
+					                               }
+					                               ?>
+					                         </select>
+					                        </div>
+					                        <div class="form-group col-lg-6">
+					                           <label for="">Date</label>
+					                            <input class="form-control" type="text" id="date_range_input" name="daterange" value="<?php echo  date("m/d/Y");?> - <?php echo  date("m/d/Y", strtotime(' +2 day'));?>" />
+					                        </div>
+					                    </div>
 					                    <div class="form-group row" >
 					                      
-					                        <div class="col-sm-10">
-
-					                             <input class="form-control" type="text" id="date_range_input" name="daterange" value="<?php echo  date("m/d/Y");?> - <?php echo  date("m/d/Y", strtotime(' +2 day'));?>" />
-					                         
-					                        </div>
-
-					                      <div class="form-group col-lg-2">
+					                      <div class="form-group col-lg-12">
 					                        
-					                          <button type="submit" id="customer_report_by_dateID" class="btn btn-success w-md m-b-5 m-t-5">Search</button>
+					                          <button type="submit" id="customer_report_by_dateID" class="btn pull-right btn-success w-md m-b-5 m-t-5">Search</button>
 
 					                      </div>
-					                    </div>
-
-					                                
+					                    </div>         
 
 					                  </div>
 					                </form>
@@ -87,8 +97,8 @@
 													<td><?php echo $module["expense_cate_title"] ?></td>
 													<td><?php echo $module["Expense_Description"] ?></td>
 													<td><?php echo $module["Expense_Voucher"] ?></td>
-													<td><?php echo $module["Date_Of_Submission"] ?></td>
-													<td><?php echo $module["Expense_Amount"] ?></td>
+													<td><?php echo $newDate = date("d-m-Y", strtotime($module["Date_Of_Submission"])) ?></td>
+													<td><?php echo  number_format($module["Expense_Amount"]) ?></td>
 													<!-- <?php 
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
 													?> -->

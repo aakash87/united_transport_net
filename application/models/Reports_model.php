@@ -29,7 +29,7 @@ class Reports_model extends MY_Model{
 		return $this->db->get()->result_array();
 	}
 
-	public function sales_person_ledger($sales_person_id)
+	public function sales_person_ledger($sales_person_id ,  $str_current_day ,  $str_last_day)
 	{
 		$this->db->select('sales_person_ledger.* , cu.full_name , ' );
 		$this->db->from('sales_person_ledger');
@@ -37,12 +37,13 @@ class Reports_model extends MY_Model{
 		$this->db->join('customer cu' , 'cu.id =  sales_person_ledger.customer_id' , 'left');
 
 		$this->db->where('sales_person_ledger.sales_person_id' , $sales_person_id);
-
+		$this->db->where('sales_person_ledger.date >=' , $str_current_day );
+		$this->db->where('sales_person_ledger.date <=' , $str_last_day );
 
 		return $this->db->get()->result_array();
 	}
 
-	public function customer_ledger($customer_id)
+	public function customer_ledger($customer_id , $str_current_day ,  $str_last_day)
 	{
 		$this->db->select('customer_ledger.* , cu.full_name , ' );
 		$this->db->from('customer_ledger');
@@ -50,10 +51,12 @@ class Reports_model extends MY_Model{
 		$this->db->join('customer cu' , 'cu.id =  customer_ledger.customer_id' , 'left');
 
 		$this->db->where('customer_ledger.customer_id' , $customer_id);
+		$this->db->where('customer_ledger.date >=' , $str_current_day );
+		$this->db->where('customer_ledger.date <=' , $str_last_day );	
 
 		return $this->db->get()->result_array();
 	}
-	public function vendor_ledger($vendor_id)
+	public function vendor_ledger($vendor_id , $str_current_day ,  $str_last_day)
 	{
 		$this->db->select('vendor_ledger.* , ven.vendor_name , ' );
 		$this->db->from('vendor_ledger');
@@ -61,6 +64,8 @@ class Reports_model extends MY_Model{
 		$this->db->join('vendor ven' , 'ven.id =  vendor_ledger.customer_id' , 'left');
 
 		$this->db->where('vendor_ledger.customer_id' , $vendor_id);
+		$this->db->where('vendor_ledger.date >=' , $str_current_day );
+		$this->db->where('vendor_ledger.date <=' , $str_last_day );
 
 		return $this->db->get()->result_array();
 	}

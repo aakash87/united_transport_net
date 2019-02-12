@@ -24,14 +24,21 @@ class Expense_model extends MY_Model{
 			return $this->db->get()->result_array();
 		}
 
-		public function get_expense_by_filter($str_current_day ,  $str_last_day)
+		public function get_expense_by_filter($exp_cat , $str_current_day ,  $str_last_day)
 		{
 
 			$this->db->select('expense.*, expense_category.expense_cate_title');
 			$this->db->from('expense');
 			$this->db->join('expense_category' , 'expense.exp_cat = expense_category.id' , 'left');
+			if ($exp_cat == TRUE) {
+			$this->db->where('exp_cat =' , $exp_cat);	
 		    $this->db->where('Date_Of_Submission >=' , $str_current_day );
 			$this->db->where('Date_Of_Submission <=' , $str_last_day );	
+			}
+			else{
+		    $this->db->where('Date_Of_Submission >=' , $str_current_day );
+			$this->db->where('Date_Of_Submission <=' , $str_last_day );	
+			}
 			return $this->db->get()->result_array();
 			
 		}

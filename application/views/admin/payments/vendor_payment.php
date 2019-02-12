@@ -48,7 +48,7 @@
 										    	?>
 												<tr>
 													<td><?php ?></td>
-													<td><?php echo $module["amount"] ?></td>
+													<td><?php echo number_format($module["amount"]) ?></td>
 													<td><?php echo $module["date"] ?></td>
 													<td>
 														<a href="<?php echo base_url() ?>admin/payments/paid_vandor_payment/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="Submit" alt="Submit" width="35" height="35"></a>
