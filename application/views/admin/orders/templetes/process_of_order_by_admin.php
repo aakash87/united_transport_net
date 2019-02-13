@@ -96,6 +96,18 @@
     top: 0;
     width: 7px;
 }
+
+   .ovel_css{
+          margin-right: 11px;
+    border-radius: 15px;
+    background-color: green;
+   }
+   .ovel_css_danger{
+          margin-right: 11px;
+    border-radius: 15px;
+    /*background-color: green;*/
+   }
+
 </style>
 <!-- /.Navbar  Static Side -->
 <div class="control-sidebar-bg"></div>
@@ -357,6 +369,8 @@
                                   </div>
                                   
                                 </div>
+
+                                <a href="<?php echo base_url()?>admin/orders/delete_order_expense/<?php echo $expense['id'] ?>"> <button type="button"  class="btn btn-danger pull-right  ovel_css_danger" style="margin-bottom: 11px !important;" onClick="return doconfirm();">Delete</button></a>
                             </div>
                       </div>
                      <?php endforeach; ?>
@@ -385,22 +399,115 @@
                      </div>
                    
                       </div>
+                      <a href="<?php echo base_url()?>admin/orders/delete_scond_stop/<?php echo $order_second['id'] ?>"> </a>
+                      <a href="<?php echo base_url()?>admin/orders/delete_scond_stop/<?php echo $order_second['id'] ?>">
+                        <button type="button"  class="btn btn-danger pull-right ovel_css_danger " style="margin-bottom: 11px !important;" title="Delete" onClick="return doconfirm2();">Delete</button>
+                      </a>
                     </div>
                   </div>
                      <?php endforeach; ?>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      <div class="optionBox">
+                         
+                          <div class="block">
+                            <a class="btn btn-success add-kpi pull-right add ovel_css">+ Add Expense</a>
+                              
+                          </div>
+                      </div>
+                      <div class="optionBox2">
+                         
+                          <div class="block2">
+                            <a class="btn btn-success add-kpi pull-right add2 ovel_css">+ Add 2<sup>nd</sup> Stop Detail</a>
+                              
+                          </div>
+                      </div>
+
+
+                     <script type="text/javascript">
+                       $('.add').click(function() {
+                           $('.block:last').before('<div class="block"><div class="row panel-body" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">Expense</span> </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br><div class="form-group row"> <div class="col-lg-4"> <label for="" > Expense Title </label> <input class="form-control" name="expense_title[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" > Expense Date </label> <input class="form-control" name="expense_date[]" type="date" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" class=""> Expense Amount </label> <input class="form-control" name="expense_amount[]" type="text" value="" id="" placeholder="" > </div></div><div class=" row"> <div class="col-lg-12"> <label for="" class=""> Expense Description </label> <textarea class="form-control" name="expense_description[]" rows="1"></textarea> <br></div></div></div></div><a class="btn btn-danger pull-right  ovel_css_danger remove"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove Expense</a></div>');
+                       });
+                       $('.optionBox').on('click','.remove',function() {
+                          $(this).parent().remove();
+                       });
+                     </script>
+                     <script type="text/javascript">
+                       $('.add2').click(function() {
+                           $('.block2:last').before('<div class="block2"><div class="row panel-body after-add-k refrence_data-append" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">2<sup>nd</sup> Stop Detail</span> </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br><div class="form-group row"> <div class="col-lg-4"> <label for="" class=""> origin </label> <input class="form-control" name="sec_stop_origin[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" class=""> Destination </label> <input class="form-control" name="sec_stop_destination[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" class=""> Rate </label> <input class="form-control" name="sec_stop_amount[]" type="text" value="" id="" placeholder="" ></div></div></div></div><a class="btn btn-danger pull-right ovel_css_danger  remove2"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove 2<sup>nd</sup> Stop Detail</a></div>');
+                       });
+                       $('.optionBox2').on('click','.remove2',function() {
+                          $(this).parent().remove();
+                       });
+                     </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+                     
+             
+                      <!-- <div class="row panel-body after-add-k refrence_data-append" style="position: relative; clear: both;">
+                          <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;">                     
+                              <span style="color: #FFF; font-size: 1.6em;">2<sup>nd</sup>  Stop Detail</span>
+                          </div>                                  
+                          <div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br>
+                   
+                      
+                        <div class="form-group row">
+                          <div class="col-lg-4">
+                            <label for="" class=""> origin </label>
+                            <input class="form-control" name="sec_stop_origin[]" type="text" value="" id="" placeholder=""  >
+                          </div>
+                          <div class="col-lg-4">
+                            <label for="" class=""> Destination </label>
+                            <input class="form-control" name="sec_stop_destination[]" type="text" value="" id="" placeholder=""  >
+                          </div>
+                          
+                          <div class="col-lg-4">
+                            <label for="" class=""> Rate </label>
+                            <input class="form-control" name="sec_stop_amount[]" type="text" value="" id="" placeholder=""  ></div>
+                          </div>
+                        </div> 
+                    </div> -->
+
+
+                    
+
+
                    
                      <!-- working -->
-                     <div class="row panel-body" style="position: relative; clear: both;">
+                     <!-- <div class="row panel-body" style="position: relative; clear: both;">
                             <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;">                     
                                 <span style="color: #FFF; font-size: 1.6em;">Expense</span>
                             </div>                                  
                             <div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br>
                               <div class="form-group row">
                                  <div class="col-sm-12">
-                                    <button type="button"  class="btn btn-success pull-right add_button">Add Expanse</button>
+                                    <button type="button"  class="btn btn-success pull-right add_button">Add Expense</button>
                                  </div>
                                  
                               </div>
@@ -425,7 +532,7 @@
 
 
                      
-                  </div>
+                  </div> -->
                   <div class="form-group row">
                     
                      <br>
@@ -751,3 +858,47 @@
     
    
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("body").on("click", ".add-k", function() {
+            var html = $(".after-add-k").first().clone();
+            //  $(html).find(".change").prepend("<label for=''>&nbsp;</label><br/><a class='btn btn-danger remove'>- Remove</a>");
+            $(html).find('input').val('')
+            $(html).find('select').val('')
+            $(html).find(".del").html("<a class='btn btn-danger remove'><i class='fa fa-trash-o' aria-hidden='true'></i> </a> " + ' <a class="btn btn-success add-k"><strong> + </strong> </a>');
+            $(".after-add-k").last().after(html);
+            var con = 0;
+            $('.select-multi').each(function() {
+                $(this).find('input.city-zin').attr('name', 'privious_citizen' + con)
+                con++
+            })
+        });
+        $("body").on("click", ".remove", function() {
+            $(this).parents(".after-add-k").remove();
+        });
+        
+    });
+</script>
+
+<script>
+function doconfirm()
+{
+    job=confirm("Are you sure to delete Expense Detail permanently?");
+    if(job!=true)
+    {
+        return false;
+    }
+}
+</script>
+<script>
+function doconfirm2()
+{
+       job=confirm("Are you sure to delete 2nd Stop Detail permanently?");
+    if(job!=true)
+    {
+        return false;
+    }
+}
+</script>
+

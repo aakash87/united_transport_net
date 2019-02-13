@@ -35,31 +35,31 @@
                      <div class="row" >
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor name</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor Name</label>
                               <div class="col-sm-9">
                                  <input class="form-control" name="vendor_name" type="text" value="<?php echo $vendor["vendor_name"] ?>" id="example-text-input" placeholder="" >
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Company name</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Company Name</label>
                               <div class="col-sm-9">
                                  <input class="form-control" name="company_name" type="text" value="<?php echo $vendor["company_name"] ?>" id="example-text-input" placeholder="" >
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor address</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor Address</label>
                               <div class="col-sm-9">
                                  <input class="form-control" name="vendor_address" type="text" value="<?php echo $vendor["vendor_address"] ?>" id="example-text-input" placeholder="" >
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor contact</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor Contact</label>
                               <div class="col-sm-9">
                                  <input class="form-control" name="vendor_contact" type="text" value="<?php echo $vendor["vendor_contact"] ?>" id="example-text-input" placeholder="" >
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor create date</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor Create Date</label>
                               <div class="col-sm-9">
                                  <input class="form-control" name="vendor_create_date" type="text" value="<?php echo $vendor["vendor_create_date"] ?>" id="example-text-input" placeholder="" >
                               </div>
@@ -70,7 +70,7 @@
                         <div class="col-md-6">
                            <div class="col-sm-12">
                               <div class="form-group row">
-                                 <label for="" class="col-sm-3 col-form-label">Special Person </label>
+                                 <label for="" class="col-sm-3 col-form-label">Special Person</label>
                                  <div class="col-sm-9">
                                     <div class="radio radio-danger">
                                        <input type="radio" name="special_person" class="special_person" id="special_person_yes" value="1" <?php echo ($vendor["special_person"] == 1) ? 'checked': NULL;  ?> >

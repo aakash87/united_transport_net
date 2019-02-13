@@ -1,3 +1,10 @@
+<style type="text/css">
+	.ovel_css{
+		margin-right: 11px;
+		border-radius: 15px;
+		background-color: green;
+	}
+</style>
 		<!-- /.Navbar  Static Side -->
 			<div class="control-sidebar-bg"></div>
 			<!-- Page Content -->
@@ -29,7 +36,7 @@
 										<?php 
 											if ($permission["created"] == "1") {
 										?>
-										<a href="<?php echo base_url("admin/vendor/create") ?>"><button class="btn btn-info pull-right">Add Vendor</button></a>
+										<a href="<?php echo base_url("admin/vendor/create") ?>"><button class="btn btn-info pull-right ovel_css">Add Vendor</button></a>
 										<?php } ?>
 									</div>
 								</div>
@@ -39,7 +46,13 @@
 										<table id="dataTableExample2" class="table table-bordered table-striped table-hover">
 											<thead>
 												<tr>
-													<th>S#</th><th>Vendor name</th><th>Company name</th><th>Vendor address</th><th>Vendor contact</th><th>Vendor create date</th><?php 
+													<th>S#</th>
+													<th>Vendor Name</th>
+													<th>Company Name</th>
+													<th>Vendor Address</th>
+													<th>Vendor Contact</th>
+													<th>Vendor Create Date</th>
+													<?php 
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
 													?>
 													<th>Action</th>

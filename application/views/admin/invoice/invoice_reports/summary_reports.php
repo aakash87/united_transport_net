@@ -44,7 +44,7 @@
                         <label for="example-text-input" class="col-sm-4 col-form-label">Select Sales Person</label>
                                 <div class="col-sm-8">
                                     <select class="form-control selectpicker" data-live-search="true" name="select_sales_person" >
-                                                  <option>Select Sales Person</option><?php foreach ($sales_person as $person) {?>
+                                                  <option value="">Select Sales Person</option><?php foreach ($sales_person as $person) {?>
                                                       <option value="<?php echo $person["id"] ?>"><?php echo $person["name"] ?></option>
                                                  <?php } ?></select>
                                 </div>

@@ -1,4 +1,11 @@
-		<!-- /.Navbar  Static Side -->
+	<style type="text/css">
+   .ovel_css{
+          margin-right: 11px;
+    border-radius: 15px;
+    background-color: green;
+   }
+</style>
+	<!-- /.Navbar  Static Side -->
 			<div class="control-sidebar-bg"></div>
 			<!-- Page Content -->
 			<div id="page-wrapper">
@@ -29,8 +36,8 @@
 										<?php 
 											if ($permission["created"] == "1") {
 										?>
-										<a href="<?php echo base_url("admin/expense/create") ?>"><button class="btn btn-info pull-right">Add Expense</button></a>
-										<a href="<?php echo base_url("admin/expense/general_expenses_reports") ?>"><button class="btn btn-info pull-right">View Expance Report</button></a>
+										<a href="<?php echo base_url("admin/expense/create") ?>"><button class="btn btn-info  pull-right ovel_css">Add Expense</button></a>
+										<!-- <a href="<?php echo base_url("admin/expense/general_expenses_reports") ?>"><button class="btn btn-info pull-right">View Expance Report</button></a> -->
 										<?php } ?>
 									</div>
 								</div>

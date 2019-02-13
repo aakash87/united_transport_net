@@ -11,11 +11,11 @@
                 <i class="pe-7s-note2"></i>
             </div>
             <div class="header-title">
-                <h1>Add Vehicel owner</h1>
+                <h1>Add Vehicle Owner</h1>
                 <small></small>
                 <ol class="breadcrumb">
                     <li><a href="index.html"><i class="pe-7s-home"></i> Home</a></li>
-                    <li class="active">Add Vehicel owner</li>
+                    <li class="active">Add Vehicle Owner</li>
                 </ol>
             </div>
         </div>
@@ -28,22 +28,22 @@
                     <div class="panel panel-bd ">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h4>Add Vehicel owner</h4>
+                                <h4>Add Vehicle Owner</h4>
                             </div>
                         </div>
                         <div class="panel-body"><div class="form-group row">
 
-                                <label for="example-text-input" class="col-sm-3 col-form-label">Owner full name</label>
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Owner Full Name</label>
                                         <div class="col-sm-9"><input class="form-control" name="owner_full_name" type="text" value="" id="example-text-input" placeholder="" ></div>
 
                                     </div><div class="form-group row">
 
-                                <label for="example-text-input" class="col-sm-3 col-form-label">Owner contact</label>
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Owner Contact</label>
                                         <div class="col-sm-9"><input class="form-control" name="owner_contact" type="text" value="" id="example-text-input" placeholder="" ></div>
 
                                     </div><div class="form-group row">
 
-                                <label for="example-text-input" class="col-sm-3 col-form-label">Owner emial</label>
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Owner Email</label>
                                         <div class="col-sm-9"><input class="form-control" name="owner_emial" type="text" value="" id="example-text-input" placeholder="" ></div>
 
                                     </div><div class="form-group row">

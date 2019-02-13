@@ -51,11 +51,22 @@ class Invoice_model extends MY_Model{
 		$this->db->join('invoice' , 'invoice_log.invoice_id = invoice.id' , 'left');
 
 		$this->db->where('orders.order_status' , 'Complete');
-		$this->db->where('orders.sales_person_id' , $id);
+ 	
+ 		if ($id == TRUE) {
+ 		$this->db->where('orders.sales_person_id' , $id);
 
 
 		$this->db->where('orders.order_date >=' , $str_current_day );
 		$this->db->where('orders.order_date <=' , $str_last_day );	
+ 		}
+ 		else{
+
+
+ 			$this->db->where('orders.order_date >=' , $str_current_day );
+ 			$this->db->where('orders.order_date <=' , $str_last_day );	
+ 		}
+
+		
 
 
 		return $this->db->get()->result_array();

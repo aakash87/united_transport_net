@@ -1,3 +1,10 @@
+<style type="text/css">
+   .ovel_css{
+      margin-right: 11px;
+      border-radius: 15px;
+      background-color: green;
+   }
+</style>
 <!-- /.Navbar  Static Side -->
 <div class="control-sidebar-bg"></div>
 <!-- Page Content -->
@@ -28,7 +35,7 @@
                      <?php 
                         if ($permission["created"] == "1") {
                         ?>
-                     <a href="<?php echo base_url("admin/vehicle/create") ?>"><button class="btn btn-info pull-right">Add Vehicle</button></a>
+                     <a href="<?php echo base_url("admin/vehicle/create") ?>"><button class="btn btn-info pull-right ovel_css">Add Vehicle</button></a>
                      <?php } ?>
                   </div>
                </div>
@@ -38,12 +45,12 @@
                         <thead>
                            <tr>
                               <th>S#</th>
-                              <th>Vehicle maker</th>
+                              <th>Vehicle Maker</th>
                               <th>Vehicle Owner</th>
                               <th>Vehicle Vendor</th>
                               <th>Vehicle engine type</th>
-                              <th>Vehicle model</th>
-                              <th>Vehicle type</th>
+                              <th>Vehicle Model</th>
+                              <th>Vehicle Type</th>
                              
                               <?php 
                                  if ($permission["edit"] == "1" || $permission["deleted"] == "1"){

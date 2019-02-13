@@ -12,11 +12,11 @@
             <i class="pe-7s-box1"></i>
          </div>
          <div class="header-title">
-            <h1>Vehicel_profit_reports <?php print_r($vehicel_id_sele); ?> | <?php echo $date_input; ?> </h1>
+            <h1>Vehicle Profit Reports <?php print_r($vehicel_id_sele); ?> | <?php echo $date_input; ?> </h1>
             <small> </small>
             <ol class="breadcrumb">
                <li><a href=""><i class="pe-7s-home"></i> Home</a></li>
-               <li class="active">Vehicel_profit_reports</li>
+               <li class="active">Vehicle Profit Reports</li>
             </ol>
          </div>
       </div>
@@ -26,7 +26,7 @@
               <div class="panel panel-bd">
                 <div class="panel-heading">
                   <div class="panel-title">
-                    <h4>Vehicel_profit_reports</h4>
+                    <h4>VIew Detail</h4>
                   </div>
                 </div>
                 <form method="post" action="<?php echo base_url() ?>admin/reports/vehicel_reports_profit" enctype="multipart/form-data">
@@ -34,10 +34,10 @@
                     <div class="form-group row" >
                       <div class="col-lg-6"">
               
-                        <label for="example-text-input" class="col-sm-4 col-form-label">Select  Vehicel</label>
+                        <label for="example-text-input" class="col-sm-4 col-form-label">Select Vehicle</label>
                                 <div class="col-sm-8">
                                    <select class="form-control selectpicker" data-live-search="true" name="select_vehicel" >
-                                      <option>Select Vehicel </option><?php foreach ($vehicels as $veh) {?>
+                                      <option value="">Select Vehicle </option><?php foreach ($vehicels as $veh) {?>
                                           <option value="<?php echo $veh["id"] ?>"><?php echo $veh["registration_number"] ?></option>
                                      <?php } ?></select>
                                 </div>
@@ -47,7 +47,7 @@
 
                       <div class="col-lg-4" >
                         
-                         <label for="example-text-input" class="col-sm-4 col-form-label">Date Picker</label>
+                         <label for="example-text-input" class="col-sm-4 col-form-label">Select Date</label>
                         
                            <div class="col-sm-8">
                             <input class="form-control" type="text" id="date_range_input" name="daterange" value="<?php echo  date("m/d/Y");?> - <?php echo  date("m/d/Y", strtotime(' +2 day'));?>" />
@@ -72,9 +72,9 @@
                                           <tr>
                                               <th>S.No</th>
                                               <th>Customer Name</th>
-                                              <th>Org</th>
-                                              <th>DEST</th>
-                                              <th>SALE AMOUNT</th>
+                                              <th>Origin</th>
+                                              <th>Destination</th>
+                                              <th>Sale Amount</th>
                                               <th>Return Amount</th>
                                               <th>Expenses</th>
                                               <th>Profit</th>
@@ -121,17 +121,17 @@
                                               <td><?php echo $order_veh['pickup_location']; ?></td>
                                               <td><?php echo $order_veh['drop_off_address']; ?></td>
                                               <td>
-                                                <?php echo $order_veh['order_total_amount']; ?>
+                                                <?php echo number_format($order_veh['order_total_amount']); ?>
 
                                                 <?php $total_amout_count += $order_veh['order_total_amount']; ?>
                                                   
                                               </td>
                                               
-                                              <td><?php echo $second_stop_count; ?></td>
+                                              <td><?php echo number_format($second_stop_count); ?></td>
                                               
                                               <?php $return_amount_total += $second_stop_count ?>
                                               
-                                              <td><?php echo $count_value; ?></td>
+                                              <td><?php echo number_format($count_value); ?></td>
                                               
                                               <?php $expense_amount_total += $count_value; ?>
                                               
@@ -141,7 +141,7 @@
 
                                                 $round_amout = $sale_amount - $amout_second_stop_count;
 
-                                                echo  $round_amout;
+                                                echo  number_format($round_amout);
                                                 
                                                $profit_amount+=  $round_amout ;
 
@@ -162,9 +162,9 @@
                                               <td></td>
                                               <td></td>
                                               <td>Total</td>
-                                              <td><?php echo $total_amout_count; ?> </td>
-                                              <td><?php echo $return_amount_total; ?></td>
-                                              <td><?php echo $expense_amount_total; ?></td>
+                                              <td><?php echo number_format($total_amout_count); ?> </td>
+                                              <td><?php echo number_format($return_amount_total); ?></td>
+                                              <td><?php echo number_format($expense_amount_total); ?></td>
                                               <td>
                                                 <?php echo $profit_amount; ?>
                                               </td>

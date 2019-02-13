@@ -1,3 +1,10 @@
+<style type="text/css">
+   .ovel_css{
+      margin-right: 11px;
+      border-radius: 15px;
+      background-color: green;
+   }
+</style>
 <!-- /.Navbar  Static Side -->
 <div class="control-sidebar-bg"></div>
 <!-- Page Content -->
@@ -28,7 +35,7 @@
                      <?php 
                         if ($permission["created"] == "1") {
                         ?>
-                     <a href="<?php echo base_url("admin/drivers/create") ?>"><button class="btn btn-info pull-right">Add Drivers</button></a>
+                     <a href="<?php echo base_url("admin/drivers/create") ?>"><button class="btn btn-info pull-right ovel_css">Add Drivers</button></a>
                      <?php } ?>
                   </div>
                </div>

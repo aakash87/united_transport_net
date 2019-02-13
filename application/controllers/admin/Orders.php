@@ -176,7 +176,7 @@
 				
 				$this->data['order_second_stop'] = $this->Orders_model->get_row_with_order_second_stop($id);
 
-				// echo '<pre>'; print_r($this->data['order_second_stop']);
+				// echo '<pre>'; print_r($this->data['order_expense']);
 
 				// die();
 
@@ -186,11 +186,21 @@
 				// print_r($this->data['local_vendor']);
 				$this->load->template('admin/orders/templetes/process_of_order_by_admin',$this->data);
 
-
 			}
 		}
 
-
+		public function delete_order_expense($id)
+		{
+			
+			$this->Orders_model->delete('order_expense',array('id'=>$id));
+			redirect('admin/orders');
+		}
+		public function delete_scond_stop($id)
+		{
+			
+			$this->Orders_model->delete('order_second_stop',array('id'=>$id));
+			redirect('admin/orders');
+		}
 		public function submit_process_by_admin()
 		{
 

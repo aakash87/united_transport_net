@@ -33,15 +33,15 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle maker</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Maker</label>
                               <div class="col-sm-9"><input class="form-control" name="vehicle_maker" type="text" value="<?php echo $vehicle["vehicle_maker"] ?>" id="example-text-input" placeholder="" ></div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle model</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Model</label>
                               <div class="col-sm-9"><input class="form-control" name="vehicle_model" type="text" value="<?php echo $vehicle["vehicle_model"] ?>" id="example-text-input" placeholder="" ></div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle type</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Type</label>
                               <div class="col-sm-9"><input class="form-control" name="vehicle_type" type="text" value="<?php echo $vehicle["vehicle_type"] ?>" id="example-text-input" placeholder="" ></div>
                            </div>
                            <div class="form-group row">
@@ -57,7 +57,7 @@
                               <div class="col-sm-9"><input class="form-control" name="vehicle_cc" type="text" value="<?php echo $vehicle["vehicle_cc"] ?>" id="example-text-input" placeholder="" ></div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle year</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Year</label>
                               <div class="col-sm-9"><input class="form-control" name="vehicle_year" type="text" value="<?php echo $vehicle["vehicle_year"] ?>" id="example-text-input" placeholder="" ></div>
                            </div>
                         </div>

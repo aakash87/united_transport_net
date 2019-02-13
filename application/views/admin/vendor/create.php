@@ -32,29 +32,29 @@
                      <div class="row" >
                         <div class="col-md-6" >
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor name</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor Name</label>
                               <div class="col-sm-9"><input class="form-control" name="vendor_name" type="text" value="" id="example-text-input" placeholder="" ></div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Company name</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Company Name</label>
                               <div class="col-sm-9"><input class="form-control" name="company_name" type="text" value="" id="example-text-input" placeholder="" ></div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor address</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor Address</label>
                               <div class="col-sm-9"><input class="form-control" name="vendor_address" type="text" value="" id="example-text-input" placeholder="" ></div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor contact</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor Contact</label>
                               <div class="col-sm-9"><input class="form-control" name="vendor_contact" type="text" value="" id="example-text-input" placeholder="" ></div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor create date</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Vendor Creation Date</label>
                               <div class="col-sm-9"><input class="form-control" name="vendor_create_date" type="date" value="" id="example-text-input" placeholder="" ></div>
                            </div>
                         </div>
                         <div class="col-md-6" >
                            <div class="form-group row">
-                              <label for="" class="col-sm-3 col-form-label">Special Person </label>
+                              <label for="" class="col-sm-3 col-form-label">Special Person</label>
                               
                                
                               <div class="col-sm-9">

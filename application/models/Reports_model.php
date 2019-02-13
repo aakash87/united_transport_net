@@ -9,10 +9,16 @@ class Reports_model extends MY_Model{
 
 		$this->db->join('customer cu' , 'orders.order_customer = cu.id' , 'left');
 
-		$this->db->where('orders.vehicel_of_vendor' , $vehicel_id);	
+		if ($vehicel_id == TRUE) {	
+				$this->db->where('orders.vehicel_of_vendor' , $vehicel_id);	
 
-	    $this->db->where('order_date >=' , $str_current_day );
-		$this->db->where('order_date <=' , $str_last_day );	
+			    $this->db->where('order_date >=' , $str_current_day );
+				$this->db->where('order_date <=' , $str_last_day );
+			}	else{
+
+			    $this->db->where('order_date >=' , $str_current_day );
+				$this->db->where('order_date <=' , $str_last_day );
+			}
 
 		return $this->db->get()->result_array();
 	}

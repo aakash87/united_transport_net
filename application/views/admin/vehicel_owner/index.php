@@ -1,4 +1,10 @@
-		<!-- /.Navbar  Static Side -->
+<style type="text/css">
+	.ovel_css{
+		margin-right: 11px;
+		border-radius: 15px;
+		background-color: green;
+	}
+</style>		<!-- /.Navbar  Static Side -->
 			<div class="control-sidebar-bg"></div>
 			<!-- Page Content -->
 			<div id="page-wrapper">
@@ -10,12 +16,12 @@
 							<i class="pe-7s-box1"></i>
 						</div>
 						<div class="header-title">
-							<h1>View Vehicel owner</h1>
+							<h1>View Vehicle Owner</h1>
 							<small> </small>
 							<ol class="breadcrumb">
 								<li><a href="<?php echo base_url() ?>"><i class="pe-7s-home"></i> Home</a></li>
 
-								<li class="active">View Vehicel owner</li>
+								<li class="active">View Vehicle Owner</li>
 							</ol>
 						</div>
 					</div> <!-- /. Content Header (Page header) -->
@@ -25,11 +31,11 @@
 							<div class="panel panel-bd">
 								<div class="panel-heading">
 									<div class="panel-title">
-										<h4>View Vehicel owner</h4>
+										<h4>View Vehicle Owner</h4>
 										<?php 
 											if ($permission["created"] == "1") {
 										?>
-										<a href="<?php echo base_url("admin/vehicel_owner/create") ?>"><button class="btn btn-info pull-right">Add Vehicel owner</button></a>
+										<a href="<?php echo base_url("admin/vehicel_owner/create") ?>"><button class="btn btn-info pull-right ovel_css">Add Vehicle Owner</button></a>
 										<?php } ?>
 									</div>
 								</div>
@@ -39,7 +45,10 @@
 										<table id="dataTableExample2" class="table table-bordered table-striped table-hover">
 											<thead>
 												<tr>
-													<th>Id</th><th>Owner full name</th><th>Owner contact</th><th>Owner emial</th><?php 
+													<th>Id</th><th>Owner Full Name</th>
+													<th>Owner Contact</th>
+													<th>Owner Email</th>
+													<?php 
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
 													?>
 													<th>Action</th>
