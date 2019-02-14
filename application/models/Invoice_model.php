@@ -17,7 +17,7 @@ class Invoice_model extends MY_Model{
 
 	public function  all_rows_with_data()
 	{
-		$this->db->select('invoice.id as invoiceID , invoice.invoice_status , invoice.customer_paid_amount ,  invoice.invoice_total_amount  ,  cu.*, users.name as sp_name');
+		$this->db->select('invoice.id as invoiceID , invoice.invoice_status , invoice.customer_paid_amount ,  invoice.invoice_total_amount  ,invoice.balance ,invoice.status,  cu.*, users.name as sp_name');
 		$this->db->from('invoice');
 		$this->db->join('customer cu' , 'cu.id  = invoice.customer_id');
 		$this->db->join('users' , 'users.id = cu.sales_person' , 'left');
@@ -90,5 +90,16 @@ class Invoice_model extends MY_Model{
 		$query = $this->db->query("SELECT * FROM $table where bank_d_id = '$bank_d_id'  ORDER BY id DESC LIMIT 1");
 		$result = $query->row_array();
 		return $result;
+	}
+
+	public function  get_invvooce_by_id($id)
+	{
+		$this->db->select('invoice.*, cu.*, users.name as sp_name');
+		$this->db->from('invoice');
+		$this->db->join('customer cu' , 'cu.id  = invoice.customer_id');
+		$this->db->join('users' , 'users.id = cu.sales_person' , 'left');
+		$this->db->where('invoice.id <=' , $id );	
+		return $this->db->get()->result_array();
+		
 	}
 }

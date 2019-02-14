@@ -10,7 +10,8 @@
 	        $this->user_type = $this->session->userdata('user_type');
 	        $this->id = $this->session->userdata('user_id');
 	        $this->permission = $this->get_permission($this->module,$this->user_type);
-	    }public function index()
+	    }
+	    public function index()
 		{
 
 			if ( $this->permission['view'] == '0' && $this->permission['view_all'] == '0' ) 
@@ -25,7 +26,11 @@
 			
 			}
 		
-			elseif ($this->permission['view'] == '1') {$this->data['invoice'] = $this->Invoice_model->get_rows('invoice',array('user_id'=>$this->id));}
+			elseif ($this->permission['view'] == '1') {
+				$this->data['invoice'] = $this->Invoice_model->get_rows('invoice',array('user_id'=>$this->id));
+			}
+			// echo "<pre>";
+			// print_r($this->data['invoice']);die();
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/invoice/index',$this->data);
 
@@ -152,7 +157,8 @@
 
 
 			$this->data['selected_data'] = $invoice_data;
-
+			// echo "<pre>";
+			// print_r($this->data['selected_data']);die();
 			$this->data['title'] = 'Create Order Invoice';$this->load->template('admin/invoice/create_order_invoice',$this->data);
 		}
 
@@ -195,11 +201,13 @@
 
 			$data_invoice = [
 				'invoice_total_amount' =>  $final_amount ,
+				'balance' =>  $final_amount,
 				'invoice_voucher_number' => "INV-".$invoice_code."-".date('Y'),
 				'order_ids' =>  $order_ids,
 				'customer_id' => $this->input->post('customer_nameID'),
 				'sales_person_id' => $this->input->post('sales_person_id'),
 				'invoice_status' => 0,
+				'status' => 'Create Invoice',
 			];
 
 
@@ -313,7 +321,7 @@
 		{
 
 		
-
+			$this->data['invoice_detail'] =  $this->Invoice_model->get_invvooce_by_id($invoice_id);
 			$this->data['invoice'] =  $this->Invoice_model->get_row_single('invoice',array('id'=>$invoice_id));
 			
 			$this->data['customer'] =  $this->Invoice_model->get_row_single('customer',array('id'=>$this->data['invoice']['customer_id']));
@@ -327,13 +335,12 @@
 			$order_data = [];
 		
 			for ($i=0; $i < sizeof($o_id); $i++) { 
-				$this->db->select('invoice_order_list.*  , orders.order_total_amount , orders.order_date, orders.pickup_location, orders.drop_off_location,  vehicle.*');
-				$this->db->from('invoice_order_list');
-				$this->db->join('orders' , 'orders.id ='. $o_id[$i]);
+				$this->db->select('orders.*');
+				$this->db->from('orders');
+			
 				 
-				$this->db->join('vehicle' , 'orders.vehicel_of_vendor = vehicle.id ');
 				
-				$this->db->where('invoice_order_list.inv_ordre_id' , $o_id[$i]);
+				$this->db->where('orders.id' , $o_id[$i]);
 
 				$this->data['order']= $this->db->get()->row_array();
 				
@@ -344,6 +351,7 @@
 			$this->data['selected_data'] = $order_data;
 
 			// echo '<pre>'; print_r($this->data['selected_data']);
+			// die();
 
  			$this->load->library('pdf');
 			$this->pdf->load_view('admin/invoice/invoice_reports/pdf_view_of_invoice',$this->data );
@@ -355,7 +363,7 @@
 		}
 
 
-		public function paid_invoice($invoice_id)
+		public function submit_invoice($invoice_id)
 		{
 
 			$this->data['invoice_tb_id'] =  $invoice_id;
@@ -400,7 +408,7 @@
 
 		}
 
-		public function paid_invoice_submit()
+		public function submit_order_invoice()
 		{
 			if ($this->input->server('REQUEST_METHOD') == 'POST') {
 				// print_r($_POST);
@@ -423,13 +431,59 @@
 
 		   	 	$total_balance =  $prev_balance - $debitamount;
 
-				$options = [
-					'invoice_paid_date' => $this->input->post('invoice_paid_date'),
-					'invoice_status' => $invoice_status,
-					'customer_paid_amount' => $paid_amount_cu,
-				];
+				echo "<pre>";
+				print_r($_POST);
+				echo "<br>";
+				$total_paid_amount = $this->input->post('amount') + $this->input->post('paid_amount_cu');
+				$payment_balans_amount = $this->input->post('balance') - $this->input->post('paid_amount_cu');
+				print_r($this->input->post('invoice_total_amount'));
+				// echo "<br>";
+				// die();
+				if ($this->input->post('invoice_total_amount') == $total_paid_amount) {
 
-				$this->Invoice_model->update('invoice',$options,array('id'=>$this->input->post('invoice_tb_id') ) );
+					// $options = [
+					// 	'invoice_paid_date' => $this->input->post('invoice_paid_date'),
+					// 	'invoice_status' => $invoice_status,
+					// 	'customer_paid_amount' => $paid_amount_cu,
+					// ];
+
+					
+
+
+
+					$options = 
+					[
+						'customer_paid_amount' =>  $total_paid_amount,
+						'balance' =>  '0',
+						'status' =>  'Paid Invoice',
+						'invoice_paid_date' => $this->input->post('invoice_paid_date'),
+					];
+					$this->Invoice_model->update('invoice',$options,array('id'=>$this->input->post('invoice_tb_id') ) );
+				}
+				else{
+					$options = 
+					[
+						'customer_paid_amount' =>  $total_paid_amount,
+						'balance' =>  $payment_balans_amount,
+						'status' =>  'Partial Invoice',
+						'invoice_paid_date' => $this->input->post('invoice_paid_date'),
+					];
+					$this->Invoice_model->update('invoice',$options,array('id'=>$this->input->post('invoice_tb_id') ) );
+				}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	              $data2=array(
 
 	                  'customer_id'=> $this->input->post('customer_id'),

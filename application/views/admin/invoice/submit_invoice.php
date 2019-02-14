@@ -21,7 +21,7 @@
         </div>
         <!-- /. Content Header (Page header) -->
 
-        <form method="post" action="<?php echo base_url() ?>admin/invoice/paid_invoice_submit" enctype="multipart/form-data">
+        <form method="post" action="<?php echo base_url() ?>admin/invoice/submit_order_invoice" enctype="multipart/form-data">
             <input type="hidden"  name="invoice_tb_id" value="<?php echo $invoice_tb_id; ?>">
             <div class="row">
                 <?php  // echo '<pre>'; print_r(); ?>
@@ -44,7 +44,7 @@
                                         </div>
 
                                         <div class="form-group row ">
-                                            <label for="example-text-input" class="col-sm-3 col-form-label">customer_name</label>
+                                            <label for="example-text-input" class="col-sm-3 col-form-label">Customer Name</label>
                                               <div class="col-sm-9">
                                                     <input class="form-control" name="customer_name" type="text" value="<?php echo $customer['full_name']; ?>" id="example-text-input" placeholder="" readonly >
                                                     <input style="display: none;" class="form-control" name="customer_id" type="text" value="<?php echo $invoice['customer_id']; ?>" id="" placeholder="" readonly >
@@ -54,7 +54,7 @@
                                         </div>
 
                                            <div class="form-group row  ">
-                                            <label for="example-text-input" class="col-sm-3 col-form-label">Paid Amout</label>
+                                            <label for="example-text-input" class="col-sm-3 col-form-label">Paid Amount</label>
                                               <div class="col-sm-9">
                                                     <input class="form-control" max="<?php echo $invoice['invoice_total_amount']; ?>" name="paid_amount_cu" type="number" value="" id="example-text-input" placeholder=""  >
                                               </div>
@@ -66,9 +66,12 @@
 
                                      <div class="col-sm-6" >
                                         <div class="form-group row ">
-                                            <label for="example-text-input" class="col-sm-3 col-form-label">total_amount</label>
+                                            <label for="example-text-input" class="col-sm-3 col-form-label">Total Amount</label>
                                               <div class="col-sm-9">
                                                     <input class="form-control" name="invoice_total_amount" type="text" value="<?php echo $invoice['invoice_total_amount']; ?>" id="example-text-input" placeholder="" readonly >
+                                                    <input class="form-control" name="balance" type="text" value="<?php echo $invoice['balance']; ?>" id="example-text-input" placeholder="" readonly >
+                                                    <input class="form-control" name="amount" type="text" value="<?php echo $invoice['customer_paid_amount']; ?>" id="example-text-input" placeholder="" readonly >
+                                                    <input class="form-control" name="old_amount" type="text" value="<?php echo $invoice['balance']; ?>" id="example-text-input" placeholder="" readonly >
                                               </div>
                                         </div>
                                         <div class="form-group row">

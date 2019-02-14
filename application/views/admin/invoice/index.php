@@ -77,14 +77,15 @@
                                  </td>
                                  <td><?php echo $module['full_name']; ?></td>
                                  <td><?php echo $module['sp_name']; ?></td>
-                                 <td>
+                                 <td><?php echo $module['status']; ?></td>
+                                 <!-- <td>
                                     <?php if ( $module['invoice_status'] == 1) : ?>
                                        complete 
                                     <?php endif; ?>
                                      <?php if ( $module['invoice_status'] == 0) : ?>
                                        Pending 
                                     <?php endif; ?>
-                                 </td>
+                                 </td> -->
                                  <td><?php echo number_format($module['customer_paid_amount']); ?></td>
                                  <td><?php echo number_format($module['invoice_total_amount']); ?></td>
                                  <td>
@@ -102,7 +103,8 @@
                                     <a href="<?php echo base_url() ?>admin/invoice/pdf_view_of_invoice/<?php echo $module["invoiceID"] ?>" target="_blank"><img src="<?php echo base_url() ?>assets/img/view_report.png" title="View Invoice PDF" alt="View Invoice PDF" width="25" height="25"></a>
                                  <?php if ($module['invoice_status'] == 0) : ?>
                                     
-                                    <a href="<?php echo base_url() ?>admin/invoice/paid_invoice/<?php echo $module["invoiceID"] ?>" target="_blank"><img src="<?php echo base_url() ?>assets/img/payment_issue.png" title="Submit Invoice" alt="Submit Invoice" width="25" height="25"></a>
+                                    <a href="<?php echo base_url() ?>admin/invoice/submit_invoice/<?php echo $module["invoiceID"] ?>" target="_blank"><img src="<?php echo base_url() ?>assets/img/payment_issue.png" title="Submit Invoice" alt="Submit Invoice" width="25" height="25" style="<?php if ($module['balance'] == 0) {
+                                      echo "display:none";}?>">
                                  <?php endif; ?>   
 
                                  </td>

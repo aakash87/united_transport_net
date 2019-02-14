@@ -85,6 +85,7 @@
 				
 				'pickup_location' => $this->input->post('pickup_location'),
 				'drop_off_location' => $this->input->post('drop_off_location'),
+				'weight' => $this->input->post('weight'),
 				'order_total_amount' => $this->input->post('order_total_amount'),
 				'order_type' => $this->input->post('select_order_type'),
 				'order_status' => 'pending',

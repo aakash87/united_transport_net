@@ -1,645 +1,373 @@
-<link href="<?php echo base_url() ?>assets/assets/dist/css/base.css" rel="stylesheet" type="text/css" />
-
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>UTN</title>
-
-    
+    <title>HTML to API - Invoice</title>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <!-- <link rel="stylesheet" href="sass/main.css" media="screen" charset="utf-8"/> -->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta http-equiv="content-type" content="text-html; charset=utf-8">
     <style type="text/css">
-
-        body{
-
-
-
-    color: #61686d;
-
-    font: 14px "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
-
-    font-weight: lighter;
-
-   /* padding-bottom: 60px;*/
-
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
 }
 
-
-
-
-
-.page-shadow {
-
-    width: 992px;
-
-    height: 60px;
-
-    margin: 0 auto;
-
-    margin-top: -1px;
-
-    z-index: 1;
-
-    position: relative;
-
+html {
+  line-height: 1;
 }
 
-
-
-h1 {
-
-    color: #4d5357;
-
-    font-weight: lighter;
-
-    font-size: 40px;
-
-    margin: 10px 0 0 0;
-
+ol, ul {
+  list-style: none;
 }
 
-
-
-.terms {
-
-    float: left;
-
-    width: 400px;
-
-    margin: 0 0 30px 0;
-
-    font-size: 12px;
-
-    color: black;
-
-    line-height: 180%;
-
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-
-
-.terms strong {
-
-    font-size: 16px;
-
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
 }
 
-
-
-.recipient-address {
-
-    /*padding-top: 60px;*/
-
-    width: 200px;
-
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
 }
 
-
-
-
-
-.recipient-address2 {
-
-    /*padding-top: 60px;*/
-
-    width: 400px;
-
+a img {
+  border: none;
 }
 
-
-
-.company-logo {
-
-    width: 202px;
-
-    height: 81px;
-
-    position: absolute;
-
-    right: 40px;
-
-    top: 40px;
-
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
 }
 
-
-
-.company-address {
-
-    width: 200px;
-
-    color: black;
-
-    position: absolute;
-
-    right: 40px;
-
-    top: 130px;
-
-    text-align: right;
-
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  color: #555555;
+}
+body a {
+  text-decoration: none;
+  color: inherit;
+}
+body a:hover {
+  color: inherit;
+  opacity: 0.7;
+}
+body .container {
+  min-width: 460px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+body .clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+body .left {
+  float: left;
+}
+body .right {
+  float: right;
+}
+body .helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+body .no-break {
+  page-break-inside: avoid;
 }
 
-
-
-.status {
-
-    position: absolute;
-
-    top: -5px;
-
-    left: -5px;
-
-    text-indent: -5000px;
-
-    width: 128px;
-
-    height: 128px;
-
+header {
+  margin-top: 15px;
+  margin-bottom: 45px;
+}
+header figure {
+  float: left;
+  margin-right: 10px;
+  width: 65px;
+  height: 70px;
+  background-color: #66BDA9;
+  text-align: center;
+}
+header figure img {
+  margin-top: 10px;
+}
+header .company-info {
+  float: right;
+  color: #66BDA9;
+  line-height: 14px;
+}
+header .company-info .address, header .company-info .phone, header .company-info .email {
+  position: relative;
+}
+header .company-info .address img, header .company-info .phone img {
+  margin-top: 2px;
+}
+header .company-info .email img {
+  margin-top: 3px;
+}
+header .company-info .title {
+  color: #66BDA9;
+  font-weight: 400;
+  font-size: 1.33333333333333em;
+}
+header .company-info .icon {
+  position: absolute;
+  left: -15px;
+  top: 1px;
+  width: 10px;
+  height: 10px;
+  background-color: #66BDA9;
+  text-align: center;
+  line-height: 0;
 }
 
-
-
-.draft {
-
-    background-image: url(images/status-draft.png);
-
+section .details {
+  min-width: 440px;
+  margin-bottom: 40px;
+  padding: 5px 10px;
+  /* background-color: #CC5A6A; */
+  color: #353333;
+  line-height: 20px;
+}
+section .details .client {
+  width: 50%;
+}
+section .details .client .name {
+  font-size: 1.16666666666667em;
+  font-weight: 600;
+}
+section .details .data {
+  width: 50%;
+  font-weight: 600;
+  text-align: right;
+}
+section .details .title {
+  margin-bottom: 5px;
+  font-size: 1.33333333333333em;
+  text-transform: uppercase;
+}
+section table {
+  width: 100%;
+  margin-bottom: 20px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 15px;
+}
+section table .qty, section table .unit, section table .total {
+  width: 15%;
+  font-size: 30px;
+}
+section table .desc {
+  width: 55%;
+}
+section table thead {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+section table thead th {
+  padding: 7px 10px;
+  background: #1b449d;
+  border-right: 5px solid #FFFFFF;
+  color: white;
+  text-align: center;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+section table thead th:last-child {
+  border-right: none;
+}
+section table tbody tr:first-child td {
+  border-top: 10px solid #ffffff;
+}
+section table tbody td {
+  padding: 10px 10px;
+  text-align: center;
+  border-right: 3px solid #368058;
+}
+section table tbody td:last-child {
+  border-right: none;
+}
+section table tbody td.desc {
+  text-align: left;
+}
+section table tbody td.total {
+  color: #337552;
+  font-weight: 600;
+  text-align: right;
+}
+section table tbody h3 {
+  margin-bottom: 5px;
+  color: #3d845e;
+  font-weight: 600;
+}
+section table.grand-total {
+  margin-bottom: 50px;
+}
+section table.grand-total tbody tr td {
+  padding: 0px 10px 12px;
+  border: none;
+  background-color: #B2DDD4;
+  color: #555555;
+  font-weight: 300;
+  text-align: right;
+}
+section table.grand-total tbody tr:first-child td {
+  padding-top: 12px;
+}
+section table.grand-total tbody tr:last-child td {
+  background-color: transparent;
+}
+section table.grand-total tbody .grand-total {
+  padding: 0;
+}
+section table.grand-total tbody .grand-total div {
+  float: right;
+  padding: 11px 10px;
+  background-color: #66BDA9;
+  color: #ffffff;
+  font-weight: 600;
+}
+section table.grand-total tbody .grand-total div span {
+  display: inline-block;
+  margin-right: 20px;
+  width: 80px;
 }
 
-
-
-.sent {
-
-    background-image: url(images/status-sent.png);
-
+footer {
+  margin-bottom: 15px;
+  padding: 0 5px;
+}
+footer .thanks {
+  margin-bottom: 40px;
+  color: #66BDA9;
+  font-size: 1.16666666666667em;
+  font-weight: 600;
+}
+footer .notice {
+  margin-bottom: 15px;
+}
+footer .end {
+  padding-top: 5px;
+  border-top: 2px solid #3e845e;
+  text-align: center;
 }
 
-
-
-.paid {
-
-    background-image: url(images/status-paid.png);
-
-}
-
-
-
-.overdue {
-
-    background-image: url(images/status-overdue.png);
-
-}
-
-
-
-hr {
-
-    clear: both;
-
-    border: none;
-
-    background: none;
-
-    border-bottom: 1px solid #d6dde2;
-
-}
-
-
-
-.pay-buttons {
-
-    text-align: center;
-
-    width: 400px;
-
-    margin: 0 auto;
-
-    margin-top: 20px;
-
-}
-
-.pay-paypal {
-
-    display: block;
-
-    width: 200px;
-
-    height: 45px;
-
-    background:  url('images/pay-buttons.png') no-repeat;
-
-    text-indent: -5000px;
-
-    background-position: 0 0;
-
-    float: left;
-
-}
-
-
-
-.pay-paypal:hover {
-
-    background-position: 0 -45px;
-
-}
-
-
-
-.pay-paypal:active {
-
-    background-position: 0 -90px;
-
-}
-
-
-
-.pay-card {
-
-    display: block;
-
-    float: left;
-
-    width: 165px;
-
-    height: 45px;
-
-    background:  url('images/pay-buttons.png') no-repeat;
-
-    text-indent: -5000px;
-
-    background-position: -200px 0;
-
-}
-
-
-
-.pay-card:hover {
-
-    background-position: -200px -45px;
-
-}
-
-
-
-.pay-card:active {
-
-    background-position: -200px -90px;
-
-}
-
-
-
-.total-due {
-
-    float: right;
-
-    width: 200px;
-
-    /*border: 1px solid #d6dde2;*/
-
-    margin: 0 0 5px 0;
-
-    padding: 0;
-
-    border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;
-
-    text-align: right;
-
-}
-
-
-
-.total-heading {
-
-    background: #e7ebee;
-
-    height: 24px;
-
-    color: #63676b;
-
-    text-shadow: 0 1px 1px #ffffff;
-
-    padding: 5px 20px 0 0;
-
-    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-
-    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-
-    box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.08);
-
-    /*border-bottom: 1px solid #d6dde2;*/
-
-    font-weight: bold;
-
-}
-
-
-
-.total-heading p, .total-amount p {
-
-    margin: 0; padding: 0;
-
-}
-
-
-
-.total-amount {
-
-    padding: 10px 20px 15px 0;
-
-    color: #4d5357;
-
-    font-size: 32px;
-
-}
-
-
-
-
-table.tablesorter {
-
-    width: 100%;
-
-    text-align: left;
-
-    border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;
-
-    margin: 50px 0;
-
-    color: black;
-
-}
-table.tablesorter2 {
-
-    width: 100%;
-
-    text-align: left;
-
-    border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;
-
-    margin: 18px 0;
-
-    color: black;
-
-}
-table.tablesorter3 {
-
-    width: 100%;
-
-    text-align: left;
-
-    border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;
-
-    margin: 15px 0;
-
-    color: black;
-
-}
-
-table.tablesorter thead tr th, table.tablesorter tfoot tr th {
-
-    margin: 0;
-
-
-
-}
-table.tablesorter thead tr .header {
-
-    background: #e7ebee url(images/arrows-both.png) no-repeat center right;
-
-    cursor: pointer;
-
-    height: 60px;
-
-    color: #63676b;
-
-    text-shadow: 0 1px 1px #ffffff;
-
-    padding-left: 20px;
-
-    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-
-    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-
-    box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.08);
-
-    border-bottom: 1px solid #d6dde2;
-
-}
-
-table.tablesorter tbody td {
-
-    padding: 10px;
-
-    text-align: center;
-
-    vertical-align: top;
-
-}
-
-table.tablesorter tbody tr.even td {
-
-    background: #f6f8f9;
-
-}
-
-table.tablesorter thead tr .headerSortUp {
-
-    background-image: url(images/arrow-up.png);
-
-}
-
-table.tablesorter thead tr .headerSortDown {
-
-    background-image: url(images/arrow-down.png);
-
-
-
-}
-
-table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
-
-
-
-}
-
-
-.table_reading 
-{
-    border: 1px solid #dddddd;
-
-}
-
-.table_reading td
-{
-    border: 1px solid #dddddd;
-
-}
-.td, th {
-
-    /*border: 1px solid #dddddd;*/
-
-    text-align: left;
-
-    padding: 5px;
-
-}
-
-.invoice_div
-{   /*
-   padding-top: 20% !important; 
-   bottom-top: 15% !important; 
-   width: 140mm !important;
-    height: 297mm !important;
-   margin: 0px auto;*/
-}
-
-@page {
-   /* size: 210mm 297mm;
-    margin: 15% 45mm 30mm 15%;*/
-     /* change the margins as you want them to be. */
-}
-
-.invoice_div
-{   /*
-   padding-top: 20% !important; 
-   bottom-top: 15% !important; 
-   width: 140mm !important;
-    height: 297mm !important;
-   margin: 0px auto;*/
-}
-
-.invoice_div {
-    size: 210mm 297mm;
-    padding: 70px;
-    margin-top: -70px;
-     /* change the margins as you want them to be. */
-}
-
-
-</style>
+    </style>
 </head>
+
 <body>
-    <br><br><br><br><br><br><br><br><br><br>
-    <div class="invoice_div">
-
-
-
-  
-    <!-- <img  style=" float: right;" src="<?php //echo base_url() ?>admin_assets/images/logo.png" alt="yourlogo" class="company-logo"> -->
-    <div class="row margin_top_custom" style="">
-        <p class="pull-left" ><strong>Invoice # : </strong><?php echo $invoice['invoice_voucher_number']?></p>
-      
-        <h2><?php echo $customer['full_name']; ?></h2>
-       
-        <p><strong>inv_amount : </strong><?php echo number_format($invoice['invoice_total_amount'])?></p>
-        
-
+    <header class="clearfix">
+        <div class="container">
+                <img class="logo" src="<?php echo base_url()?>admin_assets/images/logo.png" alt="" style="height:45px;">
+        <h6 style="text-align: center;
+    font-size: 28px;
+    font-weight: 400;" class=" ">United Transport Network</h6>
     </div>
-   
+  </header>
 
-
-<div class="main_div_container">
-    <!-- <h6>Meter Count</h6> -->
-    <div class="row" >
-        <table style="" class="table_reading">
+  <section>
+    <div class="container">
+      <div class="details clearfix">
+        <div class="client left">
+            <p class="name">Client Name : <span> <?php echo $invoice_detail[0]['full_name']?> </span></p>
+            <p style="color: #000; font-weight:500;">Address : <span><?php echo $invoice_detail[0]['Address']?></span></p>
+            <p style="color: #000; font-weight:500;">SSP Tax : <span><?php echo $invoice_detail[0]['SSP_tax']?></span></p>
+            <p style="color: #000; font-weight:500;">SP Name : <span><?php echo $invoice_detail[0]['sp_name']?></span></p>
+        </div>
+        <div class="data right">
+            <div class="title">Invoice #: <span><?php echo $invoice_detail[0]['invoice_voucher_number']?></span></div>
+            <div class="date">Date of Invoice: 16/02/2019<br>Paid Date: <?php echo $invoice_detail[0]['invoice_paid_date']?></div>
+        </div>
+    </div>
+      
+    <table border="0" cellspacing="0" cellpadding="0" >
+        <thead>
             <tr>
-                
-                <td class="td">order_date</td>
-                <td class="td" >Origin</td>
-                <td class="td">Destination</td>
-                <td class="td">Vehicle #</td>
-                <td class="td">Vehicle Rate</td>
-                <td class="td">Labor</td>
-                <td class="td">2nd Stop</td>
-                <td class="td">Detention</td>
-                <td class="td">SSP Tax (%)</td>
-                <td class="td">Total</td>
-
+                <th class="qty">S#</th>
+                <th class="total">Customer Name </th>
+                <th class="total">Date </th>
+                <th class="total">Weight </th>
+                <th class="total">Origin</th>
+                <th class="total">Destination</th>
+                <th class="total">Vehicle # </th>
+                <th class="total">Vehicle </th>
+                <th class="total">Vehicle Rate </th>
+                <th class="total">Labor </th>
+                <th class="total">2nd Stop </th>
+                <th class="total">Detention </th>
+                <th class="total">Grand Total </th>
             </tr>
-           
+        </thead>
+        <tbody>
             <?php
               $i = 1;
               $total_amount = 0;
               foreach ($selected_data as $module) {
             ?>
-              <tr>
-                <td class="td"><?php echo $newDate = date("d-m-Y", strtotime($module['order_date'])); ?></td>
-                <td class="td"><?php echo $module['pickup_location']; ?></td>
-                <td class="td"><?php echo $module['drop_off_location']; ?></td>
-                <td class="td"><?php echo $module['registration_number']; ?></td>
-                <td class="td"><?php echo number_format($module['order_total_amount']); ?></td>
-                <td class="td"><?php echo number_format($module['labor_charges']); ?></td>
-                <td class="td"><?php echo number_format($module['second_stop_amount']); ?></td>
-                <td class="td"><?php echo number_format($module['order_tenstion']); ?></td>
-                <td class="td"><?php echo $module['ssp_percantage']; ?></td>
-                <td class="td">
-                    <?php
-                        echo  number_format($module['order_total_amount'] + $module['labor_charges'] +  $module['second_stop_amount'] + $module['order_tenstion'] + $module['ssp_percantage']);
-                    ?>
-                    <?php $total_amount += $module['order_total_amount'] + $module['labor_charges'] +  $module['second_stop_amount'] + $module['order_tenstion'] + $module['ssp_percantage'];   ?>
-                </td>
-            </tr>
-
-            <?php $i++; } ?>
-         
             <tr>
-                <td class="td"></td>
-                <td class="td"></td>
-                <td class="td"></td>
-                <td class="td"></td>
-                <td class="td"></td>
-                <td class="td"></td>
-                <td class="td"></td>
-                <td class="td"></td>
-                <td class="td">Total</td>
-                <td class="td"><?php echo number_format($total_amount); ?></td>
+                <td class="qty">30</td>
+                <td class="desc"><h3><?php echo $invoice_detail[0]['full_name']?></h3></td>
+                <td class="qty"><?php echo $newDate = date("d-m-Y", strtotime($module['order_date']));?></td>
+                <td class="qty"><?php echo $module['weight']?></td>
+                <td class="qty"><?php echo $module['pickup_address']?></td>
+                <td class="qty"><?php echo $module['drop_off_location']?></td>
+                <td class="qty"></td>
+                <td class="qty"><?php echo $module['order_vendor_id']?></td>
+                <td class="qty"><?php echo $module['order_vendor_id']?></td>
+                <td class="qty"><?php echo $module['labor_charges']?></td>
+                <td class="qty"><?php echo $module['order_vendor_id']?></td>
+                <td class="qty"><?php echo $module['order_tenstion']?></td>
+                <td class="qty"><?php echo number_format($invoice['invoice_total_amount'])?></td>
             </tr>
-        </table>
+            <?php $i++; } ?>
+        </tbody>
+    </table>
     </div>
-  
-        
+</section>
 
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<div class="row">
-    
-
-    <div class="total-due">
-
-        <div class="total-heading"><p>Invoice Amount</p></div>
-    
-        <div class="total-amount"><p>Rs:  <?php echo number_format($invoice['invoice_total_amount'])?></p></div>
-        <br>
-
-        <?php echo date("01/m/Y");?>
-    </div>
-
-     </div>
-   <div class="row" style="width: 1050px;">
-    <br>
-    <br>
-    <br>
-    <br>
-    <p class="pull-right" style="margin-top: -20px; margin-left: 70px; z-index: 9999"> 
-
-
-</div>
-
-
-<script type="text/javascript">
-      $("#table").tablesorter({
-
-        widgets: ['zebra']
-
-    });
-
-</script>
-
+    <footer>
+        <div class="container">
+            <div class="thanks">Thank you!</div>
+            <div class="notice">
+                <div>For UTN (Pvt.) Ltd.</div>
+            </div>
+            <div class="end">Invoice was created on a computer and is valid without the signature and seal.</div>
+        </div>
+    </footer>
 
 </body>
+
+
 
 </html>

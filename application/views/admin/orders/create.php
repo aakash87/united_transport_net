@@ -78,6 +78,10 @@
                               <label for="example-text-input" class="col-sm-3 col-form-label"> Drop off date</label>
                               <div class="col-sm-9"><input class="form-control" name="dropoff_date_and_time" type="date" value="" id="example-text-input" placeholder="" ></div>
                            </div>
+                           <div class="form-group row">
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Weight</label>
+                              <div class="col-sm-9"><input class="form-control" name="weight" type="text" value="" id="" placeholder="" ></div>
+                           </div>
                            <!-- <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">Order vehicle</label>
                                       <div class="col-sm-9"><input class="form-control" name="order_vehicle" type="text" value="" id="example-text-input" placeholder="" ></div>
@@ -89,11 +93,11 @@
                                   </div>-->
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">Pickup address</label>
-                              <div class="col-sm-9"><textarea class="form-control" name="pickup_address" ></textarea></div>
+                              <div class="col-sm-9"><textarea class="form-control" name="pickup_address"  rows="1"></textarea></div>
                            </div>
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">Drop off address</label>
-                              <div class="col-sm-9"><textarea class="form-control" name="drop_off_address" ></textarea></div>
+                              <div class="col-sm-9"><textarea class="form-control" name="drop_off_address" rows="1" ></textarea></div>
                            </div>
                         </div>
                         <div class="col-md-6">
