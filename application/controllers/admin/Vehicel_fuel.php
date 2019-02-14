@@ -28,6 +28,7 @@
 			}
 
 			$this->data['vehicle_data'] = $this->Vehicel_fuel_model->all_rows('vehicle');
+			$this->data['fuel_vendor'] = $this->Vehicel_fuel_model->get_fuel_vendor();
 			$this->data['title'] = 'Create Vehicel_fuel';$this->load->template('admin/Vehicel_fuel/create',$this->data);
 		}
 		public function insert()
@@ -48,7 +49,7 @@
 				redirect('admin/home');
 			}
 			$this->data['vehicle_data'] = $this->Vehicel_fuel_model->all_rows('vehicle');
-
+			$this->data['fuel_vendor'] = $this->Vehicel_fuel_model->get_fuel_vendor();
 			$this->data['title'] = 'Edit Vehicel_fuel';
 			$this->data['Vehicel_fuel'] = $this->Vehicel_fuel_model->get_row_single('vehicel_fuel',array('id'=>$id));$this->load->template('admin/Vehicel_fuel/edit',$this->data);
 		}
@@ -84,5 +85,10 @@
 
 		}
 
-
+		public function delete_fule()
+		{
+			$id = $this->input->post('id');
+			$this->Vehicel_fuel_model->delete('vehicel_fuel',array('id'=>$id));
+			redirect('admin/orders');
+		}
 	}

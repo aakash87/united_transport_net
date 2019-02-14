@@ -44,6 +44,7 @@
 				'user_id' => $this->session->userdata('user_id'),
 				'special_person' => $this->input->post('special_person'),
 				'vender_type' => $this->input->post('vender_type'),
+				'fuel_vendor' => $this->input->post('fuel_vendor'),
 				
 			];
 			$data['user_id'] = $this->session->userdata('user_id');$id = $this->Vendor_model->insert('vendor',$data);

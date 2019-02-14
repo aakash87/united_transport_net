@@ -75,14 +75,31 @@
                               
 
                               <div class="col-sm-9">
-                                <div style="margin-top: 15px;">
+                                <div style="">
                                    <div class="radio radio-info radio-inline">
                                        <input type="radio" name="vender_type" class="" id="vender_type_local" value="Local">
                                     <label for="vender_type_local">Local</label>
                                    </div>
                                    <div class="radio radio-info radio-inline">
-                                       <input type="radio" name="vender_type" id="vender_type_domastic" class="" value="Domastic" checked="">
+                                       <input type="radio" name="vender_type" id="vender_type_domastic" class="" value="Domastic" >
                                     <label for="vender_type_domastic">Domastic</label>
+                                   </div>
+                               </div> 
+                              </div>
+                           </div>
+                           <div class="form-group row">
+                              <label for="" class="col-sm-3 col-form-label">Fuel Vendor</label>
+                              
+
+                              <div class="col-sm-9">
+                                <div style="">
+                                   <div class="radio radio-info radio-inline">
+                                       <input type="radio" name="vender_type" class="" id="fuel_vendor_yes" value="Yes">
+                                    <label for="fuel_vendor_yes">Yes</label>
+                                   </div>
+                                   <div class="radio radio-info radio-inline">
+                                       <input type="radio" name="vender_type" id="fuel_vendor_no" class="" value="No" checked="">
+                                    <label for="fuel_vendor_no">No</label>
                                    </div>
                                </div> 
                               </div>

@@ -29,7 +29,7 @@
         <!-- multi select -->
         <link href="<?php echo  base_url()?>admin_assets/assets/plugins/amcharts/export.css" rel="stylesheet" type="text/css" />
 
-
+        <link href="<?php echo  base_url()?>admin_assets/assets/plugins/modals/modal-component.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
  <script src="<?php echo base_url() ?>assets/sweet/dist/sweetalert-dev.js"></script>

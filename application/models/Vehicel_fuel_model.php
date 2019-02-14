@@ -10,4 +10,12 @@ class Vehicel_fuel_model extends MY_Model{
 		return $this->db->get()->result_array();		
 		
 	}
+	public function get_fuel_vendor()
+	{
+		$this->db->select('vendor.*');
+		$this->db->from('vendor');
+		$this->db->where('vendor.fuel_vendor' , "Yes" );
+		return $this->db->get()->result_array();		
+		
+	}
 }

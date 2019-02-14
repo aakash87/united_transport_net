@@ -1,3 +1,10 @@
+<style type="text/css">
+   .ovel_css{
+          margin-right: 11px;
+    border-radius: 15px;
+    background-color: green;
+   }
+</style>
 		<!-- /.Navbar  Static Side -->
 			<div class="control-sidebar-bg"></div>
 			<!-- Page Content -->
@@ -10,12 +17,12 @@
 							<i class="pe-7s-box1"></i>
 						</div>
 						<div class="header-title">
-							<h1>View Vehicel fuel</h1>
+							<h1>View Vehicle Fuel</h1>
 							<small> </small>
 							<ol class="breadcrumb">
 								<li><a href="<?php echo base_url() ?>"><i class="pe-7s-home"></i> Home</a></li>
 
-								<li class="active">View Vehicel fuel</li>
+								<li class="active">View Vehicle Fuel</li>
 							</ol>
 						</div>
 					</div> <!-- /. Content Header (Page header) -->
@@ -25,11 +32,11 @@
 							<div class="panel panel-bd">
 								<div class="panel-heading">
 									<div class="panel-title">
-										<h4>View Vehicel fuel</h4>
+										<h4>View Fueling History</h4>
 										<?php 
 											if ($permission["created"] == "1") {
 										?>
-										<a href="<?php echo base_url("admin/Vehicel_fuel/create") ?>"><button class="btn btn-info pull-right">Add Vehicel fuel</button></a>
+										<a href="<?php echo base_url("admin/Vehicel_fuel/create") ?>"><button class="btn btn-info pull-right ovel_css">Add Vehicle Fuel</button></a>
 										<?php } ?>
 									</div>
 								</div>
@@ -39,7 +46,15 @@
 										<table id="dataTableExample2" class="table table-bordered table-striped table-hover">
 											<thead>
 												<tr>
-													<th>S#</th><th>Vehicle id</th><th>Fuel tank</th><th>Start meter</th><th>Province</th><th>Note</th><th>Qty</th><th>Cost per unit</th><th>Complete</th><?php 
+													<th>S#</th>
+													<th>Vehicle</th>
+													<th>Fuel Tank Capacity</th>
+													<th>Odometer Reading</th>
+													<th>Fueling Location</th>
+													<th>Fuel Type</th>
+													<th>Quantity</th>
+													<th>Total Cost</th>
+													<th>Vendor</th><?php 
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
 													?>
 													<th>Action</th>
@@ -59,12 +74,12 @@
 														<?php 
 															if ($permission["edit"] == "1") {
 														?>
-														<a href="<?php echo base_url() ?>admin/Vehicel_fuel/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="35" height="35"></a>
+														<a href="<?php echo base_url() ?>admin/Vehicel_fuel/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="Edit Detail" alt="Edit Detail" width="25" height="25"></a>
 														<?php } ?>
 														<?php 
 															if ($permission["deleted"] == "1") {
 														?>
-		                                                <a href="<?php echo base_url() ?>admin/Vehicel_fuel/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a>
+		                                                <img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="25" height="25" class="delete" id='del_<?php echo $module["id"] ?>' >
 		                                                <?php } ?>
 	                                                </td>
 	                                                <?php } ?>
@@ -88,4 +103,43 @@
 
 
 
+<script type="text/javascript">
+	$(document).ready(function(){
 
+	  // Delete 
+	  $('.delete').click(function(){
+	    var el = this;
+	    var id = this.id;
+	    var splitid = id.split("_");
+
+	    // Delete id
+	    var deleteid = splitid[1];
+	 	// alert(deleteid);
+	    // Confirm box
+	    bootbox.confirm("Are you sure want to delete?", function(result) {
+	 
+	       if(result){
+
+	          $.ajax({
+	             type: 'POST',
+            		data: { id:deleteid },
+	             url: '<?php echo base_url() ?>admin/Vehicel_fuel/delete_fule/',
+	             success: function(resp){
+ 		             $(el).closest('tr').css('background','tomato');
+ 		             $(el).closest('tr').fadeOut(800, function(){ 
+ 	               	$(this).remove();
+ 		             });
+
+	             
+
+	                  
+	                
+	             }
+	         });
+	       }
+	 
+	    });
+	 
+	  });
+	});
+</script>

@@ -258,7 +258,7 @@
                            <label for="example-text-input" class="col-sm-3 col-form-label">Vendor Name</label>
                            <div class="col-sm-9">
                               <!-- <input class="form-control" name="ower_id" type="text" value="" d="example-text-input" placeholder="" > -->
-                              <select class="form-control" name="order_vendor_id"  value="" id="order_vendor_id" >
+                              <select class="form-control" name="order_vendor_id"  id="order_vendor_id" >
                                  <option value="">Select Vendor</option>
                                  <?php foreach ($vendor as $vend) : ?>
                                  <option value="<?php echo $vend['id'] ?>" <?php echo ($orders["order_vendor_id"] == $vend['id']  ) ? 'selected' : NULL ; ?> ><?php echo $vend['vendor_name'] ?></option>
@@ -297,7 +297,7 @@
                            <label for="example-text-input" class="col-sm-3 col-form-label">Local Vendor Name</label>
                            <div class="col-sm-9">
                               <!-- <input class="form-control" name="ower_id" type="text" value="" d="example-text-input" placeholder="" > -->
-                              <select class="form-control" name="order_vendor_id"  value="" id="order_vendor_id" >
+                              <select class="form-control" name="order_local_vendor_id"  value="" id="order_local_vendor_id" >
                                  <option value="">Select Local Vendor</option>
                                  <?php foreach ($local_vendor as $localvend) : ?>
                                  <option value="<?php echo $localvend['id'] ?>" ><?php echo $localvend['vendor_name'] ?></option>

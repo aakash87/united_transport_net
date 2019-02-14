@@ -237,6 +237,7 @@
 				'local_transport' => $this->input->post('local_transport'),
 				'labor_charges' => $this->input->post('labor_charges'),
 				'order_tenstion' => $this->input->post('order_tenstion'),
+				'order_local_vendor_id' => $this->input->post('order_local_vendor_id'),
 			];
 			
 
@@ -317,19 +318,20 @@
 
 				// print_r($customer_old_amount);
 				// echo "done"; die();
-				$vendor_ladger = 
+				$vendor_payment_data = 
 				[
-					'amount' =>  $this->input->post('builty_rates'),
-					'voucher_no' => $order_id,
-					'customer_id' => $this->input->post('order_vendor_id'),
-					'balance'=> round($this->input->post('builty_rates') + $customer_old_amount['balance']),
-					'date' =>  date('Y-m-d'),
-					'description' => 'Complete Order',
-					'reference' => 'credit',
+					// 'order_id' => $order_id,
+					// 'vendor_id' => $this->input->post('order_vendor_id'),
+					// 'vehicel_of_vendor' => $this->input->post('vehicel_of_vendor'),
+					// 'driver_name' => $this->input->post('driver_name'),
+					// 'description' => 'Complete Order',
+					'vendor_payment' =>  $this->input->post('builty_rates'),
+					'vendor_payment_status' =>  'Unpaid',
+					// 'date' =>  date('Y-m-d'),
 				];
 							
 
-				$this->Invoice_model->insert('vendor_ledger', $vendor_ladger);
+				$this->Orders_model->update('orders',$vendor_payment_data,array('id'=>$order_id));
 			}
 			
 			redirect('admin/orders');

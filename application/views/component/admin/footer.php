@@ -20,7 +20,9 @@
         <script src="<?php echo base_url() ?>admin_assets/assets/dist/js/jQuery.style.switcher.min.js" type="text/javascript"></script>
           <script src="<?php echo base_url() ?>admin_assets/assets/plugins/bootstrap-wizard/jquery.backstretch.min.js" type="text/javascript"></script>
                   <script src="<?php echo base_url() ?>admin_assets/assets/plugins/bootstrap-wizard/form.scripts.js" type="text/javascript"></script>
-
+        <script src="<?php echo base_url() ?>admin_assets/assets/plugins/modals/classie.js" type="text/javascript"></script>
+        <script src="<?php echo base_url() ?>admin_assets/assets/plugins/modals/modalEffects.js" type="text/javascript"></script>
+        <script src="<?php echo base_url() ?>admin_assets/assets/plugins/bootbox.min.js" type="text/javascript"></script>
 
 
 <script src="<?php  echo base_url() ?>admin_assets/assets/plugins/amcharts/amcharts.js" type="text/javascript"></script>
@@ -290,19 +292,19 @@ new Morris.Line({
 
         if ($(this).val() == 'Process') {
 
-            alert('Process');
+            // alert('Process');
                        
                    
         }else if ($(this).val() == 'Pending') {
 
-            alert('Pending');
+            // alert('Pending');
 
 
         }
         else if( $(this).val() == 'Complete')
         {
 
-            alert('Complete');
+            // alert('Complete');
             
 
         }
