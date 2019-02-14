@@ -75,7 +75,7 @@
 
                             
 
-
+<!-- 
 <<<<<<< HEAD
                             <div class="form-group row">
 
@@ -95,7 +95,7 @@
 
 
 =======
->>>>>>> master
+>>>>>>> master -->
                             <?php if ($this->session->flashdata('error')): ?>
                                             <a class="btn btn-danger block full-width m-b"><?php echo $this->session->flashdata('error'); ?></a>
 

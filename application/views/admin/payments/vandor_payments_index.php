@@ -10,6 +10,13 @@
         border-radius: 17px !important;
     }
 </style>
+<style type="text/css">
+   .ovel_css{
+          margin-right: 11px;
+    border-radius: 15px;
+    background-color: green;
+   }
+</style>
         <!-- /.Navbar  Static Side -->
 <div class="control-sidebar-bg"></div>
 <!-- Page Content -->
@@ -38,7 +45,8 @@
                     <div class="panel-heading">
                         <div class="panel-title">
                             <h4>Vendor Payment</h4>
-                             <a href="<?php echo base_url() ?>admin/payments/search_vandor_for_payments"><button type="submit" class="btn btn-primary pull-right">Create Payments</button></a>
+                             <a href="<?php echo base_url() ?>admin/payments/search_vandor_for_payments"><button type="submit" class="btn btn-primary pull-right ovel_css">Create Payments</button></a>
+                             <a href="<?php echo base_url() ?>admin/payments/view_paid_vendor_payments"><button type="submit" class="btn btn-primary pull-right ovel_css">View Paid Invoice</button></a>
                         </div>
                     </div>
                     <form method="post" action="<?php echo base_url(); ?>admin/payments/submit_selected_vandor_payments" id="import_forms" enctype="multipart/form-data">
@@ -49,13 +57,15 @@
                                     <thead>
                                         <tr>
                                             <th>Sr.no</th>
-                                            <th>Order Ref #</th>
+                                            <th>Inv No</th>
                                             <th>Vendor Name</th>
-                                            <th>Vehicle Type</th>
-                                            <th>Vehicle Of Vendor</th>
-                                            <th>Order Total Amount</th>
-                                            <th>Date Of Complete</th>
+                                            <th>InV Create Date</th>
+                                            <th>Vendor Address</th>
+                                            <th>Vendor Type</th>
+                                            <th>Status</th>
+                                            <th>Total Amount</th>
                                             <th>Amount</th>
+                                            <th>Balance</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -68,15 +78,17 @@
                                         ?>
                                         <tr>
                                             <td><?php echo $i++;?></td>
-                                            <td><?php echo $module["id"]; ?></td>
+                                            <td><?php echo $module["invoice_no"]; ?></td>
                                             <td><?php echo $module["vendor_name"]; ?></td>
-                                            <td><?php echo $module["vehicle_type"]; ?></td>
-                                            <td><?php echo $module["vehicel_of_vendor"]; ?></td>
-                                            <td><?php echo number_format($module["order_total_amount"]); ?></td>
-                                            <td><?php echo $newDate = date("d-m-Y", strtotime($module["created_at"]));?></td>
-                                            <td><?php echo number_format($module["vendor_payment"]); ?></td>
+                                            <td><?php echo $newDate = date("d-m-Y", strtotime($module["invoice_date"]));?></td>
+                                            <td><?php echo $module["vendor_address"]; ?></td>
+                                            <td><?php echo $module["vendor_type"]; ?></td>
+                                            <td><?php echo $module["status"]; ?></td>
+                                            <td><?php echo number_format($module["total_amount"]); ?></td>
+                                            <td><?php echo number_format($module["amount"]); ?></td>
+                                            <td><?php echo number_format($module["balance"]); ?></td>
                                             <td>
-                                                <a href="<?php echo base_url() ?>admin/payments/paid_vandor_payment/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="Submit" alt="Submit" width="35" height="35"></a>
+                                                <a href="<?php echo base_url() ?>admin/payments/submit_vandor_payment/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="Submit" alt="Submit" width="35" height="35"></a>
                                             </td>
                                         </tr>
                                         <?php } ?>

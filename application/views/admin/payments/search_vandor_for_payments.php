@@ -38,7 +38,7 @@
 					<div class="panel-heading">
 						<div class="panel-title">
 							<h4>Vendor Payment</h4>
-							 <a href="<?php echo base_url() ?>admin/payments/view_paid_vendor_payments"><button type="submit" class="btn btn-primary pull-right">View Paid Payments</button></a>
+							 <!-- <a href="<?php echo base_url() ?>admin/payments/view_paid_vendor_payments"><button type="submit" class="btn btn-primary pull-right">View Paid Payments</button></a> -->
 						</div>
 					</div>
 					<div class="panel-body">
@@ -64,7 +64,7 @@
 					        </div>
 					    </form>
 					</div>
-					<form method="post" action="<?php echo base_url(); ?>admin/payments/submit_selected_vandor_payments" id="import_forms" enctype="multipart/form-data">
+					<form method="post" action="<?php echo base_url(); ?>admin/payments/create_selected_vandor_payments" id="import_forms" enctype="multipart/form-data">
 						<div class="panel-body">
 							
 							<div class="table-responsive">
@@ -109,7 +109,7 @@
 								</table>
 								
 							</div>
-							<button type="submit" class="btn btn-primary pull-right" >Paid Selected</button>
+							<button type="submit" class="btn btn-primary pull-right" >Create Invoice</button>
 						</div>
 					</form>
 				</div>

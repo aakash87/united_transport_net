@@ -11,24 +11,24 @@
                 <i class="pe-7s-note2"></i>
             </div>
             <div class="header-title">
-                <h1>Submit Vandor Payment</h1>
+                <h1>Create Vandor Payment Invoice</h1>
                 <small></small>
                 <ol class="breadcrumb">
                     <li><a href="index.html"><i class="pe-7s-home"></i> Home</a></li>
-                    <li class="active">Submit Vandor Payment</li>
+                    <li class="active">Create Vandor Payment Invoice</li>
                 </ol>
             </div>
         </div>
         <!-- /. Content Header (Page header) -->
 
-        <form method="post" action="<?php echo base_url() ?>admin/payments/submit_vendor_payment" enctype="multipart/form-data">
+        <form method="post" action="<?php echo base_url() ?>admin/payments/create_vendor_payment_invoice" enctype="multipart/form-data">
             <!-- <input type="hidden" name="id" value="<?php echo $vendor_payments_detail["id"] ?>"> -->
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel panel-bd ">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h4>Submit Vandor Payment</h4>
+                                <h4>Create Vandor Payment Invoice</h4>
                             </div>
                         </div>
                             <div class="panel-body">
@@ -108,7 +108,7 @@
                                     <div class="form-group row">
 
                                 <div class="col-sm-12">
-                                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                                    <button type="submit" class="btn btn-primary pull-right">Create</button>
                                 </div>
                             </div>
 
