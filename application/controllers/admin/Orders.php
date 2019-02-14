@@ -167,6 +167,7 @@
 
 				$this->data['vehicle_data'] = $this->Orders_model->all_rows('vehicle');
 				$this->data['drivers_data'] = $this->Orders_model->all_rows('drivers');
+				$this->data['expense_category'] = $this->Orders_model->all_rows('expense_category');
 
 
 				$this->data['order_expense'] =  $this->Orders_model->get_order_expense($id);
@@ -183,7 +184,7 @@
 				$this->data['vendor'] = $this->Orders_model->all_rows('vendor');
 				$this->data['local_vendor'] = $this->Orders_model->get_local_vendor();
 
-				// print_r($this->data['local_vendor']);
+				// print_r($this->data['expense_category']);die();
 				$this->load->template('admin/orders/templetes/process_of_order_by_admin',$this->data);
 
 			}
@@ -253,6 +254,7 @@
 					'expense_date' => $this->input->post('expense_date')[$i],
 					'expense_amount' => $this->input->post('expense_amount')[$i],
 					'expense_description' => $this->input->post('expense_description')[$i],
+					'expense_category' => $this->input->post('expense_category')[$i],
 					'vehicel_id' => $this->input->post('order_vendor_id'),
 					'driver_id' => $this->input->post('order_driver'),
 				];
@@ -271,6 +273,7 @@
 					'expense_title' => $this->input->post('expense_title_update')[$i],
 					'expense_date' => $this->input->post('expense_date_update')[$i],
 					'expense_amount' => $this->input->post('expense_amount_update')[$i],
+					'expense_category' => $this->input->post('expense_category_update')[$i],
 					'expense_description' => $this->input->post('expense_description_update')[$i],
 				];
 

@@ -95,6 +95,7 @@ public function insert()
 				'exp_cat' => $this->input->post('exp_cat'),
 				'Expense_Description' => $this->input->post('Expense_Description'),
 				'Expense_Amount' => $this->input->post('Expense_Amount'),
+				'vehicle_id' => $this->input->post('vehicle_id'),
 				'Expense_Voucher' => $voucher_code_expense,
 				'Date_Of_Submission' => $this->input->post('Date_Of_Submission'),
 

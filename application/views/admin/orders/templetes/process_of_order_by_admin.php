@@ -340,7 +340,7 @@
 
                       <div class="col-md-12"  >
                           <?php $expense_count = 0; ?>
-                     <?php foreach ($order_expense as $expense) : $expense_count++ ?>
+                     <?php  foreach ($order_expense as $expense) : $expense_count++ ?>
                       <div class="row panel-body" style="position: relative; clear: both;">
                              <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;">                     
                                  <span style="color: #FFF; font-size: 1.6em;">Expense <?php echo $expense_count ?> </span>
@@ -363,7 +363,18 @@
                                   </div>
                                 </div>
                                 <div class="row">
-                                  <div class="form-group col-lg-12">
+                                  <div class="col-lg-4">
+                                        <label for="" class="">Expense Category </label>
+                                        <select class="form-control" name="expense_category_update[]" value="" id="">
+                                            <option value="">Select Expense Category</option>
+                                            <?php foreach ($expense_category as $exp_cat) : ?>
+                                                <option value="<?php echo $exp_cat['id'] ?>" <?php echo ($expense["expense_category"] == $exp_cat['id'] ) ? 'selected' : NULL ; ?>>
+                                                    <?php echo $exp_cat['expense_cate_title'] ?>
+                                                </option>
+                                                <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                  <div class="form-group col-lg-8">
                                     <label for="" class=""> Expense Description</label>
                                     <textarea class="form-control" name="expense_description_update[]" rows="1"><?php echo $expense['expense_description'] ?></textarea>
                                   </div>
@@ -436,11 +447,11 @@
                               
                           </div>
                       </div>
-
+                      
 
                      <script type="text/javascript">
                        $('.add').click(function() {
-                           $('.block:last').before('<div class="block"><div class="row panel-body" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">Expense</span> </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br><div class="form-group row"> <div class="col-lg-4"> <label for="" > Expense Title </label> <input class="form-control" name="expense_title[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" > Expense Date </label> <input class="form-control" name="expense_date[]" type="date" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" class=""> Expense Amount </label> <input class="form-control" name="expense_amount[]" type="text" value="" id="" placeholder="" > </div></div><div class=" row"> <div class="col-lg-12"> <label for="" class=""> Expense Description </label> <textarea class="form-control" name="expense_description[]" rows="1"></textarea> <br></div></div></div></div><a class="btn btn-danger pull-right  ovel_css_danger remove"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove Expense</a></div>');
+                           $('.block:last').before('<div class="block"><div class="row panel-body" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">Expense</span> </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"> <br><div class="form-group row"> <div class="col-lg-4"> <label for=""> Expense Title </label> <input class="form-control" name="expense_title[]" type="text" value="" id="" placeholder=""> </div><div class="col-lg-4"> <label for=""> Expense Date </label> <input class="form-control" name="expense_date[]" type="date" value="" id="" placeholder=""> </div><div class="col-lg-4"> <label for="" class=""> Expense Amount </label> <input class="form-control" name="expense_amount[]" type="text" value="" id="" placeholder=""> </div></div><div class=" row"> <div class="col-lg-4"> <label for="" class="">Expense Category </label> <select class="form-control" name="expense_category[]" value="" id=""> <option value="">Select Expense Category</option> <?php foreach ($expense_category as $exp_cat) : ?> <option value="<?php echo $exp_cat['id'] ?>"> <?php echo $exp_cat['expense_cate_title'] ?> </option> <?php endforeach; ?> </select> </div><div class="col-lg-8"> <label for="" class=""> Expense Description </label> <textarea class="form-control" name="expense_description[]" rows="1"></textarea> <br></div></div></div></div><a class="btn btn-danger pull-right ovel_css_danger remove"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove Expense</a></div>');
                        });
                        $('.optionBox').on('click','.remove',function() {
                           $(this).parent().remove();

@@ -58,6 +58,19 @@
                         <input class="form-control bank_amount" name="bank_amount" type="text" value="" id="example-text-input" placeholder="" readonly="">
                       </div>
                    </div>
+                   <div class="form-group row">
+
+                      <label for="example-text-input" class="col-sm-3 col-form-label">Select Vehicle</label>
+                      <div class="col-sm-9">
+                         <select class="form-control" name="vehicle_id" >
+                             <option>Select Vehicle</option>
+                             <?php foreach ($vehicle as $veh) : ?>
+                                 <option value="<?php echo $veh['id']; ?>"><?php echo $veh['vehicle_maker']; ?></option>
+                             <?php endforeach; ?>
+
+                         </select>
+                      </div>
+                   </div>
                      <div class="form-group row">
                         <label for="example-text-input" class="col-sm-3 col-form-label">Expense Category</label>
                         <div class="col-sm-9">
