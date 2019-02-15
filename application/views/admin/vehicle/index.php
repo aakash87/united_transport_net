@@ -85,7 +85,8 @@
                                  <?php 
                                     if ($permission["deleted"] == "1") {
                                     ?>
-                                 <a href="<?php echo base_url() ?>admin/vehicle/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a>
+                                    <img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="25" height="25" class="delete" id='del_<?php echo $module["id"] ?>' >
+                                 <!-- <a href="<?php echo base_url() ?>admin/vehicle/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a> -->
                                  <?php } ?>
                               </td>
                               <?php } ?>
@@ -105,3 +106,43 @@
 <!-- /#page-wrapper -->
 </div><!-- /#wrapper -->
 <!-- START CORE PLUGINS -->
+<script type="text/javascript">
+   $(document).ready(function(){
+
+     // Delete 
+     $('.delete').click(function(){
+       var el = this;
+       var id = this.id;
+       var splitid = id.split("_");
+
+       // Delete id
+       var deleteid = splitid[1];
+      // alert(deleteid);
+       // Confirm box
+       bootbox.confirm("Are you sure want to delete?", function(result) {
+    
+          if(result){
+
+             $.ajax({
+                type: 'POST',
+                  data: { id:deleteid },
+                url: '<?php echo base_url() ?>admin/Vehicle/delete_vehicle/',
+                success: function(resp){
+                   $(el).closest('tr').css('background','tomato');
+                   $(el).closest('tr').fadeOut(800, function(){ 
+                     $(this).remove();
+                   });
+
+                
+
+                     
+                   
+                }
+            });
+          }
+    
+       });
+    
+     });
+   });
+</script>

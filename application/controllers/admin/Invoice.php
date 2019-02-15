@@ -67,8 +67,8 @@
 			}
 
 			elseif ($this->permission['view'] == '1') {$this->data['invoice'] = $this->Invoice_modelget_rows('invoice',array('user_id'=>$this->id));}
-			
-
+			// echo "<pre>";
+			// print_r($this->data['invoice']);die();
 			$this->data['customers'] = $this->Invoice_model->all_rows('customer');
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/invoice/add_invoice',$this->data);
@@ -207,6 +207,7 @@
 				'customer_id' => $this->input->post('customer_nameID'),
 				'sales_person_id' => $this->input->post('sales_person_id'),
 				'invoice_status' => 0,
+				'invoice_create_date' => date('d-m-Y'),
 				'status' => 'Create Invoice',
 			];
 
@@ -335,11 +336,12 @@
 			$order_data = [];
 		
 			for ($i=0; $i < sizeof($o_id); $i++) { 
-				$this->db->select('orders.*');
+				$this->db->select('orders.*, inv_list.*, ve.registration_number');
 				$this->db->from('orders');
-			
-				 
 				
+				$this->db->join('invoice_order_list inv_list' , 'inv_list.inv_ordre_id = orders.id' , 'left');
+				$this->db->join('vehicle ve' , 've.id = orders.vehicel_of_vendor' , 'left');
+				 
 				$this->db->where('orders.id' , $o_id[$i]);
 
 				$this->data['order']= $this->db->get()->row_array();
@@ -350,7 +352,7 @@
 
 			$this->data['selected_data'] = $order_data;
 
-			// echo '<pre>'; print_r($this->data['selected_data']);
+			// echo '<pre>'; print_r($this->data['invoice_detail']);
 			// die();
 
  			$this->load->library('pdf');
@@ -361,6 +363,110 @@
 
 
 		}
+
+
+
+
+
+
+
+
+
+
+
+
+				public function inv_with_sst($invoice_id)
+				{
+
+					$this->data['invoice_detail'] =  $this->Invoice_model->get_invvooce_by_id($invoice_id);
+					$this->data['invoice'] =  $this->Invoice_model->get_row_single('invoice',array('id'=>$invoice_id));
+					
+					$this->data['customer'] =  $this->Invoice_model->get_row_single('customer',array('id'=>$this->data['invoice']['customer_id']));
+					
+					$this->data['invoice_order_id'] = $this->data['invoice']['order_ids'];
+
+					$o_id = explode(',',$this->data['invoice_order_id']);
+
+
+
+					$order_data = [];
+				
+					for ($i=0; $i < sizeof($o_id); $i++) { 
+						$this->db->select('orders.*, inv_list.*, ve.registration_number');
+						$this->db->from('orders');
+						
+						$this->db->join('invoice_order_list inv_list' , 'inv_list.inv_ordre_id = orders.id' , 'left');
+						$this->db->join('vehicle ve' , 've.id = orders.vehicel_of_vendor' , 'left');
+						 
+						$this->db->where('orders.id' , $o_id[$i]);
+
+						$this->data['order']= $this->db->get()->row_array();
+						
+						array_push($order_data, $this->data['order']);	
+					}
+
+
+					$this->data['selected_data'] = $order_data;
+
+					// echo '<pre>'; print_r($this->data['customer']);
+					// die();
+
+		 			$this->load->library('pdf');
+					$this->pdf->load_view('admin/invoice/invoice_reports/inv_with_sst',$this->data );
+					$this->pdf->Output();
+
+
+
+				}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 		public function submit_invoice($invoice_id)

@@ -68,13 +68,14 @@
                         <thead>
                            <tr>
                               <th><input type="checkbox" class="check_all"></th>
-                              <th>Customer Name</th>
-                              <th>Customer SalesPerson</th>
-                              <th>Order Date</th>
+                              <th>Order Id</th>
+                              <th style="width: 110px;">Customer Name</th>
+                              <th>Customer Sales Person</th>
+                              <th>Origin</th>
+                              <th>Destination</th>
+                              <th style="width: 52px;">Order Date</th>
                               <th>Order Status</th>
                              
-
-
                               <?php 
                                  if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
                                  ?>
@@ -94,20 +95,23 @@
                               <td>
                                  <input type="checkbox" class="add_check" name="id[]" value="<?php echo $module['id'] ?>">
                               </td>
-                              <td><?php echo $module['customer_name']; ?></td>
+                              <td><?php echo $module['id']; ?></td>
+                              <td style="width: 110px;"><?php echo $module['customer_name']; ?></td>
                               <td><?php echo $module['sp_name']; ?></td>
-                              <td><?php echo $module['order_date']; ?></td>
+                              <td><?php echo $module['pickup_location']; ?></td>
+                              <td><?php echo $module['drop_off_location']; ?></td>
+                              <td style="width: 1152;"><?php echo $newDate = date("d-m-Y", strtotime($module['order_date'])); ?></td>
                               <td><?php echo $module['order_status']; ?></td>
                               <td>
                                  <?php 
                                     if ($permission["edit"] == "1") {
                                     ?>
-                                 <a href="<?php echo base_url() ?>admin/invoice/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="35" height="35"></a>
+                                 <a href="<?php echo base_url() ?>admin/invoice/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="25" height="25"></a>
                                  <?php } ?>
                                  <?php 
                                     if ($permission["deleted"] == "1") {
                                     ?>
-                                 <a href="<?php echo base_url() ?>admin/invoice/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a>
+                                 <a href="<?php echo base_url() ?>admin/invoice/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="25" height="25"></a>
                                  <?php } ?>
                               </td>
                            </tr>

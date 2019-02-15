@@ -57,15 +57,15 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Sales Person<span class="required">*</span></label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Sales Person <?php echo $customer["sales_person"];?><span class="required">*</span></label>
                               <div class="col-sm-9">
                                  <select class="form-control" name="sales_person" required="">
-                                    <option>Select Sales Person</option>
+                                    <option>Select Sales Person </option>
                                     <?php 
                                        foreach ($sales_person as $sp) {
                                        
                                        ?>
-                                    <option  <?php echo  ($customer["sales_person"]  ==  $sp['id'] ) ? 'selected' : NULL; ?>   value="<?php echo $sp['id']; ?>"><?php echo $sp['sp_name']; ?></option>
+                                    <option value="<?php echo $sp['id']; ?>" <?php echo  ($customer["sales_person"]  ==  $sp['id'] ) ? 'selected' : NULL; ?>><?php echo $sp['name']; ?></option>
                                     <?php } ?> 
                                  </select>
                               </div>

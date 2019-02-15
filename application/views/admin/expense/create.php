@@ -40,7 +40,7 @@
                      </div>
                      <div class="form-group row">
 
-                        <label for="example-text-input" class="col-sm-3 col-form-label">Select Bank</label>
+                        <label for="example-text-input" class="col-sm-3 col-form-label">Banks</label>
                         <div class="col-sm-9">
                            <select class="form-control bank_id" data-live-search="true" name="bank_id" >
                                <option>Select Bank</option>

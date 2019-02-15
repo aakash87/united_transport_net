@@ -382,14 +382,32 @@ footer .end {
     <div class="container">
       <div class="details clearfix">
         <div class="client left">
-            <p class="name">Client Name : <span> <?php echo $invoice_detail[0]['full_name']?> </span></p>
-            <p style="color: #000; font-weight:500;"><?php echo $invoice_detail[0]['company_name']?></p>
-            <p style="color: #000; font-weight:500;">Karachi</p>
+            
           
         </div>
         <div class="data right">
             <div class="title">Invoice #: <span><?php echo $invoice_detail[0]['invoice_voucher_number']?></span></div>
             <div class="date">Date of Invoice: <?php echo $invoice_detail[0]['invoice_create_date']?><br></div>
+        </div>
+    </div>
+    <div class="details clearfix">
+        <div class="client left">
+            <h4>Company Detai</h4>
+            <p style="color: #000; font-weight:500;">United Transport Network</p>
+            <p style="color: #000; font-weight:500;"><?php echo $customer[0]['Address']?></p>
+            <p style="color: #000; font-weight:500;">NTN # <span>4194683-9</span></p>
+            <p style="color: #000; font-weight:500;">SRB # <span>4194683-9</span></p>
+            <p style="color: #000; font-weight:500;">Phone # <span>4194683-9</span></p>
+          
+        </div>
+        <div class="data right">
+            <h4 style="text-align: left">Customer Detai</h4>
+            <div class="date" style="text-align: left">Address: 23-E, E-Market, P.E.C.H.S, </div>
+            <div class="date" style="text-align: left"><?php echo $customer['company_name']?></div>
+            <div class="date" style="text-align: left"><?php echo $customer['Address']?></div>
+            <div class="date" style="text-align: left">NTN #</div>
+            <div class="date" style="text-align: left">STR #</div>
+            <div class="date" style="text-align: left">Phone # <span><?php echo $customer['Phone_Number']?></span></div>
         </div>
     </div>
       
@@ -452,6 +470,22 @@ footer .end {
            
         </tbody>
     </table>
+    <div class="container" style="border: 1px solid;">
+            
+                <p style="margin-left: -15px;"><strong>Remarks :</strong></p>
+                <br>
+                <br>
+                <br>
+           
+           
+        </div>
+            <div class="" style="width: 800px;">
+              <br>
+                  <span>Prepared by : ________________</span> &nbsp;  &nbsp;   &nbsp;   &nbsp;  &nbsp;  &nbsp;   &nbsp;   &nbsp;  &nbsp; 
+                  <span>Prepared by : ________________</span> &nbsp;  &nbsp;   &nbsp;   &nbsp;  &nbsp;  &nbsp;   &nbsp;   &nbsp;  &nbsp; 
+                  <span>Checked By : ________________</span>
+            </div>
+          
     </div>
 </section>
 

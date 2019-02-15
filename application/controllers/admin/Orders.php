@@ -212,18 +212,7 @@
 
 			$customer_old_amount = $this->Invoice_model->get_last_record_for_ledger('vendor_ledger' , $this->input->post('order_vendor_id'));
 			
-			
-
-
-
-
-
-
-
-
-
-
-
+		
 			$data = 
 			[
 				'order_vehicle' => $this->input->post('order_vehicle'),
@@ -256,12 +245,31 @@
 					'expense_amount' => $this->input->post('expense_amount')[$i],
 					'expense_description' => $this->input->post('expense_description')[$i],
 					'expense_category' => $this->input->post('expense_category')[$i],
+					'paid_by' => $this->input->post('paid_by')[$i],
 					'vehicel_id' => $this->input->post('order_vendor_id'),
 					'driver_id' => $this->input->post('order_driver'),
 				];
 
 				$this->Orders_model->insert('order_expense',$data_expense);
-				
+				if ($this->input->post('paid_by')[$i] == "driver_paid") {
+					$driver_old_amount = $this->Invoice_model->get_last_record_for_ledger('driver_ledger' , $this->input->post('order_driver'));
+					// print_r();
+					$driver_ledger = [
+						'customer_id' => $this->input->post('order_driver'),
+						'description' => $this->input->post('expense_description')[$i],
+						'amount' => $this->input->post('expense_amount')[$i],
+						'balance' => $driver_old_amount['balance'] + $this->input->post('expense_amount')[$i],
+						'voucher_no' => $order_id,
+						'date' => $this->input->post('expense_date')[$i],
+						'reference' => 'Credit',
+						'expense_title' => $this->input->post('expense_title')[$i],
+						'expense_category' => $this->input->post('expense_category')[$i],
+						'paid_by' => $this->input->post('paid_by')[$i],
+						'vehicel_id' => $this->input->post('order_vendor_id'),
+					];
+
+					$this->Orders_model->insert('driver_ledger',$driver_ledger);
+				}
 			}
 
 			$expense_count_for_update = count($this->input->post('expense_update_id'));
@@ -276,6 +284,7 @@
 					'expense_amount' => $this->input->post('expense_amount_update')[$i],
 					'expense_category' => $this->input->post('expense_category_update')[$i],
 					'expense_description' => $this->input->post('expense_description_update')[$i],
+					'paid_byription' => $this->input->post('paid_by_update')[$i],
 				];
 
 				$this->Orders_model->update('order_expense',$data_expense_update,array('id'=>$this->input->post('expense_update_id')[$i] ));
@@ -471,7 +480,12 @@
 		}
 
 
-
+		public function delete_order()
+		{
+			$id = $this->input->post('id');
+			$this->Vehicel_fuel_model->delete('orders',array('id'=>$id));
+			redirect('admin/orders');
+		}
 
 
 	}

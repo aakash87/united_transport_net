@@ -124,5 +124,10 @@
 			$this->data['permission'] = $this->permission;
 		 	$this->load->template('admin/vehicle/vehicle_ledger',$this->data);
 		}
-
+		public function delete_vehicle()
+		{
+			$id = $this->input->post('id');
+			$this->Vehicle_model->delete('vehicle',array('id'=>$id));
+			redirect('admin/vehicle');
+		}
 	}

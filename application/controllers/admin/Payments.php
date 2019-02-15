@@ -157,6 +157,7 @@
 
 			$this->data['permission'] = $this->permission;
 			$this->data['vendor_payments_detail'] = $this->Payments_model->submit_vandor_payment_detail($id);
+			$this->data['banks'] = $this->Payments_model->all_rows('bank');
 			// echo "<pre>";
 			// print_r($this->data['vendor_payments_detail']);die();
 			$this->load->template('admin/payments/vendor/submit_vandor_payment',$this->data);
@@ -180,6 +181,7 @@
 			$payment_balans_amount = $this->input->post('balance') - $this->input->post('pay_amount');
 			// print_r($this->input->post('vendor_id'));die();
 			// print_r($total_paid_amount);die();
+
 			for ($i=0; $i < sizeof($ids); $i++) { 
 				// print_r($id);
 				if ($this->input->post('total_amount') == $total_paid_amount) {
@@ -218,6 +220,24 @@
 				$vandor_paymet_id = $this->Payments_model->update('vendor_payments',$vendor_payment_data,array('id'=>$id));
 			}
 
+			$bank_old_amount = $this->Invoice_model->get_last_record_bank_log('bank_deposit_log' , $this->input->post('bank_id'));
+			// print_r($bank_old_amount['bank_total_amount']);die();
+			$old_bank_amount = $this->input->post('bank_amount');
+				$bank_new_data = [
+					'amount'=> $old_bank_amount - $this->input->post('pay_amount'),
+				];
+				$this->Invoice_model->update('bank',$bank_new_data,array('id'=>$this->input->post('bank_id') ) );
+			$bank_ladger = 
+			[
+				'bank_d_amount' =>  $this->input->post('pay_amount'),
+				'bank_d_id' => $this->input->post('bank_id'),
+				'bank_total_amount'=> $bank_old_amount['bank_total_amount'] - $this->input->post('pay_amount'),
+				'date' =>  $this->input->post('pay_date'),
+				'description' => 'Vendor Invoice Paid',
+				'reference' => 'Expance',
+				'invoice_voucher_number' =>  $this->input->post('invoice_no'),
+			];
+			$this->Invoice_model->insert('bank_deposit_log', $bank_ladger);
 			
 			$vendor_ladger = 
 			[

@@ -73,14 +73,14 @@
                            <tr>
                               <td><?php echo $s_number++;  ?></td>
                               <td><?php echo $module['full_name']; ?></td>
-                              <td><?php echo $module['pickup_date_and_time']; ?></td>
-                              <td><?php echo $module['dropoff_date_and_time']; ?></td>
+                              <td><?php echo $newDate = date("d-m-Y", strtotime($module['pickup_date_and_time'])); ?></td>
+                              <td><?php echo $newDate = date("d-m-Y", strtotime($module['dropoff_date_and_time'])); ?></td>
                               <td><?php echo $module["registration_number"] ?></td>
                               <td><?php echo $module["driver_name"] ?></td>
                               <td><?php echo $module["pickup_location"] ?></td>
                               <td><?php echo $module["drop_off_location"] ?></td>
-                              <td><?php echo $module["order_total_amount"]  ?></td>
-                              <td><?php echo $module["net_amount"] ?></td>
+                              <td><?php echo number_format($module["order_total_amount"]) ?></td>
+                              <td><?php echo number_format($module["net_amount"]); ?></td>
                               <td><?php echo $module["order_status"] ?></td>
                               <?php 
                                  if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
@@ -98,13 +98,11 @@
                                  <?php if ($user_type == 1) { ?>
                                  <a href="<?php echo base_url() ?>admin/orders/process_of_order_by_admin/<?php echo $module["id"] ?>"><img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/c-icon.png" title="process by admin" alt="process by admin" width="35" height="35"></a>
                                  <?php } ?>
-                                 <a href="<?php echo base_url() ?>admin/orders/delete/<?php echo $module["id"] ?>"><img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a>
+                                 <img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="25" height="25" class="delete" id='del_<?php echo $module["id"] ?>' >
+                                 
+                                <!--  <a href="<?php echo base_url() ?>admin/orders/delete/<?php echo $module["id"] ?>"><img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a> -->
                                  <?php } ?>
                                  
-
-                                 
-
-
                               </td>
                               <?php } ?>
                            </tr>
@@ -122,3 +120,43 @@
 <!-- /#page-wrapper -->
 </div><!-- /#wrapper -->
 <!-- START CORE PLUGINS -->
+<script type="text/javascript">
+   $(document).ready(function(){
+
+     // Delete 
+     $('.delete').click(function(){
+       var el = this;
+       var id = this.id;
+       var splitid = id.split("_");
+
+       // Delete id
+       var deleteid = splitid[1];
+      // alert(deleteid);
+       // Confirm box
+       bootbox.confirm("Are you sure want to delete?", function(result) {
+    
+          if(result){
+
+             $.ajax({
+                type: 'POST',
+                  data: { id:deleteid },
+                url: '<?php echo base_url() ?>admin/orders/delete_order/',
+                success: function(resp){
+                   $(el).closest('tr').css('background','tomato');
+                   $(el).closest('tr').fadeOut(800, function(){ 
+                     $(this).remove();
+                   });
+
+                
+
+                     
+                   
+                }
+            });
+          }
+    
+       });
+    
+     });
+   });
+</script>

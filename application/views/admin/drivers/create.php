@@ -64,6 +64,11 @@
 
                                     </div><div class="form-group row">
 
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Salary</label>
+                                        <div class="col-sm-9"><input class="form-control" name="salary" type="number" value="" id="example-text-input" placeholder="" ></div>
+
+                                    </div><div class="form-group row">
+
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary pull-right">Add</button>
                                 </div>

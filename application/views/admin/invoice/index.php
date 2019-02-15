@@ -99,8 +99,14 @@
                                        ?>
                                     <a href="<?php echo base_url() ?>admin/invoice/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="25" height="25"></a>
                                     <?php } ?>
-
-                                    <a href="<?php echo base_url() ?>admin/invoice/pdf_view_of_invoice/<?php echo $module["invoiceID"] ?>" target="_blank"><img src="<?php echo base_url() ?>assets/img/view_report.png" title="View Invoice PDF" alt="View Invoice PDF" width="25" height="25"></a>
+                                    <?php if ($module['SSP_tax'] == 1) {
+                                       ?>
+                                        <a href="<?php echo base_url() ?>admin/invoice/inv_with_sst/<?php echo $module["invoiceID"] ?>" target="_blank"><img src="<?php echo base_url() ?>assets/img/view_report.png" title="View Invoice PDF" alt="View Invoice PDF" width="25" height="25"></a>
+                                       <?php
+                                    }else{?>
+                                       <a href="<?php echo base_url() ?>admin/invoice/pdf_view_of_invoice/<?php echo $module["invoiceID"] ?>" target="_blank"><img src="<?php echo base_url() ?>assets/img/view_report.png" title="View Invoice PDF" alt="View Invoice PDF" width="25" height="25"></a>
+                                    <?php } ?>
+                                   
                                  <?php if ($module['invoice_status'] == 0) : ?>
                                     
                                     <a href="<?php echo base_url() ?>admin/invoice/submit_invoice/<?php echo $module["invoiceID"] ?>" target="_blank"><img src="<?php echo base_url() ?>assets/img/payment_issue.png" title="Submit Invoice" alt="Submit Invoice" width="25" height="25" style="<?php if ($module['balance'] == 0) {

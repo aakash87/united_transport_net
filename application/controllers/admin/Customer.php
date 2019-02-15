@@ -75,6 +75,7 @@
 				redirect('admin/home');
 			}
 			$this->data['title'] = 'Edit Customer';
+			$this->data['sales_person'] = $this->Customer_model->get_sale_person();
 			$this->data['customer'] = $this->Customer_model->get_row_single('customer',array('id'=>$id));$this->load->template('admin/customer/edit',$this->data);
 		}
 
@@ -111,5 +112,10 @@
 
 			echo json_encode($sales_person);
 		}
-
+		public function delete_customer()
+		{
+			$id = $this->input->post('id');
+			$this->Customer_model->delete('customer',array('id'=>$id));
+			redirect('admin/customer');
+		}
 	}

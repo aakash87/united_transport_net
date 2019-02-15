@@ -99,4 +99,12 @@
 			}
 			$this->Vendor_model->delete('vendor',array('id'=>$id));
 			redirect('admin/vendor');
-		}}
+		}
+
+		public function delete_vendor()
+		{
+			$id = $this->input->post('id');
+			$this->Vehicel_fuel_model->delete('vendor',array('id'=>$id));
+			redirect('admin/vendor');
+		}
+	}

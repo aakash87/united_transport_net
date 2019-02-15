@@ -382,6 +382,7 @@ footer .end {
     <div class="container">
       <div class="details clearfix">
         <div class="client left">
+          
             <p class="name">Client Name : <span> <?php echo $invoice_detail[0]['full_name']?> </span></p>
             <p style="color: #000; font-weight:500;"><?php echo $invoice_detail[0]['company_name']?></p>
             <p style="color: #000; font-weight:500;">Karachi</p>
@@ -440,12 +441,12 @@ footer .end {
               <tr style="border: 1px solid; background-color: #e1e4e6; border-color: #e1e4e6;">
                   
                 <td class="qty" colspan="12">Grand Total</td>
-                <td class="qty" colspan="4" >&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="float: right;"><?php echo  number_format($total_count)?></span></td>
+                <td class="qty" colspan="1" ><span style="float: right;"><?php echo  number_format($total_count)?></span></td>
               </tr>
               <tr style="border: 1px solid; background-color: #e1e4e6; border-color: #c6c9cc;">
                 
                 <td class="qty" colspan="12"><?php echo NumbersToWords::convert($total_count);?></td>
-                <td class="qty" colspan="4"><span style="float: right;"></span></td>
+                <td class="qty" colspan="1"><span style="float: right;"></span></td>
               </tr>
              
             
