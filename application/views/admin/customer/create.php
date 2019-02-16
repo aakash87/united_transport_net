@@ -103,6 +103,18 @@
                               </div>
                            </div>
                            <div class="form-group row">
+                              <label for="example-text-input" class="col-sm-3 col-form-label">NTN #</label>
+                              <div class="col-sm-9">
+                                 <input type="" class="form-control" name="ntn_no" value="" >
+                              </div>
+                           </div>
+                           <div class="form-group row">
+                              <label for="example-text-input" class="col-sm-3 col-form-label">STR #</label>
+                              <div class="col-sm-9">
+                                 <input type="" class="form-control" name="str_no" value="" >
+                              </div>
+                           </div>
+                           <div class="form-group row">
                               <div class="col-sm-12">
                                  <button type="submit" class="btn btn-primary pull-right">Submit</button>
                               </div>

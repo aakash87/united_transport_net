@@ -146,5 +146,11 @@ class Orders_model extends MY_Model{
 		return $this->db->get()->result_array();
 
 	}
-	
+	public function get_last_record_for_ledger($table , $vehicle_id)
+	{
+		$query = $this->db->query("SELECT * FROM $table where vehicle_id = '$vehicle_id'  ORDER BY id DESC LIMIT 1");
+		$result = $query->row_array();
+		return $result;
+	}
+
 }

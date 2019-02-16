@@ -212,7 +212,8 @@
 
 			$customer_old_amount = $this->Invoice_model->get_last_record_for_ledger('vendor_ledger' , $this->input->post('order_vendor_id'));
 			
-		
+
+
 			$data = 
 			[
 				'order_vehicle' => $this->input->post('order_vehicle'),
@@ -345,6 +346,64 @@
 							
 
 				$this->Orders_model->update('orders',$vendor_payment_data,array('id'=>$order_id));
+
+				$vehicle_bying_old_amount = $this->Orders_model->get_last_record_for_ledger('vehicle_ledger' , $this->input->post('vehicel_of_vendor'));
+				
+				$vehicle_bying_ledger = [
+					'vehicle_id' => $this->input->post('vehicel_of_vendor'),
+					'description' => 'Vehicle Buying',
+					'amount' =>   $this->input->post('builty_rates'),
+					'order_id' => $order_id,
+					'balance'=> round($this->input->post('builty_rates') + $vehicle_bying_old_amount['balance']),
+					'date' =>  date('d-m-Y'),
+					'reference' => 'Debit',
+				];
+
+
+				$this->Invoice_model->insert('vehicle_ledger', $vehicle_bying_ledger);
+
+				$sec_stop_amount_update = count($this->input->post('sec_stop_amount_update'));
+
+				for ($i = 0; $i < $sec_stop_amount_update ; $i++) {
+
+					$vehicle_scond_stop_old_amount = $this->Orders_model->get_last_record_for_ledger('vehicle_ledger' , $this->input->post('vehicel_of_vendor'));
+									
+					$vehicle_scond_stop_ledger = [
+						'vehicle_id' => $this->input->post('vehicel_of_vendor'),
+						'description' => '2nd Stop',
+						'amount' =>   $this->input->post('sec_stop_amount_update')[$i],
+						'order_id' => $order_id,
+						'balance'=> round($this->input->post('sec_stop_amount_update')[$i] + $vehicle_scond_stop_old_amount['balance']),
+						'date' =>  date('d-m-Y'),
+						'reference' => 'Debit',
+					];
+
+
+					$this->Invoice_model->insert('vehicle_ledger', $vehicle_scond_stop_ledger);
+					
+				}
+
+				$expense_amount_update = count($this->input->post('expense_amount_update'));
+
+				for ($i = 0; $i < $expense_amount_update ; $i++) {
+
+					$vehicle_expance_old_amount = $this->Orders_model->get_last_record_for_ledger('vehicle_ledger' , $this->input->post('vehicel_of_vendor'));
+									
+					$vehicle_expance_ledger = [
+						'vehicle_id' => $this->input->post('vehicel_of_vendor'),
+						'description' => $this->input->post('expense_category_update')[$i],
+						'amount' =>   $this->input->post('expense_amount_update')[$i],
+						'order_id' => $order_id,
+						'balance'=> round($vehicle_expance_old_amount['balance'] - $this->input->post('expense_amount_update')[$i]),
+						'date' =>  date('d-m-Y'),
+						'reference' => 'Credit',
+					];
+
+
+					$this->Invoice_model->insert('vehicle_ledger', $vehicle_expance_ledger);
+					
+				}
+
 			}
 			
 			redirect('admin/orders');

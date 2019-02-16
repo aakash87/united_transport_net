@@ -200,8 +200,9 @@
 			// print_r($customer_old_amount['balance']);die();
 
 			$data_invoice = [
-				'invoice_total_amount' =>  $final_amount ,
-				'balance' =>  $final_amount,
+				'invoice_total_amount' =>  $this->input->post('grand_total'),
+				// 'invoice_total_amount' =>  $final_amount ,
+				'balance' =>  $this->input->post('grand_total'),
 				'invoice_voucher_number' => "INV-".$invoice_code."-".date('Y'),
 				'order_ids' =>  $order_ids,
 				'customer_id' => $this->input->post('customer_nameID'),
@@ -214,10 +215,10 @@
 
 			$id = $this->Invoice_model->insert('invoice', $data_invoice);
 			$customer_ledger = [
-				'amount' =>  $final_amount ,
+				'amount' =>  $this->input->post('grand_total') ,
 				'voucher_no' => "INV-".$invoice_code."-".date('Y'),
 				'customer_id' => $this->input->post('customer_nameID'),
-				'balance'=> round($final_amount + $customer_old_amount['balance']),
+				'balance'=> round($this->input->post('grand_total') + $customer_old_amount['balance']),
 				'date' =>  date('Y-m-d'),
 				'description' => 'invoice Create',
 				'reference' => 'invoice',
@@ -227,11 +228,11 @@
 			$this->Invoice_model->insert('customer_ledger', $customer_ledger);
 
 			$sales_person_ledger = [
-				'amount' =>  $final_amount,
+				'amount' =>  $this->input->post('grand_total'),
 				'voucher_no' => "INV-".$invoice_code."-".date('Y'),
 				'sales_person_id' => $this->input->post('sales_person_id'),
 				'customer_id' => $this->input->post('customer_nameID'),
-				'balance'=> round($final_amount + $sales_person_old_amount['balance']),
+				'balance'=> round($this->input->post('grand_total') + $sales_person_old_amount['balance']),
 				'date' =>  date('Y-m-d'),
 				'description' => 'invoice Create',
 				'reference' => 'invoice',
@@ -365,107 +366,49 @@
 		}
 
 
+		public function inv_with_sst($invoice_id)
+		{
+
+			$this->data['invoice_detail'] =  $this->Invoice_model->get_invvooce_by_id($invoice_id);
+			$this->data['invoice'] =  $this->Invoice_model->get_row_single('invoice',array('id'=>$invoice_id));
+			
+			$this->data['customer'] =  $this->Invoice_model->get_row_single('customer',array('id'=>$this->data['invoice']['customer_id']));
+			
+			$this->data['invoice_order_id'] = $this->data['invoice']['order_ids'];
+
+			$o_id = explode(',',$this->data['invoice_order_id']);
 
 
 
-
-
-
-
-
-
-
-				public function inv_with_sst($invoice_id)
-				{
-
-					$this->data['invoice_detail'] =  $this->Invoice_model->get_invvooce_by_id($invoice_id);
-					$this->data['invoice'] =  $this->Invoice_model->get_row_single('invoice',array('id'=>$invoice_id));
-					
-					$this->data['customer'] =  $this->Invoice_model->get_row_single('customer',array('id'=>$this->data['invoice']['customer_id']));
-					
-					$this->data['invoice_order_id'] = $this->data['invoice']['order_ids'];
-
-					$o_id = explode(',',$this->data['invoice_order_id']);
-
-
-
-					$order_data = [];
+			$order_data = [];
+		
+			for ($i=0; $i < sizeof($o_id); $i++) { 
+				$this->db->select('orders.*, inv_list.*, ve.registration_number');
+				$this->db->from('orders');
 				
-					for ($i=0; $i < sizeof($o_id); $i++) { 
-						$this->db->select('orders.*, inv_list.*, ve.registration_number');
-						$this->db->from('orders');
-						
-						$this->db->join('invoice_order_list inv_list' , 'inv_list.inv_ordre_id = orders.id' , 'left');
-						$this->db->join('vehicle ve' , 've.id = orders.vehicel_of_vendor' , 'left');
-						 
-						$this->db->where('orders.id' , $o_id[$i]);
+				$this->db->join('invoice_order_list inv_list' , 'inv_list.inv_ordre_id = orders.id' , 'left');
+				$this->db->join('vehicle ve' , 've.id = orders.vehicel_of_vendor' , 'left');
+				 
+				$this->db->where('orders.id' , $o_id[$i]);
 
-						$this->data['order']= $this->db->get()->row_array();
-						
-						array_push($order_data, $this->data['order']);	
-					}
+				$this->data['order']= $this->db->get()->row_array();
+				
+				array_push($order_data, $this->data['order']);	
+			}
 
 
-					$this->data['selected_data'] = $order_data;
+			$this->data['selected_data'] = $order_data;
 
-					// echo '<pre>'; print_r($this->data['customer']);
-					// die();
+			// echo '<pre>'; print_r($this->data['customer']);
+			// die();
 
-		 			$this->load->library('pdf');
-					$this->pdf->load_view('admin/invoice/invoice_reports/inv_with_sst',$this->data );
-					$this->pdf->Output();
+ 			$this->load->library('pdf');
+			$this->pdf->load_view('admin/invoice/invoice_reports/inv_with_sst',$this->data );
+			$this->pdf->Output();
 
 
 
-				}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		}
 
 
 
@@ -517,7 +460,9 @@
 		public function submit_order_invoice()
 		{
 			if ($this->input->server('REQUEST_METHOD') == 'POST') {
+				// echo "<pre>";
 				// print_r($_POST);
+				// die();
 
 				$paid_amount_cu = $this->input->post('paid_amount_cu');
 				$invoice_total_amount = $this->input->post('invoice_total_amount');
@@ -553,16 +498,14 @@
 					// 	'customer_paid_amount' => $paid_amount_cu,
 					// ];
 
-					
-
-
-
 					$options = 
 					[
 						'customer_paid_amount' =>  $total_paid_amount,
 						'balance' =>  '0',
 						'status' =>  'Paid Invoice',
 						'invoice_paid_date' => $this->input->post('invoice_paid_date'),
+						'with_holding_tax' => $this->input->post('with_holding_tax'),
+						'remarks' => $this->input->post('remarks'),
 					];
 					$this->Invoice_model->update('invoice',$options,array('id'=>$this->input->post('invoice_tb_id') ) );
 				}
@@ -573,21 +516,11 @@
 						'balance' =>  $payment_balans_amount,
 						'status' =>  'Partial Invoice',
 						'invoice_paid_date' => $this->input->post('invoice_paid_date'),
+						'with_holding_tax' => $this->input->post('with_holding_tax'),
+						'remarks' => $this->input->post('remarks'),
 					];
 					$this->Invoice_model->update('invoice',$options,array('id'=>$this->input->post('invoice_tb_id') ) );
 				}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	              $data2=array(

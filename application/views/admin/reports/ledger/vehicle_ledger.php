@@ -1,4 +1,10 @@
+<style type="text/css">
+  .dropdown-menu.open {
+    z-index: 999 !important;
+}
+</style>
 <div id="page-wrapper" style="min-height: 543px;">
+
     <!-- main content -->
     <div class="content">
         <!-- Content Header (Page header) -->
@@ -28,23 +34,39 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <form action="<?php echo base_url()?>admin/reports/search_by_driver" method="POST" enctype="multipart/form-data" >
-                            <div class="form-group row">
-                                <div class="form-group col-lg-6">
-                                    <label for="">Vehicle</label>
-                                    <select class="form-control" name="driver" required="">
-                                    <option value="">Select Vehicle</option>
-                                    <?php 
-                                       foreach ($drivers as $dri) {
-                                           echo '<option value="'.$dri['id'].'">'.$dri['First_Name'].'</option>';
-                                       }
-                                       ?>
-                                 </select>
+                        <form action="<?php echo base_url()?>admin/reports/vehicle_ledger" method="POST" enctype="multipart/form-data" >
+                            <div class="panel-body">
+                              <div class="form-group row" >
+                                <div class="col-lg-6"">
+                            
+                                  <label for="example-text-input" class="col-sm-4 col-form-label">Select Vehicle</label>
+                                          <div class="col-sm-8">
+                                             <select class="form-control selectpicker" data-live-search="true" name="select_vehicel" >
+                                                <option value="">Select Vehicle </option><?php foreach ($vehicles as $veh) {?>
+                                                    <option value="<?php echo $veh["id"] ?>"><?php echo $veh["registration_number"] ?></option>
+                                               <?php } ?></select>
+                                          </div>
+
                                 </div>
-                                <div class="form-group col-lg-6">
-                                   <label for="">Date</label>
-                                     <input class="form-control" type="text" id="date_range_input" name="daterange" value="<?php echo  date("m/d/Y");?> - <?php echo  date("m/d/Y", strtotime(' +2 day'));?>" />
+                                
+
+                                <div class="col-lg-4" >
+                                  
+                                   <label for="example-text-input" class="col-sm-4 col-form-label">Select Date</label>
+                                  
+                                     <div class="col-sm-8">
+                                      <input class="form-control" type="text" id="date_range_input" name="daterange" value="<?php echo  date("m/d/Y");?> - <?php echo  date("m/d/Y", strtotime(' +2 day'));?>" />
+                                     </div>
+
                                 </div>
+
+                                <div class="form-group col-lg-2">
+                                  
+                                    <button type="submit" id="customer_report_by_dateID" class="btn btn-success w-md m-b-5 m-t-5">Search</button>
+
+                                </div>
+                                                  </div>
+
                             </div>
                             <div class="form-group row">
                                 <div class="col-lg-12">
@@ -60,27 +82,66 @@
                                 <thead>
                                     <tr>
                                         <th>S#</th>
-                                        <th>Full Name</th>
-                                        <th>Order Total Amount</th>
-                                        <th>Local Transport</th>
-                                        <th>Labor Charges</th>
-                                        <th>Net Amount</th>
+                                        <th>Order ID</th>
+                                        <th>Vehicle #</th>
+                                        <th>Desc</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                        <th>Balance</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                         $s_number = 1;
-                                        foreach ($driver_ledger as $module) {
+                                        foreach ($vehicle_ledger as $module) {
                                     ?>
                                     <tr>
                                         <td><?php echo $s_number++; ?></td>
-                                        <td><?php echo $module["driver_name"] ?></td>
-                                        <td><?php echo $module["order_total_amount"] ?></td>
-                                        <td><?php echo $module["local_transport"] ?></td>
-                                        <td><?php echo $module["labor_charges"] ?></td>              
-                                        <td><?php echo $module["net_amount"] ?></td>
+                                         <td><?php echo $module["order_id"] ?></td>
+                                        <td><?php echo $module["registration_number"] ?></td>
+                                        <td><?php if ($module["expense_cate_title"] == "") {
+                                           echo $module["description"];
+                                        }else{
+                                            echo 'Exp '.$module["expense_cate_title"];
+                                        } ?></td>
+                                        <td><?php  
+                                            if ($module["reference"] == 'Debit') {
+                                             $dabit_amount = $module["amount"];
+                                                 echo number_format($dabit_amount);
+                                            }
+                                             ?></td>
+                                             <td><?php  
+                                                $credit_amount = 0;
+                                                if ($module["reference"] == 'Credit') {
+                                                    $credit_amount = $module["amount"];
+                                                     echo number_format($credit_amount);
+                                                
+                                                } 
+                                                
+                                                 ?></td>
+                                         <td><?php echo number_format($module["balance"]) ?></td>
                                     </tr>
-                                    <?php } ?>
+                                    <?php
+                                         $total_amount = $module["balance"];
+                                            if (isset($Balance_amount)) {
+                                               $total+=$total_amount;
+                                            }
+                                             
+                                         ?>
+                                      <?php } ?>
+                                    <tr>
+                                       
+                                       <td><strong>Total </strong></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td><strong><?php if(isset( $total_amount)){
+                                          echo number_format($module["balance"]);}
+                                          else{ echo "0";}?></strong></td>
+                                       
+                                    </tr>
                                 </tbody>
                             </table>
                             

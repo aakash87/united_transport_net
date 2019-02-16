@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>HTML to API - Invoice</title>
+    <title>UTN</title>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <!-- <link rel="stylesheet" href="sass/main.css" media="screen" charset="utf-8"/> -->
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -428,6 +428,8 @@ footer .end {
                 <th class="total">Detention </th>
                 <th class="total">Order <sup style="font-size: 11px !important;">Amount</sup></th>
                 <th class="total">Grand Total </th>
+                <th class="total">sst <?php echo $customer["ssp_tax_val"];?>%</th>
+                <th class="total">Total </th>
             </tr>
         </thead>
         <tbody>
@@ -452,18 +454,20 @@ footer .end {
                 <td class="qty"><?php echo number_format($module["order_tenstion"]);?></td>
                 <td class="qty"><?php echo number_format($module["order_total_amount"]);?></td>
                 <td class="qty"><?php $grand_total =  $module['vendor_payment'] + $module['labor_charges'] + $module['second_stop_amount'] + $module['order_tenstion']+ $module['order_total_amount']; echo  number_format($grand_total)?></td>
+                <td class="qty"><?php $tax = $grand_total * $customer["ssp_tax_val"] / 100; echo $tax; ?></td>
+                <td class="qty"><?php $with_tax = $grand_total + $tax; echo $with_tax;?></td>
             </tr>
             <?php $total_count+=$grand_total; $i++; } ?>
             
               <tr style="border: 1px solid; background-color: #e1e4e6; border-color: #e1e4e6;">
                   
-                <td class="qty" colspan="12">Grand Total</td>
-                <td class="qty" colspan="4" >&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="float: right;"><?php echo  number_format($total_count)?></span></td>
+                <td class="qty" colspan="15"><strong>Grand Total</strong></td>
+                <td class="qty" colspan="" ><span style="float: right !important;"><strong><?php echo  number_format($with_tax)?></strong></span></td>
               </tr>
               <tr style="border: 1px solid; background-color: #e1e4e6; border-color: #c6c9cc;">
                 
-                <td class="qty" colspan="12"><?php echo NumbersToWords::convert($total_count);?></td>
-                <td class="qty" colspan="4"><span style="float: right;"></span></td>
+                <td class="qty" colspan="15"><strong><?php echo NumbersToWords::convert($with_tax);?></strong></td>
+                <td class="qty" colspan=""><span style="float: right;"></span></td>
               </tr>
              
             

@@ -59,7 +59,18 @@
                                                     <input class="form-control" max="<?php echo $invoice['invoice_total_amount']; ?>" name="paid_amount_cu" type="number" value="" id="example-text-input" placeholder=""  >
                                               </div>
                                         </div>
-
+                                           <div class="form-group row  ">
+                                            <label for="example-text-input" class="col-sm-3 col-form-label">With holding Tax</label>
+                                              <div class="col-sm-9">
+                                                    <input class="form-control" name="with_holding_tax" type="number" value="" id="" placeholder=""  >
+                                              </div>
+                                        </div> 
+                                        <div class="form-group row  ">
+                                            <label for="example-text-input" class="col-sm-3 col-form-label">Remarks</label>
+                                              <div class="col-sm-9">
+                                                  <textarea class="form-control" name="remarks" rows="1"></textarea>
+                                              </div>
+                                        </div>
                                        
 
                                      </div>
@@ -69,11 +80,19 @@
                                             <label for="example-text-input" class="col-sm-3 col-form-label">Total Amount</label>
                                               <div class="col-sm-9">
                                                     <input class="form-control" name="invoice_total_amount" type="text" value="<?php echo $invoice['invoice_total_amount']; ?>" id="example-text-input" placeholder="" readonly >
-                                                    <input class="form-control" name="balance" type="text" value="<?php echo $invoice['balance']; ?>" id="example-text-input" placeholder="" readonly >
-                                                    <input class="form-control" name="amount" type="text" value="<?php echo $invoice['customer_paid_amount']; ?>" id="example-text-input" placeholder="" readonly >
-                                                    <input class="form-control" name="old_amount" type="text" value="<?php echo $invoice['balance']; ?>" id="example-text-input" placeholder="" readonly >
+                                                   
+                                                    <input style="display: none;" class="form-control" name="amount" type="text" value="<?php echo $invoice['customer_paid_amount']; ?>" id="example-text-input" placeholder="" readonly >
+                                                    <input style="display: none;" class="form-control" name="old_amount" type="text" value="<?php echo $invoice['balance']; ?>" id="example-text-input" placeholder="" readonly >
                                               </div>
                                         </div>
+                                        <div class="form-group row">
+
+                                        <label for="example-text-input" class="col-sm-3 col-form-label">Balance Amount</label>
+                                                <div class="col-sm-9">
+                                                     <input class="form-control" name="balance" type="text" value="<?php echo $invoice['balance']; ?>" id="example-text-input" placeholder="" readonly >
+                                                </div>
+
+                                            </div>
                                         <div class="form-group row">
 
                                         <label for="example-text-input" class="col-sm-3 col-form-label">Select Bank</label>
@@ -88,6 +107,7 @@
                                                 </div>
 
                                             </div>
+                                            
 
                                              <div class="form-group row">
 

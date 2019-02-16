@@ -74,7 +74,7 @@
 
 
 
-            <a href="<?php echo base_url(); ?>/admin/reports/reports_vehicle_ledger"><div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <a href="<?php echo base_url(); ?>/admin/reports/vehicle_ledger"><div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                 <div class="statistic-box statistic-filled-3 border" style=" box-shadow: 10px 10px 5px #888888;">
                     <h3>Ledger</h3>
                     <span class="slight">Vehicle Wise</span>
@@ -124,6 +124,14 @@
                 <div class="statistic-box statistic-filled-3 border" style=" box-shadow: 10px 10px 5px #888888;">
                     <h3>Ledger</h3>
                     <span class="slight">Driver Wise</span>
+                    <div class="small"></div>
+                    <i class="ti-notepad statistic_icon"></i>
+
+                </div>
+            </div></a> 
+            <a href="<?php echo base_url(); ?>/admin/reports/srb_reports"><div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="statistic-box statistic-filled-3 border" style=" box-shadow: 10px 10px 5px #888888;">
+                    <h3>SRB Reports</h3>
                     <div class="small"></div>
                     <i class="ti-notepad statistic_icon"></i>
 

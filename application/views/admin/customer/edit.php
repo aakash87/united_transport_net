@@ -57,7 +57,7 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Sales Person <?php echo $customer["sales_person"];?><span class="required">*</span></label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Sales Person <span class="required">*</span></label>
                               <div class="col-sm-9">
                                  <select class="form-control" name="sales_person" required="">
                                     <option>Select Sales Person </option>
@@ -93,7 +93,7 @@
                            
 
                             <div class="form-group row">
-                              <label for="" class="col-sm-3 col-form-label">SSP</label>
+                              <label for="" class="col-sm-3 col-form-label">SST</label>
                               <div class="col-sm-9">
                                  <div class="radio radio-danger">
                                     <input type="radio" name="SSP_tax" class="SSP_tax" id="ssp_yes" value="1" <?php echo ($customer["SSP_tax"] ==  1) ? 'checked': NULL;  ?>>
@@ -108,7 +108,7 @@
                           
                            
                            <div class="form-group row ssp_tax_val_div "  <?php echo ($customer["SSP_tax"] ==  0) ? 'style="display: none;"': NULL;  ?> >
-                              <label for="" class="col-sm-3 col-form-label">SSP Amoun (%)</label>
+                              <label for="" class="col-sm-3 col-form-label">SST Amoun (%)</label>
                               <div class="col-sm-9">
                                  <input type="" class="form-control ssp_tax_val" name="ssp_tax_val" value="<?php echo $customer["ssp_tax_val"] ?>" >
                               </div>

@@ -302,6 +302,48 @@
 			$this->data['title'] = 'vendor_ledger';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/vendor_ledger',$this->data);
+		}
+		public function vehicle_ledger()
+		{
+
+			if ($this->input->server('REQUEST_METHOD') == 'POST') {
+
+				$vehicel_id = $this->input->post('select_vehicel');	
+
+				$explode_date = explode('-', $_POST['daterange']);
+
+				$current_date = $explode_date[0];
+				$str_currentdate = strtotime($current_date);
+				$str_current_day = date('d-m-Y' , $str_currentdate );
+
+				$last_date = $explode_date[1];
+				$str_last_date = strtotime($last_date);
+				$str_last_day = date('d-m-Y' , $str_last_date );
+
+				// echo $vehicel_id . '<br>';
+				// echo $str_current_day . '<br>';
+				// echo $str_last_day . '<br>';
+
+				// die();
+
+				$this->data['vehicle_ledger'] = $this->Reports_model->vehicle_ledger($vehicel_id , $str_current_day , $str_last_day );
+
+			// echo '<pre>'; print_r($this->data['vehicle_ledger']);
+			// die();
+		
+			}
+			else
+			{
+				$this->data['vehicle_ledger'] = [];
+
+			}
+
+
+			$this->data['vehicles'] = $this->Reports_model->all_rows('vehicle');
+		
+			// echo '<pre>'; print_r($this->data['vehicles']);
+			// die();	
+			$this->data['title'] = 'Vehicle Ledger';$this->load->template('admin/reports/ledger/vehicle_ledger',$this->data);
 		}	
 		public function search_by_vendor()
 		{
@@ -379,6 +421,41 @@
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/driver_ledger',$this->data);
 		}	
+
+
+
+		public function srb_reports()
+		{	
+			if ( $this->permission['view'] == '0' && $this->permission['view_all'] == '0' ) 
+			{
+				redirect('admin/home');
+			}
+			
+			if ($this->input->server('REQUEST_METHOD') == 'POST') {
+				// $this->data['vendor_ledger'] = $this->Reports_model->vendor_ledger($vendor_id);
+			}
+			else{
+				// $this->data['vendor_ledger'] = [];
+			}
+			
+			$this->data['srb_reports'] = $this->Reports_model->get_srb_reports();
+			// echo "<pre>";
+			// print_r($this->data['srb_reports']);die();
+			$this->data['title'] = 'vendor_ledger';
+			$this->data['permission'] = $this->permission;
+			$this->load->template('admin/reports/srb_reports',$this->data);
+		}
+
+
+
+
+
+
+
+
+
+
+
 		// public function vehicle_ledger()
 		// {
 		// 	$vehicle_id = 0;

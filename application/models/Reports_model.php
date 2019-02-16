@@ -90,6 +90,36 @@ class Reports_model extends MY_Model{
 		return $this->db->get()->result_array();
 	}
 
+	public function  vehicle_ledger($vehicel_id , $str_current_day , $str_last_day )
+	{
+		
+		$this->db->select('vehicle_ledger.* , ve.registration_number , exp_cat.expense_cate_title');
+		$this->db->from('vehicle_ledger');
 
+		$this->db->join('vehicle ve' , 've.id = vehicle_ledger.vehicle_id' , 'left');
+		$this->db->join('expense_category exp_cat' , 'exp_cat.id = vehicle_ledger.description' , 'left');
+
+		if ($vehicel_id == TRUE) {	
+				$this->db->where('vehicle_ledger.vehicle_id' , $vehicel_id);	
+
+			    $this->db->where('date >=' , $str_current_day );
+				$this->db->where('date <=' , $str_last_day );
+			}	else{
+
+			    $this->db->where('date >=' , $str_current_day );
+				$this->db->where('date <=' , $str_last_day );
+			}
+
+		return $this->db->get()->result_array();
+	}
+	public function get_srb_reports()
+	{
+		$this->db->select('invoice.*, cu.*');
+		$this->db->from('invoice');
+		$this->db->join('customer cu' , 'cu.id = invoice.customer_id' , 'left');
+		// $this->db->where('orders.order_driver' , $driver_id);
+
+		return $this->db->get()->result_array();
+	}
 
 }

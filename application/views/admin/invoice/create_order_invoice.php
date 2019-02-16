@@ -43,7 +43,10 @@
                               <th>Order Date</th>
                               <th>Order Status</th>
                               <th>Order Amount</th>
-                              <th>SSP %</th>
+                              <th>Other Charges</th>
+                              <th>Total With Out SST</th>
+                              <th>SST %</th>
+                              <th>Total With SST</th>
                              
                             
                            </tr>
@@ -78,6 +81,7 @@
                               }
                               
                               $count_value_second = 0;
+                              $all_total = 0;
                               foreach ($second_stop_data as $second_stop_val) {
 
                                   $count_value_second += $second_stop_val['sec_stop_amount'];
@@ -105,32 +109,35 @@
                                    <input type="hidden" name="labor_charges[]" class="labor_charges" value="<?php echo $module['labor_charges']; ?>">
 
                                      <input type="hidden" name="second_stop_amount[]" class="second_stop_amount" value="<?php echo $count_value_second ?>">
-
+                                     <?php echo $total_order_amount =  $module['order_tenstion'] + $module['labor_charges'] + $count_value_second + $module['vendor_payment']?>
                                  </td>
                                   
 
                                  <td><?php echo $module['sp_name']; ?></td>
                                  <td><?php echo $module['order_date']; ?></td>
-                                 <td><?php echo $module['order_status']; ?>
-                                 <td><?php echo $module['order_total_amount']; ?>
-                                  
-                                  <input type="hidden" name="order_single_amout[]" value="<?php echo $module['order_total_amount']; ?>">
-                                  <?php  $total_amount += $module['order_total_amount']; ?>
-                                
+                                 <td><?php echo $module['order_status']; ?></td>
+                                 <td><?php echo $module['order_total_amount'];?></td>
+
+                                 <td><?php echo $total_order_amount; ?>   </td>
+                                  <td> <?php echo $t_with_out_sst = $module['order_total_amount'] + $total_order_amount?></td>
+                                 <td><?php echo $with_tax = $t_with_out_sst * $module['ssp_tax_val'] / 100; ?>   </td>
+
+                                 <td><?php echo $grand_total = $with_tax + $t_with_out_sst; ?>
+                                     <?php  
+                                       $ssp_percantage = ($module['ssp_tax_val'] / 100) * $module['order_total_amount'];
+                                     ?>
+                                   <input type="hidden" class="ssp_percantage" name="ssp_percantage[]" value="<?php echo $ssp_percantage ?>"> 
+                                   
+
                                  </td>
-                                 
-                                 <td>
-                                    <?php echo  
-                                      $ssp_percantage = ($module['ssp_tax_val'] / 100) * $module['order_total_amount'];
-                                    ?>
-                                  <input type="hidden" class="ssp_percantage" name="ssp_percantage[]" value="<?php echo $ssp_percantage ?>">     
-                                 </td>
+
+
 
                                   
                               </tr>
 
 
-                        <?php } ?>
+                        <?php  $all_total+=$grand_total; } ?>
 
                         </tbody>
 
@@ -146,7 +153,7 @@
                         </tfoot>
                      </table>
                   </div>
-
+                  <input type="hidden" name="grand_total" value="<?php echo $all_total;?>">
                    <input type="hidden" name="total_amount" value="<?php  echo $total_amount ?>" class="total_amount" readonly>
                    
                    <input type="hidden" name="total_labour_chargers" value="" class="total_labour_chargers" readonly>
