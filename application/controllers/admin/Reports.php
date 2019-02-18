@@ -390,12 +390,12 @@
 				$this->data['drivers'] = $this->Reports_model->all_rows('drivers');
 			}
 			if ($this->input->server('REQUEST_METHOD') == 'POST') {
-				$this->data['driver_ledger'] = $this->Reports_model->driver_ledger($driver_id);
+				$this->data['driver_ledger'] = $this->Reports_model->driver_ledger($driver_id , $str_current_day ,  $str_last_day);
 			}
 			else{
 				$this->data['driver_ledger'] = [];
 			}
-			// print_r($this->data['customer']);
+			// print_r($this->data['drivers']);
 			$this->data['title'] = 'driver_ledger';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/driver_ledger',$this->data);
@@ -414,7 +414,17 @@
 			elseif ($this->user_type == 15) {
 				$this->data['drivers'] = $this->Reports_model->all_rows('drivers');
 			}
-			$this->data['driver_ledger'] = $this->Reports_model->driver_ledger($driver_id);
+			$explode_date = explode('-', $_POST['daterange']);
+
+			$current_date = $explode_date[0];
+			$str_currentdate = strtotime($current_date);
+			$str_current_day = date('Y-m-d' , $str_currentdate );
+
+			$last_date = $explode_date[1];
+			$str_last_date = strtotime($last_date);
+			$str_last_day = date('Y-m-d' , $str_last_date );
+			
+			$this->data['driver_ledger'] = $this->Reports_model->driver_ledger($driver_id , $str_current_day ,  $str_last_day);
 			// echo "<pre>";	
 			// print_r($this->data['driver_ledger']);die();
 			$this->data['title'] = 'driver_ledger';

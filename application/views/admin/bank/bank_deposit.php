@@ -113,7 +113,7 @@
                              
                                             </select>
 
-                                         <small>Amount Reduce Form This Bank</small>           
+                                         <!-- <small>Amount Reduce Form This Bank</small>            -->
                                         </div>
                                     </div>
 

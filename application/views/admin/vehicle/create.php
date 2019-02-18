@@ -111,7 +111,7 @@
                            </div>
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Image</label>
-                              <div class="col-sm-9"><input class="form-control" name="vehicle_image" type="text" value="" id="example-text-input" placeholder="" ></div>
+                              <div class="col-sm-9"><input class="form-control" name="vehicle_image" type="file" value="" id="example-text-input" placeholder="" ></div>
                            </div>
                            <div class="form-group row">
                               <div class="col-sm-12">

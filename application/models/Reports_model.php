@@ -75,17 +75,23 @@ class Reports_model extends MY_Model{
 
 		return $this->db->get()->result_array();
 	}
-	public function driver_ledger($driver_id)
+	public function driver_ledger($driver_id , $str_current_day , $str_last_day)
 	{
-		$this->db->select('orders.* , o_expance.*, o_s_stop.*, cu.full_name ,  driv.First_Name as driver_name, vehicle.registration_number ' );
-		$this->db->from('orders');
-		$this->db->join('order_expense o_expance' , 'o_expance.order_id = orders.id' , 'left');
-		$this->db->join('order_second_stop o_s_stop' , 'o_s_stop.second_stop_order_id = orders.id' , 'left');
-		$this->db->join('customer cu' , 'orders.order_customer = cu.id' , 'left');
-		$this->db->join('drivers driv' , 'driv.id = orders.order_driver' , 'left');
-		$this->db->join('vehicle' , 'vehicle.id = orders.order_vehicle' , 'left');
+		$this->db->select('driver_ledger.* , driv.First_Name');
+		$this->db->from('driver_ledger');
 
-		$this->db->where('orders.order_driver' , $driver_id);
+		$this->db->join('drivers driv' , 'driv.id = driver_ledger.customer_id' , 'left');
+
+		if ($driver_id == TRUE) {	
+				$this->db->where('driver_ledger.customer_id' , $driver_id);	
+
+			    $this->db->where('date >=' , $str_current_day );
+				$this->db->where('date <=' , $str_last_day );
+			}	else{
+
+			    $this->db->where('date >=' , $str_current_day );
+				$this->db->where('date <=' , $str_last_day );
+			}
 
 		return $this->db->get()->result_array();
 	}

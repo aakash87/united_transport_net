@@ -41,12 +41,14 @@
                                 <label for="example-text-input" class="col-sm-3 col-form-label">Bank description</label>
                                         <div class="col-sm-9"><input class="form-control" name="bank_description" type="text" value="" id="example-text-input" placeholder="" ></div>
 
-                                    </div><div class="form-group row">
+                                    </div>
+                                    <!-- <div class="form-group row">
 
                                 <label for="example-text-input" class="col-sm-3 col-form-label">Amount</label>
                                         <div class="col-sm-9"><input class="form-control" name="amount" type="text" value="" id="example-text-input" placeholder="" ></div>
 
-                                    </div><div class="form-group row">
+                                    </div> -->
+                                    <div class="form-group row">
 
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary pull-right">Add</button>

@@ -203,6 +203,7 @@
 				'invoice_total_amount' =>  $this->input->post('grand_total'),
 				// 'invoice_total_amount' =>  $final_amount ,
 				'balance' =>  $this->input->post('grand_total'),
+				't_with_out_sst' =>  $this->input->post('t_with_out_sst'),
 				'invoice_voucher_number' => "INV-".$invoice_code."-".date('Y'),
 				'order_ids' =>  $order_ids,
 				'customer_id' => $this->input->post('customer_nameID'),

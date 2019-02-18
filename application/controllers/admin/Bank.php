@@ -218,6 +218,7 @@
 					'bank_total_amount' => $total_amount,
 					'ref_no' => $ref_no,
 					'reference' => $reference,
+					'description' => $this->input->post('bank_description'),
 					'date' => $this->input->post('create_date')
 				];
 
@@ -283,6 +284,66 @@
 		}
 
 
+		public function driver_deposit()
+		{
+			// echo 'working';
 
+			if ($this->input->server('REQUEST_METHOD') == 'POST') {
+				$driverId = $this->input->post('driverId');
+				$driver_amount = $this->input->post('driver_amount');
+				$bank_id = $this->input->post('bank_id');
+				$bank_amount = $this->input->post('bank_amount');
+				$description = $this->input->post('descriptiondescription');
+				$amount = $this->input->post('amount');
+					
+				$this->data['bank_single'] = $this->Bank_model->get_row_single('bank',array('id'=>$bank_id));
+				$total_amount_after_paid = $this->data['bank_single']['amount'] - $this->input->post('amount');
+				$last_record = $this->Expense_model->get_last_record_expense('bank_deposit_log');
+				$last_record_id = $last_record['id'] + 1;
+				$ref_no = "Pay-".$last_record_id."-".$this->input->post('driverId').'-'.date('Y');
+				// echo "<pre>";
+				// print_r($_POST);
+				// die();
+				// $reference = "Deposit";
+				$update_bank_amount = [
+						'amount' => $total_amount_after_paid
+					];
+					
+				$this->Bank_model->update('bank',$update_bank_amount,array('id'=>$bank_id));
+				$deposit_data = [
+					'bank_d_id' => $bank_id,
+					'bank_tran_amount' => $this->input->post('amount'),
+					'bank_total_amount' => $total_amount_after_paid,
+					'ref_no' => $ref_no,
+					'reference' => 'Credit',
+					'date' => $this->input->post('create_date'),
+					'description' => $this->input->post('description')
+				];
+
+
+				$id = $this->Bank_model->insert('bank_deposit_log', $deposit_data);
+
+				$driver_ledger = [
+					'customer_id' => $this->input->post('driverId'),
+					'description' => 'Recive Amount',
+					'amount' => $this->input->post('amount'),
+					'balance' => $this->input->post('driver_amount') - $this->input->post('amount'),
+					'ref_no' => $ref_no,
+					'date' => $this->input->post('create_date'),
+					'reference' => 'Debit',
+				];
+
+
+				$id = $this->Bank_model->insert('driver_ledger', $driver_ledger);
+
+				redirect('admin/bank/');
+			}
+
+			$this->data['drivers'] = $this->Bank_model->all_rows('drivers');
+			$this->data['banks'] = $this->Bank_model->all_rows('bank');
+
+			$this->data['title'] = 'Driver Deposit';$this->load->template('admin/bank/driver_deposit',$this->data);
+
+		}
 
 	}

@@ -43,8 +43,8 @@
 				'vendor_create_date' => $this->input->post('vendor_create_date'),
 				'user_id' => $this->session->userdata('user_id'),
 				'special_person' => $this->input->post('special_person'),
-				'vender_type' => $this->input->post('vender_type'),
-				'fuel_vendor' => $this->input->post('fuel_vendor'),
+				'vendor_type' => $this->input->post('vender_type'),
+				'fuel_vendor' => 'Yes',
 				
 			];
 			$data['user_id'] = $this->session->userdata('user_id');$id = $this->Vendor_model->insert('vendor',$data);

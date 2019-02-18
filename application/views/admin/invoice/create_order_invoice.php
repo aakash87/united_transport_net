@@ -119,7 +119,9 @@
                                  <td><?php echo $module['order_total_amount'];?></td>
 
                                  <td><?php echo $total_order_amount; ?>   </td>
-                                  <td> <?php echo $t_with_out_sst = $module['order_total_amount'] + $total_order_amount?></td>
+                                  <td> <?php echo $t_with_out_sst = $module['order_total_amount'] + $module['local_transport'] + $total_order_amount?>
+                                    <input type="hidden" name="t_with_out_sst" value="<?php echo $t_with_out_sst ?>">
+                                  </td>
                                  <td><?php echo $with_tax = $t_with_out_sst * $module['ssp_tax_val'] / 100; ?>   </td>
 
                                  <td><?php echo $grand_total = $with_tax + $t_with_out_sst; ?>
@@ -162,7 +164,7 @@
                    
                    <input type="hidden" name="second_stop_amount_total" value="" class="second_stop_amount_total" readonly>
                  
-                   <input type="hidden" name="ssp_text_total" value="" class="ssp_text_total" readonly>
+                   <input type="hidden" name="ssp_hidden_total" value="" class="ssp_hidden_total" readonly>
                    
                    
                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
@@ -182,7 +184,7 @@
 <!-- START CORE PLUGINS -->
 
 
-<script type="text/javascript">
+<script type="hidden/javascript">
 $('.check_all').change(function() {
 if($(this).is(':checked')){
 $('.add_check').removeAttr('checked');
@@ -228,7 +230,7 @@ $('.ssp_percantage').each(function(){
 
 
 
-$('.ssp_text_total').val(ssp_percantage);    
+$('.ssp_hidden_total').val(ssp_percantage);    
 
 $('.order_tenstion_total').val(order_tenstion);    
 $('.total_labour_chargers').val(labor_charges);    

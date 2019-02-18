@@ -5,6 +5,7 @@
 	    {
 	        parent::__construct();
 	        $this->load->model('Drivers_model');
+	        $this->load->model('Invoice_model');
 	        $this->module = 'Drivers';
 	        $this->user_type = $this->session->userdata('user_type');
 	        $this->id = $this->session->userdata('user_id');
@@ -120,5 +121,28 @@
 		 	$this->load->template('admin/drivers/driver_ledger',$this->data);
 
 		}
+
+		public function get_driver_amount()
+
+
+
+		 {
+
+		  $driverId = $this->input->post('driverId');
+
+		  // $customer_data =  $this->Customer_invoices_model->Expense_model($bank_name);
+
+		   $Amount =  $this->Invoice_model->get_last_record_for_ledger('driver_ledger' , $driverId);
+
+
+		  
+
+
+
+		  echo $Amount['balance'];
+
+		 
+
+		 }
 
 	}

@@ -48,6 +48,17 @@
             </div></a>
 
 
+            <a href="<?php echo base_url(); ?>/admin/bank/driver_deposit">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="statistic-box statistic-filled-3 border" style=" box-shadow: 10px 10px 5px #888888;">
+                        <h2><span class="slight">Driver Deposit</span></h2>
+                        <div class="small"></div>
+                        <i class="ti-notepad statistic_icon"></i>
+                    </div>
+                </div>
+            </a>
+
+
 
 
 

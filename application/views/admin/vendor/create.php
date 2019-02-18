@@ -87,7 +87,7 @@
                                </div> 
                               </div>
                            </div>
-                           <div class="form-group row">
+                           <!-- <div class="form-group row">
                               <label for="" class="col-sm-3 col-form-label">Fuel Vendor</label>
                               
 
@@ -103,7 +103,7 @@
                                    </div>
                                </div> 
                               </div>
-                           </div>
+                           </div> -->
                            <!-- <div class="form-group row">
                               <div class="col-sm-12">
                                  <button type="button"  class="btn btn-success pull-right add_button">Add Vehicle</button>                                          

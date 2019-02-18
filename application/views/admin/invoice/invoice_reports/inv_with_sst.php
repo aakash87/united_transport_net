@@ -453,7 +453,7 @@ footer .end {
                 <td class="qty"><?php echo number_format($module["second_stop_amount"]);?></td>
                 <td class="qty"><?php echo number_format($module["order_tenstion"]);?></td>
                 <td class="qty"><?php echo number_format($module["order_total_amount"]);?></td>
-                <td class="qty"><?php $grand_total =  $module['vendor_payment'] + $module['labor_charges'] + $module['second_stop_amount'] + $module['order_tenstion']+ $module['order_total_amount']; echo  number_format($grand_total)?></td>
+                <td class="qty"><?php $grand_total =  $module['vendor_payment'] + $module['local_transport'] + $module['labor_charges'] + $module['second_stop_amount'] + $module['order_tenstion']+ $module['order_total_amount']; echo  number_format($grand_total)?></td>
                 <td class="qty"><?php $tax = $grand_total * $customer["ssp_tax_val"] / 100; echo $tax; ?></td>
                 <td class="qty"><?php $with_tax = $grand_total + $tax; echo $with_tax;?></td>
             </tr>

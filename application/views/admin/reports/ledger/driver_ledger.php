@@ -31,12 +31,12 @@
                         <form action="<?php echo base_url()?>admin/reports/search_by_driver" method="POST" enctype="multipart/form-data" >
                             <div class="form-group row">
                                 <div class="form-group col-lg-6">
-                                   <label for="">Driver</label>
+                                   <label for="">Drivers</label>
                                     <select class="form-control" name="driver" required="">
                                     <option value="">Select Driver</option>
                                     <?php 
-                                       foreach ($drivers as $dri) {
-                                           echo '<option value="'.$dri['id'].'">'.$dri['First_Name'].'</option>';
+                                       foreach ($drivers as $driv) {
+                                           echo '<option value="'.$driv['id'].'">'.$driv['First_Name'].'</option>';
                                        }
                                        ?>
                                  </select>
@@ -60,11 +60,12 @@
                                 <thead>
                                     <tr>
                                         <th>S#</th>
-                                        <th>Full Name</th>
-                                        <th>Order Total Amount</th>
-                                        <th>Local Transport</th>
-                                        <th>Labor Charges</th>
-                                        <th>Net Amount</th>
+                                        <th>Date</th>
+                                        <th>Order ID</th>
+                                        <th>Desc</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                        <th>balance</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,13 +75,53 @@
                                     ?>
                                     <tr>
                                         <td><?php echo $s_number++; ?></td>
-                                        <td><?php echo $module["driver_name"] ?></td>
-                                        <td><?php echo $module["order_total_amount"] ?></td>
-                                        <td><?php echo $module["local_transport"] ?></td>
-                                        <td><?php echo $module["labor_charges"] ?></td>              
-                                        <td><?php echo $module["net_amount"] ?></td>
+                                        <td><?php echo $newDate = date("d-m-Y", strtotime($module["date"])); ?></td>
+                                        <td><?php echo $module["voucher_no"] ?></td> 
+                                        <td><?php echo $module["description"] ?></td>
+                                        <td><?php  
+                                            if ($module["reference"] == 'Debit') {
+                                             $dabit_amount = $module["amount"];
+                                                 echo number_format($dabit_amount);
+                                            }
+                                             ?></td>
+                                         <td><?php  
+                                            $credit_amount = 0;
+                                            if ($module["reference"] == 'Credit') {
+                                                $credit_amount = $module["amount"];
+                                                 echo number_format($credit_amount);
+                                            
+                                            } 
+                                            $invoice_amount = 0;
+                                            if ($module["reference"] == 'invoice' && isset($credit_amount)) {
+                                                $invoice_amount = $module["amount"];
+                                                 echo number_format($invoice_amount);
+                                                    
+                                                 $cr_in_total = $credit_amount + $invoice_amount;
+                                            }
+                                             ?></td>            
+                                        <td><?php echo number_format($module["balance"]) ?></td>
                                     </tr>
-                                    <?php } ?>
+                                   <?php
+                                     $total_amount = $module["balance"];
+                                        if (isset($Balance_amount)) {
+                                           $total+=$total_amount;
+                                        }
+                                         
+                                     ?>
+                                  <?php } ?>
+                                    <tr>
+                                       
+                                       <td><strong>Total </strong></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td><strong><?php if(isset( $total_amount)){
+                                          echo number_format($module["balance"]);}
+                                          else{ echo "0";}?></strong></td>
+                                       
+                                    </tr>
                                 </tbody>
                             </table>
                             

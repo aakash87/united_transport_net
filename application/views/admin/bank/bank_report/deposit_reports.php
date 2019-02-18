@@ -37,7 +37,7 @@
                             
                                <div class="col-sm-8">
                                  <select class="form-control" name="banks_id" id="banks_id" required="">
-                                      <option>Select Sales Person</option>
+                                      <option>Select Bank Account</option>
                                       <?php foreach ($banks as $ban) :?>
                                       <option value="<?php echo $ban['id']; ?>" <?php echo ($ban['id'] == $bank_id)? 'selected' : NULL  ?> ><?php echo $ban['bank_name']; ?></option>
                                       <?php endforeach; ?>
@@ -71,6 +71,7 @@
                                           <tr>
                                               <th>S#</th>
                                               <th>Date</th>
+                                              <th>Desc</th>
                                               <th>Type</th>
                                               <th>Ref #</th>
                                               <th>Amount</th>
@@ -91,10 +92,17 @@
                                       <tr>
                                         <td><?php  echo $serial++; ?></td>
                                         <td><?php  echo $dep['date']; ?></td>
+                                        <td><?php  echo $dep['description']; ?></td>
                                         <td><?php  echo $dep['reference']; ?></td>
                                         <td><?php  echo $dep['ref_no']; ?></td>
                                         <td><?php  $dabit_amount = $dep["bank_d_amount"];
                                                  echo number_format($dabit_amount); ?></td>
+                                        <td>
+                                           <?php if ($dep["reference"] == 'Deposit' || $dep["reference"] == 'Invoice') {
+                                             $dabit_amount = $dep["bank_d_amount"];
+                                                 echo number_format($dabit_amount);
+                                            } ?>
+                                        </td>
                                         <td>
                                           <?php if ($dep["reference"] == 'Transfer' || $dep["reference"] == 'Expance') {
                                              $dabit_amount = $dep["bank_d_amount"];
@@ -102,12 +110,6 @@
                                             } ?>
                                                
                                              </td>
-                                        <td>
-                                           <?php if ($dep["reference"] == 'Deposit' || $dep["reference"] == 'Invoice') {
-                                             $dabit_amount = $dep["bank_d_amount"];
-                                                 echo number_format($dabit_amount);
-                                            } ?>
-                                        </td>
                                         <td><?php  echo number_format($dep["bank_total_amount"])?></td>
                                        
                                       </td>
