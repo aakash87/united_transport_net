@@ -136,7 +136,7 @@
                            
                               <td><?php echo $serial_number++; ?></td>
                               <td><?php echo $value['customer_name'];  ?></td>
-                              <td><?php echo $value['order_date'];  ?></td>
+                              <td><?php echo $newDate = date("d-m-Y", strtotime($value['order_date']));  ?></td>
                               <td><?php echo $value['registration_number'];  ?></td>
                               <td><?php echo $value['vehicle_type'];  ?></td>
                               <td>Builty</td>
@@ -144,17 +144,17 @@
                               <td><?php echo $value['pickup_location'];  ?></td>
                               <td><?php echo $value['drop_off_location'];  ?></td>
                               <td>Invoice </td>
-                              <td><?php echo $value['order_total_amount'];  ?> </td>
-                              <td><?php echo $value['local_transport'];  ?></td>
-                              <td><?php echo $value['labor_charges'];  ?> </td>
+                              <td><?php echo number_format($value['order_total_amount']);  ?> </td>
+                              <td><?php echo number_format($value['local_transport']);  ?></td>
+                              <td><?php echo number_format($value['labor_charges']);  ?> </td>
                               <td><?php echo $misc_expense_amount;  ?></td>
-                              <td><?php echo $value['vehicle_bying'];  ?></td>
+                              <td><?php echo number_format($value['vehicle_bying']);  ?></td>
                               <td>
                                  <?php
                                     $tax_divide_value = $value['tax'] / 100; 
                                     $tax = $value['order_total_amount'] * $tax_divide_value; 
                                   ?>
-                                 <?php echo $tax;  ?>
+                                 <?php echo number_format($tax);  ?>
                                     
                               </td>
                               <td>
@@ -179,8 +179,8 @@
                                 
                                 $admin_charges = $total_of_gp * $multipul_amount;
                               ?>
-                              <td><?php echo $admin_charges; ?></td>
-                              <td><?php echo $total_of_gp - $admin_charges;  ?></td>
+                              <td><?php echo number_format($admin_charges); ?></td>
+                              <td><?php echo number_format($total_of_gp - $admin_charges);  ?></td>
                               <td>
                                 <?php
                                       if ($value['invoice_status'] == 1) {
@@ -196,7 +196,7 @@
 
                                 <?php
                                       if ($value['invoice_status'] == 1) {
-                                          echo $value['invoice_paid_date'];
+                                          echo $newDate = date("M", strtotime($value['invoice_paid_date']));
                                       }
                                       else{
                                         echo 'Nill';

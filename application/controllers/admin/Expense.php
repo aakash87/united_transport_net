@@ -153,6 +153,16 @@ public function insert()
 					);
 					$this->Invoice_model->insert('bank_deposit_log', $bank_log_data);
 
+					$bank_ledger_minus = [
+						'bank_id' => $this->input->post('bank_id'),
+						'description' => $this->input->post('Expense_Description'),
+						'amount' => $this->input->post('Expense_Amount'),
+						'balance' => $this->input->post('bank_amount') - $this->input->post('Expense_Amount'),
+						'ref_no' => "EXP-".$id."-".date('Y'),
+						'date' => $this->input->post('Date_Of_Submission'),
+						'reference' => 'Credit',
+					];
+					$this->Invoice_model->insert('bank_ledger', $bank_ledger_minus);
                 
                   	redirect('admin/expense');
 

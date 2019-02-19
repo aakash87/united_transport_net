@@ -22,7 +22,7 @@
         <!-- /. Content Header (Page header) -->
 
         <form method="post" action="<?php echo base_url() ?>admin/payments/create_vendor_payment_invoice" enctype="multipart/form-data">
-            <!-- <input type="hidden" name="id" value="<?php echo $vendor_payments_detail["id"] ?>"> -->
+           
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel panel-bd ">
@@ -56,8 +56,8 @@
                                                 $i=1;
                                                 foreach ($selected_data as $module) {
                                             ?>
-                                            <input type="" name="vendor_id" value="<?php echo $module["order_vendor_id"];?>">
-                                            <input type="" name="id[]" value="<?php echo $module["id"];?>">
+                                            <input type="hidden" name="vendor_id" value="<?php echo $module["order_vendor_id"];?>">
+                                            <input type="hidden" name="id[]" value="<?php echo $module["id"];?>">
                                             <tr>
                                                
                                                 <td><?php echo $i++;?></td>

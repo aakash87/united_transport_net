@@ -90,14 +90,14 @@
                                             <td><?php echo $module['str_no'];?></td>
                                             <td><?php echo $newDate = date("M", strtotime($module['created_at']));?></td>
                                             <td><?php echo $module['invoice_voucher_number'];?></td>
-                                            <td><?php echo $module['t_with_out_sst'];?></td>
+                                            <td><?php echo number_format($module['t_with_out_sst']);?></td>
                                             <!-- <td><?php echo $module['srb_tax'];?>%</td> -->
-                                             <td><?php echo  $tax = $module['t_with_out_sst'] * $module["ssp_tax_val"] / 100; echo round($tax);?> <small>(<?php echo $module["ssp_tax_val"]?>%)</small></td>
-                                            <td><?php echo $module['invoice_total_amount'];?></td>
+                                             <td><?php echo  $tax = $module['t_with_out_sst'] * $module["srb_tax"] / 100; echo number_format(round($tax));?> <small>(<?php echo $module["srb_tax"]?>%)</small></td>
+                                            <td><?php echo number_format($module['invoice_total_amount']);?></td>
                                             <td><?php echo $module['invoice_create_date'];?></td>
                                             <td><?php echo $module['invoice_paid_date'];?></td>
-                                            <td><?php echo  $i_tax = $module['invoice_total_amount'] * 2 / 100; echo round($i_tax);?></td>
-                                            <td><?php echo  $tax = $module['invoice_total_amount'] * $module["with_holding_tax"] / 100; echo round($tax);?> <small>(<?php echo $module["with_holding_tax"]?>%)</small></td>
+                                            <td><?php echo  $i_tax = $module['invoice_total_amount'] * 2 / 100; echo number_format(round($i_tax));?></td>
+                                            <td><?php echo  $tax = $module['invoice_total_amount'] * $module["with_holding_tax"] / 100; echo number_format(round($tax));?> <small>(<?php echo $module["with_holding_tax"]?>%)</small></td>
                                             <td><?php echo $module['customer_paid_amount'];?></td>
                                             <td><?php echo $module['remarks'];?></td>
                                         </tr>

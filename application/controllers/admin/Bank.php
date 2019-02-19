@@ -166,6 +166,9 @@
 			// echo 'working';
 
 			if ($this->input->server('REQUEST_METHOD') == 'POST') {
+				// echo "<pre>";
+				// print_r($_POST);
+				// die();
 				$bank_transfer = $this->input->post('bank_transfer');
 					
 				if ($this->input->post('transfer_check') == 1) {
@@ -187,7 +190,6 @@
 				else {
 					$pluse_on_tran = 0;
 				}
-
 				$bank_id = $this->input->post('bank_id');
 				$this->data['bank_single'] = $this->Bank_model->get_row_single('bank',array('id'=>$bank_id));
 				$last_record = $this->Expense_model->get_last_record_expense('bank_deposit_log');
@@ -198,13 +200,47 @@
 					$total_amount = $this->data['bank_single']['amount'] - $this->input->post('amount');
 					$ref_no = "TR-".$last_record_id."-".date('Y');
 					$reference= "Transfer";
-
+					// minus start
+					$bank_ledger_minus = [
+						'bank_id' => $this->input->post('bank_id'),
+						'description' => $this->input->post('bank_description'),
+						'amount' => $this->input->post('amount'),
+						'balance' => $this->input->post('bank_amount') - $this->input->post('amount'),
+						'ref_no' => "TR-".$this->input->post('bank_id')."-".$last_record_id."-".date('Y'),
+						'transfer_bank_id' => $this->input->post('bank_transfer'),
+						'date' => $this->input->post('create_date'),
+						'reference' => 'Credit',
+					];
+					$this->Bank_model->insert('bank_ledger', $bank_ledger_minus);
+					// minus end
+					// plus start
+					$bank_ledger_plus = [
+						'bank_id' => $this->input->post('bank_transfer'),
+						'description' => $this->input->post('bank_description'),
+						'amount' => $this->input->post('amount'),
+						'balance' => $this->input->post('bank_transfer_amount') + $this->input->post('amount'),
+						'ref_no' => "DP-".$this->input->post('bank_transfer')."-".$last_record_id."-".date('Y'),
+						'date' => $this->input->post('create_date'),
+						'reference' => 'Debit',
+					];
+					$this->Bank_model->insert('bank_ledger', $bank_ledger_plus);
+					// plus end
+					
 				}
 				else{
 					$total_amount = $this->data['bank_single']['amount'] + $this->input->post('amount');
 					$ref_no = "DP-".$last_record_id."-".date('Y');
 					$reference = "Deposit";
-
+					$bank_ledger = [
+						'bank_id' => $this->input->post('bank_id'),
+						'description' => $this->input->post('bank_description'),
+						'amount' => $this->input->post('amount'),
+						'balance' => $this->input->post('bank_amount') + $this->input->post('amount'),
+						'ref_no' => "DP-".$this->input->post('bank_id')."-".$last_record_id."-".date('Y'),
+						'date' => $this->input->post('create_date'),
+						'reference' => 'Debit',
+					];
+					$this->Bank_model->insert('bank_ledger', $bank_ledger);
 				}
 
 				// print_r($last_record_id['id']);
@@ -345,5 +381,41 @@
 			$this->data['title'] = 'Driver Deposit';$this->load->template('admin/bank/driver_deposit',$this->data);
 
 		}
+		public function bank_ledger()
+		{	
+			if ($this->input->server('REQUEST_METHOD') == 'POST') {
+				$bank_id = $this->input->post('banks_id');
 
+				$explode_date = explode('-', $_POST['daterange']);
+
+				$current_date = $explode_date[0];
+				$str_currentdate = strtotime($current_date);
+				$str_current_day = date('Y-m-d' , $str_currentdate );
+
+				$last_date = $explode_date[1];
+				$str_last_date = strtotime($last_date);
+				$str_last_day = date('Y-m-d' , $str_last_date );
+
+
+				$this->data['bank_ledger'] = $this->Bank_model->bank_ledger($bank_id , $str_current_day , $str_last_day);
+
+
+				$this->data['bank_id'] = $bank_id;
+
+				$this->data['date_range'] = $this->input->post('daterange');
+
+			}
+			else {
+
+				$this->data['bank_ledger'] = [];
+
+				$this->data['bank_id'] = [];
+
+				$this->data['date_range'] = '';
+			}
+			// echo "<pre>";
+			// print_r($this->data['bank_ledger']);die();
+			$this->data['banks'] = $this->Bank_model->all_rows('bank');
+			$this->data['title'] = 'Bank Ledger';$this->load->template('admin/bank/bank_ledger',$this->data);
+		}
 	}

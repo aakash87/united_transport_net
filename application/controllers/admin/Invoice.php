@@ -200,9 +200,9 @@
 			// print_r($customer_old_amount['balance']);die();
 
 			$data_invoice = [
-				'invoice_total_amount' =>  $this->input->post('grand_total'),
+				'invoice_total_amount' =>  $this->input->post('total_amount'),
 				// 'invoice_total_amount' =>  $final_amount ,
-				'balance' =>  $this->input->post('grand_total'),
+				'balance' =>  $this->input->post('total_amount'),
 				't_with_out_sst' =>  $this->input->post('t_with_out_sst'),
 				'invoice_voucher_number' => "INV-".$invoice_code."-".date('Y'),
 				'order_ids' =>  $order_ids,
@@ -216,10 +216,10 @@
 
 			$id = $this->Invoice_model->insert('invoice', $data_invoice);
 			$customer_ledger = [
-				'amount' =>  $this->input->post('grand_total') ,
+				'amount' =>  $this->input->post('total_amount') ,
 				'voucher_no' => "INV-".$invoice_code."-".date('Y'),
 				'customer_id' => $this->input->post('customer_nameID'),
-				'balance'=> round($this->input->post('grand_total') + $customer_old_amount['balance']),
+				'balance'=> round($this->input->post('total_amount') + $customer_old_amount['balance']),
 				'date' =>  date('Y-m-d'),
 				'description' => 'invoice Create',
 				'reference' => 'invoice',
@@ -229,11 +229,11 @@
 			$this->Invoice_model->insert('customer_ledger', $customer_ledger);
 
 			$sales_person_ledger = [
-				'amount' =>  $this->input->post('grand_total'),
+				'amount' =>  $this->input->post('total_amount'),
 				'voucher_no' => "INV-".$invoice_code."-".date('Y'),
 				'sales_person_id' => $this->input->post('sales_person_id'),
 				'customer_id' => $this->input->post('customer_nameID'),
-				'balance'=> round($this->input->post('grand_total') + $sales_person_old_amount['balance']),
+				'balance'=> round($this->input->post('total_amount') + $sales_person_old_amount['balance']),
 				'date' =>  date('Y-m-d'),
 				'description' => 'invoice Create',
 				'reference' => 'invoice',
@@ -491,6 +491,7 @@
 				print_r($this->input->post('invoice_total_amount'));
 				// echo "<br>";
 				// die();
+
 				if ($this->input->post('invoice_total_amount') == $total_paid_amount) {
 
 					// $options = [
@@ -574,11 +575,21 @@
 	              'date'=>$this->input->post('invoice_paid_date'),
 	              'bank_total_amount'=> $old_bank_log_balance + $paid_amount_cu,
 	              'invoice_voucher_number'=> $this->input->post('invoice_voucher_number'),
-	              'ref_no'=> "INV-".$this->input->post('invoice_voucher_number')."-".date('Y'),
+	              'ref_no'=> $this->input->post('invoice_voucher_number'),
 	              'reference'=> "Invoice",
               	);
               	$this->Invoice_model->insert('bank_deposit_log', $bank_log_data);
-
+              	
+              	$bank_ledger = [
+              		'bank_id' => $this->input->post('bank_id'),
+              		'description' => 'Invoice Paid',
+              		'amount' => $this->input->post('paid_amount_cu'),
+              		'balance' => $this->input->post('bank_amount') + $this->input->post('paid_amount_cu'),
+              		'ref_no' => $this->input->post('invoice_voucher_number'),
+              		'date' => $this->input->post('invoice_paid_date'),
+              		'reference' => 'Debit',
+              	];
+              	$this->Invoice_model->insert('bank_ledger', $bank_ledger);
 				redirect('admin/invoice');
 
 				

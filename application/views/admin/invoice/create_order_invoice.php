@@ -116,15 +116,15 @@
                                  <td><?php echo $module['sp_name']; ?></td>
                                  <td><?php echo $module['order_date']; ?></td>
                                  <td><?php echo $module['order_status']; ?></td>
-                                 <td><?php echo $module['order_total_amount'];?></td>
+                                 <td><?php echo number_format($module['order_total_amount']);?></td>
 
                                  <td><?php echo $total_order_amount; ?>   </td>
-                                  <td> <?php echo $t_with_out_sst = $module['order_total_amount'] + $module['local_transport'] + $total_order_amount?>
+                                  <td> <?php $t_with_out_sst = $module['order_total_amount'] + $module['local_transport'] + $total_order_amount ;  echo number_format($t_with_out_sst);?>
                                     <input type="hidden" name="t_with_out_sst" value="<?php echo $t_with_out_sst ?>">
                                   </td>
                                  <td><?php echo $with_tax = $t_with_out_sst * $module['ssp_tax_val'] / 100; ?>   </td>
 
-                                 <td><?php echo $grand_total = $with_tax + $t_with_out_sst; ?>
+                                 <td><?php $grand_total = $with_tax + $t_with_out_sst;  echo number_format($grand_total);?>
                                      <?php  
                                        $ssp_percantage = ($module['ssp_tax_val'] / 100) * $module['order_total_amount'];
                                      ?>
@@ -139,7 +139,7 @@
                               </tr>
 
 
-                        <?php  $all_total+=$grand_total; } ?>
+                        <?php  $all_total+=$grand_total; $total_amount+=$grand_total; } ?>
 
                         </tbody>
 
@@ -149,14 +149,17 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><?php echo $total_amount; ?></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><?php echo round($total_amount); ?></td>
                           </tr>
                         </tfoot>
                      </table>
                   </div>
-                  <input type="hidden" name="grand_total" value="<?php echo $all_total;?>">
-                   <input type="hidden" name="total_amount" value="<?php  echo $total_amount ?>" class="total_amount" readonly>
+                  <input type="hidden" name="grand_total" value="<?php echo round($all_total);?>">
+                   <input type="hidden" name="total_amount" value="<?php  echo round($total_amount) ?>" class="total_amount" readonly>
                    
                    <input type="hidden" name="total_labour_chargers" value="" class="total_labour_chargers" readonly>
                  

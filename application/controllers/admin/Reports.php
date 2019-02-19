@@ -427,7 +427,7 @@
 			$this->data['driver_ledger'] = $this->Reports_model->driver_ledger($driver_id , $str_current_day ,  $str_last_day);
 			// echo "<pre>";	
 			// print_r($this->data['driver_ledger']);die();
-			$this->data['title'] = 'driver_ledger';
+			$this->data['title'] = 'search_by_driver';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/driver_ledger',$this->data);
 		}	
@@ -451,7 +451,7 @@
 			$this->data['srb_reports'] = $this->Reports_model->get_srb_reports();
 			// echo "<pre>";
 			// print_r($this->data['srb_reports']);die();
-			$this->data['title'] = 'vendor_ledger';
+			$this->data['title'] = 'srb_reports';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/srb_reports',$this->data);
 		}

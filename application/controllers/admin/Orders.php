@@ -191,17 +191,17 @@
 			}
 		}
 
-		public function delete_order_expense($id)
+		public function delete_order_expense($id, $order_id)
 		{
 			
 			$this->Orders_model->delete('order_expense',array('id'=>$id));
-			redirect('admin/orders');
+			redirect('admin/orders/process_of_order_by_admin/'.$order_id);
 		}
-		public function delete_scond_stop($id)
+		public function delete_scond_stop($id, $order_id)
 		{
 			
 			$this->Orders_model->delete('order_second_stop',array('id'=>$id));
-			redirect('admin/orders');
+			redirect('admin/orders/process_of_order_by_admin/'.$order_id);
 		}
 		public function submit_process_by_admin()
 		{
@@ -542,7 +542,7 @@
 		public function delete_order()
 		{
 			$id = $this->input->post('id');
-			$this->Vehicel_fuel_model->delete('orders',array('id'=>$id));
+			$this->Orders_model->delete('orders',array('id'=>$id));
 			redirect('admin/orders');
 		}
 

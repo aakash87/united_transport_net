@@ -111,7 +111,7 @@
 				'date' =>  $this->input->post('invoice_date'),
 				'status' =>  1,
 				'description' => 'Invoice',
-				'reference' => 'debit',
+				'reference' => 'Credit',
 				'invoice_no' =>  $invoice_code,
 			];
 						
@@ -239,6 +239,18 @@
 			];
 			$this->Invoice_model->insert('bank_deposit_log', $bank_ladger);
 			
+			$bank_ledger = [
+				'bank_id' => $this->input->post('bank_id'),
+				'description' => 'Vendor Invoice Paid',
+				'amount' => $this->input->post('pay_amount'),
+				'balance' => $this->input->post('bank_amount') - $this->input->post('pay_amount'),
+				'ref_no' => $this->input->post('invoice_no'),
+				'date' => $this->input->post('pay_date'),
+				'reference' => 'Credit',
+			];
+			$this->Invoice_model->insert('bank_ledger', $bank_ledger);
+
+
 			$vendor_ladger = 
 			[
 				'amount' =>  $this->input->post('pay_amount'),
@@ -247,7 +259,7 @@
 				'date' =>  $this->input->post('pay_date'),
 				'status' =>  1,
 				'description' => 'Invoice Paid',
-				'reference' => 'credit',
+				'reference' => 'Debit',
 				'invoice_no' =>  $this->input->post('invoice_no'),
 			];
 						

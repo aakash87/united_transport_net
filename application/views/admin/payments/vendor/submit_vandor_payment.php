@@ -36,13 +36,19 @@
                                     <label for="example-text-input" class="col-sm-3 col-form-label">Payment Amount<span class="required">*</span></label>
                                     <div class="col-sm-9">
                                         <input class="form-control" name="payments" type="text" value="<?php echo $vendor_payments_detail['total_amount'] ?>" id="example-text-input" placeholder="" readonly="">
+                                        
+                                        <input class="form-control" name="total_amount" type="hidden" value="<?php echo $vendor_payments_detail['total_amount'] ?>" id="example-text-input" placeholder="" readonly="">
+                                        <input class="form-control" name="old_amount" type="hidden" value="<?php echo $vendor_payments_detail['amount'] ?>" id="example-text-input" placeholder="" readonly="">
+                                        <input style=""  class="form-control" name="o_id" type="hidden" value="<?php echo $vendor_payments_detail["order_id"] ?>" id="example-text-input" placeholder="" readonly="">
+                                        <input style=""  class="form-control" name="id" type="hidden" value="<?php echo $vendor_payments_detail["id"] ?>" id="example-text-input" placeholder="" readonly="">
+                                        <input style="" class="form-control" name="invoice_no" type="hidden" value="<?php echo $vendor_payments_detail["invoice_no"] ?>" id="example-text-input" placeholder="" readonly="">
+                                        <input style="" class="form-control" name="vendor_id" type="hidden" value="<?php echo $vendor_payments_detail["vendor_id"] ?>" id="example-text-input" placeholder="" readonly="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-3 col-form-label">Balance Amount</label>
+                                    <div class="col-sm-9">
                                         <input class="form-control" name="balance" type="text" value="<?php echo $vendor_payments_detail['balance'] ?>" id="example-text-input" placeholder="" readonly="">
-                                        <input class="form-control" name="total_amount" type="text" value="<?php echo $vendor_payments_detail['total_amount'] ?>" id="example-text-input" placeholder="" readonly="">
-                                        <input class="form-control" name="old_amount" type="text" value="<?php echo $vendor_payments_detail['amount'] ?>" id="example-text-input" placeholder="" readonly="">
-                                        <input style=""  class="form-control" name="o_id" type="text" value="<?php echo $vendor_payments_detail["order_id"] ?>" id="example-text-input" placeholder="" readonly="">
-                                        <input style=""  class="form-control" name="id" type="text" value="<?php echo $vendor_payments_detail["id"] ?>" id="example-text-input" placeholder="" readonly="">
-                                        <input style="" class="form-control" name="invoice_no" type="text" value="<?php echo $vendor_payments_detail["invoice_no"] ?>" id="example-text-input" placeholder="" readonly="">
-                                        <input style="" class="form-control" name="vendor_id" type="text" value="<?php echo $vendor_payments_detail["vendor_id"] ?>" id="example-text-input" placeholder="" readonly="">
                                     </div>
                                 </div>
                                 <div class="form-group row">

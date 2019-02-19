@@ -79,14 +79,14 @@
                                        <td><?php echo $module["voucher_no"] ?></td>
                                        <td><?php echo $module["description"] ?></td>
                                        <td><?php  
-                                           if ($module["reference"] == 'debit') {
+                                           if ($module["reference"] == 'Debit') {
                                             $dabit_amount = $module["amount"];
                                                 echo number_format($dabit_amount);
                                            }
                                             ?></td>
                                         <td><?php  
                                            $credit_amount = 0;
-                                           if ($module["reference"] == 'credit') {
+                                           if ($module["reference"] == 'Credit') {
                                                $credit_amount = $module["amount"];
                                                 echo number_format($credit_amount);
                                            

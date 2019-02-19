@@ -108,4 +108,10 @@ class Users extends MY_Controller {
         $this->User_model->delete('users',array('id'=>$id));
         redirect('admin/users');
     }
+    public function delete_user()
+    {
+        $id = $this->input->post('id');
+        $this->User_model->delete('users',array('id'=>$id));
+        redirect('admin/users');
+    }
 }

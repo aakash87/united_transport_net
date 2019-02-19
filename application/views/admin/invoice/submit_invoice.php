@@ -59,10 +59,11 @@
                                                     <input class="form-control" max="<?php echo $invoice['invoice_total_amount']; ?>" name="paid_amount_cu" type="number" value="" id="example-text-input" placeholder=""  >
                                               </div>
                                         </div>
-                                           <div class="form-group row  ">
+
+                                           <div class="form-group row  " style="">
                                             <label for="example-text-input" class="col-sm-3 col-form-label">With holding Tax</label>
                                               <div class="col-sm-9">
-                                                    <input class="form-control" name="with_holding_tax" type="number" value="" id="" placeholder=""  >
+                                                    <input class="form-control" name="with_holding_tax" type="number" value="<?php echo $invoice['with_holding_tax']; ?>" id="" placeholder="" <?php if ( $invoice['balance'] !== $invoice['invoice_total_amount']) { echo "readonly";}?> >
                                               </div>
                                         </div> 
                                         <div class="form-group row  ">

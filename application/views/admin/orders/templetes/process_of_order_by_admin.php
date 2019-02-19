@@ -277,12 +277,12 @@
                         </div>
                         <div class="form-group row">
                            <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Type</label>
-                           <div class="col-sm-9"><input class="form-control" name="vehicle_type" type="text" value="" id="vehicle_type" placeholder="" readonly="" ></div>
+                           <div class="col-sm-9"><input class="form-control" name="vehicle_type" type="text" value="" id="vehicle_type" placeholder=""  ></div>
                         </div>
                         <div class="form-group row">
                            <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Buying</label>
                            <div class="col-sm-9">
-                              <input class="form-control" name="builty_rates" type="text" value="" id="vehicle_bying" placeholder="" readonly="" >
+                              <input class="form-control" name="builty_rates" type="text" value="" id="vehicle_bying" placeholder=""  >
                            </div>
                         </div>
                         <div class="form-group row">
@@ -389,7 +389,7 @@
                                   </div>
                                 </div>
 
-                                <a href="<?php echo base_url()?>admin/orders/delete_order_expense/<?php echo $expense['id'] ?>"> <button type="button"  class="btn btn-danger pull-right  ovel_css_danger" style="margin-bottom: 11px !important;" onClick="return doconfirm();">Delete</button></a>
+                                <a href="<?php echo base_url()?>admin/orders/delete_order_expense/<?php echo $expense['id'] ?>/<?php echo $expense['order_id'] ?>"> <button type="button"  class="btn btn-danger pull-right  ovel_css_danger" style="margin-bottom: 11px !important;" onClick="return doconfirm();">Delete</button></a>
                             </div>
                       </div>
                      <?php endforeach; ?>
@@ -418,8 +418,8 @@
                      </div>
                    
                       </div>
-                      <a href="<?php echo base_url()?>admin/orders/delete_scond_stop/<?php echo $order_second['id'] ?>"> </a>
-                      <a href="<?php echo base_url()?>admin/orders/delete_scond_stop/<?php echo $order_second['id'] ?>">
+                      <!-- <a href="<?php echo base_url()?>admin/orders/delete_scond_stop/<?php echo $order_second['id'] ?>"> </a> -->
+                      <a href="<?php echo base_url()?>admin/orders/delete_scond_stop/<?php echo $order_second['id'] ?>/<?php echo $order_second['second_stop_order_id'] ?>">
                         <button type="button"  class="btn btn-danger pull-right ovel_css_danger " style="margin-bottom: 11px !important;" title="Delete" onClick="return doconfirm2();">Delete</button>
                       </a>
                     </div>

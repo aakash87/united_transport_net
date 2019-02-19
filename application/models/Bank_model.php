@@ -16,6 +16,26 @@ class Bank_model extends MY_Model{
 			return $this->db->get()->result_array();
 			
 		}
+		public function bank_ledger($bank_id , $str_current_day , $str_last_day)
+		{
+			$this->db->select('bank_ledger.* , ban.bank_name , ba.bank_name as transfer_bank_name');
+			$this->db->from('bank_ledger');
 
+			$this->db->join('bank ban' , 'ban.id = bank_ledger.bank_id' , 'left');
+			$this->db->join('bank ba' , 'ba.id = bank_ledger.transfer_bank_id' , 'left');
+
+			if ($bank_id == TRUE) {	
+					$this->db->where('bank_ledger.bank_id' , $bank_id);	
+
+				    $this->db->where('date >=' , $str_current_day );
+					$this->db->where('date <=' , $str_last_day );
+				}	else{
+
+				    $this->db->where('date >=' , $str_current_day );
+					$this->db->where('date <=' , $str_last_day );
+				}
+
+			return $this->db->get()->result_array();
+		}
 
 	}
