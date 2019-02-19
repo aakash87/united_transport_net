@@ -94,9 +94,9 @@
                                  <?php 
                                     if ($permission["deleted"] == "1") {
                                     ?>
-                                 <a href="<?php echo base_url() ?>admin/orders/add_expense_of_order/<?php echo $module["id"] ?>"><img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/img/add.png" title="Add Expense" alt="Add Expense" width="35" height="35"></a>
+                                 <a href="<?php echo base_url() ?>admin/orders/add_expense_of_order/<?php echo $module["id"] ?>"><img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/img/add.png" title="Add Expense" alt="Add Expense" width="25" height="25"></a>
                                  <?php if ($user_type == 1) { ?>
-                                 <a href="<?php echo base_url() ?>admin/orders/process_of_order_by_admin/<?php echo $module["id"] ?>"><img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/c-icon.png" title="process by admin" alt="process by admin" width="35" height="35"></a>
+                                 <a href="<?php echo base_url() ?>admin/orders/process_of_order_by_admin/<?php echo $module["id"] ?>"><img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/c-icon.png" title="process by admin" alt="process by admin" width="25" height="25"></a>
                                  <?php } ?>
                                  <img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="25" height="25" class="delete" id='del_<?php echo $module["id"] ?>' >
                                  

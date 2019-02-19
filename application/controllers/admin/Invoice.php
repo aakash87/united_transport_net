@@ -125,6 +125,12 @@
 			$this->Invoice_model->delete('invoice',array('id'=>$id));
 			redirect('admin/invoice');
 		}
+		public function delete_invoice()
+		{
+			$id = $this->input->post('id');
+			$this->Invoice_model->delete('invoice',array('id'=>$id));
+			redirect('admin/invoice');
+		}
 
 		public function create_selected_inboice()
 		{

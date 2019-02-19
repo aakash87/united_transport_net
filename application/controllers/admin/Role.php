@@ -128,4 +128,11 @@ class Role extends MY_Controller {
 		$this->Role_model->delete('permission',array('user_type_id'=>$id));
 		redirect('admin/role');
 	}
+	public function delete_role()
+	{
+		$id = $this->input->post('id');
+		$this->Role_model->delete('user_type',array('id'=>$id));
+		$this->Role_model->delete('permission',array('user_type_id'=>$id));
+		redirect('admin/role');
+	}
 }

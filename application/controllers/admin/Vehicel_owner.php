@@ -69,4 +69,11 @@
 			}
 			$this->Vehicel_owner_model->delete('vehicel_owner',array('id'=>$id));
 			redirect('admin/vehicel_owner');
-		}}
+		}
+		public function delete_vehicel_owner()
+		{
+			$id = $this->input->post('id');
+			$this->Vehicel_owner_model->delete('vehicel_owner',array('id'=>$id));
+			redirect('admin/vehicel_owner');
+		}
+	}

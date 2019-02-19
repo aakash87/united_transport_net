@@ -80,7 +80,7 @@
                                  <?php 
                                     if ($permission["edit"] == "1") {
                                     ?>
-                                 <a href="<?php echo base_url() ?>admin/vehicle/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="35" height="35"></a>
+                                 <a href="<?php echo base_url() ?>admin/vehicle/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="25" height="25"></a>
                                  <?php } ?>
                                  <?php 
                                     if ($permission["deleted"] == "1") {

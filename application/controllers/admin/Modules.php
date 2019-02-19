@@ -196,5 +196,10 @@ class Modules extends MY_Controller {
 		$this->Modules_model->delete('modules',array('id'=>$id));
 		redirect('admin/modules');
 	}
-
+	public function delete_module()
+	{
+		$id = $this->input->post('id');
+		$this->Modules_model->delete('modules',array('id'=>$id));
+		redirect('admin/modules');
+	}
 }

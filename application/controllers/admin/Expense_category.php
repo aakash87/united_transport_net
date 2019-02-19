@@ -140,4 +140,12 @@
 
 			redirect('admin/expense_category');
 
-		}}
+		}
+		public function delete_expense_cat()
+		{
+			$id = $this->input->post('id');
+			$this->Expense_category_model->delete('expense_category',array('id'=>$id));
+
+			redirect('admin/expense_category');
+		}
+	}

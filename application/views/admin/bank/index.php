@@ -62,12 +62,12 @@
 														<?php 
 															if ($permission["edit"] == "1") {
 														?>
-														<a href="<?php echo base_url() ?>admin/bank/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="35" height="35"></a>
+														<a href="<?php echo base_url() ?>admin/bank/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="25" height="25"></a>
 														<?php } ?>
 														<?php 
 															if ($permission["deleted"] == "1") {
 														?>
-		                                                <a href="<?php echo base_url() ?>admin/bank/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a>
+														<img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="25" height="25" class="delete" id='del_<?php echo $module["id"] ?>' >
 		                                                <?php } ?>
 	                                                </td>
 	                                                <?php } ?>
@@ -87,7 +87,46 @@
 		</div><!-- /#wrapper -->
 		<!-- START CORE PLUGINS -->
 
+<script type="text/javascript">
+   $(document).ready(function(){
 
+     // Delete 
+     $('.delete').click(function(){
+       var el = this;
+       var id = this.id;
+       var splitid = id.split("_");
+
+       // Delete id
+       var deleteid = splitid[1];
+      // alert(deleteid);
+       // Confirm box
+       bootbox.confirm("Are you sure want to delete?", function(result) {
+    
+          if(result){
+
+             $.ajax({
+                type: 'POST',
+                  data: { id:deleteid },
+                url: '<?php echo base_url() ?>admin/bank/delete_bank/',
+                success: function(resp){
+                   $(el).closest('tr').css('background','tomato');
+                   $(el).closest('tr').fadeOut(800, function(){ 
+                     $(this).remove();
+                   });
+
+                
+
+                     
+                   
+                }
+            });
+          }
+    
+       });
+    
+     });
+   });
+</script>
 
 
 

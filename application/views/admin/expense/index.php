@@ -69,15 +69,17 @@
 														<?php 
 															if ($permission["edit"] == "1") {
 														?>
-														<a href="<?php echo base_url() ?>admin/expense/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="35" height="35"></a>
+														<a href="<?php echo base_url() ?>admin/expense/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="25" height="25"></a>
 														<?php } ?>
 														<?php 
 															if ($permission["deleted"] == "1") {
 														?>
-		                                                <a href="<?php echo base_url() ?>admin/expense/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a>
+		                                                <!-- <a href="<?php echo base_url() ?>admin/expense/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="25" height="25"></a> -->
+		                                                <img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="25" height="25" class="delete" id='del_<?php echo $module["id"] ?>' >
 		                                                <?php } ?>
 		                                                <!-- <button type="button" class="btn btn-purple" data-toggle="modal" onclick="get_showing(<?php echo $module["id"] ?>)"  data-target="#modal-lg">View Detail</button> -->
-		                                                 <a data-toggle="modal" onclick="get_showing(<?php echo $module["id"] ?>)"  data-target="#modal-lg"><img src="<?php echo base_url() ?>assets/icons/view.png" title="" alt="" width="35" height="35"></a>
+		                                                <img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/img/view_report.png" title="View Detail" alt="View Detail" width="35" height="35" data-toggle="modal" onclick="get_showing(<?php echo $module["id"] ?>)"  data-target="#modal-lg">
+		                                                 <!-- <a data-toggle="modal" onclick="get_showing(<?php echo $module["id"] ?>)"  data-target="#modal-lg"><img src="<?php echo base_url() ?>assets/icons/view.png" title="" alt="" width="25" height="25"></a> -->
 	                                                </td>
 	                                                <?php } ?>
 												</tr>
@@ -142,7 +144,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h1 class="modal-title">Modal title</h1>
+                    <h1 class="modal-title">Expanse Detail</h1>
                 </div>
                 <div class="modal-body">
                     <p>
@@ -167,7 +169,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Save changes</button>
+                    <!-- <button type="button" class="btn btn-success">Save changes</button> -->
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -176,3 +178,43 @@
 
 
 
+<script type="text/javascript">
+   $(document).ready(function(){
+
+     // Delete 
+     $('.delete').click(function(){
+       var el = this;
+       var id = this.id;
+       var splitid = id.split("_");
+
+       // Delete id
+       var deleteid = splitid[1];
+      // alert(deleteid);
+       // Confirm box
+       bootbox.confirm("Are you sure want to delete?", function(result) {
+    
+          if(result){
+
+             $.ajax({
+                type: 'POST',
+                  data: { id:deleteid },
+                url: '<?php echo base_url() ?>admin/expense/delete_expense/',
+                success: function(resp){
+                   $(el).closest('tr').css('background','tomato');
+                   $(el).closest('tr').fadeOut(800, function(){ 
+                     $(this).remove();
+                   });
+
+                
+
+                     
+                   
+                }
+            });
+          }
+    
+       });
+    
+     });
+   });
+</script>

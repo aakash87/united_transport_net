@@ -75,7 +75,12 @@
 			$this->Drivers_model->delete('drivers',array('id'=>$id));
 			redirect('admin/drivers');
 		}
-
+		public function delete_driver()
+		{
+			$id = $this->input->post('id');
+			$this->Drivers_model->delete('drivers',array('id'=>$id));
+			redirect('admin/drivers');
+		}
 		public function driver_ledger()
 		{
 			if ( $this->permission['view'] == '0' && $this->permission['view_all'] == '0' ) 

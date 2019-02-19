@@ -230,7 +230,12 @@ public function insert()
 			redirect('admin/expense');
 
 		}
-
+		public function delete_expense()
+		{
+			$id = $this->input->post('id');
+			$this->Expense_model->delete('expense',array('id'=>$id));
+			redirect('admin/expense');
+		}
 		public function get_bank_amount()
 
 

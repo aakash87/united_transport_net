@@ -160,6 +160,12 @@
 			redirect('admin/bank');
 
 		}
+		public function delete_bank()
+		{
+			$id = $this->input->post('id');
+			$this->Bank_model->delete('bank',array('id'=>$id));
+			redirect('admin/bank');
+		}
 
 		public function bank_deposit()
 		{
