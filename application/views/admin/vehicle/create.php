@@ -73,18 +73,7 @@
                               <label for="example-text-input" class="col-sm-3 col-form-label">Chassis Number</label>
                               <div class="col-sm-9"><input class="form-control" name="chassis_number" type="text" value="" id="example-text-input" placeholder="" ></div>
                            </div>
-                           <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Owner Name</label>
-                              <div class="col-sm-9">
-                                 <!-- <input class="form-control" name="ower_id" type="text" value="" d="example-text-input" placeholder="" > -->
-                                 <select class="form-control" name="ower_id"  value="" id="example-text-input" >
-                                    <option value="">Select Driver</option>
-                                    <?php foreach ($vehicel_owner as $owner) : ?>
-                                    <option value="<?php echo $owner['id'] ?>"><?php echo $owner['owner_full_name'] ?></option>
-                                    <?php endforeach; ?>    
-                                 </select>
-                              </div>
-                           </div>
+                           
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">Vendor Name</label>
                               <div class="col-sm-9">

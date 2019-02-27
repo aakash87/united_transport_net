@@ -39,11 +39,13 @@
                         <thead>
                            <tr>
                               <th>Customer Name</th>
-                              <th>Customer SalesPerson</th>
+                              <th>Customer Salesperson</th>
                               <th>Order Date</th>
                               <th>Order Status</th>
                               <th>Order Amount</th>
-                              <th>Other Charges</th>
+                              <th>Labour Charges</th>
+                              <th>Second Stop</th>
+                              <th>Detention</th>
                               <th>Total With Out SST</th>
                               <th>SST %</th>
                               <th>Total With SST</th>
@@ -103,32 +105,50 @@
                                    <input type="hidden" name="orderID[]" value="<?php echo $module['id']; ?>" >
                                    <input type="hidden" name="misc_expense[]" value="<?php print_r($count_value); ?>" >
                                    
-                                   <input type="hidden" name="order_tenstion[]" value="<?php echo $module['order_tenstion']; ?>" class="order_tenstion">
+                                   <input type="hidden" name="order_detention_customer[]" value="<?php echo $module['order_detention_customer']; ?>" class="order_detention_customer">
                                   
-
+                                    <input type="hidden" name="order_vendor_id[]" value="<?php echo $module['order_vendor_id']?>">
+                                    <input type="hidden" name="order_local_vendor_id[]" value="<?php echo $module['order_local_vendor_id']?>">
+                                    <input type="hidden" name="local_transport[]" value="<?php echo $module['local_transport']?>">
                                    <input type="hidden" name="labor_charges[]" class="labor_charges" value="<?php echo $module['labor_charges']; ?>">
 
                                      <input type="hidden" name="second_stop_amount[]" class="second_stop_amount" value="<?php echo $count_value_second ?>">
-                                     <?php echo $total_order_amount =  $module['order_tenstion'] + $module['labor_charges'] + $count_value_second + $module['vendor_payment']?>
+                                     <?php
+                                   $total_labor = 0;
+                                   $labour_data = $this->db->query("SELECT * FROM `order_labor_charges` where order_id='".$module['id']."' ")->result_array();
+                                   foreach ($labour_data as $l_data) {
+                                   
+                                     $total_labor += $l_data['labor_charges_customer'];
+                                     ?>
+                                    
+                                     <input type="hidden" name="order_labor_vendor_id[]" value="<?php echo $l_data['order_vendor_id']?>">
+                                     <?php
+                                   }
+                                  
+                                   ?>
+                                     <?php $total_other_charges =  $module['order_detention_customer'] + $count_value_second + $total_labor;?>
                                  </td>
                                   
 
                                  <td><?php echo $module['sp_name']; ?></td>
-                                 <td><?php echo $module['order_date']; ?></td>
+                                 <td><?php echo $newDate = date("d-m-Y", strtotime($module["order_date"])); ?></td>
                                  <td><?php echo $module['order_status']; ?></td>
                                  <td><?php echo number_format($module['order_total_amount']);?></td>
+                                 <td><?php echo $total_labor; ?></td>
+                                 <td><?php echo $count_value_second; ?></td>
+                                 <td><?php echo $module['order_detention_customer']; ?></td>
 
-                                 <td><?php echo $total_order_amount; ?>   </td>
-                                  <td> <?php $t_with_out_sst = $module['order_total_amount'] + $module['local_transport'] + $total_order_amount ;  echo number_format($t_with_out_sst);?>
+
+                                  <td> <?php $t_with_out_sst = $module['order_total_amount'] + $total_other_charges ;  echo number_format($t_with_out_sst);?>
                                     <input type="hidden" name="t_with_out_sst" value="<?php echo $t_with_out_sst ?>">
                                   </td>
-                                 <td><?php echo $with_tax = $t_with_out_sst * $module['ssp_tax_val'] / 100; ?>   </td>
+                                 <td><?php $tax_amount = $t_with_out_sst * $module['ssp_tax_val'] / 100;  echo round($tax_amount)?>  <small>(<?php echo $module['ssp_tax_val']?>%)</small></td>
 
-                                 <td><?php $grand_total = $with_tax + $t_with_out_sst;  echo number_format($grand_total);?>
+                                 <td><?php $grand_total = round($tax_amount) + $t_with_out_sst;  echo number_format($grand_total);?>
                                      <?php  
-                                       $ssp_percantage = ($module['ssp_tax_val'] / 100) * $module['order_total_amount'];
+                                       $ssp_percantage = ($module['ssp_tax_val'] / 100) * $t_with_out_sst;
                                      ?>
-                                   <input type="hidden" class="ssp_percantage" name="ssp_percantage[]" value="<?php echo $ssp_percantage ?>"> 
+                                   <input type="hidden" class="ssp_percantage" name="ssp_percantage[]" value="<?php echo round($ssp_percantage) ?>"> 
                                    
 
                                  </td>
@@ -145,6 +165,7 @@
 
                         <tfoot>
                           <tr>
+                            <td><strong>Total</strong></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -153,7 +174,8 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><?php echo round($total_amount); ?></td>
+                            <td></td>
+                            <td><strong><?php echo number_format(round($total_amount)); ?></strong></td>
                           </tr>
                         </tfoot>
                      </table>
@@ -163,7 +185,7 @@
                    
                    <input type="hidden" name="total_labour_chargers" value="" class="total_labour_chargers" readonly>
                  
-                   <input type="hidden" name="order_tenstion_total" value="" class="order_tenstion_total" readonly>
+                   <input type="hidden" name="order_detention_customer_total" value="" class="order_detention_customer_total" readonly>
                    
                    <input type="hidden" name="second_stop_amount_total" value="" class="second_stop_amount_total" readonly>
                  
@@ -208,9 +230,9 @@ $('.labor_charges').each(function(){
 });
 
 
-var order_tenstion = 0;
-$('.order_tenstion').each(function(){
-    order_tenstion += parseFloat($(this).val());
+var order_detention_customer = 0;
+$('.order_detention_customer').each(function(){
+    order_detention_customer += parseFloat($(this).val());
 
 });
 
@@ -235,7 +257,7 @@ $('.ssp_percantage').each(function(){
 
 $('.ssp_hidden_total').val(ssp_percantage);    
 
-$('.order_tenstion_total').val(order_tenstion);    
+$('.order_detention_customer_total').val(order_detention_customer);    
 $('.total_labour_chargers').val(labor_charges);    
 
 $('.second_stop_amount_total').val(second_stop_amount);    

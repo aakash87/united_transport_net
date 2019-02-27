@@ -18,6 +18,8 @@
 			$this->data['title'] = 'Vehicle';
 			if ( $this->permission['view_all'] == '1'){$this->data['vehicle'] = $this->Vehicle_model->all_rows_get_owner('vehicle');}
 			elseif ($this->permission['view'] == '1') {$this->data['vehicle'] = $this->Vehicle_modelget_rows('vehicle',array('user_id'=>$this->id));}
+			// echo "<pre>";
+			// print_r($this->data['vehicle']);die();
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/vehicle/index',$this->data);
 		}public function create()

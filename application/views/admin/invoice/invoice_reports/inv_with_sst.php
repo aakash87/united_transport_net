@@ -437,36 +437,47 @@ footer .end {
               $i = 1;
               $total_amount = 0;
               $total_count = 0;
+              $total_amount_invoice = 0;
               foreach ($selected_data as $module) {
             ?>
             <tr>
                 <td class="qty"><?php echo $i;?></td>
                 <td class="qty"><?php echo $invoice_detail[0]['company_name']?></td>
-                <td class="qty"><?php echo  $newDate = date("d-m-Y", strtotime($module['order_date']));?></td>
+                <td class="qty"><?php echo $newDate = date("d-m-Y", strtotime($module['order_date']));?></td>
                 <td class="qty"><?php echo $module['weight']?></td>
-                <td class="qty"><?php echo $module['pickup_location']?></td>
-                <td class="qty"><?php echo $module['drop_off_location']?></td>
+                <td class="" style="font-size: 20px !important;"><?php echo $module['pickup_location']?></td>
+                <td class="" style="font-size: 20px !important;"><?php echo $module['drop_off_location']?></td>
                 <td class="qty"><?php echo $module['registration_number']?></td>
                 <td class="qty"><?php echo $module['vehicle_type']?></td>
-                <td class="qty"><?php echo number_format($module["vendor_payment"]);?></td>
-                <td class="qty"><?php echo number_format($module["labor_charges"]);?></td>
-                <td class="qty"><?php echo number_format($module["second_stop_amount"]);?></td>
-                <td class="qty"><?php echo number_format($module["order_tenstion"]);?></td>
                 <td class="qty"><?php echo number_format($module["order_total_amount"]);?></td>
-                <td class="qty"><?php $grand_total =  $module['vendor_payment'] + $module['local_transport'] + $module['labor_charges'] + $module['second_stop_amount'] + $module['order_tenstion']+ $module['order_total_amount']; echo  number_format($grand_total)?></td>
-                <td class="qty"><?php $tax = $grand_total * $customer["ssp_tax_val"] / 100; echo $tax; ?></td>
-                <td class="qty"><?php $with_tax = $grand_total + $tax; echo $with_tax;?></td>
+                <td class="qty">
+                              <?php
+                                 $total_labor = 0;
+                                 $labour_data = $this->db->query("SELECT * FROM `order_labor_charges` where order_id='".$module['id']."' ")->result_array();
+                                 foreach ($labour_data as $l_data) {
+                                 
+                                   $total_labor += $l_data['labor_charges_customer'];
+                                }?>
+  
+                                    <?php echo number_format($total_labor);?>                                       
+                                     </td>
+                <td class="qty"><?php echo number_format($module["second_stop_amount"]);?></td>
+                <td class="qty"><?php echo number_format($module["order_detention_customer"]);?></td>
+                <td class="qty"><?php ?></td>
+                <td class="qty"><?php $grand_total =  $module['order_total_amount'] +  $total_labor + $module['second_stop_amount'] + $module['order_detention_customer']; echo  number_format($grand_total)?></td>
+                <td class="qty"><?php $tax = $grand_total * $customer["ssp_tax_val"] / 100; echo round($tax); ?></td>
+                <td class="qty"><?php $with_tax = $grand_total + round($tax); echo number_format($with_tax);?></td>
             </tr>
-            <?php $total_count+=$grand_total; $i++; } ?>
+            <?php $total_count+=$grand_total; $total_amount_invoice+=$with_tax; $i++; } ?>
             
-              <tr style="border: 1px solid; background-color: #e1e4e6; border-color: #e1e4e6;">
+              <tr style="background-color: #e1e4e6; border-color: #e1e4e6;">
                   
                 <td class="qty" colspan="15"><strong>Grand Total</strong></td>
-                <td class="qty" colspan="" ><span style="float: right !important;"><strong><?php echo  number_format($with_tax)?></strong></span></td>
+                <td class="qty" colspan="" ><span style="float: right !important;"><strong><?php echo  number_format($total_amount_invoice)?>/=</strong></span></td>
               </tr>
-              <tr style="border: 1px solid; background-color: #e1e4e6; border-color: #c6c9cc;">
+              <tr style="background-color: #e1e4e6; border-color: #c6c9cc;">
                 
-                <td class="qty" colspan="15"><strong><?php echo NumbersToWords::convert($with_tax);?></strong></td>
+                <td class="qty" colspan="15"><strong><?php echo NumbersToWords::convert($total_amount_invoice);?> Only </strong></td>
                 <td class="qty" colspan=""><span style="float: right;"></span></td>
               </tr>
              

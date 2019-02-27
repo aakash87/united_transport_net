@@ -99,13 +99,11 @@
                               <label for="example-text-input" class="col-sm-3 col-form-label">Drop off address</label>
                               <div class="col-sm-9"><textarea class="form-control" name="drop_off_address" rows="1" ></textarea></div>
                            </div>
-                        </div>
-                        <div class="col-md-6">
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">Origin</label>
                               <div class="col-sm-9">
                                 <select class="form-control selectpicker" data-live-search="true" name="pickup_location">
-                                    <option>Select City</option>
+                                    <option value="">Select Origin City</option>
                                     <?php 
                                     foreach ($city_list as $city) {
                                         echo '<option value="'.$city['CityName'].'">'.$city['CityName'].'</option>';
@@ -119,7 +117,7 @@
                               <div class="col-sm-9">
 
                                 <select class="form-control selectpicker" data-live-search="true" name="drop_off_location">
-                                    <option>Select City</option>
+                                    <option value="">Select Destination City</option>
                                     <?php 
                                     foreach ($city_list as $city) {
                                         echo '<option value="'.$city['CityName'].'">'.$city['CityName'].'</option>';
@@ -139,6 +137,150 @@
                               <label for="example-text-input" class="col-sm-3 col-form-label">Rate</label>
                               <div class="col-sm-9"><input class="form-control" name="order_total_amount" type="text" value="" id="example-text-input" placeholder="" ></div>
                            </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="field_wrapper">
+                              <div class="form-group row">
+                                 <label for="example-text-input" class="col-sm-3 col-form-label">Vendor Name</label>
+                                 <div class="col-sm-9">
+                                    <!-- <input class="form-control" name="ower_id" type="text" value="" d="example-text-input" placeholder="" > -->
+                                    <select class="form-control" name="order_vendor_id"  id="order_vendor_id" >
+                                       <option value="">Select Vendor</option>
+                                       <?php foreach ($vendor as $vend) : ?>
+                                       <option value="<?php echo $vend['id'] ?>" ><?php echo $vend['vendor_name'] ?></option>
+                                       <?php endforeach; ?>    
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="form-group row">
+                                 <label for="example-text-input" class="col-sm-3 col-form-label">Assigned Vehicle</label>
+                                 <div class="col-sm-9">
+                                    <input class="form-control" name="vehicel_of_vendorID" type="hidden" value="" id="vehicel_of_vendorID" placeholder=""  >
+                                    <select class="form-control" name="vehicel_of_vendor" id="vehicel_of_vendor" value="">
+                                       <option value="">Select Vehicle Vendoraaa</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="form-group row">
+                                 <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Type</label>
+                                 <div class="col-sm-9"><input class="form-control" name="vehicle_type" type="text" value="" id="vehicle_type" placeholder=""  ></div>
+                              </div>
+                              <div class="form-group row">
+                                 <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Buying</label>
+                                 <div class="col-sm-9">
+                                    <input class="form-control" name="" type="text" value="" id="vehicle_bying" placeholder="" readonly="" >
+                                 </div>
+                              </div>
+                              <div class="form-group row">
+                                 <label for="example-text-input" class="col-sm-3 col-form-label">Buying Assigned</label>
+                                 <div class="col-sm-9">
+                                    <input class="form-control" name="baying_assigned_rates" type="text" value="" id="vehicle_bying" placeholder="">
+                                 </div>
+                              </div>
+
+                              <div class="form-group row">
+                                 <label for="example-text-input" class="col-sm-3 col-form-label">Driver Name</label>
+                                 <div class="col-sm-9">
+                                    <input class="form-control" name="" type="text" value="" id="driver_name" placeholder="" >
+                                    <input class="form-control" name="order_driver" type="hidden" value="" id="driver_id" placeholder="" >
+                                 </div>
+                              </div>
+
+                              <div class="form-group row">
+                                 <label for="example-text-input" class="col-sm-3 col-form-label">Local Vendor Name</label>
+                                 <div class="col-sm-9">
+                                    <!-- <input class="form-control" name="ower_id" type="text" value="" d="example-text-input" placeholder="" > -->
+                                    <select class="form-control" name="order_local_vendor_id"  value="" id="order_local_vendor_id" >
+                                       <option value="">Select Local Vendor</option>
+                                       <?php foreach ($local_vendor as $localvend) : ?>
+                                       <option value="<?php echo $localvend['id'] ?>" ><?php echo $localvend['vendor_name'] ?></option>
+                                       <?php endforeach; ?>    
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="form-group row">
+                                 <label for="example-text-input" class="col-sm-3 col-form-label"> Local Transport </label>
+                                 <div class="col-sm-9">
+                                    <input class="form-control" name="local_transport" type="text" value="" id=" local_transport" placeholder="" >
+                                 </div>
+                              </div>
+
+                              
+
+
+                              <div class="form-group row">
+                                 <label for="example-text-input" class="col-sm-3 col-form-label"> Detention For Vendor </label>
+                                 <div class="col-sm-9">
+                                    <input class="form-control" name="order_tenstion" type="text" value="" id="" placeholder="" >
+                                 </div>
+                              </div>
+                              <div class="form-group row">
+                                 <label for="example-text-input" class="col-sm-3 col-form-label"> Detention For Customer </label>
+                                 <div class="col-sm-9">
+                                    <input class="form-control" name="order_detention_customer" type="text" value="" id="" placeholder="" >
+                                 </div>
+                              </div>
+                              <div class="form-group row">
+                                 <label for="example-text-input" class="col-sm-3 col-form-label"> Builty </label>
+                                 <div class="col-sm-9">
+                                    <input class="form-control" name="builty_num" type="text" value="" id="" placeholder="" >
+                                 </div>
+                              </div>
+                              <div class="after-add-labour">
+                                  <div class="form-group row">
+                                     <label for="example-text-input" class="col-sm-3 col-form-label">Labour Vendor</label>
+                                     <div class="col-sm-9">
+                                        <!-- <input class="form-control" name="ower_id" type="text" value="" d="example-text-input" placeholder="" > -->
+                                        <select class="form-control" name="order_labour_vendor_id[]"  value="" id="" >
+                                           <option value="">Select Labour Vendor</option>
+                                           <?php foreach ($labour_vendor as $labourvend) : ?>
+                                           <option value="<?php echo $labourvend['id'] ?>" ><?php echo $labourvend['vendor_name'] ?></option>
+                                           <?php endforeach; ?>    
+                                        </select>
+                                     </div>
+                                  </div>
+                                  <div class="form-group row">
+                                       <label for="example-text-input" class="col-sm-3 col-form-label"> Labour Charges For Vendor </label>
+                                       <div class="col-sm-9">
+                                          <input class="form-control" name="labor_charges[]" type="text" value="" id="labor_charges" placeholder="" >
+                                       
+                                       </div>
+                                    </div>
+                                    <div class="form-group row">
+                                       <label for="example-text-input" class="col-sm-3 col-form-label"> Labour Charges For Customer</label>
+                                       <div class="col-sm-9">
+                                          <input class="form-control" name="labor_charges_customer[]" type="text" value="" id="labor_charges" placeholder="" >
+                                       
+                                       </div>
+                                    </div>
+                                
+                                  <div class="form-group row">
+                                      <span class="pull-right">
+                                        <div class="col-sm-12 dele">
+                                          <a class="btn btn-success add-labour-chargers pull-right">+ Add More</a>
+                                        </div>
+                                      </span>
+                                  </div>
+
+                              </div>
+                              
+                           </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                            <div class="form-group row">
                               <div class="col-sm-12">
                                  <button type="submit" class="btn btn-primary pull-right">Submit</button>
@@ -151,9 +293,7 @@
             </div>
          </div>
       </form>
-   </div>
-</div>
-</div>
+   
 <!-- /.main content -->
 </div>
 <!-- /#page-wrapper -->
@@ -210,20 +350,20 @@
            success: function(resp){
    
                var Json_vendor = JSON.parse(resp);
-   
-                  $('#vehicel_of_vendor').append($('<option/>', { 
-                         value: '',
-                         text : 'select vehicel of vendor'
-                     })); 
+                  // remover kera q ky repeat horha tha
+                 //  $('#vehicel_of_vendor').append($('<option/>', { 
+                 //         value: '',
+                 //         text : 'select vehicel of vendor'
+                 //     })); 
                       
-                  $.each(Json_vendor, function(key, value) {
-                   $('#vehicel_of_vendor').append($('<option/>', { 
-                         value: value.id,
-                         text : value.registration_number 
-                     }));
+                 //  $.each(Json_vendor, function(key, value) {
+                 //   $('#vehicel_of_vendor').append($('<option/>', { 
+                 //         value: value.id,
+                 //         text : value.registration_number 
+                 //     }));
    
-                 });
-               
+                 // });
+                // remover kera q ky repeat horha tha end
            }
        })
    
@@ -321,4 +461,195 @@
         });
    });
    
+</script>
+<script type="text/javascript">
+   $(document).ready(function(){
+       //Once add button is clicked
+       $(addButton).click(function(){
+           //Check maximum number of input fields
+           if(x < maxField){ 
+               x++; //Increment field counter
+               $(wrapper).append(fieldHTML); //Add field html
+           }
+       });
+       
+       //Once remove button is clicked
+       $(wrapper).on('click', '.remove_button', function(e){
+           e.preventDefault();
+           $(this).parent('div').remove(); //Remove field html
+           x--; //Decrement field counter
+       });
+   
+     $('#order_total_amount').keyup(function(){
+           
+   
+           var amount = $(this).val();
+           var commission = $('#commission').val();
+   
+           var multipart_amount = amount * commission;
+   
+           var divide = multipart_amount / 100;
+            
+           var net_profit = amount - divide;
+   
+           $('#net_amount_jquery').val(net_profit);
+       });
+   
+   });
+   
+   
+   
+   
+   
+        $('#order_vendor_id').on('change' , function(){
+           
+   
+           $("#vehicel_of_vendor option").remove();
+   
+           var order_vendor_id = $(this).val();
+           
+           $.ajax({
+               url: "<?php echo base_url(); ?>/admin/orders/get_vendor_customer",
+               type: "POST",
+               data: {order_vendor_id : order_vendor_id},
+   
+               success: function(resp){
+   
+                   var Json_vendor = JSON.parse(resp);
+   
+                      $('#vehicel_of_vendor').append($('<option/>', { 
+                             value: '',
+                             text : 'select vehicel of vendor'
+                         })); 
+                          
+                      $.each(Json_vendor, function(key, value) {
+                       $('#vehicel_of_vendor').append($('<option/>', { 
+                             value: value.id,
+                             text : value.registration_number 
+                         }));
+   
+                     });
+                   
+               }
+           });
+   
+       });
+   
+        $('#vehicel_of_vendor').on('change', function(){
+   
+            var vehicel_of_vendorID = $(this).val();
+   
+           $.ajax({
+               url: "<?php echo base_url(); ?>/admin/orders/get_vendor_vehicel_details",
+               type: "POST",
+               data: {vehicel_of_vendorID : vehicel_of_vendorID},
+   
+               success: function(resp){
+                   var Json_vendor_vehicel = JSON.parse(resp);
+   
+                   console.log(Json_vendor_vehicel);
+   
+                   $('#vehicle_type').val(Json_vendor_vehicel.vehicle_type);
+                   $('#vehicle_bying ').val(Json_vendor_vehicel.vehicle_bying );
+                   $('#driver_name').val(Json_vendor_vehicel.driver_name);
+                   $('#driver_id').val(Json_vendor_vehicel.driversID);
+   
+                   console.log(Json_vendor_vehicel);
+   
+   
+   
+   
+                   
+               }
+           });
+   
+   
+   
+   
+   
+        });
+   
+   
+        $(document).ready(function(){
+            var order_vendor_id = $('#order_vendor_id').val();
+   
+                var order_vendorID = $('#vehicel_of_vendorID').val();
+   
+               $.ajax({
+               url: "<?php echo base_url(); ?>/admin/orders/get_vendor_customer",
+               type: "POST",
+               data: {order_vendor_id : order_vendor_id},
+   
+               success: function(resp){
+   
+                   var Json_vendor = JSON.parse(resp);
+   
+                      $('#vehicel_of_vendor').append($('<option/>', { 
+                             value: '',
+                             text : 'select vehicel of vendor'
+                         })); 
+                          
+                      $.each(Json_vendor, function(key, value) {
+   
+                       var option = '<option value="' +  value.id + '"' + 
+                            ( value.id == order_vendorID ? 'selected="selected"' : '') +
+                             '>' + value.registration_number + '</option>';
+                       $('#vehicel_of_vendor').append(option);
+   
+                     });
+                   
+               }
+           });
+   
+   
+   
+          var vehicel_of_vendorID = $('#vehicel_of_vendorID').val();
+   
+            $.ajax({
+               url: "<?php echo base_url(); ?>/admin/orders/get_vendor_vehicel_details",
+               type: "POST",
+               data: {vehicel_of_vendorID : vehicel_of_vendorID},
+   
+               success: function(resp){
+                   var Json_vendor_vehicel = JSON.parse(resp);
+   
+                   // console.log(Json_vendor_vehicel.vehicle_type);
+   
+                   $('#vehicle_type').val(Json_vendor_vehicel.vehicle_type);
+                   $('#vehicle_bying ').val(Json_vendor_vehicel.vehicle_bying);
+                    $('#driver_name ').val(Json_vendor_vehicel.driver_name);
+                   $('#driver_id').val(Json_vendor_vehicel.driversID);
+   
+   
+   
+                      console.log(Json_vendor_vehicel);
+   
+   
+   
+                   
+               }
+           });   
+   
+        });
+   
+   
+  
+    
+   
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("body").on("click", ".add-labour-chargers", function() {
+            var html = $(".after-add-labour").first().clone();
+            //  $(html).find(".change").prepend("<label for=''>&nbsp;</label><br/><a class='btn btn-danger remove'>- Remove</a>");
+            $(html).find('input').val('')
+            $(html).find('select').val('')
+            $(html).find(".dele").html("<a class='btn btn-danger remove'><i class='fa fa-trash-o' aria-hidden='true'></i> </a> " + ' <a class="btn btn-success add-labour-chargers"><strong> + </strong> </a>');
+            $(".after-add-labour").last().after(html);
+        });
+        $("body").on("click", ".remove", function() {
+            $(this).parents(".after-add-labour").remove();
+        });
+    });
 </script>

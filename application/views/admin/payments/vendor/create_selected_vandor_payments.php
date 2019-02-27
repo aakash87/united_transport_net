@@ -28,7 +28,7 @@
                     <div class="panel panel-bd ">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h4>Create Vandor Payment Invoice</h4>
+                                <h4>Create <?php if ($this->input->server('REQUEST_METHOD') == 'POST') { $vendor_detatil = $this->db->query("SELECT * FROM `vendor` where id='".$selected_data[0]['vendor_id']."' ")->row_array(); print_r($vendor_detatil['vendor_name']); }  ?>  Invoice</h4>
                             </div>
                         </div>
                             <div class="panel-body">
@@ -39,11 +39,12 @@
                                             <tr>
                                                
                                                 <th>Sr.no</th>
-                                                <th>Order Ref #</th>
-                                                <th>Vendor Name</th>
-                                                <th>Vehicle Type</th>
-                                                <th>Vehicle Of Vendor</th>
-                                                <th>Order Total Amount</th>
+                                                <th>Order ID</th>
+                                                <th>Vendor Type</th>
+                                                <th>Vehicle Buying</th>
+                                                <th>Detention</th>
+                                                <th>Local Transport</th>
+                                                <th>Labour Charges</th>
                                                 <th>Date Of Complete</th>
                                                 <th>Amount</th>
                                             </tr>
@@ -56,26 +57,28 @@
                                                 $i=1;
                                                 foreach ($selected_data as $module) {
                                             ?>
-                                            <input type="hidden" name="vendor_id" value="<?php echo $module["order_vendor_id"];?>">
+                                            <input type="hidden" name="vendor_id" value="<?php echo $module["vendor_id"];?>">
+                                            <input type="hidden" name="order_id[]" value="<?php echo $module["order_id"];?>">
                                             <input type="hidden" name="id[]" value="<?php echo $module["id"];?>">
                                             <tr>
-                                               
                                                 <td><?php echo $i++;?></td>
-                                                <td><?php echo $module["id"]; ?></td>
-                                                <td><?php echo $module["vendor_name"]; ?></td>
-                                                <td><?php echo $module["vehicle_type"]; ?></td>
-                                                <td><?php echo $module["vehicel_of_vendor"]; ?></td>
-                                                <td><?php echo number_format($module["order_total_amount"]); ?></td>
-                                                <td><?php echo $newDate = date("d-m-Y", strtotime($module["created_at"]));?></td>
-                                                <td><?php echo number_format($module["vendor_payment"]); ?></td>
+                                                <td><?php echo $module["order_id"]; ?></td>
+                                                <td><?php echo $module["vendor_type"]; ?></td>
+                                                <td><?php echo number_format($module["vehicle_buying"]); ?></td>
+                                                <td><?php echo number_format($module["detention"]); ?></td>
+                                                <td><?php echo number_format($module["local_transport"]); ?></td>
+                                                <td><?php echo number_format($module["labour_charges"]); ?></td>
+                                                <td><?php echo $newDate = date("d-m-Y", strtotime($module["date"]));?></td>
+                                                <td><?php echo number_format($module["total_cost"]); ?></td>
                                                 
                                             </tr>
-                                            <?php $vandor_total_amount+= $module["vendor_payment"]; } ?>
+                                            <?php $vandor_total_amount+= $module["total_cost"]; } ?>
                                             <tfoot>
                                                <tr>
                                                    <td></td>
                                                    <td><strong>Total</strong></td>
                                                    <td><strong></strong></td>
+                                                   <td></td>
                                                    <td></td>
                                                    <td></td>
                                                    <td></td>

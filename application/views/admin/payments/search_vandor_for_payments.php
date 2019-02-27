@@ -37,7 +37,7 @@
 				<div class="panel panel-bd">
 					<div class="panel-heading">
 						<div class="panel-title">
-							<h4>Vendor Payment</h4>
+							<h4><?php if ($this->input->server('REQUEST_METHOD') == 'POST') { $vendor_detatil = $this->db->query("SELECT * FROM `vendor` where id='".$this->input->post('vendor_id')."' ")->row_array(); print_r($vendor_detatil['vendor_name']); }	?> Payments </h4>
 							 <!-- <a href="<?php echo base_url() ?>admin/payments/view_paid_vendor_payments"><button type="submit" class="btn btn-primary pull-right">View Paid Payments</button></a> -->
 						</div>
 					</div>
@@ -73,39 +73,57 @@
 										<tr>
 											<th><input type="checkbox" class="check_all"> </th>
 											<th>Sr.no</th>
-											<th>Order Ref #</th>
-											<th>Vendor Name</th>
-											<th>Vehicle Type</th>
-											<th>Vehicle Of Vendor</th>
-											<th>Order Total Amount</th>
+											<th>Order ID</th>
+											<th>Vendor Type</th>
+											<th>Vehicle Buying</th>
+											<th>Detention</th>
+											<th>Local Transport</th>
+											<th>Labour Charges</th>
 											<th>Date Of Complete</th>
 											<th>Amount</th>
-											<th>Action</th>
 										</tr>
 									</thead>
 								    <tbody>
+
 								    	<?php
 									    	// echo "<pre>";
 									    	// print_r($vendor_payments);
 								    		$i=1;
+								    		$total_amount=0;
+
 								    		foreach ($vendor_payments as $module) {
 								    	?>
+								    	
 										<tr>
 											<td><input type="checkbox" class="add_check" name="id[]" value="<?php echo $module['id'] ?>"></td>
 											<td><?php echo $i++;?></td>
-											<td><?php echo $module["id"]; ?></td>
-											<td><?php echo $module["vendor_name"]; ?></td>
-											<td><?php echo $module["vehicle_type"]; ?></td>
-											<td><?php echo $module["vehicel_of_vendor"]; ?></td>
-											<td><?php echo number_format($module["order_total_amount"]); ?></td>
-											<td><?php echo $newDate = date("d-m-Y", strtotime($module["created_at"]));?></td>
-											<td><?php echo number_format($module["vendor_payment"]); ?></td>
-											<td>
-												<!-- <a href="<?php echo base_url() ?>admin/payments/paid_vandor_payment/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="Submit" alt="Submit" width="35" height="35"></a> -->
-											</td>
+											<td><?php echo $module["order_id"]; ?></td>
+											<td><?php echo $module["vendor_type"]; ?></td>
+											<td><?php echo number_format($module["vehicle_buying"]); ?></td>
+											<td><?php echo number_format($module["detention"]); ?></td>
+											<td><?php echo number_format($module["local_transport"]); ?></td>
+											<td><?php echo number_format($module["labour_charges"]); ?></td>
+											<td><?php echo $newDate = date("d-m-Y", strtotime($module["date"]));?></td>
+											<td><?php echo number_format($module["total_cost"]); ?></td>
+											
 										</tr>
-										<?php } ?>
+										<?php  $total_amount +=$module["total_cost"]; } ?>
+										
 									</tbody>
+									<tfoot>
+										<tr>
+											<td><strong>Total</strong></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td><strong><?php echo number_format($total_amount);?></strong></td>
+										</tr>
+									</tfoot>
 								</table>
 								
 							</div>

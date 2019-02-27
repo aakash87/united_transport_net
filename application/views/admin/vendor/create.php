@@ -71,18 +71,34 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="" class="col-sm-3 col-form-label">Type</label>
+                              <label for="" class="col-sm-3 col-form-label">Vendor Labour</label>
+                              
+                              <div class="col-sm-9">
+                                <div style="">
+                                   <div class="radio radio-info radio-inline">
+                                       <input type="radio" name="vender_labour" class="" id="vender_labour_yes" value="Local">
+                                    <label for="vender_labour_yes">Yes</label>
+                                   </div>
+                                   <div class="radio radio-info radio-inline">
+                                       <input type="radio" name="vender_labour" id="vender_labour_no" class="" value="Domestic_only" checked="">
+                                    <label for="vender_labour_no">No</label>
+                                   </div>
+                               </div> 
+                              </div>
+                           </div>
+                           <div class="form-group row">
+                              <label for="" class="col-sm-3 col-form-label">Local Vendor</label>
                               
 
                               <div class="col-sm-9">
                                 <div style="">
                                    <div class="radio radio-info radio-inline">
                                        <input type="radio" name="vender_type" class="" id="vender_type_local" value="Local">
-                                    <label for="vender_type_local">Local</label>
+                                    <label for="vender_type_local">Yes</label>
                                    </div>
                                    <div class="radio radio-info radio-inline">
-                                       <input type="radio" name="vender_type" id="vender_type_domastic" class="" value="Domastic" >
-                                    <label for="vender_type_domastic">Domastic</label>
+                                       <input type="radio" name="vender_type" id="vender_type_domastic" class="" value="Domestic_only" checked="">
+                                    <label for="vender_type_domastic">No</label>
                                    </div>
                                </div> 
                               </div>

@@ -282,7 +282,14 @@
                         <div class="form-group row">
                            <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Buying</label>
                            <div class="col-sm-9">
-                              <input class="form-control" name="builty_rates" type="text" value="" id="vehicle_bying" placeholder=""  >
+                              <input class="form-control" name="" type="text" value="" id="vehicle_bying" placeholder=""  readonly="">
+                           </div>
+                        </div>
+                        <div class="form-group row">
+                           <label for="example-text-input" class="col-sm-3 col-form-label">Buying Assigned </label>
+                           <div class="col-sm-9">
+                              <input class="form-control buying_assigned" name="baying_assigned_rates" type="text" value="" id="vehicle_bying" placeholder="">
+                              <input class="form-control" name="buying_assigned" type="hidden" value="<?php echo ($orders["baying_assigned_rates"]) ? $orders["baying_assigned_rates"] : NULL ; ?>" id="" placeholder="">
                            </div>
                         </div>
                         <div class="form-group row">
@@ -300,7 +307,7 @@
                               <select class="form-control" name="order_local_vendor_id"  value="" id="order_local_vendor_id" >
                                  <option value="">Select Local Vendor</option>
                                  <?php foreach ($local_vendor as $localvend) : ?>
-                                 <option value="<?php echo $localvend['id'] ?>" ><?php echo $localvend['vendor_name'] ?></option>
+                                 <option value="<?php echo $localvend['id'] ?>" <?php echo ($orders["order_local_vendor_id"] == $localvend['id']  ) ? 'selected' : NULL ; ?>><?php echo $localvend['vendor_name'] ?></option>
                                  <?php endforeach; ?>    
                               </select>
                            </div>
@@ -311,22 +318,44 @@
                               <input class="form-control" name="local_transport" type="text" value="<?php echo ($orders["local_transport"]) ? $orders["local_transport"] : NULL ; ?>" id=" local_transport" placeholder="" >
                            </div>
                         </div>
-
                         <div class="form-group row">
-                           <label for="example-text-input" class="col-sm-3 col-form-label"> Labour Charges </label>
-                           <div class="col-sm-9">
-                              <input class="form-control" name="labor_charges" type="text" value="<?php echo ($orders["labor_charges"]) ? $orders["labor_charges"] : NULL ; ?>" id="labor_charges" placeholder="" >
-                           
-                           </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                           <label for="example-text-input" class="col-sm-3 col-form-label"> Detention </label>
+                           <label for="example-text-input" class="col-sm-3 col-form-label"> Detention For Vendor</label>
                            <div class="col-sm-9">
                               <input class="form-control" name="order_tenstion" type="text" value="<?php echo ($orders["order_tenstion"]) ? $orders["order_tenstion"] : NULL ; ?>" id="" placeholder="" >
                            </div>
                         </div>
+                        <div class="form-group row">
+                           <label for="example-text-input" class="col-sm-3 col-form-label"> Detention For Customer </label>
+                           <div class="col-sm-9">
+                              <input class="form-control" name="order_detention_customer" type="text" value="<?php echo ($orders["order_detention_customer"]) ? $orders["order_detention_customer"] : NULL ; ?>" id="" placeholder="" >
+                           </div>
+                        </div>
+                        <div class="form-group row">
+                           <label for="example-text-input" class="col-sm-3 col-form-label"> Builty </label>
+                           <div class="col-sm-9">
+                              <input class="form-control" name="builty_num" type="text" value="<?php echo ($orders["builty_num"]) ? $orders["builty_num"] : NULL ; ?>" id="" placeholder="" >
+                           </div>
+                        </div>
+                        <!-- <div class="after-add-labour">
+
+                            <div class="form-group row">
+                                 <label for="example-text-input" class="col-sm-3 col-form-label"> Labour Charges </label>
+                                 <div class="col-sm-9">
+                                    <input class="form-control" name="labor_charges[]" type="text" value="" id="labor_charges" placeholder="" >
+                                 
+                                 </div>
+                              </div>
+                          
+                            <div class="form-group row">
+                                <span class="pull-right">
+                                  <div class="col-sm-12 dele">
+                                    <a class="btn btn-success add-labour-chargers pull-right">+ Add More</a>
+                                  </div>
+                                </span>
+                            </div>
+
+                        </div> -->
+
 
                         
                      </div>   
@@ -339,6 +368,47 @@
                     <hr>
 
                       <div class="col-md-12"  >
+                            <?php $labor_charges_count = 0; foreach ($order_labor_charges as $labor_charges) : $labor_charges_count++ ?>
+                            <div class="row panel-body" style="position: relative; clear: both;">
+                                   <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;">                     
+                                       <span style="color: #FFF; font-size: 1.6em;">Labour Charges <?php echo $labor_charges_count ?> </span>
+                                   </div>                                  
+                            <div class="form-group row" style="border: 2px solid; border-color: #999999;"><br>
+
+                                <div class="form-group col-lg-3">
+                                  <label for="" class=""> Labour Vendor</label>
+                                  <select class="form-control" name="updat_order_labour_vendor_id[]"  value="" id="" >
+                                     <option value="">Select Labour Vendor </option>
+                                     <?php foreach ($labour_vendor as $labourvend) : ?>
+                                     <option value="<?php echo $labourvend['id'] ?>" <?php echo ($labor_charges["order_vendor_id"] == $labourvend['id'] ) ? 'selected' : NULL ; ?>><?php echo $labourvend['vendor_name'] ?></option>
+                                     <?php endforeach; ?>    
+                                  </select>
+                                </div>
+
+                                <div class="form-group col-lg-3" >
+                                <label for="" class=""> Labour Charges For Vendor </label>
+
+                                <input class="form-control" name="update_labor_charges[]" type="text" value="<?php echo ($labor_charges["labor_charges"]) ? $labor_charges["labor_charges"] : NULL ; ?>" id="labor_charges" placeholder="" >
+                                  <input class="form-control" name="update_labor_charges_id[]" type="Hidden" value="<?php echo $labor_charges["id"] ; ?>" id="labor_charges" placeholder="" >
+                                </div>
+                                <div class="form-group col-lg-4" >
+                                <label for="" class=""> Labour Charges For Customer </label>
+
+                                <input class="form-control" name="update_labor_charges_customer[]" type="text" value="<?php echo ($labor_charges["labor_charges_customer"]) ? $labor_charges["labor_charges_customer"] : NULL ; ?>" id="labor_charges" placeholder="" >
+                                </div>
+                            
+                                <div class="form-group col-lg-2 pull-right">
+                                  <label for="" > </label><br>
+                                  <a href="<?php echo base_url()?>admin/orders/delete_labor_charges/<?php echo $labor_charges['id'] ?>/<?php echo $labor_charges['order_id'] ?>"> <button type="button"  class="btn btn-danger pull-right  ovel_css_danger" style="margin-bottom: 11px !important;" onClick="return doconfirm();"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button></a>
+                                </div>
+                              
+                               
+
+                               
+                            </div>
+                         
+                        </div>
+                            <?php endforeach; ?>
                           <?php $expense_count = 0; ?>
                      <?php  foreach ($order_expense as $expense) : $expense_count++ ?>
                       <div class="row panel-body" style="position: relative; clear: both;">
@@ -389,7 +459,7 @@
                                   </div>
                                 </div>
 
-                                <a href="<?php echo base_url()?>admin/orders/delete_order_expense/<?php echo $expense['id'] ?>/<?php echo $expense['order_id'] ?>"> <button type="button"  class="btn btn-danger pull-right  ovel_css_danger" style="margin-bottom: 11px !important;" onClick="return doconfirm();">Delete</button></a>
+                                <a href="<?php echo base_url()?>admin/orders/delete_order_expense/<?php echo $expense['id'] ?>/<?php echo $expense['order_id'] ?>"> <button type="button"  class="btn btn-danger pull-right  ovel_css_danger" style="margin-bottom: 11px !important;" onClick="return doconfirm();"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button></a>
                             </div>
                       </div>
                      <?php endforeach; ?>
@@ -420,25 +490,11 @@
                       </div>
                       <!-- <a href="<?php echo base_url()?>admin/orders/delete_scond_stop/<?php echo $order_second['id'] ?>"> </a> -->
                       <a href="<?php echo base_url()?>admin/orders/delete_scond_stop/<?php echo $order_second['id'] ?>/<?php echo $order_second['second_stop_order_id'] ?>">
-                        <button type="button"  class="btn btn-danger pull-right ovel_css_danger " style="margin-bottom: 11px !important;" title="Delete" onClick="return doconfirm2();">Delete</button>
+                        <button type="button"  class="btn btn-danger pull-right ovel_css_danger " style="margin-bottom: 11px !important;" title="Delete" onClick="return doconfirm2();"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                       </a>
                     </div>
                   </div>
                      <?php endforeach; ?>
-
-
-
-
-
-
-
-                     
-
-
-
-
-
-
 
                       <div class="optionBox">
                          
@@ -450,6 +506,12 @@
                       <div class="optionBox2">
                           <div class="block2">
                             <a class="btn btn-success add-kpi pull-right add2 ovel_css">+ Add 2<sup>nd</sup> Stop Detail</a>
+                              
+                          </div>
+                      </div>
+                      <div class="optionBox3">
+                          <div class="block3">
+                            <a class="btn btn-success add-kpi pull-right add3 ovel_css">+ Add Labour Charges</a>
                               
                           </div>
                       </div>
@@ -467,6 +529,14 @@
                            $('.block2:last').before('<div class="block2"><div class="row panel-body after-add-k refrence_data-append" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">2<sup>nd</sup> Stop Detail</span> </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br><div class="form-group row"> <div class="col-lg-4"> <label for="" class=""> origin </label> <input class="form-control" name="sec_stop_origin[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" class=""> Destination </label> <input class="form-control" name="sec_stop_destination[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" class=""> Rate </label> <input class="form-control" name="sec_stop_amount[]" type="text" value="" id="" placeholder="" ></div></div></div></div><a class="btn btn-danger pull-right ovel_css_danger  remove2"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove 2<sup>nd</sup> Stop Detail</a></div>');
                        });
                        $('.optionBox2').on('click','.remove2',function() {
+                          $(this).parent().remove();
+                       });
+                     </script>
+                     <script type="text/javascript">
+                       $('.add3').click(function() {
+                           $('.block3:last').before('<div class="block3"><div class="row panel-body after-add-k refrence_data-append" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">Labour Charges </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"> <br><div class="form-group row"> <div class="form-group col-lg-6"> <label for="" class=""> Labour Vendor</label> <select class="form-control" name="order_labour_vendor_id[]" value="" id="" > <option value="">Select Labour Vendor </option> <?php foreach ($labour_vendor as $labourvend) : ?> <option value="<?php echo $labourvend['id'] ?>" ><?php echo $labourvend['vendor_name'] ?></option> <?php endforeach; ?> </select> </div><div class="col-lg-6"> <label for="" class=""> Labour Charges For Vendor </label> <input class="form-control" name="labor_charges[]" type="text" value="" id="labor_charges" placeholder=""> </div></div><div class="form-group row"><div class="col-lg-6"> <label for="" class=""> Labour Charges For Customer </label> <input class="form-control" name="labor_charges_customer[]" type="text" value="" id="labor_charges" placeholder=""> </div></div></div></div><a class="btn btn-danger pull-right ovel_css_danger remove3"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove Labour Charges</a></div>');
+                       });
+                       $('.optionBox3').on('click','.remove3',function() {
                           $(this).parent().remove();
                        });
                      </script>
@@ -568,7 +638,7 @@
 <!-- /.main content -->
 </div>
 <!-- /#page-wrapper -->
-</div>
+
 
 <!-- /#wrapper -->
 <!-- START CORE PLUGINS -->
@@ -662,39 +732,7 @@
    
    
    
-        $('#order_vendor_id').on('change' , function(){
-           
-   
-           $("#vehicel_of_vendor option").remove();
-   
-           var order_vendor_id = $(this).val();
-           
-           $.ajax({
-               url: "<?php echo base_url(); ?>/admin/orders/get_vendor_customer",
-               type: "POST",
-               data: {order_vendor_id : order_vendor_id},
-   
-               success: function(resp){
-   
-                   var Json_vendor = JSON.parse(resp);
-   
-                      $('#vehicel_of_vendor').append($('<option/>', { 
-                             value: '',
-                             text : 'select vehicel of vendor'
-                         })); 
-                          
-                      $.each(Json_vendor, function(key, value) {
-                       $('#vehicel_of_vendor').append($('<option/>', { 
-                             value: value.id,
-                             text : value.registration_number 
-                         }));
-   
-                     });
-                   
-               }
-           });
-   
-       });
+        
    
         $('#vehicel_of_vendor').on('change', function(){
    
@@ -761,6 +799,10 @@
                    
                }
            });
+               setTimeout(function(){
+                $(".buying_assigned").val($("input[name=buying_assigned]").val());
+                               
+               }, 1000);
    
    
    
@@ -917,4 +959,20 @@ function doconfirm2()
     }
 }
 </script>
-
+<!-- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("body").on("click", ".add-labour-chargers", function() {
+            var html = $(".after-add-labour").first().clone();
+            //  $(html).find(".change").prepend("<label for=''>&nbsp;</label><br/><a class='btn btn-danger remove'>- Remove</a>");
+            $(html).find('input').val('')
+            $(html).find('select').val('')
+            $(html).find(".dele").html("<a class='btn btn-danger remove'><i class='fa fa-trash-o' aria-hidden='true'></i> </a> " + ' <a class="btn btn-success add-labour-chargers"><strong> + </strong> </a>');
+            $(".after-add-labour").last().after(html);
+        });
+        $("body").on("click", ".remove", function() {
+            $(this).parents(".after-add-labour").remove();
+        });
+    });
+</script> -->

@@ -115,6 +115,15 @@ class Orders_model extends MY_Model{
 		$this->db->where('order_second_stop.second_stop_order_id' , $order_vendor_id );
 		return $this->db->get()->result_array();
 	}
+	public function get_row_with_order_labor_charges($order_vendor_id)
+
+	{
+		$this->db->select('order_labor_charges.*');
+		$this->db->from('order_labor_charges');
+
+		$this->db->where('order_labor_charges.order_id' , $order_vendor_id );
+		return $this->db->get()->result_array();
+	}
 
 
 
@@ -142,6 +151,16 @@ class Orders_model extends MY_Model{
 		$this->db->from('vendor');
 
 		$this->db->where('vendor.vendor_type' , "Local" );
+
+		return $this->db->get()->result_array();
+
+	}
+	public function get_labour_vendor()
+	{
+		$this->db->select('vendor.*' );
+		$this->db->from('vendor');
+
+		$this->db->where('vendor.vender_labour' , "Yes" );
 
 		return $this->db->get()->result_array();
 

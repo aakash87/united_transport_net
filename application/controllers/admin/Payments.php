@@ -13,7 +13,7 @@
 	    }
 	    public function vandor_payments_index()
 		{
-			$this->data['title'] = 'vendor_payment';
+			$this->data['title'] = 'Vandor Payments Index';
 			$this->data['permission'] = $this->permission;
 			$this->data['vendor_payments'] = $this->Payments_model->all_create_inv_with_name();
 			// echo "<pre>";
@@ -22,7 +22,7 @@
 		}
 		public function search_vandor_for_payments()
 		{
-			$this->data['title'] = 'vendor_payment';
+			$this->data['title'] = 'Vendor Payment';
 			if ($this->input->server('REQUEST_METHOD') == 'POST') {
 				
 				$vendor_id = $this->input->post('vendor_id');	
@@ -45,7 +45,7 @@
 		}
 		public function view_paid_vendor_payments()
 		{
-			$this->data['title'] = 'view_paid_vendor_payments';
+			$this->data['title'] = 'View Paid Vendor Payments';
 
 			$this->data['permission'] = $this->permission;
 			$this->data['vendor_payments'] = $this->Payments_model->view_paid_vendor_payments();
@@ -56,7 +56,7 @@
 		public function paid_vandor_payment($id)
 		{
 
-			$this->data['title'] = 'paid_vandor_payment';
+			$this->data['title'] = 'Paid Vandor Payment';
 
 			$this->data['permission'] = $this->permission;
 			$this->data['vendor_payments_detail'] = $this->Payments_model->vendor_payments_detail($id);
@@ -66,46 +66,55 @@
 		}
 		public function create_vendor_payment_invoice()
 		{
-			$id = $this->input->post('id[]');
-			$ids =  implode(',', $this->input->post('id[]'));
+			$id= $this->input->post('id[]');
+			$order_id=  implode(',', $this->input->post('order_id[]'));
+			 // print_r($order_id);
+
+			// $order_id = $this->input->post('order_id[]');
 			
+			// echo $order_id =  implode(',', $this->input->post('id[]'));
+			// die();
 			
-			$this->data['title'] = 'create_vendor_payment_invoice';
+			$this->data['title'] = 'Create Vendor Payment Invoice';
 
 			$this->data['permission'] = $this->permission;
 			$this->data['customer_old_amount'] = $this->Invoice_model->get_last_record_for_ledger('vendor_ledger' , $this->input->post('vendor_id'));
 			$balance_amount = $this->data['customer_old_amount']['balance'];
 			// print_r($this->data['customer_old_amount']['balance']);die();
-			$invoice_code_plus = $this->Payments_model->get_last_record_invoice('invoice');
+			$invoice_code_plus = $this->Payments_model->get_last_record_invoice('vendor_payments');
 
  			$invoice_code_id = $invoice_code_plus['id'] + 1;
 
- 			$invoice_code = 'INV-V'."-".$this->input->post('vendor_id'). $invoice_code_id.'-'.date('y');
+ 			$invoice_code = 'INV-V'."-".$this->input->post('vendor_id').'-'. $invoice_code_id.'-'.date('y');
 			// print_r($this->input->post('vendor_id'));die();
 			for ($i=0; $i < sizeof($id); $i++) { 
-				print_r($id);
-				$order_data = 
+				// $order_data = 
+				// [
+				// 	'vendor_payment_status' =>  'Create Invoice',
+				// ];
+				// $this->Payments_model->update('orders',$order_data,array('id'=>$id[$i]));
+				$external_data = 
 				[
-					'vendor_payment_status' =>  'Create Invoice',
+					'status' =>  'Create Invoice',
 				];
-				$this->Payments_model->update('orders',$order_data,array('id'=>$id[$i]));
+				$this->Payments_model->update('vendor_external_cost',$external_data,array('id'=>$id[$i]));
+				
 			}
-			$vendor_payment_data = 
-				[
-					'order_id' => $ids,
-					'vendor_id' => $this->input->post('vendor_id'),
-					'description' => 'Complete Order',
-					'balance' =>  $this->input->post('payments'),
-					'total_amount' =>  $this->input->post('payments'),
-					'status' =>  'Unpaid',
-					'invoice_date' =>  $this->input->post('invoice_date'),
-					'invoice_no' =>  $invoice_code,
-				];
-				$vandor_paymet_id = $this->Invoice_model->insert('vendor_payments', $vendor_payment_data);
+				$vendor_payment_data = 
+					[
+						'order_id' => $order_id,
+						'vendor_id' => $this->input->post('vendor_id'),
+						'description' => 'Complete Order',
+						'balance' =>  $this->input->post('payments'),
+						'total_amount' =>  $this->input->post('payments'),
+						'status' =>  'UnPaid',
+						'invoice_date' =>  $this->input->post('invoice_date'),
+						'invoice_no' =>  $invoice_code,
+					];
+					$vandor_paymet_id = $this->Invoice_model->insert('vendor_payments', $vendor_payment_data);
 			$vendor_ladger = 
 			[
 				'amount' =>  $this->input->post('payments'),
-				
 				'customer_id' => $this->input->post('vendor_id'),
 				'balance'=> $balance_amount + $this->input->post('payments'),
 				'date' =>  $this->input->post('invoice_date'),
@@ -127,17 +136,18 @@
 				redirect('admin/home');
 			}
 
-			$p_ids = $this->input->post('id[]');
-			// print_r($p_ids);die();
+			$ext_ids = $this->input->post('id[]');
+			// print_r($ext_ids);die();
+
 			$payment_data = [];	
-			for ($i=0; $i < sizeof($p_ids); $i++) { 
+			for ($i=0; $i < sizeof($ext_ids); $i++) { 
 
 				
-				$this->db->select('orders.* , van.vendor_name' );
-	    		$this->db->from('orders');
-	            $this->db->join('vendor van' , 'van.id = orders.order_vendor_id' , 'left');
+				$this->db->select('vendor_external_cost.* ' );
+	    		$this->db->from('vendor_external_cost');
+	            $this->db->join('orders ord' , 'ord.id = vendor_external_cost.order_id' , 'left');
 
-	    		$this->db->where('orders.id' , $p_ids[$i] );
+	    		$this->db->where('vendor_external_cost.id' , $ext_ids[$i] );
 	           $this->data['selected_payments_data'] = $this->db->get()->row_array();
 				array_push($payment_data, $this->data['selected_payments_data'] );
 			}
@@ -146,14 +156,14 @@
 			// echo "<pre>";
 			// print_r($this->data['selected_data']);die();
 			
-			$this->data['title'] = 'Submit Selected Vendor Payment';
+			$this->data['title'] = 'Create Selected Vendor Payment';
 
 			$this->load->template('admin/payments/vendor/create_selected_vandor_payments',$this->data);
 		}
 		public function submit_vandor_payment($id)
 		{
 
-			$this->data['title'] = 'submit_vandor_payment';
+			$this->data['title'] = 'Submit Vandor Payment';
 
 			$this->data['permission'] = $this->permission;
 			$this->data['vendor_payments_detail'] = $this->Payments_model->submit_vandor_payment_detail($id);
@@ -167,7 +177,7 @@
 			$id = $this->input->post('id');
 			$ids =  explode(',',$this->input->post('o_id'));
 			
-			$this->data['title'] = 'submit_vendor_invoice';
+			$this->data['title'] = 'Submit Vendor Invoice';
 
 			$this->data['permission'] = $this->permission;
 			$this->data['customer_old_amount'] = $this->Invoice_model->get_last_record_for_ledger('vendor_ledger' , $this->input->post('vendor_id'));

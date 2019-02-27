@@ -58,10 +58,14 @@
 				
 				$this->data['sales_person'] = $this->Orders_model->get_sales_person($this->id );
 			}
-
-			
 			$this->data['city_list'] = $this->Orders_model->all_rows('city_list');
+			$this->data['vehicle_data'] = $this->Orders_model->all_rows('vehicle');
+			$this->data['drivers_data'] = $this->Orders_model->all_rows('drivers');
+			$this->data['expense_category'] = $this->Orders_model->all_rows('expense_category');
 			$this->data['vendor'] = $this->Orders_model->all_rows('vendor');
+			$this->data['local_vendor'] = $this->Orders_model->get_local_vendor();
+			$this->data['labour_vendor'] = $this->Orders_model->get_labour_vendor();
+
 			$this->data['title'] = 'Create Orders';$this->load->template('admin/orders/create',$this->data);
 		}
 
@@ -72,6 +76,8 @@
 			{
 				redirect('admin/home');
 			}
+			// echo "<pre>";
+			// print_r($_POST);die();
 			$data = [
 
 				'order_date' => $this->input->post('order_date'),
@@ -90,10 +96,32 @@
 				'order_type' => $this->input->post('select_order_type'),
 				'order_status' => 'pending',
 				'inv_created' => 0,
-				
-
+				'order_vendor_id' => $this->input->post('order_vendor_id'),
+				'vehicel_of_vendor' => $this->input->post('vehicel_of_vendor'),
+				'vehicle_type' => $this->input->post('vehicle_type'),
+				'baying_assigned_rates' => $this->input->post('baying_assigned_rates'),
+				'order_total_amount' => $this->input->post('order_total_amount'),
+				'order_driver' => $this->input->post('order_driver'),
+				'local_transport' => $this->input->post('local_transport'),
+				'order_tenstion' => $this->input->post('order_tenstion'),
+				'order_detention_customer' => $this->input->post('order_detention_customer'),
+				'remarks' => $this->input->post('remarks'),
+				'builty_num' => $this->input->post('builty_num'),
+				'order_local_vendor_id' => $this->input->post('order_local_vendor_id'),
 			];
-			$data['user_id'] = $this->session->userdata('user_id');$id = $this->Orders_model->insert('orders',$data);
+			$data['user_id'] = $this->session->userdata('user_id');
+			$id = $this->Orders_model->insert('orders',$data);
+			$count_labor=count($_POST['labor_charges']);
+			for ($i=0; $i < $count_labor ; $i++) {
+			     $array_labor=array(
+			      'order_id'=>$id,
+			      'order_vendor_id'=>$_POST['order_labour_vendor_id'][$i],
+			      'labor_charges'=>$_POST['labor_charges'][$i],
+			      'labor_charges_customer'=>$_POST['labor_charges_customer'][$i],
+			      
+			     );
+			      $this->db->insert('order_labor_charges',$array_labor);
+			  }
 			if ($id) {
 				redirect('admin/orders');
 			}
@@ -177,15 +205,17 @@
 				$this->data['orders'] = $this->Orders_model->get_row_with_customer_data($id);
 				
 				$this->data['order_second_stop'] = $this->Orders_model->get_row_with_order_second_stop($id);
+				$this->data['order_labor_charges'] = $this->Orders_model->get_row_with_order_labor_charges($id);
 
-				// echo '<pre>'; print_r($this->data['order_expense']);
+				// echo '<pre>'; print_r($this->data['orders']);
 
 				// die();
 
 				$this->data['vendor'] = $this->Orders_model->all_rows('vendor');
 				$this->data['local_vendor'] = $this->Orders_model->get_local_vendor();
-
-				// print_r($this->data['expense_category']);die();
+				$this->data['labour_vendor'] = $this->Orders_model->get_labour_vendor();
+				// echo "<pre>";
+				// print_r($this->data['order_labor_charges']);die();
 				$this->load->template('admin/orders/templetes/process_of_order_by_admin',$this->data);
 
 			}
@@ -203,16 +233,22 @@
 			$this->Orders_model->delete('order_second_stop',array('id'=>$id));
 			redirect('admin/orders/process_of_order_by_admin/'.$order_id);
 		}
+		public function delete_labor_charges($id, $order_id)
+		{
+			
+			$this->Orders_model->delete('order_labor_charges',array('id'=>$id));
+			redirect('admin/orders/process_of_order_by_admin/'.$order_id);
+		}
 		public function submit_process_by_admin()
 		{
-
+			// echo "<pre>";
+			// print_r($_POST);die();
 			$order_id = $this->input->post('id');
 
 			$sales_person_id = $this->input->post('sales_person_id');
 
 			$customer_old_amount = $this->Invoice_model->get_last_record_for_ledger('vendor_ledger' , $this->input->post('order_vendor_id'));
-			
-
+				
 
 			$data = 
 			[
@@ -224,11 +260,12 @@
 				'order_vendor_id' => $this->input->post('order_vendor_id'),
 				'vehicel_of_vendor' => $this->input->post('vehicel_of_vendor'),
 				'vehicle_type' => $this->input->post('vehicle_type'),
+				'baying_assigned_rates' => $this->input->post('baying_assigned_rates'),
 				'order_total_amount' => $this->input->post('order_total_amount'),
 				'order_driver' => $this->input->post('order_driver'),
 				'local_transport' => $this->input->post('local_transport'),
-				'labor_charges' => $this->input->post('labor_charges'),
 				'order_tenstion' => $this->input->post('order_tenstion'),
+				'builty_num' => $this->input->post('builty_num'),
 				'order_local_vendor_id' => $this->input->post('order_local_vendor_id'),
 			];
 			
@@ -273,8 +310,31 @@
 				}
 			}
 
-			$expense_count_for_update = count($this->input->post('expense_update_id'));
+			$update_labor_charges = count($this->input->post('update_labor_charges'));
 
+			for ($i = 0; $i < $update_labor_charges ; $i++) {
+
+				$data_update_labor_charges = [
+					'order_vendor_id' => $this->input->post('updat_order_labour_vendor_id')[$i],
+					'labor_charges' => $this->input->post('update_labor_charges')[$i],
+					'labor_charges_customer' => $this->input->post('update_labor_charges_customer')[$i],
+				];
+
+				$this->Orders_model->update('order_labor_charges',$data_update_labor_charges,array('id'=>$this->input->post('update_labor_charges_id')[$i] ));
+				
+			}
+			$count_labor=count($_POST['labor_charges']);
+			// print_r($count_labor);die();
+			for ($i=0; $i < $count_labor ; $i++) {
+			     $array_labor=array(
+			      'order_id'=>$order_id,
+			      'order_vendor_id'=>$_POST['order_labour_vendor_id'][$i],
+			      'labor_charges'=>$_POST['labor_charges'][$i],
+			      'labor_charges_customer'=>$_POST['labor_charges_customer'][$i],
+			      
+			     );
+			      $this->db->insert('order_labor_charges',$array_labor);
+			  }
 
 			for ($i = 0; $i < $expense_count_for_update ; $i++) {
 
@@ -330,8 +390,72 @@
 
 			if ($this->input->post('order_status') == "Complete") {
 
-				// print_r($customer_old_amount);
-				// echo "done"; die();
+				// vendor payment data start
+				if ($this->input->post('order_vendor_id') == TRUE) {
+					$external_cost_buying = 
+					[
+						'order_id' => $order_id,
+						'vendor_id' => $this->input->post('order_vendor_id'),
+						'vendor_type' => 'Buying',
+						'status' => 'UnPaid',
+						'detention' => $this->input->post('order_tenstion'),
+						'vehicle_buying' => $this->input->post('buying_assigned'),
+						'total_cost' => $this->input->post('buying_assigned') + $this->input->post('order_tenstion'),
+						'date' => date('d-m-Y'),
+					];
+					$this->Orders_model->insert('vendor_external_cost',$external_cost_buying);
+				}
+				if ($this->input->post('order_local_vendor_id') == TRUE) {
+					$external_cost_local = 
+					[
+						'order_id' => $order_id,
+						'vendor_id' => $this->input->post('order_local_vendor_id'),
+						'vendor_type' => 'Local',
+						'status' => 'UnPaid',
+						'local_transport' => $this->input->post('local_transport'),
+						'total_cost' => $this->input->post('local_transport'),
+						'date' => date('d-m-Y'),
+					];
+					$this->Orders_model->insert('vendor_external_cost',$external_cost_local);
+				}
+				
+				if ($this->input->post('update_labor_charges') == TRUE) {
+					$update_labor_charges = count($this->input->post('update_labor_charges'));
+
+					for ($i = 0; $i < $update_labor_charges ; $i++) {
+
+						$data_update_labor_charges = [
+							'order_id' => $order_id,
+							'vendor_id' => $this->input->post('updat_order_labour_vendor_id')[$i],
+							'vendor_type' => 'Labor',
+							'status' => 'UnPaid',
+							'labour_charges' => $this->input->post('update_labor_charges')[$i],
+							'total_cost' => $this->input->post('update_labor_charges')[$i],
+							'date' => date('d-m-Y'),
+						];
+						$this->Orders_model->insert('vendor_external_cost',$data_update_labor_charges);
+						
+					}
+				}
+				if ($this->input->post('labor_charges') == TRUE) {
+				$count_labor=count($_POST['labor_charges']);
+				// print_r($count_labor);die();
+				for ($i=0; $i < $count_labor ; $i++) {
+				     $array_labor=array(
+						'order_id' => $order_id,
+						'vendor_id' => $this->input->post('order_labour_vendor_id')[$i],
+						'vendor_type' => 'Labor',
+						'status' => 'UnPaid',
+						'labour_charges' => $this->input->post('labor_charges')[$i],
+						'total_cost' => $this->input->post('labor_charges')[$i],
+						'date' => date('d-m-Y'),
+				     );
+				      $this->db->insert('vendor_external_cost',$array_labor);
+				  }
+					
+				}
+				// vendor payment data end
+			
 				$vendor_payment_data = 
 				[
 					// 'order_id' => $order_id,
@@ -339,7 +463,7 @@
 					// 'vehicel_of_vendor' => $this->input->post('vehicel_of_vendor'),
 					// 'driver_name' => $this->input->post('driver_name'),
 					// 'description' => 'Complete Order',
-					'vendor_payment' =>  $this->input->post('builty_rates'),
+					'vendor_payment' =>  $this->input->post('baying_assigned_rates'),
 					'vendor_payment_status' =>  'Unpaid',
 					// 'date' =>  date('Y-m-d'),
 				];
@@ -352,9 +476,9 @@
 				$vehicle_bying_ledger = [
 					'vehicle_id' => $this->input->post('vehicel_of_vendor'),
 					'description' => 'Vehicle Buying',
-					'amount' =>   $this->input->post('builty_rates'),
+					'amount' =>   $this->input->post('baying_assigned_rates'),
 					'order_id' => $order_id,
-					'balance'=> round($this->input->post('builty_rates') + $vehicle_bying_old_amount['balance']),
+					'balance'=> round($this->input->post('baying_assigned_rates') + $vehicle_bying_old_amount['balance']),
 					'date' =>  date('d-m-Y'),
 					'reference' => 'Debit',
 				];

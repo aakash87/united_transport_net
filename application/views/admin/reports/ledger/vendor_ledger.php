@@ -76,7 +76,7 @@
                                    <tr>
                                        <td><?php echo $s_number++; ?></td>
                                        <td><?php echo $newDate = date("d-m-Y", strtotime($module["date"])); ?></td>
-                                       <td><?php echo $module["voucher_no"] ?></td>
+                                       <td><?php echo $module["invoice_no"] ?></td>
                                        <td><?php echo $module["description"] ?></td>
                                        <td><?php  
                                            if ($module["reference"] == 'Debit') {

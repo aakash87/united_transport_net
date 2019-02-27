@@ -36,7 +36,7 @@ class Invoice_model extends MY_Model{
 
 	public function get_summary_data($id , $str_current_day , $str_last_day)
 	{
-		$this->db->select('orders.* , cu.full_name as customer_name , cu.sales_person, cu.tax , cu.sp_commission , cu.srb_tax  , users.name as sp_name , vendor.vendor_name , invoice_ol.misc_expense , vehicle.registration_number , vehicle.vehicle_bying , vehicle.vehicle_type , invoice.invoice_paid_date , invoice.invoice_status , invoice_log.order_id as log_id');
+		$this->db->select('orders.* , cu.full_name as customer_name , cu.sales_person, cu.tax , cu.sp_commission , cu.srb_tax  , users.name as sp_name , vendor.vendor_name , invoice_ol.misc_expense , vehicle.registration_number , vehicle.vehicle_bying , vehicle.vehicle_type , invoice.invoice_paid_date , invoice.invoice_voucher_number , invoice.invoice_status , invoice_log.order_id as log_id');
 
 		$this->db->from('orders');
 		$this->db->join('customer cu' , 'orders.order_customer = cu.id' , 'left');
@@ -98,7 +98,8 @@ class Invoice_model extends MY_Model{
 		$this->db->from('invoice');
 		$this->db->join('customer cu' , 'cu.id  = invoice.customer_id');
 		$this->db->join('users' , 'users.id = cu.sales_person' , 'left');
-		$this->db->where('invoice.id <=' , $id );	
+		// $this->db->where('invoice.id <=' , $id );	
+		$this->db->where('invoice.id =' , $id );	
 		return $this->db->get()->result_array();
 		
 	}

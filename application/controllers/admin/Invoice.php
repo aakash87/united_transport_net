@@ -160,7 +160,7 @@
 			   array_push($invoice_data, $this->data['invoice'] );
 			}
 
-
+			
 
 			$this->data['selected_data'] = $invoice_data;
 			// echo "<pre>";
@@ -317,10 +317,10 @@
 
 			}
 
-
-
+			// echo "<pre>";
+			// print_r($this->data['summary_data']);die();
 			$this->data['sales_person'] = $this->Invoice_model->all_rows('users');
-			$this->data['title'] = 'Create Order Invoice';
+			$this->data['title'] = 'Summary Report';
 
 			$this->load->template('admin/invoice/invoice_reports/summary_reports',$this->data);
 		}
@@ -360,7 +360,7 @@
 
 			$this->data['selected_data'] = $order_data;
 
-			// echo '<pre>'; print_r($this->data['invoice_detail']);
+			// echo '<pre>'; print_r($this->data['selected_data']);
 			// die();
 
  			$this->load->library('pdf');
@@ -378,14 +378,13 @@
 
 			$this->data['invoice_detail'] =  $this->Invoice_model->get_invvooce_by_id($invoice_id);
 			$this->data['invoice'] =  $this->Invoice_model->get_row_single('invoice',array('id'=>$invoice_id));
-			
 			$this->data['customer'] =  $this->Invoice_model->get_row_single('customer',array('id'=>$this->data['invoice']['customer_id']));
 			
 			$this->data['invoice_order_id'] = $this->data['invoice']['order_ids'];
 
 			$o_id = explode(',',$this->data['invoice_order_id']);
 
-
+			// print_r($o_id);die();
 
 			$order_data = [];
 		
@@ -406,7 +405,7 @@
 
 			$this->data['selected_data'] = $order_data;
 
-			// echo '<pre>'; print_r($this->data['customer']);
+			// echo '<pre>'; print_r($this->data['selected_data']);
 			// die();
 
  			$this->load->library('pdf');
@@ -467,20 +466,23 @@
 		public function submit_order_invoice()
 		{
 			if ($this->input->server('REQUEST_METHOD') == 'POST') {
-				// echo "<pre>";
-				// print_r($_POST);
+				echo "<pre>";
+				print_r($_POST);
 				// die();
 
+				$total_with_tax = $this->input->post('with_holding_amount') + $this->input->post('paid_amount_cu');
+				
+				// die();
 				$paid_amount_cu = $this->input->post('paid_amount_cu');
 				$invoice_total_amount = $this->input->post('invoice_total_amount');
 
-				if ($paid_amount_cu == $invoice_total_amount ) {
-					$invoice_status = 1;
-				}
-				else
-				{
-					$invoice_status =  2;
-				}
+				// if ($paid_amount_cu == $invoice_total_amount ) {
+				// 	$invoice_status = 1;
+				// }
+				// else
+				// {
+				// 	$invoice_status =  2;
+				// }
 				$this->data['customer_old_amount'] = $this->Invoice_model->get_last_record_for_ledger('customer_ledger' , $this->input->post('customer_id'));
 				// print_r($this->data['customer_old_amount']['balance']);die();
 		   	 	$debitamount =  $paid_amount_cu;
@@ -489,16 +491,25 @@
 
 		   	 	$total_balance =  $prev_balance - $debitamount;
 
-				echo "<pre>";
-				print_r($_POST);
-				echo "<br>";
-				$total_paid_amount = $this->input->post('amount') + $this->input->post('paid_amount_cu');
-				$payment_balans_amount = $this->input->post('balance') - $this->input->post('paid_amount_cu');
-				print_r($this->input->post('invoice_total_amount'));
+				// echo "<pre>";
+				// print_r($_POST);
 				// echo "<br>";
+				$total_paid_amount = $this->input->post('amount') + $this->input->post('paid_amount_cu') + $this->input->post('with_holding_amount');
+				$round_total_paid_amount = round($total_paid_amount);
+				$payment_balans_amount = $this->input->post('balance') - $this->input->post('paid_amount_cu') - round($this->input->post('with_holding_amount'));
+				
+			
+				$in_amount_for_if = round($this->input->post('invoice_total_amount'));
+				// if ($in_amount_for_if == $round_total_paid_amount) {
+				// 	echo "string";
+				// 	print_r($this->input->post('invoice_tb_id'));
+				// }else
+				// {
+				// 	echo "dsadsaadsadsads";
+				// 	print_r($this->input->post('invoice_tb_id'));
+				// }
 				// die();
-
-				if ($this->input->post('invoice_total_amount') == $total_paid_amount) {
+				if ($in_amount_for_if == $round_total_paid_amount) {
 
 					// $options = [
 					// 	'invoice_paid_date' => $this->input->post('invoice_paid_date'),
@@ -508,7 +519,7 @@
 
 					$options = 
 					[
-						'customer_paid_amount' =>  $total_paid_amount,
+						'customer_paid_amount' =>  $round_total_paid_amount,
 						'balance' =>  '0',
 						'status' =>  'Paid Invoice',
 						'invoice_paid_date' => $this->input->post('invoice_paid_date'),
@@ -520,7 +531,7 @@
 				else{
 					$options = 
 					[
-						'customer_paid_amount' =>  $total_paid_amount,
+						'customer_paid_amount' =>  $round_total_paid_amount,
 						'balance' =>  $payment_balans_amount,
 						'status' =>  'Partial Invoice',
 						'invoice_paid_date' => $this->input->post('invoice_paid_date'),
@@ -543,6 +554,20 @@
 	                  'reference'=> 'debit',
 	              );
 	              $this->Invoice_model->insert('customer_ledger', $data2);
+	              if ($this->input->post('with_holding_amount') == TRUE) {
+	              	$data_tax=array(
+
+	              	    'customer_id'=> $this->input->post('customer_id'),
+	              	    'amount'=> round($this->input->post('with_holding_amount')),
+	              	    'date'=>$this->input->post('invoice_paid_date'),
+	              	    'status'=> '1',
+	              	    'voucher_no'=> $this->input->post('invoice_voucher_number'),
+	              	    'description'=> 'Tax Amount',
+	              	    'balance'=> $total_balance - round($this->input->post('with_holding_amount')),
+	              	    'reference'=> 'debit',
+	              	);
+	              	$this->Invoice_model->insert('customer_ledger', $data_tax);
+	              }
 
 	          		$this->data['sels_person_old_amount'] = $this->Invoice_model->get_last_record_for_ledger_by_selse_person('sales_person_ledger' , $this->input->post('sales_person_id'));
 	          		 // print_r($this->data['sels_person_old_amount']['balance']);die();

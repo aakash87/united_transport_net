@@ -78,17 +78,18 @@
                            </div>
                         </div>
                         <div class="col-md-6">
-                           <div class="form-group row">
+                          <!--  <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">SRB Tax (%)</label>
                               <div class="col-sm-9">
                                  <input type="" class="form-control" name="srb_tax" value="" >
                               </div>
-                           </div>
+                           </div> -->
                            <div class="form-group row">
                               <label for="" class="col-sm-3 col-form-label">Apply SST</label>
                               <div class="col-sm-9">
                                  <div class="radio radio-danger">
-                                    <input type="radio" name="SSP_tax" class="SSP_tax" id="ssp_yes" value="1">
+                                    <!-- <input type="radio" name="SSP_tax" class="SSP_tax" id="ssp_yes" value="1"> -->
+                                    <input type="radio" name="srb_tax" class="SSP_tax" id="ssp_yes" value="1">
                                     <label for="ssp_yes">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                  
                                     <input type="radio" name="SSP_tax" id="ssp_no" class="SSP_tax" value="0" checked="">

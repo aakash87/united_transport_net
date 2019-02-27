@@ -37,37 +37,49 @@
                                      <div class="col-sm-6" style="">
 
                                         <div class="form-group row ">
-                                            <label for="example-text-input" class="col-sm-3 col-form-label">Date</label>
+                                            <label for="" class="col-sm-3 col-form-label">Date</label>
                                               <div class="col-sm-9">
-                                                    <input class="form-control" name="invoice_paid_date" type="date" value="" id="example-text-input" placeholder=""  >
+                                                    <input class="form-control" name="invoice_paid_date" type="date" value="" id="" placeholder=""  >
                                               </div>
                                         </div>
 
                                         <div class="form-group row ">
-                                            <label for="example-text-input" class="col-sm-3 col-form-label">Customer Name</label>
+                                            <label for="" class="col-sm-3 col-form-label">Customer Name</label>
                                               <div class="col-sm-9">
-                                                    <input class="form-control" name="customer_name" type="text" value="<?php echo $customer['full_name']; ?>" id="example-text-input" placeholder="" readonly >
-                                                    <input style="display: none;" class="form-control" name="customer_id" type="text" value="<?php echo $invoice['customer_id']; ?>" id="" placeholder="" readonly >
-                                                    <input style="display: none;" class="form-control" name="sales_person_id" type="text" value="<?php echo $invoice['sales_person_id']; ?>" id="" placeholder="" readonly >
-                                                    <input style="display: none;" class="form-control" name="invoice_voucher_number" type="text" value="<?php echo $invoice['invoice_voucher_number']; ?>" id="" placeholder="" readonly >
+                                                    <input class="form-control" name="customer_name" type="text" value="<?php echo $customer['full_name']; ?>" id="" placeholder="" readonly >
+                                                    <input style="display:;" class="form-control" name="customer_id" type="text" value="<?php echo $invoice['customer_id']; ?>" id="" placeholder="" readonly >
+                                                    <input style="display:;" class="form-control" name="sales_person_id" type="text" value="<?php echo $invoice['sales_person_id']; ?>" id="" placeholder="" readonly >
+                                                    <input style="display:;" class="form-control" name="invoice_voucher_number" type="text" value="<?php echo $invoice['invoice_voucher_number']; ?>" id="" placeholder="" readonly >
                                               </div>
                                         </div>
 
-                                           <div class="form-group row  ">
-                                            <label for="example-text-input" class="col-sm-3 col-form-label">Paid Amount</label>
-                                              <div class="col-sm-9">
-                                                    <input class="form-control" max="<?php echo $invoice['invoice_total_amount']; ?>" name="paid_amount_cu" type="number" value="" id="example-text-input" placeholder=""  >
-                                              </div>
-                                        </div>
 
                                            <div class="form-group row  " style="">
-                                            <label for="example-text-input" class="col-sm-3 col-form-label">With holding Tax</label>
+                                            <label for="" class="col-sm-3 col-form-label">With holding Tax (%)</label>
                                               <div class="col-sm-9">
-                                                    <input class="form-control" name="with_holding_tax" type="number" value="<?php echo $invoice['with_holding_tax']; ?>" id="" placeholder="" <?php if ( $invoice['balance'] !== $invoice['invoice_total_amount']) { echo "readonly";}?> >
+                                                    <input class="form-control" id="with_holding_tax" name="with_holding_tax" type="number" value="<?php echo $invoice['with_holding_tax']; ?>" id="" placeholder="" <?php if ( $invoice['balance'] !== $invoice['invoice_total_amount']) { echo "readonly";}?> >
                                               </div>
                                         </div> 
+                                           <div class="form-group row  " >
+                                            <label for="" <?php if ( $invoice['balance'] !== $invoice['invoice_total_amount']) { echo "style='display:none;'";}?> class="col-sm-3 col-form-label">With holding</label>
+                                              <div class="col-sm-9">
+                                                    <input class="form-control" id="with_holding"  name="with_holding_amount" type="<?php if ( $invoice['balance'] !== $invoice['invoice_total_amount']) { echo "hidden";}else{ echo "text";}?>" value="" id="" placeholder="" readonly="" >
+                                              </div>
+                                        </div>
+                                        <div class="form-group row  " <?php if ( $invoice['balance'] !== $invoice['invoice_total_amount']) { echo "style='display:none;'";}?>>
+                                            <label for="" class="col-sm-3 col-form-label">After w h Amount</label>
+                                              <div class="col-sm-9">
+                                                    <input class="form-control after_w_h_amount" max="" name="after_w_h_amount" type="number" value="" placeholder="" readonly="" >
+                                              </div>
+                                        </div>
                                         <div class="form-group row  ">
-                                            <label for="example-text-input" class="col-sm-3 col-form-label">Remarks</label>
+                                            <label for="" class="col-sm-3 col-form-label">Paid Amount</label>
+                                              <div class="col-sm-9">
+                                                    <input class="form-control after_w_h_amount" max="<?php echo $invoice['invoice_total_amount']; ?>" name="paid_amount_cu" type="number" value="" id="" placeholder=""  >
+                                              </div>
+                                        </div>
+                                        <div class="form-group row  ">
+                                            <label for="" class="col-sm-3 col-form-label">Remarks</label>
                                               <div class="col-sm-9">
                                                   <textarea class="form-control" name="remarks" rows="1"></textarea>
                                               </div>
@@ -78,25 +90,25 @@
 
                                      <div class="col-sm-6" >
                                         <div class="form-group row ">
-                                            <label for="example-text-input" class="col-sm-3 col-form-label">Total Amount</label>
+                                            <label for="" class="col-sm-3 col-form-label">Total Amount</label>
                                               <div class="col-sm-9">
-                                                    <input class="form-control" name="invoice_total_amount" type="text" value="<?php echo $invoice['invoice_total_amount']; ?>" id="example-text-input" placeholder="" readonly >
+                                                    <input class="form-control" name="invoice_total_amount" type="text" value="<?php echo $invoice['invoice_total_amount']; ?>" id="total_amount" placeholder="" readonly >
                                                    
-                                                    <input style="display: none;" class="form-control" name="amount" type="text" value="<?php echo $invoice['customer_paid_amount']; ?>" id="example-text-input" placeholder="" readonly >
-                                                    <input style="display: none;" class="form-control" name="old_amount" type="text" value="<?php echo $invoice['balance']; ?>" id="example-text-input" placeholder="" readonly >
+                                                    <input style="display:;" class="form-control" name="amount" type="text" value="<?php echo $invoice['customer_paid_amount']; ?>" id="" placeholder="" readonly >
+                                                    <input style="display:;" class="form-control" name="old_amount" type="text" value="<?php echo $invoice['balance']; ?>" id="" placeholder="" readonly >
                                               </div>
                                         </div>
                                         <div class="form-group row">
 
-                                        <label for="example-text-input" class="col-sm-3 col-form-label">Balance Amount</label>
+                                        <label for="" class="col-sm-3 col-form-label">Balance Amount</label>
                                                 <div class="col-sm-9">
-                                                     <input class="form-control" name="balance" type="text" value="<?php echo $invoice['balance']; ?>" id="example-text-input" placeholder="" readonly >
+                                                     <input class="form-control" id="balance_amount" name="balance" type="text" value="<?php echo $invoice['balance']; ?>" id="" placeholder="" readonly >
                                                 </div>
 
                                             </div>
                                         <div class="form-group row">
 
-                                        <label for="example-text-input" class="col-sm-3 col-form-label">Select Bank</label>
+                                        <label for="" class="col-sm-3 col-form-label">Select Bank</label>
                                                 <div class="col-sm-9">
                                                     <select class="form-control bank_id" data-live-search="true" name="bank_id" >
                                                         <option>Select Bank</option>
@@ -112,8 +124,8 @@
 
                                              <div class="form-group row">
 
-                                <label for="example-text-input" class="col-sm-3 col-form-label"> Bank Amount</label>
-                                        <div class="col-sm-9"><input class="form-control bank_amount" name="bank_amount" type="text" value="" id="example-text-input" placeholder="" readonly=""></div>
+                                <label for="" class="col-sm-3 col-form-label"> Bank Amount</label>
+                                        <div class="col-sm-9"><input class="form-control bank_amount" name="bank_amount" type="text" value="" id="" placeholder="" readonly=""></div>
 
                                     </div>
 
@@ -121,6 +133,7 @@
 
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary pull-right">Add</button>
+                                    <button style="display: none;" type="button" class="my_but btn btn-primary pull-right">ddd</button>
                                 </div>
                             </div>
 
@@ -183,3 +196,19 @@
     });
 
 </script>
+
+<?php if ( $invoice['balance'] !== $invoice['invoice_total_amount']) { ?>
+
+<?php }else{?>
+<script type="text/javascript">
+  $("#with_holding_tax").keyup(function () {
+      var ans = $('#balance_amount').val(); 
+      var d_ans = ans * $('#with_holding_tax').val();
+      var with_holding = d_ans / 100;
+      var after_with_holding = $('#balance_amount').val() - with_holding;
+      $('#with_holding').val(d_ans / 100);
+      $('.after_w_h_amount').val(Math.round(after_with_holding));
+
+  });
+</script>
+<?php } ?>

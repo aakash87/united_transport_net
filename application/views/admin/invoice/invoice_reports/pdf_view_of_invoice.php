@@ -408,7 +408,6 @@ footer .end {
                 <th class="total">Labor </th>
                 <th class="total">2nd Stop </th>
                 <th class="total">Detention </th>
-                <th class="total">Order <sup style="font-size: 11px !important;">Amount</sup></th>
                 <th class="total">Grand Total </th>
             </tr>
         </thead>
@@ -421,31 +420,40 @@ footer .end {
             ?>
             <tr>
                 <td class="qty"><?php echo $i;?></td>
-                <td class="qty"><?php echo $invoice_detail[0]['company_name']?></td>
+                <td class="qty"><?php echo "UNITED TRANSPORT NETRWORK"?></td>
                 <td class="qty"><?php echo  $newDate = date("d-m-Y", strtotime($module['order_date']));?></td>
                 <td class="qty"><?php echo $module['weight']?></td>
-                <td class="qty"><?php echo $module['pickup_location']?></td>
-                <td class="qty"><?php echo $module['drop_off_location']?></td>
+                <td class="" style="font-size: 20px !important;"><?php echo $module['pickup_location']?></td>
+                <td class="" style="font-size: 20px !important;"><?php echo $module['drop_off_location']?></td>
                 <td class="qty"><?php echo $module['registration_number']?></td>
                 <td class="qty"><?php echo $module['vehicle_type']?></td>
-                <td class="qty"><?php echo number_format($module["vendor_payment"]);?></td>
-                <td class="qty"><?php echo number_format($module["labor_charges"]);?></td>
-                <td class="qty"><?php echo number_format($module["second_stop_amount"]);?></td>
-                <td class="qty"><?php echo number_format($module["order_tenstion"]);?></td>
                 <td class="qty"><?php echo number_format($module["order_total_amount"]);?></td>
-                <td class="qty"><?php $grand_total =  $module['vendor_payment'] + $module['labor_charges'] + $module['second_stop_amount'] + $module['order_tenstion']+ $module['order_total_amount']; echo  number_format($grand_total)?></td>
+                <td class="qty">
+                  <?php
+                     $total_labor = 0;
+                     $labour_data = $this->db->query("SELECT * FROM `order_labor_charges` where order_id='".$module['id']."' ")->result_array();
+                     foreach ($labour_data as $l_data) {
+                     
+                       $total_labor += $l_data['labor_charges_customer'];
+                    }?>
+                  
+                        <?php echo number_format($total_labor);?>   
+                </td>
+                <td class="qty"><?php echo number_format($module["second_stop_amount"]);?></td>
+                <td class="qty"><?php echo number_format($module["order_detention_customer"]);?></td>
+                <td class="qty"><?php $grand_total =  $module['second_stop_amount'] + $module['order_detention_customer']+ $module['order_total_amount'] + $total_labor; echo  number_format($grand_total)?></td>
             </tr>
             <?php $total_count+=$grand_total; $i++; } ?>
             
-              <tr style="border: 1px solid; background-color: #e1e4e6; border-color: #e1e4e6;">
+              <tr style=" background-color: #e1e4e6; border-color: #e1e4e6;">
                   
-                <td class="qty" colspan="12">Grand Total</td>
-                <td class="qty" colspan="4" >&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="float: right;"><?php echo  number_format($total_count)?></span></td>
+                <td class="qty" colspan="12"><strong>Grand Total</strong></td>
+                <td class="qty" colspan="1" ><span style=""><strong><?php echo  number_format($total_count)?></strong></span></td>
               </tr>
-              <tr style="border: 1px solid; background-color: #e1e4e6; border-color: #c6c9cc;">
+              <tr style=" background-color: #e1e4e6; border-color: #c6c9cc;">
                 
-                <td class="qty" colspan="12"><?php echo NumbersToWords::convert($total_count);?></td>
-                <td class="qty" colspan="4"><span style="float: right;"></span></td>
+                <td class="qty" colspan="12"><strong><?php echo NumbersToWords::convert($total_count);?></strong></td>
+                <td class="qty" colspan="1"><span style=""></span></td>
               </tr>
              
             

@@ -46,7 +46,7 @@
                            <tr>
                               <th>S#</th>
                               <th>Vehicle Maker</th>
-                              <th>Vehicle Owner</th>
+                              <th>Vehicle Number</th>
                               <th>Vehicle Vendor</th>
                               <th>Vehicle engine type</th>
                               <th>Vehicle Model</th>
@@ -67,7 +67,7 @@
                            <tr>
                               <td><?php echo $s_number++ ?></td>
                               <td><?php echo $module["vehicle_maker"] ?></td>
-                              <td><?php echo $module["owner_full_name"] ?></td>
+                              <td><?php echo $module["registration_number"] ?></td>
                               <td><?php echo $module["vendor_name"] ?></td>
                               <td><?php echo $module["engine_number"] ?></td>
                               <td><?php echo $module["vehicle_model"] ?></td>

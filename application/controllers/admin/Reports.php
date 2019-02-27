@@ -167,7 +167,7 @@
 		public function charts()
 		{
 
-			$this->data['title'] = 'Charts';$this->load->template('admin/reports/reports_temp/charts_reports',$this->data);
+			$this->data['title'] = 'Charts'; $this->load->template('admin/reports/reports_temp/charts_reports',$this->data);
 		}
 
 		public function sales_person_ledger()
@@ -189,7 +189,7 @@
 				$this->data['sales_person_ledger'] = [];
 			}
 			// print_r($this->data['sales_person']);
-			$this->data['title'] = 'sales_person_ledger';
+			$this->data['title'] = 'Sales Person Ledger';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/sales_person_ledger',$this->data);
 		}	
@@ -221,7 +221,7 @@
 			
 			// echo "<pre>";	
 			// print_r($this->data['sales_person_ledger']);die();
-			$this->data['title'] = 'sales_person_ledger';
+			$this->data['title'] = 'Sales Person Ledger';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/sales_person_ledger',$this->data);
 		}	
@@ -244,7 +244,7 @@
 				$this->data['customer_ledger'] = [];
 			}
 			// print_r($this->data['customer']);
-			$this->data['title'] = 'customer_ledger';
+			$this->data['title'] = 'Customer Ledger';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/customer_ledger',$this->data);
 		}	
@@ -276,7 +276,7 @@
 			$this->data['customer_ledger'] = $this->Reports_model->customer_ledger($customer_id , $str_current_day ,  $str_last_day);
 			// echo "<pre>";	
 			// print_r($this->data['customer_ledger']);die();
-			$this->data['title'] = 'customer_ledger';
+			$this->data['title'] = 'Customer Ledger';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/customer_ledger',$this->data);
 		}
@@ -299,7 +299,7 @@
 				$this->data['vendor_ledger'] = [];
 			}
 			// print_r($this->data['customer']);
-			$this->data['title'] = 'vendor_ledger';
+			$this->data['title'] = 'Vendor Ledger';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/vendor_ledger',$this->data);
 		}
@@ -372,7 +372,7 @@
 			$this->data['vendor_ledger'] = $this->Reports_model->vendor_ledger($vendor_id , $str_current_day ,  $str_last_day);
 			// echo "<pre>";	
 			// print_r($this->data['vendor_ledger']);die();
-			$this->data['title'] = 'vendor_ledger';
+			$this->data['title'] = 'Vendor Ledger';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/vendor_ledger',$this->data);
 		}
@@ -396,7 +396,7 @@
 				$this->data['driver_ledger'] = [];
 			}
 			// print_r($this->data['drivers']);
-			$this->data['title'] = 'driver_ledger';
+			$this->data['title'] = 'Driver Ledger';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/driver_ledger',$this->data);
 		}	
@@ -427,7 +427,7 @@
 			$this->data['driver_ledger'] = $this->Reports_model->driver_ledger($driver_id , $str_current_day ,  $str_last_day);
 			// echo "<pre>";	
 			// print_r($this->data['driver_ledger']);die();
-			$this->data['title'] = 'search_by_driver';
+			$this->data['title'] = 'Search By Driver';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/driver_ledger',$this->data);
 		}	
