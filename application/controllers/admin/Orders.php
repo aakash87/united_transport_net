@@ -111,6 +111,7 @@
 			];
 			$data['user_id'] = $this->session->userdata('user_id');
 			$id = $this->Orders_model->insert('orders',$data);
+
 			$count_labor=count($_POST['labor_charges']);
 			for ($i=0; $i < $count_labor ; $i++) {
 			     $array_labor=array(
@@ -323,6 +324,8 @@
 				$this->Orders_model->update('order_labor_charges',$data_update_labor_charges,array('id'=>$this->input->post('update_labor_charges_id')[$i] ));
 				
 			}
+			if ($this->input->post('add3_input') == "Yes") {
+				
 			$count_labor=count($_POST['labor_charges']);
 			// print_r($count_labor);die();
 			for ($i=0; $i < $count_labor ; $i++) {
@@ -335,7 +338,9 @@
 			     );
 			      $this->db->insert('order_labor_charges',$array_labor);
 			  }
-
+			  }
+				
+			  $expense_count_for_update = count($this->input->post('expense_title_update'));
 			for ($i = 0; $i < $expense_count_for_update ; $i++) {
 
 				$data_expense_update = [
@@ -345,7 +350,7 @@
 					'expense_amount' => $this->input->post('expense_amount_update')[$i],
 					'expense_category' => $this->input->post('expense_category_update')[$i],
 					'expense_description' => $this->input->post('expense_description_update')[$i],
-					'paid_byription' => $this->input->post('paid_by_update')[$i],
+					'paid_by' => $this->input->post('paid_by_update')[$i],
 				];
 
 				$this->Orders_model->update('order_expense',$data_expense_update,array('id'=>$this->input->post('expense_update_id')[$i] ));
@@ -354,7 +359,8 @@
 
 
 
-
+			if ($this->input->post('add1_input') == "Yes") {
+				
 			$sec_stop_origin_count = count($this->input->post('sec_stop_origin'));
 
 			for ($i = 0; $i < $sec_stop_origin_count ; $i++) {
@@ -370,13 +376,13 @@
 					$this->Orders_model->insert('order_second_stop',$data_stop_origin_count);
 				
 			}
-
+			}
 
 			$sec_stop_origin_count_update = count($this->input->post('second_stop_id'));
 
-			for ($i = 0; $i < $sec_stop_origin_count ; $i++) {
+			for ($i = 0; $i < $sec_stop_origin_count_update ; $i++) {
 
-				$data_stop_origin_count = [
+				$data_stop_origin_count_u = [
 					'driver_id' => $this->input->post('order_driver'),
 					'second_stop_order_id' => $order_id ,
 					'sec_stop_destination' => $this->input->post('sec_stop_destination_update')[$i],
@@ -384,7 +390,7 @@
 					'sec_stop_origin' => $this->input->post('sec_stop_origin_update')[$i],
 				];	
 
-				$this->Orders_model->update('order_second_stop',$data_stop_origin_count,array('id'=>$this->input->post('second_stop_id')[$i] ));
+				$this->Orders_model->update('order_second_stop',$data_stop_origin_count_u,array('id'=>$this->input->post('second_stop_id')[$i] ));
 				
 			}
 
@@ -486,47 +492,49 @@
 
 				$this->Invoice_model->insert('vehicle_ledger', $vehicle_bying_ledger);
 
-				$sec_stop_amount_update = count($this->input->post('sec_stop_amount_update'));
+				
+					$sec_stop_amount_update = count($this->input->post('sec_stop_amount_update'));
 
-				for ($i = 0; $i < $sec_stop_amount_update ; $i++) {
+					for ($i = 0; $i < $sec_stop_amount_update ; $i++) {
 
-					$vehicle_scond_stop_old_amount = $this->Orders_model->get_last_record_for_ledger('vehicle_ledger' , $this->input->post('vehicel_of_vendor'));
-									
-					$vehicle_scond_stop_ledger = [
-						'vehicle_id' => $this->input->post('vehicel_of_vendor'),
-						'description' => '2nd Stop',
-						'amount' =>   $this->input->post('sec_stop_amount_update')[$i],
-						'order_id' => $order_id,
-						'balance'=> round($this->input->post('sec_stop_amount_update')[$i] + $vehicle_scond_stop_old_amount['balance']),
-						'date' =>  date('d-m-Y'),
-						'reference' => 'Debit',
-					];
-
-
-					$this->Invoice_model->insert('vehicle_ledger', $vehicle_scond_stop_ledger);
-					
-				}
-
-				$expense_amount_update = count($this->input->post('expense_amount_update'));
-
-				for ($i = 0; $i < $expense_amount_update ; $i++) {
-
-					$vehicle_expance_old_amount = $this->Orders_model->get_last_record_for_ledger('vehicle_ledger' , $this->input->post('vehicel_of_vendor'));
-									
-					$vehicle_expance_ledger = [
-						'vehicle_id' => $this->input->post('vehicel_of_vendor'),
-						'description' => $this->input->post('expense_category_update')[$i],
-						'amount' =>   $this->input->post('expense_amount_update')[$i],
-						'order_id' => $order_id,
-						'balance'=> round($vehicle_expance_old_amount['balance'] - $this->input->post('expense_amount_update')[$i]),
-						'date' =>  date('d-m-Y'),
-						'reference' => 'Credit',
-					];
+						$vehicle_scond_stop_old_amount = $this->Orders_model->get_last_record_for_ledger('vehicle_ledger' , $this->input->post('vehicel_of_vendor'));
+										
+						$vehicle_scond_stop_ledger = [
+							'vehicle_id' => $this->input->post('vehicel_of_vendor'),
+							'description' => '2nd Stop',
+							'amount' =>   $this->input->post('sec_stop_amount_update')[$i],
+							'order_id' => $order_id,
+							'balance'=> round($this->input->post('sec_stop_amount_update')[$i] + $vehicle_scond_stop_old_amount['balance']),
+							'date' =>  date('d-m-Y'),
+							'reference' => 'Debit',
+						];
 
 
-					$this->Invoice_model->insert('vehicle_ledger', $vehicle_expance_ledger);
-					
-				}
+						$this->Invoice_model->insert('vehicle_ledger', $vehicle_scond_stop_ledger);
+						
+					}
+
+					$expense_amount_update = count($this->input->post('expense_amount_update'));
+
+					for ($i = 0; $i < $expense_amount_update ; $i++) {
+
+						$vehicle_expance_old_amount = $this->Orders_model->get_last_record_for_ledger('vehicle_ledger' , $this->input->post('vehicel_of_vendor'));
+										
+						$vehicle_expance_ledger = [
+							'vehicle_id' => $this->input->post('vehicel_of_vendor'),
+							'description' => $this->input->post('expense_category_update')[$i],
+							'amount' =>   $this->input->post('expense_amount_update')[$i],
+							'order_id' => $order_id,
+							'balance'=> round($vehicle_expance_old_amount['balance'] - $this->input->post('expense_amount_update')[$i]),
+							'date' =>  date('d-m-Y'),
+							'reference' => 'Credit',
+						];
+
+
+						$this->Invoice_model->insert('vehicle_ledger', $vehicle_expance_ledger);
+						
+					}
+
 
 			}
 			

@@ -29,7 +29,9 @@
 			$this->data['title'] = 'Create Vendor';$this->load->template('admin/vendor/create',$this->data);
 		}
 		public function insert()
-		{
+		{	
+			// echo "<pre>";
+			// print_r($_POST);die();
 			if ( $this->permission['created'] == '0') 
 			{
 				redirect('admin/home');
@@ -43,6 +45,7 @@
 				'vendor_create_date' => $this->input->post('vendor_create_date'),
 				'user_id' => $this->session->userdata('user_id'),
 				'special_person' => $this->input->post('special_person'),
+				'vender_labour' => $this->input->post('vender_labour'),
 				'vendor_type' => $this->input->post('vender_type'),
 				'fuel_vendor' => 'Yes',
 				

@@ -80,6 +80,7 @@
                                     <tbody>
                                      <?php
                                          $serial = 1;
+                                         $total_amount = 0;
                                          foreach ($order_of_sales as $data ) {
                                       ?>
                                       <tr>
@@ -88,7 +89,15 @@
                                         <td><?php echo $data['name'] ?></td>
                                         <td><?php echo $data['order_total_amount'] ?></td>
                                       </tr>
-                                    <?php } ?>
+                                    <?php $total_amount += $data['order_total_amount'] ; } ?>
+                                    <tfoot>
+                                      <tr>
+                                        <td><strong>Total</strong></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><strong><?php echo $total_amount; ?></strong></td>
+                                      </tr>
+                                    </tfoot>
                                         
                                         
                                           

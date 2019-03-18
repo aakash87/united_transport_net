@@ -139,6 +139,8 @@
                   <div class="panel-heading">
                      <div class="panel-title">
                         <h4>Process Order</h4>
+                        <input type="Hidden" class="add1_input" name="add1_input">
+                        <input type="Hidden" class="add3_input" name="add3_input">
                      </div>
                   </div>
                   <div class="panel-body">
@@ -475,6 +477,7 @@
                           <input type="hidden" value="<?php echo $order_second['id'] ?>" name="second_stop_id[]">
                           <label for="" > Origin </label>
                              <input class="form-control" name="sec_stop_origin_update[]" type="text" value="<?php echo $order_second['sec_stop_origin'] ?>" id="" placeholder=""  >
+
                         </div>
                        <div class="form-group col-lg-4">
                         <label for="" > Destination </label>
@@ -835,7 +838,16 @@
    
         });
    
-   
+   $(".add1").click(function (event) {
+    event.preventDefault();
+    $(".add1_input").val("Yes");
+
+});
+   $(".add3").click(function (event) {
+    event.preventDefault();
+    $(".add3_input").val("Yes");
+
+});
    
    $(document).ready(function(){
          var maxField = 10; //Input fields increment limitation

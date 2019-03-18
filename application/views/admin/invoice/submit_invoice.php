@@ -47,9 +47,9 @@
                                             <label for="" class="col-sm-3 col-form-label">Customer Name</label>
                                               <div class="col-sm-9">
                                                     <input class="form-control" name="customer_name" type="text" value="<?php echo $customer['full_name']; ?>" id="" placeholder="" readonly >
-                                                    <input style="display:;" class="form-control" name="customer_id" type="text" value="<?php echo $invoice['customer_id']; ?>" id="" placeholder="" readonly >
-                                                    <input style="display:;" class="form-control" name="sales_person_id" type="text" value="<?php echo $invoice['sales_person_id']; ?>" id="" placeholder="" readonly >
-                                                    <input style="display:;" class="form-control" name="invoice_voucher_number" type="text" value="<?php echo $invoice['invoice_voucher_number']; ?>" id="" placeholder="" readonly >
+                                                    <input style="display:none;" class="form-control" name="customer_id" type="text" value="<?php echo $invoice['customer_id']; ?>" id="" placeholder="" readonly >
+                                                    <input style="display:none;" class="form-control" name="sales_person_id" type="text" value="<?php echo $invoice['sales_person_id']; ?>" id="" placeholder="" readonly >
+                                                    <input style="display:none;" class="form-control" name="invoice_voucher_number" type="text" value="<?php echo $invoice['invoice_voucher_number']; ?>" id="" placeholder="" readonly >
                                               </div>
                                         </div>
 
@@ -94,8 +94,8 @@
                                               <div class="col-sm-9">
                                                     <input class="form-control" name="invoice_total_amount" type="text" value="<?php echo $invoice['invoice_total_amount']; ?>" id="total_amount" placeholder="" readonly >
                                                    
-                                                    <input style="display:;" class="form-control" name="amount" type="text" value="<?php echo $invoice['customer_paid_amount']; ?>" id="" placeholder="" readonly >
-                                                    <input style="display:;" class="form-control" name="old_amount" type="text" value="<?php echo $invoice['balance']; ?>" id="" placeholder="" readonly >
+                                                    <input style="display:none;" class="form-control" name="amount" type="text" value="<?php echo $invoice['customer_paid_amount']; ?>" id="" placeholder="" readonly >
+                                                    <input style="display:none;" class="form-control" name="old_amount" type="text" value="<?php echo $invoice['balance']; ?>" id="" placeholder="" readonly >
                                               </div>
                                         </div>
                                         <div class="form-group row">

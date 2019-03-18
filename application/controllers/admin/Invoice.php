@@ -466,8 +466,8 @@
 		public function submit_order_invoice()
 		{
 			if ($this->input->server('REQUEST_METHOD') == 'POST') {
-				echo "<pre>";
-				print_r($_POST);
+				// echo "<pre>";
+				// print_r($_POST);
 				// die();
 
 				$total_with_tax = $this->input->post('with_holding_amount') + $this->input->post('paid_amount_cu');

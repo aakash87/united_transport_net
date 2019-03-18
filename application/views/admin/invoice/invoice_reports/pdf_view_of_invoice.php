@@ -382,8 +382,8 @@ footer .end {
     <div class="container">
       <div class="details clearfix">
         <div class="client left">
-            <p class="name">Client Name : <span> <?php echo $invoice_detail[0]['full_name']?> </span></p>
-            <p style="color: #000; font-weight:500;"><?php echo $invoice_detail[0]['company_name']?></p>
+            <p class="name">Client Name : <span> <?php echo $invoice_detail[0]['company_name']?> </span></p>
+            <p style="color: #000; font-weight:500;"></p>
             <p style="color: #000; font-weight:500;">Karachi</p>
           
         </div>
@@ -420,7 +420,7 @@ footer .end {
             ?>
             <tr>
                 <td class="qty"><?php echo $i;?></td>
-                <td class="qty"><?php echo "UNITED TRANSPORT NETRWORK"?></td>
+                <td class="qty"><?php echo $invoice_detail[0]['company_name']?></td>
                 <td class="qty"><?php echo  $newDate = date("d-m-Y", strtotime($module['order_date']));?></td>
                 <td class="qty"><?php echo $module['weight']?></td>
                 <td class="" style="font-size: 20px !important;"><?php echo $module['pickup_location']?></td>
@@ -468,7 +468,7 @@ footer .end {
             <div class="thanks"></div>
             <div class="thanks">Thank you!</div>
             <div class="notice">
-                <div>For UTN (Pvt.) Ltd.</div>
+                <div>For UTN</div>
             </div>
             <div class="end">Invoice was created on a computer and is valid without the signature and seal.</div>
         </div>

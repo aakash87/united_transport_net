@@ -89,7 +89,7 @@
                               <div class="col-sm-9">
                                  <div class="radio radio-danger">
                                     <!-- <input type="radio" name="SSP_tax" class="SSP_tax" id="ssp_yes" value="1"> -->
-                                    <input type="radio" name="srb_tax" class="SSP_tax" id="ssp_yes" value="1">
+                                    <input type="radio" name="SSP_tax" class="SSP_tax" id="ssp_yes" value="1">
                                     <label for="ssp_yes">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                  
                                     <input type="radio" name="SSP_tax" id="ssp_no" class="SSP_tax" value="0" checked="">

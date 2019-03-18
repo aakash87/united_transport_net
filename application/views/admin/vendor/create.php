@@ -76,11 +76,11 @@
                               <div class="col-sm-9">
                                 <div style="">
                                    <div class="radio radio-info radio-inline">
-                                       <input type="radio" name="vender_labour" class="" id="vender_labour_yes" value="Local">
+                                       <input type="radio" name="vender_labour" class="" id="vender_labour_yes" value="Yes">
                                     <label for="vender_labour_yes">Yes</label>
                                    </div>
                                    <div class="radio radio-info radio-inline">
-                                       <input type="radio" name="vender_labour" id="vender_labour_no" class="" value="Domestic_only" checked="">
+                                       <input type="radio" name="vender_labour" id="vender_labour_no" class="" value="No" checked="">
                                     <label for="vender_labour_no">No</label>
                                    </div>
                                </div> 

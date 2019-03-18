@@ -84,7 +84,7 @@
                         <i class="material-icons">apps</i>
                     </button>
                     <a class="navbar-brand" href="#">
-                      <img class="main-logo" src="<?php echo base_url() ?>admin_assets/images/logo.png" alt="">
+                      <img class="main-logo" src="<?php echo base_url() ?>admin_assets/images/smerplogo.png" alt="">
 
                         <!--<span>AdminPage</span>-->
                     </a>

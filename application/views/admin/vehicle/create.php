@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Reg Number</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Number</label>
                               <div class="col-sm-9"><input class="form-control" name="registration_number" type="text" value="" id="example-text-input" placeholder="" ></div>
                            </div>
                            <div class="form-group row">
