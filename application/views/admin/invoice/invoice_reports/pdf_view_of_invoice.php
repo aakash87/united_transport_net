@@ -404,6 +404,7 @@ footer .end {
                 <th class="total">Destination</th>
                 <th class="total">Vehicle # </th>
                 <th class="total">Vehicle Type</th>
+                <th class="total">Builty #</th>
                 <th class="total">Vehicle Rate </th>
                 <th class="total">Labor </th>
                 <th class="total">2nd Stop </th>
@@ -427,6 +428,7 @@ footer .end {
                 <td class="" style="font-size: 20px !important;"><?php echo $module['drop_off_location']?></td>
                 <td class="qty"><?php echo $module['registration_number']?></td>
                 <td class="qty"><?php echo $module['vehicle_type']?></td>
+                <td class="qty"><?php echo $module['builty_num']?></td>
                 <td class="qty"><?php echo number_format($module["order_total_amount"]);?></td>
                 <td class="qty">
                   <?php
@@ -447,12 +449,12 @@ footer .end {
             
               <tr style=" background-color: #e1e4e6; border-color: #e1e4e6;">
                   
-                <td class="qty" colspan="12"><strong>Grand Total</strong></td>
+                <td class="qty" colspan="13"><strong>Grand Total</strong></td>
                 <td class="qty" colspan="1" ><span style=""><strong><?php echo  number_format($total_count)?></strong></span></td>
               </tr>
               <tr style=" background-color: #e1e4e6; border-color: #c6c9cc;">
                 
-                <td class="qty" colspan="12"><strong><?php echo NumbersToWords::convert($total_count);?></strong></td>
+                <td class="qty" colspan="13"><strong><?php echo NumbersToWords::convert($total_count);?></strong></td>
                 <td class="qty" colspan="1"><span style=""></span></td>
               </tr>
              

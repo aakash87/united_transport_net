@@ -29,7 +29,10 @@
                 <div class="panel panel-bd">
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <h4>View Ledger</h4>
+                            <h4><?php if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                                $get_expense_data = $this->db->query("SELECT * FROM `vehicle` where id='".$_POST['select_vehicel']."' ")->row_array(); echo  $get_expense_data['registration_number']; echo " Vehicle ";}
+                                ?>  Ledger <?php if ($this->input->server('REQUEST_METHOD') == 'POST') { echo $newDate = date("d-m-Y", strtotime($str_current_day_show)); echo " To "; echo $newDate2 = date("d-m-Y", strtotime($str_last_date_show)); }
+                                ?></h4>
                             
                         </div>
                     </div>
@@ -39,7 +42,7 @@
                               <div class="form-group row" >
                                 <div class="col-lg-6"">
                             
-                                  <label for="example-text-input" class="col-sm-4 col-form-label">Select Vehicle</label>
+                                  <label for="example-text-input" class="col-sm-4 col-form-label">Vehicle</label>
                                           <div class="col-sm-8">
                                              <select class="form-control selectpicker" data-live-search="true" name="select_vehicel" >
                                                 <option value="">Select Vehicle </option><?php foreach ($vehicles as $veh) {?>

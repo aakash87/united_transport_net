@@ -44,6 +44,7 @@
                         <thead>
                            <tr>
                               <th>S#</th>
+                              <th>INV #</th>
                               <th>Customer Name</th>
                               <th>Customer SalesPerson</th>
                               <th>Invoice Status</th>
@@ -75,6 +76,7 @@
                                  <td>
                                     <?php echo  $s_number++; ?>
                                  </td>
+                                 <td><?php echo $module['invoice_voucher_number']; ?></td>
                                  <td><?php echo $module['full_name']; ?></td>
                                  <td><?php echo $module['sp_name']; ?></td>
                                  <td><?php echo $module['status']; ?></td>

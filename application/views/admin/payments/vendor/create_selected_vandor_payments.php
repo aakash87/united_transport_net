@@ -40,7 +40,7 @@
                                                
                                                 <th>Sr.no</th>
                                                 <th>Order ID</th>
-                                                <th>Vendor Type</th>
+                                                <th>Desc</th>
                                                 <th>Vehicle Buying</th>
                                                 <th>Detention</th>
                                                 <th>Local Transport</th>

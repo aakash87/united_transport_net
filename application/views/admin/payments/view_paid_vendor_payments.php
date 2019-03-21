@@ -61,7 +61,7 @@
                                             <th>Vendor Name</th>
                                             <th>InV Create Date</th>
                                             <th>Vendor Address</th>
-                                            <th>Vendor Type</th>
+                                            <th>Desc</th>
                                             <th>Status</th>
                                             <th>Total Amount</th>
                                             <th>Amount</th>

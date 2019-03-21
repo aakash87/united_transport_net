@@ -85,7 +85,7 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Pickup date</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Loading date</label>
                               <div class="col-sm-9"><input class="form-control" name="pickup_date_and_time" type="date" value="<?php echo $orders['pickup_date_and_time'] ?>" id="example-text-input" placeholder=""  ></div>
                            </div>
                            <div class="form-group row">

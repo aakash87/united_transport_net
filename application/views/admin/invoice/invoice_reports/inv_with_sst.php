@@ -422,6 +422,7 @@ footer .end {
                 <th class="total">Destination</th>
                 <th class="total">Vehicle # </th>
                 <th class="total">Vehicle Type</th>
+                <th class="total">Builty #</th>
                 <th class="total">Vehicle Rate </th>
                 <th class="total">Labor </th>
                 <th class="total">2nd Stop </th>
@@ -449,6 +450,7 @@ footer .end {
                 <td class="" style="font-size: 20px !important;"><?php echo $module['drop_off_location']?></td>
                 <td class="qty"><?php echo $module['registration_number']?></td>
                 <td class="qty"><?php echo $module['vehicle_type']?></td>
+                <td class="qty"><?php echo $module['builty_num']?></td>
                 <td class="qty"><?php echo number_format($module["order_total_amount"]);?></td>
                 <td class="qty">
                               <?php

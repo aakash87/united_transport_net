@@ -218,8 +218,8 @@
 			$str_last_day = date('Y-m-d' , $str_last_date );
 			
 			$this->data['sales_person_ledger'] = $this->Reports_model->sales_person_ledger($sales_person_id , $str_current_day ,  $str_last_day);
-			
-			// echo "<pre>";	
+			$this->data['str_current_day_show'] = $current_date;
+			$this->data['str_last_date_show'] = $last_date;			// echo "<pre>";	
 			// print_r($this->data['sales_person_ledger']);die();
 			$this->data['title'] = 'Sales Person Ledger';
 			$this->data['permission'] = $this->permission;
@@ -276,6 +276,8 @@
 			$this->data['customer_ledger'] = $this->Reports_model->customer_ledger($customer_id , $str_current_day ,  $str_last_day);
 			// echo "<pre>";	
 			// print_r($this->data['customer_ledger']);die();
+			$this->data['str_current_day_show'] = $current_date;
+			$this->data['str_last_date_show'] = $last_date;
 			$this->data['title'] = 'Customer Ledger';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/customer_ledger',$this->data);
@@ -342,7 +344,9 @@
 			$this->data['vehicles'] = $this->Reports_model->all_rows('vehicle');
 		
 			// echo '<pre>'; print_r($this->data['vehicles']);
-			// die();	
+			// die();
+			$this->data['str_current_day_show'] = $current_date;
+			$this->data['str_last_date_show'] = $last_date;	
 			$this->data['title'] = 'Vehicle Ledger';$this->load->template('admin/reports/ledger/vehicle_ledger',$this->data);
 		}	
 		public function search_by_vendor()
@@ -372,6 +376,8 @@
 			$this->data['vendor_ledger'] = $this->Reports_model->vendor_ledger($vendor_id , $str_current_day ,  $str_last_day);
 			// echo "<pre>";	
 			// print_r($this->data['vendor_ledger']);die();
+			$this->data['str_current_day_show'] = $current_date;
+			$this->data['str_last_date_show'] = $last_date;
 			$this->data['title'] = 'Vendor Ledger';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/vendor_ledger',$this->data);
@@ -427,6 +433,8 @@
 			$this->data['driver_ledger'] = $this->Reports_model->driver_ledger($driver_id , $str_current_day ,  $str_last_day);
 			// echo "<pre>";	
 			// print_r($this->data['driver_ledger']);die();
+			$this->data['str_current_day_show'] = $current_date;
+			$this->data['str_last_date_show'] = $last_date;
 			$this->data['title'] = 'Search By Driver';
 			$this->data['permission'] = $this->permission;
 			$this->load->template('admin/reports/ledger/driver_ledger',$this->data);

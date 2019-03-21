@@ -17,7 +17,7 @@ class Invoice_model extends MY_Model{
 
 	public function  all_rows_with_data()
 	{
-		$this->db->select('invoice.id as invoiceID , invoice.invoice_status , invoice.customer_paid_amount ,  invoice.invoice_total_amount  ,invoice.balance ,invoice.status,  cu.*, users.name as sp_name');
+		$this->db->select('invoice.id as invoiceID , invoice.invoice_status , invoice.customer_paid_amount ,  invoice.invoice_total_amount  ,invoice.balance ,invoice.status, invoice.invoice_voucher_number,  cu.*, users.name as sp_name');
 		$this->db->from('invoice');
 		$this->db->join('customer cu' , 'cu.id  = invoice.customer_id');
 		$this->db->join('users' , 'users.id = cu.sales_person' , 'left');

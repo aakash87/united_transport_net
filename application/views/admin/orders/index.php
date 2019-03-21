@@ -56,6 +56,7 @@
                               <th>Pickup Location</th>
                               <th>Dropoff Location</th>
                               <th>Builty #</th>
+                              <th>Local Transport</th>
                               <th>Second Stop</th>
                               <th>Total Amount</th>
                               <th>Net Amount</th>
@@ -82,6 +83,7 @@
                               <td><?php echo $module["pickup_location"] ?></td>
                               <td><?php echo $module["drop_off_location"] ?></td>
                               <td><?php echo $module["builty_num"] ?></td>
+                              <td><?php echo $module["local_transport"] ?></td>
                               <td><?php if ($module["second_stop_order_id"] == TRUE) {
                                 echo "Yes";
                               }else{

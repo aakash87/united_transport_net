@@ -167,7 +167,7 @@
                            </div>
 
                              <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Pickup Date/Time</label>
+                                <label for="" class="col-sm-3 col-form-label">Loading Date/Time</label>
                                 <div class="col-sm-9">
                                    <input class="form-control" name="pickup_date_and_time" type="text" value=" <?php 
 
