@@ -51,7 +51,7 @@ class Reports_model extends MY_Model{
 
 	public function customer_ledger($customer_id , $str_current_day ,  $str_last_day)
 	{
-		$this->db->select('customer_ledger.* , cu.full_name , ' );
+		$this->db->select('customer_ledger.* , cu.full_name , inv.with_holding_tax' );
 		$this->db->from('customer_ledger');
 		$this->db->join('invoice inv' , 'inv.invoice_voucher_number =  customer_ledger.voucher_no' , 'left');
 		$this->db->join('customer cu' , 'cu.id =  customer_ledger.customer_id' , 'left');

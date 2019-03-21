@@ -77,7 +77,12 @@
                                         <td><?php echo $s_number++; ?></td>
                                         <td><?php echo $newDate = date("d-m-Y", strtotime($module["date"])); ?></td>
                                         <td><?php echo $module["voucher_no"] ?></td>
-                                        <td><?php echo $module["description"] ?></td>
+                                        <td><?php echo $module["description"] ?>
+                                            <?php if ($module["description"] == "Tax Amount") {
+                                                echo $module["with_holding_tax"].'%';
+                                            } else{
+                                                echo " ";
+                                            } ?></td>
                                         <td><?php  
                                             if ($module["reference"] == 'debit') {
                                              $dabit_amount = $module["amount"];

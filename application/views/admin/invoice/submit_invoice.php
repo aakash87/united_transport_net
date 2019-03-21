@@ -206,8 +206,8 @@
       var d_ans = ans * $('#with_holding_tax').val();
       var with_holding = d_ans / 100;
       var after_with_holding = $('#balance_amount').val() - with_holding;
-      $('#with_holding').val(d_ans / 100);
-      $('.after_w_h_amount').val(Math.round(after_with_holding));
+      $('#with_holding').val(Math.round(d_ans / 100));
+      $('.after_w_h_amount').val(Math.trunc(after_with_holding));
 
   });
 </script>

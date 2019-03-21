@@ -35,8 +35,8 @@
 				$this->data['orders'] = $this->all_rows_with_customer_byID('orders',array('user_id'=>$this->id));
 			}
 
-
-
+			// echo "<pre>";
+			// print_r($this->data['orders']);die();
 			$this->data['permission'] = $this->permission;
 			$this->data['user_type'] = $this->user_type;
 			$this->load->template('admin/orders/index',$this->data);
@@ -119,6 +119,7 @@
 			      'order_vendor_id'=>$_POST['order_labour_vendor_id'][$i],
 			      'labor_charges'=>$_POST['labor_charges'][$i],
 			      'labor_charges_customer'=>$_POST['labor_charges_customer'][$i],
+			      'labor_charges_description'=>$_POST['labor_charges_description'][$i],
 			      
 			     );
 			      $this->db->insert('order_labor_charges',$array_labor);
@@ -319,6 +320,7 @@
 					'order_vendor_id' => $this->input->post('updat_order_labour_vendor_id')[$i],
 					'labor_charges' => $this->input->post('update_labor_charges')[$i],
 					'labor_charges_customer' => $this->input->post('update_labor_charges_customer')[$i],
+					'labor_charges_description' => $this->input->post('update_labor_charges_description')[$i],
 				];
 
 				$this->Orders_model->update('order_labor_charges',$data_update_labor_charges,array('id'=>$this->input->post('update_labor_charges_id')[$i] ));
@@ -334,6 +336,7 @@
 			      'order_vendor_id'=>$_POST['order_labour_vendor_id'][$i],
 			      'labor_charges'=>$_POST['labor_charges'][$i],
 			      'labor_charges_customer'=>$_POST['labor_charges_customer'][$i],
+			      'labor_charges_description'=>$_POST['labor_charges_description'][$i],
 			      
 			     );
 			      $this->db->insert('order_labor_charges',$array_labor);

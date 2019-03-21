@@ -55,6 +55,8 @@
                               <th>Order Driver</th>
                               <th>Pickup Location</th>
                               <th>Dropoff Location</th>
+                              <th>Builty #</th>
+                              <th>Second Stop</th>
                               <th>Total Amount</th>
                               <th>Net Amount</th>
                               <th>Status</th>
@@ -67,11 +69,11 @@
                         </thead>
                         <tbody>
                            <?php
-                              $s_number = 1;
+                              $s_number = count($orders);
                               foreach ($orders as $module) {
                            ?>
                            <tr>
-                              <td><?php echo $s_number++;  ?></td>
+                              <td><?php echo $s_number--;  ?></td>
                               <td><?php echo $module['full_name']; ?></td>
                               <td><?php echo $newDate = date("d-m-Y", strtotime($module['pickup_date_and_time'])); ?></td>
                               <td><?php echo $newDate = date("d-m-Y", strtotime($module['dropoff_date_and_time'])); ?></td>
@@ -79,6 +81,12 @@
                               <td><?php echo $module["driver_name"] ?></td>
                               <td><?php echo $module["pickup_location"] ?></td>
                               <td><?php echo $module["drop_off_location"] ?></td>
+                              <td><?php echo $module["builty_num"] ?></td>
+                              <td><?php if ($module["second_stop_order_id"] == TRUE) {
+                                echo "Yes";
+                              }else{
+                                echo "No";
+                              } ?></td>
                               <td><?php echo number_format($module["order_total_amount"]) ?></td>
                               <td><?php echo number_format($module["net_amount"]); ?></td>
                               <td><?php echo $module["order_status"] ?></td>

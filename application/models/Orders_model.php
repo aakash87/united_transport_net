@@ -4,11 +4,12 @@ class Orders_model extends MY_Model{
 
 	public function all_rows_with_customer()
 	{
-		$this->db->select('orders.* , cu.full_name ,  driv.First_Name as driver_name, vehicle.registration_number' );
+		$this->db->select('orders.* , cu.full_name ,  driv.First_Name as driver_name, vehicle.registration_number , s_stop.second_stop_order_id' );
 		$this->db->from('orders');
 		$this->db->join('customer cu' , 'orders.order_customer = cu.id' , 'left');
 		$this->db->join('drivers driv' , 'driv.id = orders.order_driver' , 'left');
 		$this->db->join('vehicle' , 'vehicle.id = orders.order_vehicle' , 'left');
+		$this->db->join('order_second_stop as s_stop' , 's_stop.second_stop_order_id = orders.id' , 'left');
 
 		return $this->db->get()->result_array();
 

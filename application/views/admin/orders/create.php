@@ -90,7 +90,7 @@
                               <label for="example-text-input" class="col-sm-3 col-form-label">Order driver</label>
                                       <div class="col-sm-9"><input class="form-control" name="order_driver" type="text" value="" id="example-text-input" placeholder="" ></div>
                               
-                                  </div>-->
+                           </div>-->
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">Pickup address</label>
                               <div class="col-sm-9"><textarea class="form-control" name="pickup_address"  rows="1"></textarea></div>
@@ -250,6 +250,14 @@
                                        <label for="example-text-input" class="col-sm-3 col-form-label"> Labour Charges For Customer</label>
                                        <div class="col-sm-9">
                                           <input class="form-control" name="labor_charges_customer[]" type="text" value="" id="labor_charges" placeholder="" >
+                                       
+                                       </div>
+                                    </div>
+                                    <div class="form-group row">
+                                       <label for="example-text-input" class="col-sm-3 col-form-label"> Description</label>
+                                       <div class="col-sm-9">
+                                          <textarea class="form-control" name="labor_charges_description[]" rows="1"></textarea>
+                                          
                                        
                                        </div>
                                     </div>
@@ -532,6 +540,7 @@
                    
                }
            });
+           // $("#vehicel_of_vendor option").remove();
    
        });
    
@@ -645,6 +654,7 @@
             //  $(html).find(".change").prepend("<label for=''>&nbsp;</label><br/><a class='btn btn-danger remove'>- Remove</a>");
             $(html).find('input').val('')
             $(html).find('select').val('')
+            $(html).find('textarea').val('')
             $(html).find(".dele").html("<a class='btn btn-danger remove'><i class='fa fa-trash-o' aria-hidden='true'></i> </a> " + ' <a class="btn btn-success add-labour-chargers"><strong> + </strong> </a>');
             $(".after-add-labour").last().after(html);
         });

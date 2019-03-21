@@ -218,18 +218,6 @@
                            <input  class="form-control" name="commission" id="commission" readonly value="<?php echo $orders["sp_name"] ?>">
                         </div>
                      </div>
-
-
-                     <div class="form-group row">
-                        <label for="" class="col-sm-3 col-form-label">Status</label>
-                        <div class="col-sm-9">
-                           <select class="form-control" name="order_status" id="order_status">
-                              <option value="Pending" <?php echo ($orders["order_status"] == 'pending' ) ? 'selected' : NULL ; ?> >Pending</option>
-                              <option value="Complete" <?php echo ($orders["order_status"] == 'Complete' ) ? 'selected' : NULL ; ?> >Complete</option>
-                              <option value="Process" <?php echo ($orders["order_status"] == 'Process' ) ? 'selected' : NULL ; ?> >Process</option>
-                           </select>
-                        </div>
-                     </div>
                      <div class="form-group row">
                         <label for="" class="col-sm-3 col-form-label">Total Amount </label>
                         <div class="col-sm-9">
@@ -387,16 +375,21 @@
                                   </select>
                                 </div>
 
-                                <div class="form-group col-lg-3" >
-                                <label for="" class=""> Labour Charges For Vendor </label>
+                                <div class="form-group col-lg-2" >
+                                <label for="" class="">Charges For <small>Vendor</small> </label>
 
                                 <input class="form-control" name="update_labor_charges[]" type="text" value="<?php echo ($labor_charges["labor_charges"]) ? $labor_charges["labor_charges"] : NULL ; ?>" id="labor_charges" placeholder="" >
                                   <input class="form-control" name="update_labor_charges_id[]" type="Hidden" value="<?php echo $labor_charges["id"] ; ?>" id="labor_charges" placeholder="" >
                                 </div>
-                                <div class="form-group col-lg-4" >
-                                <label for="" class=""> Labour Charges For Customer </label>
+                                <div class="form-group col-lg-2" >
+                                <label for="" class="">Charges For <small>Cus</small> </label>
 
                                 <input class="form-control" name="update_labor_charges_customer[]" type="text" value="<?php echo ($labor_charges["labor_charges_customer"]) ? $labor_charges["labor_charges_customer"] : NULL ; ?>" id="labor_charges" placeholder="" >
+                                </div> 
+                                <div class="form-group col-lg-3" >
+                                <label for="" class=""> Description </label>
+                                <textarea class="form-control" name="update_labor_charges_description[]" rows="1" id="labor_charges"><?php echo ($labor_charges["labor_charges_description"]) ? $labor_charges["labor_charges_description"] : NULL ; ?></textarea>
+                                
                                 </div>
                             
                                 <div class="form-group col-lg-2 pull-right">
@@ -521,7 +514,7 @@
 
                      <script type="text/javascript">
                        $('.add').click(function() {
-                           $('.block:last').before('<div class="block"> <div class="row panel-body" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">Expense</span> </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"> <br><div class="form-group row"> <div class="col-lg-4"> <label for=""> Expense Title </label> <input class="form-control" name="expense_title[]" type="text" value="" id="" placeholder=""> </div><div class="col-lg-4"> <label for=""> Expense Date </label> <input class="form-control" name="expense_date[]" type="date" value="" id="" placeholder=""> </div><div class="col-lg-4"> <label for="" class=""> Expense Amount </label> <input class="form-control" name="expense_amount[]" type="text" value="" id="" placeholder=""> </div></div><div class=" row"> <div class="col-lg-4"> <label for="" class="">Expense Category </label> <select class="form-control" name="expense_category[]" value="" id=""> <option value="">Select Expense Category</option> <?php foreach ($expense_category as $exp_cat) : ?> <option value="<?php echo $exp_cat['id'] ?>"> <?php echo $exp_cat['expense_cate_title'] ?> </option> <?php endforeach; ?> </select> </div><div class="col-lg-4"> <label for="" class=""> Expense Description </label> <textarea class="form-control" name="expense_description[]" rows="1"></textarea> </div><div class="col-lg-4"> <label for="" class="">Paid By</label> <select class="form-control" name="paid_by[]" id=""> <option value="">Select Paid By</option> <option value="gernal_paid">Gernal</option> <option value="driver_paid">Driver</option> </select> <br></div></div></div></div><a class="btn btn-danger pull-right ovel_css_danger remove"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove Expense</a></div>');
+                           $('.block:last').before('<div class="form-group row"><div class="block"> <div class="row panel-body" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">Expense</span> </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"> <br><div class="form-group row"> <div class="col-lg-4"> <label for=""> Expense Title </label> <input class="form-control" name="expense_title[]" type="text" value="" id="" placeholder=""> </div><div class="col-lg-4"> <label for=""> Expense Date </label> <input class="form-control" name="expense_date[]" type="date" value="" id="" placeholder=""> </div><div class="col-lg-4"> <label for="" class=""> Expense Amount </label> <input class="form-control" name="expense_amount[]" type="text" value="" id="" placeholder=""> </div></div><div class=" row"> <div class="col-lg-4"> <label for="" class="">Expense Category </label> <select class="form-control" name="expense_category[]" value="" id=""> <option value="">Select Expense Category</option> <?php foreach ($expense_category as $exp_cat) : ?> <option value="<?php echo $exp_cat['id'] ?>"> <?php echo $exp_cat['expense_cate_title'] ?> </option> <?php endforeach; ?> </select> </div><div class="col-lg-4"> <label for="" class=""> Expense Description </label> <textarea class="form-control" name="expense_description[]" rows="1"></textarea> </div><div class="col-lg-4"> <label for="" class="">Paid By</label> <select class="form-control" name="paid_by[]" id=""> <option value="">Select Paid By</option> <option value="gernal_paid">Gernal</option> <option value="driver_paid">Driver</option> </select> <br></div></div></div></div></div><a class="btn btn-danger pull-right ovel_css_danger remove"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove Expense</a></div>');
                        });
                        $('.optionBox').on('click','.remove',function() {
                           $(this).parent().remove();
@@ -529,7 +522,7 @@
                      </script>
                      <script type="text/javascript">
                        $('.add2').click(function() {
-                           $('.block2:last').before('<div class="block2"><div class="row panel-body after-add-k refrence_data-append" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">2<sup>nd</sup> Stop Detail</span> </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br><div class="form-group row"> <div class="col-lg-4"> <label for="" class=""> origin </label> <input class="form-control" name="sec_stop_origin[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" class=""> Destination </label> <input class="form-control" name="sec_stop_destination[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" class=""> Rate </label> <input class="form-control" name="sec_stop_amount[]" type="text" value="" id="" placeholder="" ></div></div></div></div><a class="btn btn-danger pull-right ovel_css_danger  remove2"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove 2<sup>nd</sup> Stop Detail</a></div>');
+                           $('.block2:last').before('<div class="form-group row"><div class="block2"><div class="row panel-body after-add-k refrence_data-append" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">2<sup>nd</sup> Stop Detail</span> </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br><div class="form-group row"> <div class="col-lg-4"> <label for="" class=""> origin </label> <input class="form-control" name="sec_stop_origin[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" class=""> Destination <small>2nd Stop</small></label> <input class="form-control" name="sec_stop_destination[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" class=""> Rate </label> <input class="form-control" name="sec_stop_amount[]" type="text" value="" id="" placeholder="" ></div></div></div></div></div><a class="btn btn-danger pull-right ovel_css_danger  remove2"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove 2<sup>nd</sup> Stop Detail</a></div>');
                        });
                        $('.optionBox2').on('click','.remove2',function() {
                           $(this).parent().remove();
@@ -537,7 +530,7 @@
                      </script>
                      <script type="text/javascript">
                        $('.add3').click(function() {
-                           $('.block3:last').before('<div class="block3"><div class="row panel-body after-add-k refrence_data-append" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">Labour Charges </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"> <br><div class="form-group row"> <div class="form-group col-lg-6"> <label for="" class=""> Labour Vendor</label> <select class="form-control" name="order_labour_vendor_id[]" value="" id="" > <option value="">Select Labour Vendor </option> <?php foreach ($labour_vendor as $labourvend) : ?> <option value="<?php echo $labourvend['id'] ?>" ><?php echo $labourvend['vendor_name'] ?></option> <?php endforeach; ?> </select> </div><div class="col-lg-6"> <label for="" class=""> Labour Charges For Vendor </label> <input class="form-control" name="labor_charges[]" type="text" value="" id="labor_charges" placeholder=""> </div></div><div class="form-group row"><div class="col-lg-6"> <label for="" class=""> Labour Charges For Customer </label> <input class="form-control" name="labor_charges_customer[]" type="text" value="" id="labor_charges" placeholder=""> </div></div></div></div><a class="btn btn-danger pull-right ovel_css_danger remove3"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove Labour Charges</a></div>');
+                           $('.block3:last').before(' <div class="form-group row"><div class="block3"><div class="row panel-body after-add-k refrence_data-append" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">Labour Charges </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"> <br><div class="form-group row"> <div class="form-group col-lg-3"> <label for="" class=""> Labour Vendor</label> <select class="form-control" name="order_labour_vendor_id[]" value="" id="" > <option value="">Select Labour Vendor </option> <?php foreach ($labour_vendor as $labourvend) : ?> <option value="<?php echo $labourvend['id'] ?>" ><?php echo $labourvend['vendor_name'] ?></option> <?php endforeach; ?> </select> </div><div class="col-lg-2"> <label for="" class="">Charges For <small>Vendor</small> </label> <input class="form-control" name="labor_charges[]" type="text" value="" id="labor_charges" placeholder=""> </div><div class="form-group row"><div class="col-lg-2"> <label for="" class="">Charges For <small>Cus</small> </label> <input class="form-control" name="labor_charges_customer[]" type="text" value="" id="labor_charges" placeholder=""> </div><div class="form-group row"><div class="col-lg-4"> <label for="" class=""> Description </label> <textarea class="form-control" name="labor_charges_description[]" rows="1" id="labor_charges"></textarea></div></div></div></div></div></div><a class="btn btn-danger pull-right ovel_css_danger remove3"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove Labour Charges</a></div>');
                        });
                        $('.optionBox3').on('click','.remove3',function() {
                           $(this).parent().remove();
@@ -622,6 +615,18 @@
 
                      
                   </div> -->
+                  
+                 
+                  <div class="form-group row">
+                     <div class="col-sm-12">
+                      <label for="" class="">Status</label>
+                        <select class="form-control" name="order_status" id="order_status">
+                           <option value="Pending" <?php echo ($orders["order_status"] == 'pending' ) ? 'selected' : NULL ; ?> >Pending</option>
+                           <option value="Complete" <?php echo ($orders["order_status"] == 'Complete' ) ? 'selected' : NULL ; ?> >Complete</option>
+                           <option value="Process" <?php echo ($orders["order_status"] == 'Process' ) ? 'selected' : NULL ; ?> >Process</option>
+                        </select>
+                     </div>
+                  </div>
                   <div class="form-group row">
                     
                      <br>
@@ -936,6 +941,7 @@
             //  $(html).find(".change").prepend("<label for=''>&nbsp;</label><br/><a class='btn btn-danger remove'>- Remove</a>");
             $(html).find('input').val('')
             $(html).find('select').val('')
+            $(html).find('textarea').val('')
             $(html).find(".del").html("<a class='btn btn-danger remove'><i class='fa fa-trash-o' aria-hidden='true'></i> </a> " + ' <a class="btn btn-success add-k"><strong> + </strong> </a>');
             $(".after-add-k").last().after(html);
             var con = 0;
