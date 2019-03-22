@@ -111,7 +111,7 @@
 			];
 			$data['user_id'] = $this->session->userdata('user_id');
 			$id = $this->Orders_model->insert('orders',$data);
-
+			if ($this->input->post('add3_input') == "Yes") {
 			$count_labor=count($_POST['labor_charges']);
 			for ($i=0; $i < $count_labor ; $i++) {
 			     $array_labor=array(
@@ -124,6 +124,7 @@
 			     );
 			      $this->db->insert('order_labor_charges',$array_labor);
 			  }
+			}
 			if ($id) {
 				redirect('admin/orders');
 			}
@@ -146,6 +147,38 @@
 
 			$this->data['title'] = 'Edit Orders';
 			$this->data['orders'] = $this->Orders_model->get_row_single_with_cu($id);$this->load->template('admin/orders/edit',$this->data);
+		}
+		public function view_order_detail($id)
+		{
+			if ($this->user_type == 1) {
+				
+				$this->data['title'] = 'View Order Detail';
+
+				$this->data['vehicle_data'] = $this->Orders_model->all_rows('vehicle');
+				$this->data['drivers_data'] = $this->Orders_model->all_rows('drivers');
+				$this->data['expense_category'] = $this->Orders_model->all_rows('expense_category');
+
+
+				$this->data['order_expense'] =  $this->Orders_model->get_order_expense($id);
+
+				
+				$this->data['orders'] = $this->Orders_model->get_row_with_customer_data($id);
+				
+				$this->data['order_second_stop'] = $this->Orders_model->get_row_with_order_second_stop($id);
+				$this->data['order_labor_charges'] = $this->Orders_model->get_row_with_order_labor_charges($id);
+
+				// echo '<pre>'; print_r($this->data['orders']);
+
+				// die();
+
+				$this->data['vendor'] = $this->Orders_model->all_rows('vendor');
+				$this->data['local_vendor'] = $this->Orders_model->get_local_vendor();
+				$this->data['labour_vendor'] = $this->Orders_model->get_labour_vendor();
+				// echo "<pre>";
+				// print_r($this->data['order_labor_charges']);die();
+				$this->load->template('admin/orders/view_order_detail',$this->data);
+
+			}
 		}
 
 		public function update()
@@ -362,7 +395,7 @@
 
 
 
-			if ($this->input->post('add1_input') == "Yes") {
+			if ($this->input->post('add2_input') == "Yes") {
 				
 			$sec_stop_origin_count = count($this->input->post('sec_stop_origin'));
 

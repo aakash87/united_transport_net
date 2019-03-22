@@ -139,8 +139,9 @@
                   <div class="panel-heading">
                      <div class="panel-title">
                         <h4>Process Order</h4>
-                        <input type="Hidden" class="add1_input" name="add1_input">
-                        <input type="Hidden" class="add3_input" name="add3_input">
+                        <input type="text" class="add1_input" name="add1_input">
+                        <input type="text" class="add2_input" name="add2_input">
+                        <input type="text" class="add3_input" name="add3_input">
                      </div>
                   </div>
                   <div class="panel-body">
@@ -305,19 +306,26 @@
                         <div class="form-group row">
                            <label for="example-text-input" class="col-sm-3 col-form-label"> Local Transport </label>
                            <div class="col-sm-9">
-                              <input class="form-control" name="local_transport" type="text" value="<?php echo ($orders["local_transport"]) ? $orders["local_transport"] : NULL ; ?>" id=" local_transport" placeholder="" >
+                              <input class="form-control" name="local_transport" type="text" value="<?php if($orders["local_transport"] == FALSE){echo "0";}else{
+                                echo $orders["local_transport"];
+                              } ?>" id=" local_transport" placeholder="" >
                            </div>
                         </div>
                         <div class="form-group row">
                            <label for="example-text-input" class="col-sm-3 col-form-label"> Detention For Vendor</label>
                            <div class="col-sm-9">
-                              <input class="form-control" name="order_tenstion" type="text" value="<?php echo ($orders["order_tenstion"]) ? $orders["order_tenstion"] : NULL ; ?>" id="" placeholder="" >
+                              <input class="form-control" name="order_tenstion" type="text" value="<?php if($orders["order_tenstion"] == FALSE){echo "0";}else{
+                                echo $orders["order_tenstion"];
+                              } ?>
+                              " id="" placeholder="" >
                            </div>
                         </div>
                         <div class="form-group row">
                            <label for="example-text-input" class="col-sm-3 col-form-label"> Detention For Customer </label>
                            <div class="col-sm-9">
-                              <input class="form-control" name="order_detention_customer" type="text" value="<?php echo ($orders["order_detention_customer"]) ? $orders["order_detention_customer"] : NULL ; ?>" id="" placeholder="" >
+                              <input class="form-control" name="order_detention_customer" type="text" value="<?php if($orders["order_detention_customer"] == FALSE){echo "0";}else{
+                                echo $orders["order_detention_customer"];
+                              } ?>" id="" placeholder="" >
                            </div>
                         </div>
                         <div class="form-group row">
@@ -415,6 +423,7 @@
                                   <div class="form-group col-lg-4">
                                     <label for="" class=""> Expense Title</label>
                                     <input class="form-control" name="expense_title_update[]" type="text" value="<?php echo $expense['expense_title'] ?>" id="" placeholder=""  >
+                                    <input class="form-control" name="expense_update_id[]" type="hidden" value="<?php echo $expense['id'] ?>" id="" placeholder=""  >
                                   </div>
                                   <div class="form-group col-lg-4">
                                     <label for="" > Expense Date </label>
@@ -495,7 +504,7 @@
                       <div class="optionBox">
                          
                           <div class="block">
-                            <a class="btn btn-success add-kpi pull-right add ovel_css">+ Add Expense</a>
+                            <a class="btn btn-success add-kpi pull-right add ovel_css add1">+ Add Expense</a>
                               
                           </div>
                       </div>
@@ -846,6 +855,11 @@
    $(".add1").click(function (event) {
     event.preventDefault();
     $(".add1_input").val("Yes");
+
+});
+   $(".add2").click(function (event) {
+    event.preventDefault();
+    $(".add2_input").val("Yes");
 
 });
    $(".add3").click(function (event) {

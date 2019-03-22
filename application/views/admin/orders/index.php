@@ -49,7 +49,7 @@
                            <tr>
                               <th>S.no</th>
                               <th>Customer</th>
-                              <th>Pickup Date/Time</th>
+                              <th>Loading Date/Time</th>
                               <th>Dropoff Date/Time</th>
                               <th>Order Vehicle</th>
                               <th>Order Driver</th>
@@ -84,11 +84,13 @@
                               <td><?php echo $module["drop_off_location"] ?></td>
                               <td><?php echo $module["builty_num"] ?></td>
                               <td><?php echo $module["local_transport"] ?></td>
-                              <td><?php if ($module["second_stop_order_id"] == TRUE) {
-                                echo "Yes";
-                              }else{
-                                echo "No";
-                              } ?></td>
+                              <td><?php $second_stop = $this->db->query("SELECT * FROM `order_second_stop` where second_stop_order_id='".$module['id']."' ")->result_array();
+                              $total_amount_of_s_stop = 0;
+                              foreach ($second_stop as $s_stop) {
+                                $s_stop['sec_stop_amount'];
+                               $total_amount_of_s_stop += $s_stop['sec_stop_amount'];
+                               };
+                              ?><span href="#" data-toggle="tooltip" title="<?php echo count($second_stop);?> Second Stop On This Order"> <?php echo $total_amount_of_s_stop; ?></span></td>
                               <td><?php echo number_format($module["order_total_amount"]) ?></td>
                               <td><?php echo number_format($module["net_amount"]); ?></td>
                               <td><?php echo $module["order_status"] ?></td>
@@ -99,7 +101,7 @@
                                  <?php 
                                     if ($permission["edit"] == "1") {
                                     ?>
-                                 <a href="<?php echo base_url() ?>admin/orders/edit/<?php echo $module["id"] ?>"><img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="35" height="35"></a>
+                                 <a href="<?php echo base_url() ?>admin/orders/edit/<?php echo $module["id"] ?>"><img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/record1.png" title="Edit" alt="Edit" width="35" height="35"></a>
                                  <?php } ?>
                                  <?php 
                                     if ($permission["deleted"] == "1") {
@@ -107,6 +109,7 @@
                                  <a href="<?php echo base_url() ?>admin/orders/add_expense_of_order/<?php echo $module["id"] ?>"><img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/img/add.png" title="Add Expense" alt="Add Expense" width="25" height="25"></a>
                                  <?php if ($user_type == 1) { ?>
                                  <a href="<?php echo base_url() ?>admin/orders/process_of_order_by_admin/<?php echo $module["id"] ?>"><img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/c-icon.png" title="process by admin" alt="process by admin" width="25" height="25"></a>
+                                 <a href="<?php echo base_url() ?>admin/orders/view_order_detail/<?php echo $module["id"] ?>"><img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/record1.png" title="View Order Detail" alt="View Order Detail" width="25" height="25"></a>
                                  <?php } ?>
                                  <img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="25" height="25" class="delete" id='del_<?php echo $module["id"] ?>' >
                                  
@@ -169,4 +172,7 @@
     
      });
    });
+   $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
 </script>

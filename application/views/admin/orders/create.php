@@ -36,6 +36,7 @@
                         <div class="col-md-6">
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">Date</label>
+                              <input type="hidden" class="add3_input" name="add3_input">
                               <div class="col-sm-9"><input type="date" name="order_date" class="form-control" ></div>
                            </div>
                            <div class="form-group row" class="sales_person_id_div">
@@ -226,11 +227,10 @@
                                     <input class="form-control" name="builty_num" type="text" value="" id="" placeholder="" >
                                  </div>
                               </div>
-                              <div class="after-add-labour">
+                              <!-- <div class="after-add-labour">
                                   <div class="form-group row">
                                      <label for="example-text-input" class="col-sm-3 col-form-label">Labour Vendor</label>
                                      <div class="col-sm-9">
-                                        <!-- <input class="form-control" name="ower_id" type="text" value="" d="example-text-input" placeholder="" > -->
                                         <select class="form-control" name="order_labour_vendor_id[]"  value="" id="" >
                                            <option value="">Select Labour Vendor</option>
                                            <?php foreach ($labour_vendor as $labourvend) : ?>
@@ -262,23 +262,24 @@
                                        </div>
                                     </div>
                                 
-                                  <div class="form-group row">
-                                      <span class="pull-right">
-                                        <div class="col-sm-12 dele">
-                                          <a class="btn btn-success add-labour-chargers pull-right">+ Add More</a>
-                                        </div>
-                                      </span>
-                                  </div>
 
-                              </div>
+                              </div> -->
                               
                            </div> 
+                        </div>
 
 
 
 
 
-
+                            
+                                <div class="optionBox3">
+                                     <div class="block3">
+                                       <a class="btn btn-success pull-right add3 ovel_css">+ Add Labour Charges</a>
+                                         
+                                     </div>
+                                 </div>
+                            
 
 
 
@@ -291,17 +292,33 @@
 
                            <div class="form-group row">
                               <div class="col-sm-12">
+                                 <br>
                                  <button type="submit" class="btn btn-primary pull-right">Submit</button>
                               </div>
                            </div>
-                        </div>
+                        
                      </div>
                   </div>
                </div>
             </div>
          </div>
       </form>
-   
+   <script type="text/javascript">
+     $('.add3').click(function() {
+         $('.block3:last').before(' <div class=""><div class="block3"><div class=" panel-body after-add-k refrence_data-append" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">Labour Charges </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"> <br><div class="form-group row"> <div class="form-group col-lg-3"> <label for="" class=""> Labour Vendor</label> <select class="form-control" name="order_labour_vendor_id[]" value="" id="" > <option value="">Select Labour Vendor </option> <?php foreach ($labour_vendor as $labourvend) : ?> <option value="<?php echo $labourvend['id'] ?>" ><?php echo $labourvend['vendor_name'] ?></option> <?php endforeach; ?> </select> </div><div class="col-lg-2"> <label for="" class="">Charges For <small>Vendor</small> </label> <input class="form-control" name="labor_charges[]" type="text" value="" id="labor_charges" placeholder=""> </div><div class="form-group row"><div class="col-lg-2"> <label for="" class="">Charges For <small>Cus</small> </label> <input class="form-control" name="labor_charges_customer[]" type="text" value="" id="labor_charges" placeholder=""> </div><div class="form-group row"><div class="col-lg-4"> <label for="" class=""> Description </label> <textarea class="form-control" name="labor_charges_description[]" rows="1" id="labor_charges"></textarea></div></div></div></div></div></div><a class="btn btn-danger pull-right ovel_css_danger remove3"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove Labour Charges</a></div>');
+     });
+     $('.optionBox3').on('click','.remove3',function() {
+        $(this).parent().remove();
+     });
+
+   </script>
+<script type="text/javascript">
+   $(".add3").click(function (event) {
+      // alert();
+    event.preventDefault();
+    $(".add3_input").val("Yes");
+ });
+</script>
 <!-- /.main content -->
 </div>
 <!-- /#page-wrapper -->
@@ -662,4 +679,5 @@
             $(this).parents(".after-add-labour").remove();
         });
     });
+    
 </script>
