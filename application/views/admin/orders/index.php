@@ -58,7 +58,7 @@
                               <th>Builty #</th>
                               <th>Local Transport</th>
                               <th>Second Stop</th>
-                              <th>Total Amount</th>
+                              <th>Order Amount</th>
                               <th>Net Amount</th>
                               <th>Status</th>
                               <?php 
