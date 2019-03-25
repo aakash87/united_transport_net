@@ -713,6 +713,15 @@
 			$this->Orders_model->delete('orders',array('id'=>$id));
 			redirect('admin/orders');
 		}
+		public function delet_all_data()
+		{
+			$id = $this->input->post('id');
+			$this->Orders_model->delete('orders',array('id'=>$id));
+			$this->Orders_model->delete('order_expense',array('order_id'=>$id));
+			$this->Orders_model->delete('order_labor_charges',array('order_id'=>$id));
+			$this->Orders_model->delete('order_second_stop',array('order_id'=>$id));
+			redirect('admin/orders');
+		}
 
 
 	}

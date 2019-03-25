@@ -114,6 +114,7 @@
                                  <img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="25" height="25" class="delete" id='del_<?php echo $module["id"] ?>' >
                                  
                                 <!--  <a href="<?php echo base_url() ?>admin/orders/delete/<?php echo $module["id"] ?>"><img style="height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a> -->
+                                <a href="<?php echo base_url() ?>admin/orders/delet_all_data/<?php echo $module["id"] ?>">delet</a>
                                  <?php } ?>
                                  
                               </td>
