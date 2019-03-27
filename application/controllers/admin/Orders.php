@@ -180,6 +180,43 @@
 
 			}
 		}
+		public function view_order_detail_by_ids()
+		{
+			if ($this->user_type == 1) {
+				
+
+				$this->data['title'] = 'View Order Detail';
+				$this->data['vehicle_data'] = $this->Orders_model->all_rows('vehicle');
+				$this->data['drivers_data'] = $this->Orders_model->all_rows('drivers');
+				$this->data['expense_category'] = $this->Orders_model->all_rows('expense_category');
+				$o_id = explode(',', $_GET['ids']);
+				// print_r(count($o_id));
+
+	$selected_data1 = [];	
+
+	for ($i=0; $i < count($o_id); $i++) { 
+		$this->data['orders'] = $this->Orders_model->get_row_with_customer_data($o_id[$i]);
+		$this->data['order_expense'] =  $this->Orders_model->get_order_expense($o_id[$i]);
+		$this->data['order_second_stop'] = $this->Orders_model->get_row_with_order_second_stop($o_id[$i]);
+		$this->data['order_labor_charges'] = $this->Orders_model->get_row_with_order_labor_charges($o_id[$i]);
+		array_push($selected_data1, $this->data['orders']);
+	}
+	$this->data['selected_data1'] = $selected_data1;
+				
+
+				// echo '<pre>'; print_r($this->data['selected_data4']);
+
+				// die();
+
+				$this->data['vendor'] = $this->Orders_model->all_rows('vendor');
+				$this->data['local_vendor'] = $this->Orders_model->get_local_vendor();
+				$this->data['labour_vendor'] = $this->Orders_model->get_labour_vendor();
+				// echo "<pre>";
+				// print_r($this->data['order_labor_charges']);die();
+				$this->load->template('admin/orders/view_order_detail_by_ids',$this->data);
+
+			}
+		}
 
 		public function update()
 		{
@@ -441,8 +478,8 @@
 						'vendor_type' => 'Buying',
 						'status' => 'UnPaid',
 						'detention' => $this->input->post('order_tenstion'),
-						'vehicle_buying' => $this->input->post('buying_assigned'),
-						'total_cost' => $this->input->post('buying_assigned') + $this->input->post('order_tenstion'),
+						'vehicle_buying' => $this->input->post('v_buy'),
+						'total_cost' => $this->input->post('v_buy') + $this->input->post('order_tenstion'),
 						'date' => date('d-m-Y'),
 					];
 					$this->Orders_model->insert('vendor_external_cost',$external_cost_buying);
@@ -713,13 +750,14 @@
 			$this->Orders_model->delete('orders',array('id'=>$id));
 			redirect('admin/orders');
 		}
-		public function delet_all_data()
+		public function delet_all_data($id)
 		{
-			$id = $this->input->post('id');
+			// $id = $this->input->post('id');
 			$this->Orders_model->delete('orders',array('id'=>$id));
 			$this->Orders_model->delete('order_expense',array('order_id'=>$id));
 			$this->Orders_model->delete('order_labor_charges',array('order_id'=>$id));
-			$this->Orders_model->delete('order_second_stop',array('order_id'=>$id));
+			$this->Orders_model->delete('order_second_stop',array('second_stop_order_id'=>$id));
+			$this->Orders_model->delete('vendor_external_cost',array('order_id'=>$id));
 			redirect('admin/orders');
 		}
 

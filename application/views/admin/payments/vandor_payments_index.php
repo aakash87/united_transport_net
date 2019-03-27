@@ -86,7 +86,8 @@
                                             <td><?php echo number_format($module["amount"]); ?></td>
                                             <td><?php echo number_format($module["balance"]); ?></td>
                                             <td>
-                                                <a href="<?php echo base_url() ?>admin/payments/submit_vandor_payment/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="Submit" alt="Submit" width="35" height="35"></a>
+                                                <a href="<?php echo base_url() ?>admin/payments/submit_vandor_payment/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="Submit" alt="Submit" width="25" height="25"></a>
+                                                <a href="<?php echo base_url() ?>admin/payments/view_vendor_invoie/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/img/view_report.png" title="View Invoice" alt="View Invoice" width="25" height="25"></a>
                                             </td>
                                         </tr>
                                         <?php } ?>

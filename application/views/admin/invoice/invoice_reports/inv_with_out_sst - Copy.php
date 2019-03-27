@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>UTN</title>
+    <title>HTML to API - Invoice</title>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <!-- <link rel="stylesheet" href="sass/main.css" media="screen" charset="utf-8"/> -->
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -184,7 +184,7 @@ section table {
   font-size: 15px;
 }
 section table .qty, section table .unit, section table .total {
-  width: auto;
+  width: 15%;
   font-size: 30px;
 }
 section table .desc {
@@ -373,17 +373,8 @@ footer .end {
 <body>
     <header class="clearfix">
         <div class="container">
-                <!-- <img class="logo" src="<?php echo base_url()?>admin_assets/images/logo.png" alt="" style="height:45px;">
-        <h6 style="text-align: center; font-size: 28px; font-weight: 400;" class=" ">United Transport Network</h6> -->
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+                <img class="logo" src="<?php echo base_url()?>admin_assets/images/logo.png" alt="" style="height:45px;">
+        <h6 style="text-align: center; font-size: 28px; font-weight: 400;" class=" ">United Transport Network</h6>
     </div>
   </header>
 
@@ -391,32 +382,15 @@ footer .end {
     <div class="container">
       <div class="details clearfix">
         <div class="client left">
-            
+          
+            <p class="name">Client Name : <span> <?php echo $invoice_detail[0]['full_name']?> </span></p>
+            <p style="color: #000; font-weight:500;"><?php echo $invoice_detail[0]['company_name']?></p>
+            <p style="color: #000; font-weight:500;">Karachi</p>
           
         </div>
         <div class="data right">
-            <div class="date">Invoice #: <span style="text-decoration: underline;"><?php echo $invoice_detail[0]['invoice_voucher_number']?></span></div>
-            <div class="date">Date of Invoice: <span style="text-decoration: underline;"><?php echo $newDate22 = date("d-m-Y", strtotime($invoice_detail[0]['invoice_create_date']));?></span><br></div>
-        </div>
-    </div>
-    <div class="details clearfix">
-        <div class="client left">
-            <h4>Company Detail</h4>
-            <p style="color: #000; font-weight:500;">United Transport Network</p>
-            <p style="color: #000; font-weight:500;"><?php echo $customer[0]['Address']?></p>
-            <p style="color: #000; font-weight:500;">NTN # <span>4194683-9</span></p>
-            <p style="color: #000; font-weight:500;">SRB # <span>4194683-9</span></p>
-            <p style="color: #000; font-weight:500;">Phone # <span>4194683-9</span></p>
-          
-        </div>
-        <div class="data right">
-            <h4 style="text-align: left">Customer Detail</h4>
-            <div class="date" style="text-align: left">Address: 23-E, E-Market, P.E.C.H.S, </div>
-            <div class="date" style="text-align: left"><?php echo $customer['company_name']?></div>
-            <div class="date" style="text-align: left"><?php echo $customer['Address']?></div>
-            <div class="date" style="text-align: left">NTN #</div>
-            <div class="date" style="text-align: left">STR #</div>
-            <div class="date" style="text-align: left">Phone # <span><?php echo $customer['Phone_Number']?></span></div>
+            <div class="title">Invoice #: <span><?php echo $invoice_detail[0]['invoice_voucher_number']?></span></div>
+            <div class="date">Date of Invoice: <?php echo $invoice_detail[0]['invoice_create_date']?><br></div>
         </div>
     </div>
       
@@ -431,14 +405,12 @@ footer .end {
                 <th class="total">Destination</th>
                 <th class="total">Vehicle # </th>
                 <th class="total">Vehicle Type</th>
-                <th class="total">Builty #</th>
                 <th class="total">Vehicle Rate </th>
                 <th class="total">Labor </th>
                 <th class="total">2nd Stop </th>
                 <th class="total">Detention </th>
-                <th class="total">Local Trans</sup></th>
-                <th class="total">Buying</sup></th>
-                <th class="total">Total </th>
+                <th class="total">Order <sup style="font-size: 11px !important;">Amount</sup></th>
+                <th class="total">Grand Total </th>
             </tr>
         </thead>
         <tbody>
@@ -446,77 +418,53 @@ footer .end {
               $i = 1;
               $total_amount = 0;
               $total_count = 0;
-              $total_amount_invoice = 0;
               foreach ($selected_data as $module) {
             ?>
             <tr>
                 <td class="qty"><?php echo $i;?></td>
                 <td class="qty"><?php echo $invoice_detail[0]['company_name']?></td>
-                <td class="qty"><?php echo $newDate = date("d-m-Y", strtotime($module['order_date']));?></td>
+                <td class="qty"><?php echo  $newDate = date("d-m-Y", strtotime($module['order_date']));?></td>
                 <td class="qty"><?php echo $module['weight']?></td>
-                <td class="qty" style="font-size: 20px !important;"><?php echo $module['pickup_location']?></td>
-                <td class="qty" style="font-size: 20px !important;"><?php echo $module['drop_off_location']?></td>
+                <td class="qty"><?php echo $module['pickup_location']?></td>
+                <td class="qty"><?php echo $module['drop_off_location']?></td>
                 <td class="qty"><?php echo $module['registration_number']?></td>
                 <td class="qty"><?php echo $module['vehicle_type']?></td>
-                <td class="qty"><?php echo $module['builty_num']?></td>
-                <td class="qty"><?php echo number_format($module["order_total_amount"]);?></td>
-                <td class="qty">
-                  <?php
-                     $total_labor = 0;
-                     $labour_data = $this->db->query("SELECT * FROM `order_labor_charges` where order_id='".$module['id']."' ")->result_array();
-                     foreach ($labour_data as $l_data) {
-                     
-                       $total_labor += $l_data['labor_charges_customer'];
-                    }?>
-
-                    <?php echo number_format($total_labor);?>                                       
-                </td>
+                <td class="qty"><?php echo number_format($module["vendor_payment"]);?></td>
+                <td class="qty"><?php echo number_format($module["labor_charges"]);?></td>
                 <td class="qty"><?php echo number_format($module["second_stop_amount"]);?></td>
-                <td class="qty"><?php echo number_format($module["order_detention_customer"]);?></td>
-                <td class="qty"><?php echo $module['local_transport']; ?></td>
-                <td class="qty"><?php echo $module['baying_assigned_rates']; ?></td>
-                <td class="qty"><?php $grand_total =  $module['order_total_amount'] + $module['local_transport']  + $module['baying_assigned_rates'] +  $total_labor + $module['second_stop_amount'] + $module['order_detention_customer']; echo  number_format($grand_total)?></td>
+                <td class="qty"><?php echo number_format($module["order_tenstion"]);?></td>
+                <td class="qty"><?php echo number_format($module["order_total_amount"]);?></td>
+                <td class="qty"><?php $grand_total =  $module['vendor_payment'] + $module['labor_charges'] + $module['second_stop_amount'] + $module['order_tenstion']+ $module['order_total_amount']; echo  number_format($grand_total)?></td>
             </tr>
-            <?php $total_count+=$grand_total; $total_amount_invoice+=$with_tax; $i++; } ?>
+            <?php $total_count+=$grand_total; $i++; } ?>
             
-              <tr style="background-color: #e1e4e6; border-color: #e1e4e6;">
+              <tr style="border: 1px solid; background-color: #e1e4e6; border-color: #e1e4e6;">
                   
-                <td class="qty" colspan="15"><strong>Grand Total</strong></td>
-                <td class="qty" colspan="1" ><span style="float: right !important;"><strong><?php echo  number_format($total_count);?>/=</strong></span></td>
+                <td class="qty" colspan="12">Grand Total</td>
+                <td class="qty" colspan="1" ><span style="float: right;"><?php echo  number_format($total_count)?></span></td>
               </tr>
-              <tr style="background-color: #e1e4e6; border-color: #e1e4e6;">
-                  
-                <td class="qty" colspan="15"><strong>Tax (<?php echo $invoice["tax_per"]; ?> %)</strong></td>
-                <td class="qty" colspan="1" ><span style="float: right !important;"><strong><?php echo  number_format($invoice["tax_amount"]); ?>/=</strong></span></td>
-              </tr>
-              <tr style="background-color: #e1e4e6; border-color: #c6c9cc;">
+              <tr style="border: 1px solid; background-color: #e1e4e6; border-color: #c6c9cc;">
                 
-                
-                <td class="qty" colspan="15"><strong><?php echo NumbersToWords::convert($invoice["invoice_total_amount"]);?> Only </strong></td>
-                <td class="qty" colspan="1" ><span style="float: right !important;"><strong><?php echo  number_format($invoice["invoice_total_amount"]); ?>/=</strong></span></td>
+                <td class="qty" colspan="12"><?php echo NumbersToWords::convert($total_count);?></td>
+                <td class="qty" colspan="1"><span style="float: right;"></span></td>
               </tr>
              
             
            
         </tbody>
     </table>
-   
-            
-          
     </div>
 </section>
 
-    <footer style="position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   text-align: center">
-        <div class="  " style="font-size: 13px;">
-              <br>
-                  <span>Prepared by : ________________</span> &nbsp;  &nbsp;   &nbsp;   &nbsp;  &nbsp;  &nbsp;   &nbsp;   &nbsp;  &nbsp; 
-                  <span>Received by : ________________</span> &nbsp;  &nbsp;   &nbsp;   &nbsp;  &nbsp;  &nbsp;   &nbsp;   &nbsp;  &nbsp; 
-                  <span>Checked By : ________________</span>
+    <footer>
+        <div class="container">
+            <div class="thanks"></div>
+            <div class="thanks">Thank you!</div>
+            <div class="notice">
+                <div>For UTN (Pvt.) Ltd.</div>
             </div>
+            <div class="end">Invoice was created on a computer and is valid without the signature and seal.</div>
+        </div>
     </footer>
 
 </body>

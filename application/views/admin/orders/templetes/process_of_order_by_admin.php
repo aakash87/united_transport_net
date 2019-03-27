@@ -139,9 +139,9 @@
                   <div class="panel-heading">
                      <div class="panel-title">
                         <h4>Process Order</h4>
-                        <input type="text" class="add1_input" name="add1_input">
-                        <input type="text" class="add2_input" name="add2_input">
-                        <input type="text" class="add3_input" name="add3_input">
+                        <input type="hidden" class="add1_input" name="add1_input">
+                        <input type="hidden" class="add2_input" name="add2_input">
+                        <input type="hidden" class="add3_input" name="add3_input">
                      </div>
                   </div>
                   <div class="panel-body">
@@ -273,7 +273,7 @@
                         <div class="form-group row">
                            <label for="example-text-input" class="col-sm-3 col-form-label">Vehicle Buying</label>
                            <div class="col-sm-9">
-                              <input class="form-control" name="" type="text" value="" id="vehicle_bying" placeholder=""  readonly="">
+                              <input class="form-control" name="v_buy" type="text" value="" id="vehicle_bying" placeholder=""  readonly="">
                            </div>
                         </div>
                         <div class="form-group row">

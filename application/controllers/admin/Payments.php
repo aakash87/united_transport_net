@@ -87,19 +87,7 @@
 
  			$invoice_code = 'INV-V'."-".$this->input->post('vendor_id').'-'. $invoice_code_id.'-'.date('y');
 			// print_r($this->input->post('vendor_id'));die();
-			for ($i=0; $i < sizeof($id); $i++) { 
-				// $order_data = 
-				// [
-				// 	'vendor_payment_status' =>  'Create Invoice',
-				// ];
-				// $this->Payments_model->update('orders',$order_data,array('id'=>$id[$i]));
-				$external_data = 
-				[
-					'status' =>  'Create Invoice',
-				];
-				$this->Payments_model->update('vendor_external_cost',$external_data,array('id'=>$id[$i]));
-				
-			}
+			
 				$vendor_payment_data = 
 					[
 						'order_id' => $order_id,
@@ -112,6 +100,20 @@
 						'invoice_no' =>  $invoice_code,
 					];
 					$vandor_paymet_id = $this->Invoice_model->insert('vendor_payments', $vendor_payment_data);
+					for ($i=0; $i < sizeof($id); $i++) { 
+						// $order_data = 
+						// [
+						// 	'vendor_payment_status' =>  'Create Invoice',
+						// ];
+						// $this->Payments_model->update('orders',$order_data,array('id'=>$id[$i]));
+						$external_data = 
+						[
+							'status' =>  'Create Invoice',
+							'vandor_paymet_id' =>  $vandor_paymet_id,
+						];
+						$this->Payments_model->update('vendor_external_cost',$external_data,array('id'=>$id[$i]));
+						
+					}
 			$vendor_ladger = 
 			[
 				'amount' =>  $this->input->post('payments'),
@@ -137,7 +139,7 @@
 			}
 
 			$ext_ids = $this->input->post('id[]');
-			// print_r($ext_ids);die();
+			 // print_r($ext_ids);die();
 
 			$payment_data = [];	
 			for ($i=0; $i < sizeof($ext_ids); $i++) { 
@@ -277,5 +279,26 @@
 			$this->Invoice_model->insert('vendor_ledger', $vendor_ladger);
 			
 			redirect('admin/payments/vandor_payments_index');
+		}
+		public function view_vendor_invoie($invoice_id)
+		{
+
+			$this->data['permission'] = $this->permission;
+			$this->data['vendor_payments_detail'] = $this->Payments_model->submit_vandor_payment_detail($invoice_id);
+			$o_ids = explode(",", $this->data['vendor_payments_detail']['order_id']);
+			      
+			$this->data['vendor_order_detail_for_payment'] = $this->Payments_model->vendor_order_detail_for_payment($invoice_id);
+			        
+				// echo "<pre>";
+			 //     print_r($this->data['vendor_order_detail_for_payment']);
+			 // die();
+			
+ 			$this->load->library('pdf');
+			$this->pdf->load_view('admin/payments/invoice/view_vendor_invoie',$this->data );
+			$this->pdf->Output();
+
+
+
+
 		}
 	}

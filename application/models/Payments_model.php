@@ -67,6 +67,15 @@
             return $this->db->get()->result_array();
 
         }
+        public function vendor_order_detail_for_payment($invoice_id)
+        {
+            $this->db->select('vendor_external_cost.* , ord.order_date  , ord.pickup_date_and_time  , ord.dropoff_date_and_time  , ord.vehicle_type , ord.pickup_location , ord.drop_off_location');
+            $this->db->from('vendor_external_cost');
+            $this->db->join('orders ord' , 'ord.id = vendor_external_cost.order_id' , 'left');
+            $this->db->where('vendor_external_cost.vandor_paymet_id' , $invoice_id);
+            return $this->db->get()->result_array();
+
+        }
         public function get_last_record_invoice($table)
         {
             $query = $this->db->query("SELECT * FROM $table  ORDER BY id DESC LIMIT 1");

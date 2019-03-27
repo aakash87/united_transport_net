@@ -69,13 +69,39 @@
                                         <div class="form-group row  " <?php if ( $invoice['balance'] !== $invoice['invoice_total_amount']) { echo "style='display:none;'";}?>>
                                             <label for="" class="col-sm-3 col-form-label">After w h Amount</label>
                                               <div class="col-sm-9">
-                                                    <input class="form-control after_w_h_amount" max="" name="after_w_h_amount" type="number" value="" placeholder="" readonly="" >
+                                                    <!-- <input class="form-control after_w_h_amount" max="" name="after_w_h_amount" type="number" value="" placeholder="" readonly="" > -->
+                                                    <input class="form-control a_w_h_amount" max="" name="a_w_h_amount" type="text" value="<?php if ( $invoice['balance'] !== $invoice['invoice_total_amount']) { print($invoice['balance']);}?>" placeholder="" readonly="" >
                                               </div>
+                                        </div>
+                                        <div class="form-group row">
+                                          <label for="" class="col-sm-3 col-form-label">Deduction</label>
+                                          <div class="col-sm-9">
+                                             <div class="radio radio-danger">
+                                                <!-- <input type="radio" name="SSP_tax" class="SSP_tax" id="ssp_yes" value="1"> -->
+                                                <input type="radio" name="deduction" class="deduction_yes" id="deduction_yes" value="Yes">
+                                                <label for="deduction_yes">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             
+                                                <input type="radio" name="deduction" id="deduction_no" class="deduction_no" value="No" checked="">
+                                                <label for="deduction_no">No</label>
+                                             </div>
+                                          </div>
+                                        </div>   
+                                        <div id="append_deduction">
+                                          <div class="form-group row" class="for_remove">
+                                             <label for="" class="col-sm-3 col-form-label">Deduction Amount</label>
+                                             <div class="col-sm-9"><input class="form-control" name="deduction_amount" type="text" value=""  placeholder=""  id="deduction_amount" ></div>
+                                          </div>
+                                          <div class="form-group row" class="for_remove">
+                                             <label for="" class="col-sm-3 col-form-label">Deduction Details</label>
+                                             <div class="col-sm-9">
+                                                <textarea class="form-control" name="deduction_details" rows="3"></textarea>
+                                             </div>
+                                          </div>
                                         </div>
                                         <div class="form-group row  ">
                                             <label for="" class="col-sm-3 col-form-label">Paid Amount</label>
                                               <div class="col-sm-9">
-                                                    <input class="form-control after_w_h_amount" max="<?php echo $invoice['invoice_total_amount']; ?>" name="paid_amount_cu" type="number" value="" id="" placeholder=""  >
+                                                    <input class="form-control after_w_h_amount" max="<?php echo $invoice['invoice_total_amount']; ?>" name="paid_amount_cu" type="text" value="<?php if ( $invoice['balance'] !== $invoice['invoice_total_amount']) { print($invoice['balance']);}?>" id="" placeholder=""  >
                                               </div>
                                         </div>
                                         <div class="form-group row  ">
@@ -85,9 +111,8 @@
                                               </div>
                                         </div>
                                        
-
+                
                                      </div>
-
                                      <div class="col-sm-6" >
                                         <div class="form-group row ">
                                             <label for="" class="col-sm-3 col-form-label">Total Amount</label>
@@ -208,7 +233,33 @@
       var after_with_holding = $('#balance_amount').val() - with_holding;
       $('#with_holding').val(Math.round(d_ans / 100));
       $('.after_w_h_amount').val(Math.trunc(after_with_holding));
+      $('.a_w_h_amount').val(Math.trunc(after_with_holding));
 
   });
 </script>
 <?php } ?>
+
+<script type="text/javascript">
+   $(document).ready(function(){
+        $('#append_deduction').hide();
+      $('input[name="deduction"]').change(function(){
+       if ($(this).val() == 'Yes' )
+       {
+         $('#append_deduction').show();
+           $('#deduction_amount').keyup(function(){
+            var de_amount = $(this).val();
+            var in_total_amount = $('.a_w_h_amount').val();
+            var total =  in_total_amount - de_amount;
+            // alert(total);
+            $('.after_w_h_amount').val(total);
+         });
+       }
+       else if ($(this).val() == 'No') {
+         $('#append_deduction').hide();
+       }
+      });
+   })   
+   
+   
+   
+</script>

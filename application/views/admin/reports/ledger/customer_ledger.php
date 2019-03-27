@@ -80,7 +80,7 @@
                                     <tr>
                                         <td><?php echo $s_number++; ?></td>
                                         <td><?php echo $newDate = date("d-m-Y", strtotime($module["date"])); ?></td>
-                                        <td><?php echo $module["voucher_no"] ?></td>
+                                        <td><a href="<?php echo base_url()?>admin/orders/view_order_detail_by_ids?ids=<?php echo $module["order_ids"]; ?>"><?php echo $module["voucher_no"] ?></a></td>
                                         <td><?php echo $module["description"] ?>
                                             <?php if ($module["description"] == "Tax Amount") {
                                                 echo $module["with_holding_tax"].'%';
