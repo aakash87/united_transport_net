@@ -41,7 +41,7 @@
 				'vendor_name' => $this->input->post('vendor_name'),
 				'company_name' => $this->input->post('company_name'),
 				'vendor_address' => $this->input->post('vendor_address'),
-				'vendor_contact' => $this->input->post('vendor_contactvendor_create_date'),
+				'vendor_contact' => $this->input->post('vendor_contact'),
 				'vendor_create_date' => $this->input->post('vendor_create_date'),
 				'user_id' => $this->session->userdata('user_id'),
 				'special_person' => $this->input->post('special_person'),
@@ -88,9 +88,24 @@
 			{
 				redirect('admin/home');
 			}
-			$data = $this->input->post();
-			$id = $data['id'];
-			unset($data['id']);$id = $this->Vendor_model->update('vendor',$data,array('id'=>$id));
+			// print_r($_POST);
+			// die();
+			
+			$data = [
+
+				'vendor_name' => $this->input->post('vendor_name'),
+				'company_name' => $this->input->post('company_name'),
+				'vendor_address' => $this->input->post('vendor_address'),
+				'vendor_contact' => $this->input->post('vendor_contact'),
+				'vendor_create_date' => $this->input->post('vendor_create_date'),
+				'user_id' => $this->session->userdata('user_id'),
+				'special_person' => $this->input->post('special_person'),
+				'vender_labour' => $this->input->post('vender_labour'),
+				'vendor_type' => $this->input->post('vender_type'),
+				'fuel_vendor' => 'Yes',
+				
+			];
+			$id = $this->Vendor_model->update('vendor',$data,array('id'=>$this->input->post('id')));
 			if ($id) {
 				redirect('admin/vendor');
 			}

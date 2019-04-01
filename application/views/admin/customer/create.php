@@ -32,7 +32,7 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Full Name</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Customer Name</label>
                               <div class="col-sm-9"><input class="form-control" name="full_name" type="text" value="" id="example-text-input" placeholder="" ></div>
                            </div>
                            <div class="form-group row">

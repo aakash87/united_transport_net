@@ -33,7 +33,7 @@
                      <div class="row">
                         <div class="col-md-6" >
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Full Name</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Customer Name</label>
                               <div class="col-sm-9"><input class="form-control" name="full_name" type="text" value="<?php echo $customer['full_name'] ?>" id="example-text-input" placeholder="" ></div>
                            </div>
                            <div class="form-group row">
@@ -79,38 +79,15 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Tax (%)</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">NTN #</label>
                               <div class="col-sm-9">
-                                 <input type="" class="form-control" name="tax" value="<?php echo $customer['tax']; ?>" >
+                                 <input type="" class="form-control" name="ntn_no" value="<?php echo $customer['ntn_no']; ?>" >
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">srb tax (%) </label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">STR #</label>
                               <div class="col-sm-9">
-                                 <input type="" class="form-control" name="srb_tax" value="<?php echo $customer['srb_tax']; ?>" >
-                              </div>
-                           </div>
-                           
-
-                            <div class="form-group row">
-                              <label for="" class="col-sm-3 col-form-label">SST</label>
-                              <div class="col-sm-9">
-                                 <div class="radio radio-danger">
-                                    <input type="radio" name="SSP_tax" class="SSP_tax" id="ssp_yes" value="1" <?php echo ($customer["SSP_tax"] ==  1) ? 'checked': NULL;  ?>>
-                                    <label for="ssp_yes">Yes</label>
-                                 </div>
-                                 <div class="radio radio-danger">
-                                    <input type="radio" name="SSP_tax" id="ssp_no" class="SSP_tax" value="0"  <?php echo ($customer["SSP_tax"] ==  0) ? 'checked': NULL;  ?>>
-                                    <label for="ssp_no">No</label>
-                                 </div>
-                              </div>
-                           </div> 
-                          
-                           
-                           <div class="form-group row ssp_tax_val_div "  <?php echo ($customer["SSP_tax"] ==  0) ? 'style="display: none;"': NULL;  ?> >
-                              <label for="" class="col-sm-3 col-form-label">SST Amoun (%)</label>
-                              <div class="col-sm-9">
-                                 <input type="" class="form-control ssp_tax_val" name="ssp_tax_val" value="<?php echo $customer["ssp_tax_val"] ?>" >
+                                 <input type="" class="form-control" name="str_no" value="<?php echo $customer['str_no']; ?>" >
                               </div>
                            </div>
     

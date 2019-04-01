@@ -71,17 +71,52 @@
                            <div class="col-sm-12">
                               <div class="form-group row">
                                  <label for="" class="col-sm-3 col-form-label">Special Person</label>
+                                 
                                  <div class="col-sm-9">
-                                    <div class="radio radio-danger">
-                                       <input type="radio" name="special_person" class="special_person" id="special_person_yes" value="1" <?php echo ($vendor["special_person"] == 1) ? 'checked': NULL;  ?> >
-                                       <label for="special_person_yes">Yes</label>
-                                    </div>
-                                    <div class="radio radio-danger">
-                                       
-                                       <input type="radio" name="special_person" id="special_person_no" class="special_person" value="0"  <?php echo ($vendor["special_person"] ==  0) ? 'checked': NULL;  ?>>
-                                     
-                                       <label for="special_person_no">No</label>
-                                    </div>
+                                   <div style="">
+                                      <div class="radio radio-info radio-inline">
+                                          <input type="radio" name="special_person" class="special_person" id="special_person_yes" value="1" <?php echo ($vendor["special_person"] == 1) ? 'checked': NULL;  ?> >
+                                          <label for="special_person_yes">Yes</label>
+                                      </div>
+                                      <div class="radio radio-info radio-inline">
+                                          <input type="radio" name="special_person" id="special_person_no" class="special_person" value="0"  <?php echo ($vendor["special_person"] ==  0) ? 'checked': NULL;  ?>>
+                                                                              
+                                         <label for="special_person_no">No</label>
+                                      </div>
+                                  </div> 
+                                 </div>
+                              </div>
+                              <div class="form-group row">
+                                 <label for="" class="col-sm-3 col-form-label">Vendor Labour</label>
+                                 
+                                 <div class="col-sm-9">
+                                   <div style="">
+                                      <div class="radio radio-info radio-inline">
+                                          <input type="radio" name="vender_labour" class="" id="vender_labour_yes" value="Yes" <?php echo ($vendor["vender_labour"] == "Yes") ? 'checked': NULL;  ?>>
+                                       <label for="vender_labour_yes">Yes</label>
+                                      </div>
+                                      <div class="radio radio-info radio-inline">
+                                          <input type="radio" name="vender_labour" id="vender_labour_no" class="" value="No" <?php echo ($vendor["vender_labour"] == "No") ? 'checked': NULL;  ?>>
+                                       <label for="vender_labour_no">No</label>
+                                      </div>
+                                  </div> 
+                                 </div>
+                              </div>
+                              <div class="form-group row">
+                                 <label for="" class="col-sm-3 col-form-label">Local Vendor</label>
+                                 
+
+                                 <div class="col-sm-9">
+                                   <div style="">
+                                      <div class="radio radio-info radio-inline">
+                                          <input type="radio" name="vender_type" class="" id="vender_type_local" value="Local" <?php echo ($vendor["vendor_type"] == "Local") ? 'checked': NULL;  ?>>
+                                       <label for="vender_type_local">Yes</label>
+                                      </div>
+                                      <div class="radio radio-info radio-inline">
+                                          <input type="radio" name="vender_type" id="vender_type_domastic" class="" value="Domestic_only" <?php echo ($vendor["vendor_type"] == "Domestic_only") ? 'checked': NULL;  ?>>
+                                       <label for="vender_type_domastic">No</label>
+                                      </div>
+                                  </div> 
                                  </div>
                               </div>
                               <button type="submit" class="btn btn-primary pull-right">Update</button>
