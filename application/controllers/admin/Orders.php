@@ -99,7 +99,7 @@
 				'order_vendor_id' => $this->input->post('order_vendor_id'),
 				'vehicel_of_vendor' => $this->input->post('vehicel_of_vendor'),
 				'vehicle_type' => $this->input->post('vehicle_type'),
-				'baying_assigned_rates' => $this->input->post('baying_assigned_rates'),
+				'baying_assigned_rates_for_vendor' => $this->input->post('baying_assigned_rates_for_vendor'),
 				'order_total_amount' => $this->input->post('order_total_amount'),
 				'order_driver' => $this->input->post('order_driver'),
 				'local_transport' => $this->input->post('local_transport'),
@@ -332,13 +332,15 @@
 				'order_vendor_id' => $this->input->post('order_vendor_id'),
 				'vehicel_of_vendor' => $this->input->post('vehicel_of_vendor'),
 				'vehicle_type' => $this->input->post('vehicle_type'),
-				'baying_assigned_rates' => $this->input->post('baying_assigned_rates'),
+				'baying_assigned_rates_for_vendor' => $this->input->post('baying_assigned_rates_for_vendor'),
 				'order_total_amount' => $this->input->post('order_total_amount'),
 				'order_driver' => $this->input->post('order_driver'),
 				'local_transport' => $this->input->post('local_transport'),
 				'order_tenstion' => $this->input->post('order_tenstion'),
 				'builty_num' => $this->input->post('builty_num'),
 				'order_local_vendor_id' => $this->input->post('order_local_vendor_id'),
+				'order_tenstion' => $this->input->post('order_tenstion'),
+				'order_detention_customer' => $this->input->post('order_detention_customer'),
 			];
 			
 
@@ -478,8 +480,8 @@
 						'vendor_type' => 'Buying',
 						'status' => 'UnPaid',
 						'detention' => $this->input->post('order_tenstion'),
-						'vehicle_buying' => $this->input->post('v_buy'),
-						'total_cost' => $this->input->post('v_buy') + $this->input->post('order_tenstion'),
+						'vehicle_buying' => $this->input->post('baying_assigned_rates_for_vendor'),
+						'total_cost' => $this->input->post('baying_assigned_rates_for_vendor') + $this->input->post('order_tenstion'),
 						'date' => date('d-m-Y'),
 					];
 					$this->Orders_model->insert('vendor_external_cost',$external_cost_buying);
@@ -542,7 +544,7 @@
 					// 'vehicel_of_vendor' => $this->input->post('vehicel_of_vendor'),
 					// 'driver_name' => $this->input->post('driver_name'),
 					// 'description' => 'Complete Order',
-					'vendor_payment' =>  $this->input->post('baying_assigned_rates'),
+					'vendor_payment' =>  $this->input->post('baying_assigned_rates_for_vendor'),
 					'vendor_payment_status' =>  'Unpaid',
 					// 'date' =>  date('Y-m-d'),
 				];
@@ -555,9 +557,9 @@
 				$vehicle_bying_ledger = [
 					'vehicle_id' => $this->input->post('vehicel_of_vendor'),
 					'description' => 'Vehicle Buying',
-					'amount' =>   $this->input->post('baying_assigned_rates'),
+					'amount' =>   $this->input->post('baying_assigned_rates_for_vendor'),
 					'order_id' => $order_id,
-					'balance'=> round($this->input->post('baying_assigned_rates') + $vehicle_bying_old_amount['balance']),
+					'balance'=> round($this->input->post('baying_assigned_rates_for_vendor') + $vehicle_bying_old_amount['balance']),
 					'date' =>  date('d-m-Y'),
 					'reference' => 'Debit',
 				];
@@ -566,18 +568,18 @@
 				$this->Invoice_model->insert('vehicle_ledger', $vehicle_bying_ledger);
 
 				
-					$sec_stop_amount_update = count($this->input->post('sec_stop_amount_update'));
+					$sec_stop_amount_for_vendor_update = count($this->input->post('sec_stop_amount_for_vendor_update'));
 
-					for ($i = 0; $i < $sec_stop_amount_update ; $i++) {
+					for ($i = 0; $i < $sec_stop_amount_for_vendor_update ; $i++) {
 
 						$vehicle_scond_stop_old_amount = $this->Orders_model->get_last_record_for_ledger('vehicle_ledger' , $this->input->post('vehicel_of_vendor'));
 										
 						$vehicle_scond_stop_ledger = [
 							'vehicle_id' => $this->input->post('vehicel_of_vendor'),
 							'description' => '2nd Stop',
-							'amount' =>   $this->input->post('sec_stop_amount_update')[$i],
+							'amount' =>   $this->input->post('sec_stop_amount_for_vendor_update')[$i],
 							'order_id' => $order_id,
-							'balance'=> round($this->input->post('sec_stop_amount_update')[$i] + $vehicle_scond_stop_old_amount['balance']),
+							'balance'=> round($this->input->post('sec_stop_amount_for_vendor_update')[$i] + $vehicle_scond_stop_old_amount['balance']),
 							'date' =>  date('d-m-Y'),
 							'reference' => 'Debit',
 						];
@@ -646,7 +648,8 @@
 
 				$this->data['order_of_sales'] = $this->Orders_model->get_orders_by_sales_person($sales_person , $str_current_day , $str_last_day);
 
-
+				$this->data['str_current_day_show'] = $current_date;
+				$this->data['str_last_date_show'] = $last_date;
 
 			}
 			else{

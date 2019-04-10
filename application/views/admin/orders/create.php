@@ -175,7 +175,7 @@
                               <div class="form-group row">
                                  <label for="example-text-input" class="col-sm-3 col-form-label">Buying Assigned</label>
                                  <div class="col-sm-9">
-                                    <input class="form-control" name="baying_assigned_rates" type="text" value="" id="vehicle_bying" placeholder="">
+                                    <input class="form-control" name="baying_assigned_rates_for_vendor" type="text" value="" id="vehicle_bying" placeholder="">
                                  </div>
                               </div>
 

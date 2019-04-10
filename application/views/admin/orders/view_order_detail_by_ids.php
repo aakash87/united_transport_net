@@ -436,21 +436,27 @@
                             </div>                                  
                             <div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br>
                                 <div class="row">
-                                    <div class="col-lg-4" style="margin-top:-14px;">
+                                    <div class="col-lg-3" style="margin-top:-14px;">
                                         <address>
                                           <strong style="font-weight: 600;">Origin </strong> :
                                           <e class="full_name_value"><?php echo $order_second['sec_stop_origin'] ?></e><br>
                                       </address>
                                     </div>
-                                    <div class="col-lg-4" style="margin-top:-14px;">
+                                    <div class="col-lg-3" style="margin-top:-14px;">
                                         <address>
                                                <strong style="font-weight: 600;">Destination </strong> :
                                          <e class="father_name_value"><?php echo $order_second['sec_stop_destination'] ?></e><br>
                                       </address>
                                     </div>
-                                    <div class="col-lg-4" style="margin-top:-14px;">
+                                    <div class="col-lg-3" style="margin-top:-14px;">
                                         <address>
-                                               <strong style="font-weight: 600;">Stop Amount </strong> :
+                                               <strong style="font-weight: 600;">Rate For Vendor</strong> :
+                                         <e class="father_name_value"><?php echo $order_second['sec_stop_amount_for_vendor'] ?></e><br>
+                                      </address>
+                                    </div>
+                                    <div class="col-lg-3" style="margin-top:-14px;">
+                                        <address>
+                                               <strong style="font-weight: 600;">Stop Rate For Customer</strong> :
                                          <e class=""><?php echo $order_second['sec_stop_amount'] ?></e><br>
                                       </address>
                                     </div>

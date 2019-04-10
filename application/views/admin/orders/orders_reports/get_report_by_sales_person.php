@@ -26,7 +26,11 @@
               <div class="panel panel-bd">
                 <div class="panel-heading">
                   <div class="panel-title">
-                    <h4>View Purchase Report</h4>
+                    <h4><?php if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                                $get_expense_data = $this->db->query("SELECT * FROM `users` where id='".$_POST['select_sales_person']."' ")->row_array(); echo  $get_expense_data['name']; }
+                                ?>  Report <?php if ($this->input->server('REQUEST_METHOD') == 'POST') { echo $newDate = date("d-m-Y", strtotime($str_current_day_show)); echo " To "; echo $newDate2 = date("d-m-Y", strtotime($str_last_date_show)); }
+                                ?>
+                              </h4>
                   </div>
                 </div>
                 <form method="post" action="<?php echo base_url() ?>admin/orders/get_report_by_sales_person" enctype="multipart/form-data">

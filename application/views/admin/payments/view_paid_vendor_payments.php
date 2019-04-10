@@ -61,7 +61,7 @@
                                             <th>Vendor Name</th>
                                             <th>InV Create Date</th>
                                             <th>Vendor Address</th>
-                                            <th>Desc</th>
+                                            <!-- <th>Desc</th> -->
                                             <th>Status</th>
                                             <th>Total Amount</th>
                                             <th>Amount</th>
@@ -78,11 +78,11 @@
                                         ?>
                                         <tr>
                                             <td><?php echo $i++;?></td>
-                                            <td><?php echo $module["invoice_no"]; ?></td>
+                                            <td><a href="<?php echo base_url() ?>admin/payments/view_vendor_invoie/<?php echo $module["id"] ?>" target="_blank"><?php echo $module["invoice_no"]; ?></a></td>
                                             <td><?php echo $module["vendor_name"]; ?></td>
                                             <td><?php echo $newDate = date("d-m-Y", strtotime($module["invoice_date"]));?></td>
                                             <td><?php echo $module["vendor_address"]; ?></td>
-                                            <td><?php echo $module["vendor_type"]; ?></td>
+                                            <!-- <td><?php echo $module["vendor_type"]; ?></td> -->
                                             <td><?php echo $module["status"]; ?></td>
                                             <td><?php echo number_format($module["total_amount"]); ?></td>
                                             <td><?php echo number_format($module["amount"]); ?></td>

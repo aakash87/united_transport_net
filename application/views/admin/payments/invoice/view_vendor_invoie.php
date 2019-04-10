@@ -373,7 +373,7 @@ footer .end {
 <body>
     <header class="clearfix">
         <div class="">
-                <img class="logo" src="<?php echo base_url()?>admin_assets/images/header.jpg" alt="" style="height:auto">
+                <img class="logo" src="<?php echo base_url()?>admin_assets/images/header.JPG" alt="" style="height:auto">
     </div>
   </header>
 
@@ -391,10 +391,9 @@ footer .end {
     </div>
     <div class="details clearfix">
         <div class="client left">
-            <h4>Vendor Detai</h4>
+            <h4>Vendor Detail</h4>
             <p style="color: #000; font-weight:500;"><?php echo $vendor_payments_detail['vendor_name']?></p>
             <p style="color: #000; font-weight:500;"><?php echo $vendor_payments_detail['vendor_address']?></p>
-            <p style="color: #000; font-weight:500;">INV Status : <span><?php echo $vendor_payments_detail['status']?></span></p>
           
         </div>
     </div>
@@ -409,6 +408,7 @@ footer .end {
                 <th class="total">Drop of Date</th>
                 <th class="total">Origin</th>
                 <th class="total">Destination</th>
+                <th class="total">Vehicle # </th>
                 <th class="total">Vehicle Type </th>
                 <th class="total">Order Type</th>
                 <th class="total">Buying </th>
@@ -431,6 +431,8 @@ footer .end {
                 <td class="qty"><?php echo $newDate25 = date("d-m-Y", strtotime($module['dropoff_date_and_time']));?></td>
                 <td class="qty"><?php echo $module['pickup_location'];?></td>
                 <td class="qty"><?php echo $module['drop_off_location'];?></td>
+                <td class="qty"><?php $get_order_vehicle_name = $this->db->query("SELECT * FROM `vehicle` where id='".$module["vehicel_of_vendor"]."' ")->row_array(); echo  $get_order_vehicle_name['registration_number'];?>
+                          <?php echo $module['vehicel_of_vendor'];?></td>
                 <td class="qty"><?php echo $module['vehicle_type'];?></td>
                 <td class="qty"><?php echo $module['vendor_type'];?></td>
                 <td class="qty"><?php echo number_format($module['vehicle_buying']);?></td>
@@ -444,12 +446,12 @@ footer .end {
             
               <tr style="background-color: #e1e4e6; border-color: #e1e4e6;">
                   
-                <td class="qty" colspan="12"><strong>Grand Total</strong></td>
+                <td class="qty" colspan="13"><strong>Grand Total</strong></td>
                 <td class="qty" colspan="" ><span style="float: right !important;"><strong><?php echo  number_format($total_amount_invoice)?>/=</strong></span></td>
               </tr>
               <tr style="background-color: #e1e4e6; border-color: #c6c9cc;">
                 
-                <td class="qty" colspan="12"><strong><?php echo NumbersToWords::convert($total_amount_invoice);?> Only </strong></td>
+                <td class="qty" colspan="13"><strong><?php echo NumbersToWords::convert($total_amount_invoice);?> Only </strong></td>
                 <td class="qty" colspan=""><span style="float: right;"></span></td>
               </tr>
              

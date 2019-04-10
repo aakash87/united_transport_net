@@ -63,7 +63,7 @@
                         <tbody>
 
                            <?php
-                              $s_number = 1;
+                              $s_number = count($invoice);
                               foreach ($invoice as $module) {
 
 
@@ -74,7 +74,7 @@
                             <tr>
    
                                  <td>
-                                    <?php echo  $s_number++; ?>
+                                    <?php echo  $s_number--; ?>
                                  </td>
                                  <td><?php echo $module['invoice_voucher_number']; ?></td>
                                  <td><?php echo $module['full_name']; ?></td>

@@ -329,6 +329,8 @@
 				// die();
 
 				$this->data['vehicle_ledger'] = $this->Reports_model->vehicle_ledger($vehicel_id , $str_current_day , $str_last_day );
+				$this->data['str_current_day_show'] = $current_date;
+			$this->data['str_last_date_show'] = $last_date;	
 
 			// echo '<pre>'; print_r($this->data['vehicle_ledger']);
 			// die();
@@ -337,6 +339,8 @@
 			else
 			{
 				$this->data['vehicle_ledger'] = [];
+				$this->data['str_current_day_show'] = [];
+				$this->data['str_last_date_show'] = [];
 
 			}
 
@@ -345,8 +349,7 @@
 		
 			// echo '<pre>'; print_r($this->data['vehicles']);
 			// die();
-			$this->data['str_current_day_show'] = $current_date;
-			$this->data['str_last_date_show'] = $last_date;	
+			
 			$this->data['title'] = 'Vehicle Ledger';$this->load->template('admin/reports/ledger/vehicle_ledger',$this->data);
 		}	
 		public function search_by_vendor()

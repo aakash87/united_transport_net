@@ -54,8 +54,8 @@
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-sm-3 col-form-label">Bank<span class="required">*</span></label>
                                     <div class="col-sm-9">
-                                        <select class="form-control bank_id" data-live-search="true" name="bank_id" >
-                                           <option>Select Bank</option>
+                                        <select class="form-control bank_id" data-live-search="true" name="bank_id" required="" >
+                                           <option value="">Select Bank</option>
                                            <?php foreach ($banks as $bank) : ?>
                                                <option value="<?php echo $bank['id']; ?>"><?php echo $bank['bank_name']; ?></option>
                                            <?php endforeach; ?>

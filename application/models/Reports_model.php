@@ -120,7 +120,7 @@ class Reports_model extends MY_Model{
 	}
 	public function get_srb_reports()
 	{
-		$this->db->select('invoice.*, cu.*');
+		$this->db->select('invoice.*, invoice.id as inv_id,  cu.*');
 		$this->db->from('invoice');
 		$this->db->join('customer cu' , 'cu.id = invoice.customer_id' , 'left');
 		// $this->db->where('orders.order_driver' , $driver_id);

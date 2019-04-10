@@ -86,7 +86,7 @@
                                         $total_amout_count = 0; 
                                         $expense_amount_total = 0;
                                         $return_amount_total = 0;
-                                        $serail_num = 0;
+                                        $serail_num = 1;
                                         $profit_amount = 0;
 
                                       ?>
@@ -111,7 +111,7 @@
                                                 foreach ($second_stop as $second) {
 
                                                  // echo '<pre>'; print_r($value);
-                                                    $second_stop_count += $second['sec_stop_amount'];
+                                                    $second_stop_count += $second['sec_stop_amount_for_vendor'];
                                                    
                                                 }
                                           ?>
@@ -119,7 +119,7 @@
                                               <td><?php echo $serail_num++; ?></td>
                                               <td><?php echo $order_veh['full_name']; ?></td>
                                               <td><?php echo $order_veh['pickup_location']; ?></td>
-                                              <td><?php echo $order_veh['drop_off_address']; ?></td>
+                                              <td><?php echo $order_veh['drop_off_location']; ?></td>
                                               <td>
                                                 <?php echo number_format($order_veh['order_total_amount']); ?>
 
@@ -139,7 +139,7 @@
                                                 $sale_amount = $order_veh['order_total_amount'];
                                                 $amout_second_stop_count = $second_stop_count;
 
-                                                $round_amout = $sale_amount - $amout_second_stop_count;
+                                                $round_amout = $sale_amount + $amout_second_stop_count - $count_value;
 
                                                 echo  number_format($round_amout);
                                                 
@@ -161,13 +161,13 @@
                                               <td></td>
                                               <td></td>
                                               <td></td>
-                                              <td>Total</td>
-                                              <td><?php echo number_format($total_amout_count); ?> </td>
-                                              <td><?php echo number_format($return_amount_total); ?></td>
-                                              <td><?php echo number_format($expense_amount_total); ?></td>
-                                              <td>
-                                                <?php echo $profit_amount; ?>
-                                              </td>
+                                              <td><strong>Total</strong></td>
+                                              <td><strong><?php echo number_format($total_amout_count); ?> </strong></td>
+                                              <td><strong><?php echo number_format($return_amount_total); ?></strong></td>
+                                              <td><strong><?php echo number_format($expense_amount_total); ?></strong></td>
+                                              <td><strong>
+                                                <?php echo number_format($profit_amount); ?>
+                                                <strong></td>
                                           </tr>
                                         
                                       </tfoot>

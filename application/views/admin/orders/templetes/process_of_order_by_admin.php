@@ -220,7 +220,7 @@
                         </div>
                      </div>
                      <div class="form-group row">
-                        <label for="" class="col-sm-3 col-form-label">Total Amount </label>
+                        <label for="" class="col-sm-3 col-form-label">Rate </label>
                         <div class="col-sm-9">
                            <input  class="form-control" name="order_total_amount" id="order_total_amount"  value="<?php echo $orders["order_total_amount"] ?>">
                         </div>
@@ -279,8 +279,8 @@
                         <div class="form-group row">
                            <label for="example-text-input" class="col-sm-3 col-form-label">Buying Assigned </label>
                            <div class="col-sm-9">
-                              <input class="form-control buying_assigned" name="baying_assigned_rates" type="text" value="" id="vehicle_bying" placeholder="">
-                              <input class="form-control" name="buying_assigned" type="hidden" value="<?php echo ($orders["baying_assigned_rates"]) ? $orders["baying_assigned_rates"] : NULL ; ?>" id="" placeholder="">
+                              <input class="form-control buying_assigned" name="baying_assigned_rates_for_vendor" type="text" value="" id="vehicle_bying" placeholder="">
+                              <input class="form-control" name="buying_assigned" type="hidden" value="<?php echo ($orders["baying_assigned_rates_for_vendor"]) ? $orders["baying_assigned_rates_for_vendor"] : NULL ; ?>" id="" placeholder="">
                            </div>
                         </div>
                         <div class="form-group row">
@@ -475,20 +475,24 @@
                              </div>                                  
                              <div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br>
                        <div class="row">
-                          <div class="form-group col-lg-4">
+                          <div class="form-group col-lg-3">
                           <input type="hidden" value="<?php echo $order_second['id'] ?>" name="second_stop_id[]">
                           <label for="" > Origin </label>
                              <input class="form-control" name="sec_stop_origin_update[]" type="text" value="<?php echo $order_second['sec_stop_origin'] ?>" id="" placeholder=""  >
 
                         </div>
-                       <div class="form-group col-lg-4">
+                       <div class="form-group col-lg-3">
                         <label for="" > Destination </label>
                         
                            <input class="form-control" name="sec_stop_destination_update[]" type="text" value="<?php echo $order_second['sec_stop_destination'] ?>" id="" placeholder=""  >
                      </div>
-                     <div class="form-group col-lg-4">
-                        <label for="" > Stop Amount </label>
+                     <div class="form-group col-lg-3">
+                        <label for="" > Stop Amount Vendor</label>
                       
+                           <input class="form-control" name="sec_stop_amount_for_vendor_update[]" type="text" value="<?php echo $order_second['sec_stop_amount_for_vendor'] ?>" id="" placeholder=""  >
+                     </div>
+                     <div class="form-group col-lg-3">
+                        <label for="" >Stop Amount Cus </label>
                            <input class="form-control" name="sec_stop_amount_update[]" type="text" value="<?php echo $order_second['sec_stop_amount'] ?>" id="" placeholder=""  >
                      </div>
                    
@@ -531,7 +535,7 @@
                      </script>
                      <script type="text/javascript">
                        $('.add2').click(function() {
-                           $('.block2:last').before('<div class="form-group row"><div class="block2"><div class="row panel-body after-add-k refrence_data-append" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">2<sup>nd</sup> Stop Detail</span> </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br><div class="form-group row"> <div class="col-lg-4"> <label for="" class=""> origin </label> <input class="form-control" name="sec_stop_origin[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" class=""> Destination <small>2nd Stop</small></label> <input class="form-control" name="sec_stop_destination[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-4"> <label for="" class=""> Rate </label> <input class="form-control" name="sec_stop_amount[]" type="text" value="" id="" placeholder="" ></div></div></div></div></div><a class="btn btn-danger pull-right ovel_css_danger  remove2"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove 2<sup>nd</sup> Stop Detail</a></div>');
+                           $('.block2:last').before('<div class="form-group row"><div class="block2"><div class="row panel-body after-add-k refrence_data-append" style="position: relative; clear: both;"> <div class="footer-ribbon" style="background: #999; position: absolute; margin: -20px 0 0 11px; z-index: 111; font-size: 9px; padding: 1px 9px 4px 10px;"> <span style="color: #FFF; font-size: 1.6em;">2<sup>nd</sup> Stop Detail</span> </div><div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br><div class="form-group row"> <div class="col-lg-3"> <label for="" class=""> origin </label> <input class="form-control" name="sec_stop_origin[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-3"> <label for="" class=""> Destination <small>2nd Stop</small></label> <input class="form-control" name="sec_stop_destination[]" type="text" value="" id="" placeholder="" > </div><div class="col-lg-3"> <label for="" class=""> Rate For Vendor </label> <input class="form-control" name="sec_stop_amount_for_vendor[]" type="text" value="" id="" placeholder="" ></div><div class="col-lg-3"> <label for="" class=""> Rate For Customer </label> <input class="form-control" name="sec_stop_amount[]" type="text" value="" id="" placeholder="" ></div></div></div></div></div><a class="btn btn-danger pull-right ovel_css_danger  remove2"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove 2<sup>nd</sup> Stop Detail</a></div>');
                        });
                        $('.optionBox2').on('click','.remove2',function() {
                           $(this).parent().remove();

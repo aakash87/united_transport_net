@@ -171,6 +171,7 @@
 
 		public function create_selected_invoice_submit()
 			{	
+				
 				// echo "<pre>";
 				// print_r($_POST);die();
 				$order_count = count($this->input->post('orderID'));
@@ -204,7 +205,7 @@
 					'total_amount' => $this->input->post('grand_total'),
 					'total_labour_chargers' => $this->input->post('total_labour_chargers'),
 					'order_detention_customer_total' => $this->input->post('order_detention_customer_total'),
-					'all_total_buying' => $this->input->post('all_total_buying'),
+					// 'all_total_buying' => $this->input->post('all_total_buying'),
 					'second_stop_amount_total' => $this->input->post('second_stop_amount_total'),
 					'tax_per' => $this->input->post('tax_per'),
 					'tax_amount' => $this->input->post('tax_amount'),
@@ -302,6 +303,8 @@
 				$sales_person = $this->input->post('select_sales_person');
 
 				$this->data['summary_data'] = $this->Invoice_model->get_summary_data($sales_person , $str_current_day , $str_last_day);
+				$this->data['str_current_day_show'] = $current_date;
+				$this->data['str_last_date_show'] = $last_date;
 			}
 			else
 			{
@@ -440,10 +443,10 @@
 				array_push($order_data, $this->data['order']);	
 			}
 
-
-			// $this->data['selected_data'] = $order_data;
+			// echo "<pre>";
 			// print_r($this->data['invoice']);
 			// die();
+			// $this->data['selected_data'] = $order_data;
 			// echo '<pre>'; print_r($this->data['selected_data'] );
 
 			$this->data['banks'] = $this->Invoice_model->all_rows('bank');
@@ -494,6 +497,7 @@
 						'invoice_paid_date' => $this->input->post('invoice_paid_date'),
 						'with_holding_tax' => $this->input->post('with_holding_tax'),
 						'remarks' => $this->input->post('remarks'),
+						'invoice_status' => 1,
 					];
 					$this->Invoice_model->update('invoice',$options,array('id'=>$this->input->post('invoice_tb_id') ) );
 				}
@@ -506,6 +510,7 @@
 						'invoice_paid_date' => $this->input->post('invoice_paid_date'),
 						'with_holding_tax' => $this->input->post('with_holding_tax'),
 						'remarks' => $this->input->post('remarks'),
+						'invoice_status' => 2,
 					];
 					$this->Invoice_model->update('invoice',$options,array('id'=>$this->input->post('invoice_tb_id') ) );
 				}

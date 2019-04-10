@@ -63,7 +63,7 @@
                                             <th>Vendor Address</th>
                                             <th>Status</th>
                                             <th>Total Amount</th>
-                                            <th>Amount</th>
+                                            <th>Paid Amount</th>
                                             <th>Balance</th>
                                             <th>Action</th>
                                         </tr>

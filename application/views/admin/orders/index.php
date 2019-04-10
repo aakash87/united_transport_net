@@ -52,9 +52,9 @@
                               <th>Loading Date/Time</th>
                               <th>Dropoff Date/Time</th>
                               <th>Order Vehicle</th>
-                              <th>Order Driver</th>
-                              <th>Pickup Location</th>
-                              <th>Dropoff Location</th>
+                              <th>Order Vendor</th>
+                              <th>Origin</th>
+                              <th>Destination</th>
                               <th>Builty #</th>
                               <th>Local Transport</th>
                               <th>Second Stop</th>
@@ -78,8 +78,10 @@
                               <td><?php echo $module['full_name']; ?></td>
                               <td><?php echo $newDate = date("d-m-Y", strtotime($module['pickup_date_and_time'])); ?></td>
                               <td><?php echo $newDate = date("d-m-Y", strtotime($module['dropoff_date_and_time'])); ?></td>
-                              <td><?php echo $module["registration_number"] ?></td>
-                              <td><?php echo $module["driver_name"] ?></td>
+                              <td><?php $get_expense_data = $this->db->query("SELECT * FROM `vehicle` where id='".$module["vehicel_of_vendor"]."' ")->row_array(); echo  $get_expense_data['registration_number'];
+                               ?></td>
+                              <td><?php $get_vendor_data = $this->db->query("SELECT * FROM `vendor` where id='".$module["order_vendor_id"]."' ")->row_array(); echo  $get_vendor_data['vendor_name'];
+                                ?></td>
                               <td><?php echo $module["pickup_location"] ?></td>
                               <td><?php echo $module["drop_off_location"] ?></td>
                               <td><?php echo $module["builty_num"] ?></td>

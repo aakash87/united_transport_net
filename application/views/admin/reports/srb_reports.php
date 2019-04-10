@@ -89,17 +89,25 @@
                                             <td><?php echo $module['ntn_no'];?></td>
                                             <td><?php echo $module['str_no'];?></td>
                                             <td><?php echo $newDate = date("M", strtotime($module['created_at']));?></td>
-                                            <td><?php echo $module['invoice_voucher_number'];?></td>
-                                            <td><?php echo number_format($module['t_with_out_sst']);?></td>
-                                            <!-- <td><?php echo $module['srb_tax'];?>%</td> -->
-                                             <td><?php  $tax = $module['t_with_out_sst'] * $module["srb_tax"] / 100; echo number_format(round($tax));?> <small>(<?php echo $module["srb_tax"]?>%)</small></td>
-                                            <td><?php  $total_amount = $module['t_with_out_sst'] + $tax; echo number_format($total_amount);?></td>
+                                            <td>
+                                                <?php if ($module['tax_per'] == 0) {
+                                                   ?>
+                                                    <a href="<?php echo base_url() ?>admin/invoice/inv_with_out_sst/<?php echo $module["inv_id"] ?>" target="_blank"><?php echo $module['invoice_voucher_number'];  ?></a>
+                                                   <?php
+                                                  }else{?>
+                                                  <a href="<?php echo base_url() ?>admin/invoice/inv_with_sst/<?php echo $module["inv_id"] ?>" target="_blank"><?php echo $module['invoice_voucher_number'];  ?></a>
+                                                <?php } ?>
+                                            </td>
+                                            <td><?php echo number_format($module['total_amount']);?></td>
+                                            <td><?php  $tax = $module['total_amount'] * $module["tax_per"] / 100; echo number_format(round($tax));?> <small>(<?php echo $module["tax_per"]?>%)</small></td>
+                                            <td><?php echo number_format($module['invoice_total_amount']);?>
+                                            <?php  $total_amount = $module['t_with_out_sst'] + $tax;?></td>
                                             <td><?php echo $module['invoice_create_date'];?></td>
                                             <td><?php echo $module['invoice_paid_date'];?></td>
                                             <!-- <td><?php  $i_tax = $module['invoice_total_amount'] * 2 / 100; echo number_format(round($i_tax));?></td> -->
-                                            <td><?php  $i_tax = $total_amount * 2 / 100; echo number_format(round($i_tax));?></td> 
-                                            <td><?php  $with_holding = $tax * $module["with_holding_tax"] / 100; echo number_format(round($with_holding));?> <small>(<?php echo $module["with_holding_tax"]?>%)</small></td>
-                                            <td><?php echo $module['customer_paid_amount'];?></td>
+                                            <td><?php  $i_tax = $module['total_amount'] * 2 / 100; echo number_format(round($i_tax));?></td> 
+                                            <td><?php  $with_holding = $module["invoice_total_amount"] * $module["with_holding_tax"] / 100; echo number_format(round($with_holding));?> <small>(<?php echo $module["with_holding_tax"]?>%)</small></td>
+                                            <td><?php echo number_format($module['customer_paid_amount']);?></td>
                                             <td><?php echo $module['remarks'];?></td>
                                         </tr>
 

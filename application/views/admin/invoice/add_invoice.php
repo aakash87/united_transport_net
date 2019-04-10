@@ -45,7 +45,7 @@
                    <form method="post" action="<?php echo base_url() ?>admin/invoice/add_invoice" enctype="multipart/form-data">
                   <div class="form-group row" >
                      <div class="col-lg-6"">
-                        <label for="example-text-input" class="col-sm-4 col-form-label">Select  Customer</label>
+                        <label for="example-text-input" class="col-sm-4 col-form-label">Customer</label>
                         <div class="col-sm-8">
                            <select class="form-control selectpicker" data-live-search="true" name="select_customer" >
                               <option>Select Customer </option>

@@ -201,7 +201,11 @@
                                     <div class="col-lg-4" style="margin-top:-14px;">
                                         <address>
                                                <strong style="font-weight: 600;">Assigned Vehicle </strong> :
-                                         <e class="father_name_value"><?php echo $orders["vehicel_of_vendor"];?></e><br>
+                                         <e class="father_name_value">
+                                           <?php 
+                                            if ($orders["order_vendor_id"] == TRUE) {
+                                            $get_order_vehicle_name = $this->db->query("SELECT * FROM `vehicle` where id='".$orders["vehicel_of_vendor"]."' ")->row_array(); echo  $get_order_vehicle_name['registration_number']; }?>
+                                         </e><br>
                                       </address>
                                     </div>
                                     <div class="col-lg-4" style="margin-top:-14px;">
@@ -215,15 +219,10 @@
                                     <div class="col-lg-4" style="margin-top:-14px;">
                                         <address>
                                           <strong style="font-weight: 600;">Vehicle Buying </strong> :
-                                          <e class="full_name_value"><?php echo $orders["baying_assigned_rates"];?></e><br>
+                                          <e class="full_name_value"><?php echo $orders["baying_assigned_rates_for_vendor"];?></e><br>
                                       </address>
                                     </div>
-                                    <div class="col-lg-4" style="margin-top:-14px;">
-                                        <address>
-                                               <strong style="font-weight: 600;">Buying Assigned </strong> :
-                                         <e class="father_name_value"><?php echo $orders["order_type"];?></e><br>
-                                      </address>
-                                    </div>
+                                   
                                     <div class="col-lg-4" style="margin-top:-14px;">
                                         <address>
                                                <strong style="font-weight: 600;">Driver Name </strong> :
@@ -232,6 +231,12 @@
                                             $get_order_d_name = $this->db->query("SELECT * FROM `drivers` where id='".$orders["order_driver"]."' ")->row_array(); echo  $get_order_d_name['First_Name']; }?>
                                             </e><br>
                                       </address>
+                                    </div>
+                                     <div class="col-lg-4" style="margin-top:-14px;">
+                                        <address>
+                                                   <strong style="font-weight: 600;">Builty # </strong> :
+                                             <e class="father_name_value"><?php echo ($orders["builty_num"]) ? $orders["builty_num"] : NULL ; ?></e><br>
+                                          </address>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -271,39 +276,31 @@
                                         </div>
                                         <div class="col-lg-4" style="margin-top:-14px;">
                                             <address>
-                                                   <strong style="font-weight: 600;">Builty # </strong> :
-                                             <e class="father_name_value"><?php echo ($orders["builty_num"]) ? $orders["builty_num"] : NULL ; ?></e><br>
-                                          </address>
-                                        </div>
-                                        <div class="col-lg-4" style="margin-top:-14px;">
-                                            <address>
-                                                   <strong style="font-weight: 600;">Detention For Vendor </strong> :
-                                             <e class=""><?php echo $orders["order_type"];?></e><br>
-                                          </address>
-                                        </div>
-                                    </div>
-                                <div class="row">
-                                    
-                                    <div class="col-lg-4" style="margin-top:-14px;">
-                                        <address>
-                                               <strong style="font-weight: 600;">Pickup Address </strong> :
-                                         <e class="father_name_value"><?php echo $orders["pickup_address"];?></e><br>
-                                      </address>
-                                    </div>
-                                    <div class="col-lg-4" style="margin-top:-14px;">
-                                        <address>
-                                               <strong style="font-weight: 600;">Dropoff Address </strong> :
-                                         <e class=""><?php echo $orders["drop_off_address"];?></e><br>
-                                      </address>
-                                    </div>
-                                    <div class="col-lg-4" style="margin-top:-14px;">
-                                        <address>
                                           <strong style="font-weight: 600;">Dropoff Date/Time </strong> :
                                           <e class="full_name_value"><?php 
 
 
                                     $originalDate2 = $orders["dropoff_date_and_time"];
                                     $dropoff_date_and_time = date("d-m-Y", strtotime($originalDate2)); echo $dropoff_date_and_time ;?></e><br>
+                                      </address>
+                                        </div>
+                                         <!-- <?php print_r($orders)?>  -->
+                                        <div class="col-lg-4" style="margin-top:-14px;">
+                                            
+                                        </div>
+                                    </div>
+                                <div class="row">
+                                    
+                                    <div class="col-lg-6" style="margin-top:-14px;">
+                                        <address>
+                                               <strong style="font-weight: 600;">Pickup Address </strong> :
+                                         <e class="father_name_value"><?php echo $orders["pickup_address"];?></e><br>
+                                      </address>
+                                    </div>
+                                    <div class="col-lg-6" style="margin-top:-14px;">
+                                        <address>
+                                               <strong style="font-weight: 600;">Dropoff Address </strong> :
+                                         <e class=""><?php echo $orders["drop_off_address"];?></e><br>
                                       </address>
                                     </div>
                                 </div>
@@ -427,21 +424,27 @@
                             </div>                                  
                             <div class="col-lg-12" style="border: 2px solid; border-color: #999999;"><br>
                                 <div class="row">
-                                    <div class="col-lg-4" style="margin-top:-14px;">
+                                    <div class="col-lg-3" style="margin-top:-14px;">
                                         <address>
                                           <strong style="font-weight: 600;">Origin </strong> :
                                           <e class="full_name_value"><?php echo $order_second['sec_stop_origin'] ?></e><br>
                                       </address>
                                     </div>
-                                    <div class="col-lg-4" style="margin-top:-14px;">
+                                    <div class="col-lg-3" style="margin-top:-14px;">
                                         <address>
                                                <strong style="font-weight: 600;">Destination </strong> :
                                          <e class="father_name_value"><?php echo $order_second['sec_stop_destination'] ?></e><br>
                                       </address>
                                     </div>
-                                    <div class="col-lg-4" style="margin-top:-14px;">
+                                    <div class="col-lg-3" style="margin-top:-14px;">
                                         <address>
-                                               <strong style="font-weight: 600;">Stop Amount </strong> :
+                                               <strong style="font-weight: 600;">Rate For Vendor</strong> :
+                                         <e class="father_name_value"><?php echo $order_second['sec_stop_amount_for_vendor'] ?></e><br>
+                                      </address>
+                                    </div>
+                                    <div class="col-lg-3" style="margin-top:-14px;">
+                                        <address>
+                                               <strong style="font-weight: 600;">Stop Rate For Customer</strong> :
                                          <e class=""><?php echo $order_second['sec_stop_amount'] ?></e><br>
                                       </address>
                                     </div>

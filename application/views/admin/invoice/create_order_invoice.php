@@ -40,12 +40,11 @@
                               <th>Customer Name</th>
                               <th>Customer Salesperson</th>
                               <th>Order Date</th>
-                              <th>Order Status</th>
+                              <th>Rate</th>
                               <th>Labour Charges</th>
                               <th>Second Stop</th>
                               <th>Detention</th>
                               <th>Local Transport</th>
-                              <th>Baying Rates</th>
                               <th>Total</th>
                            </tr>
                         </thead>
@@ -58,7 +57,7 @@
                               $all_total_labor = 0;
                               $all_total_detention_customer = 0;
                               $all_total_order_amount = 0;
-                              $all_total_buying = 0;
+                              // $all_total_buying = 0;
                               foreach ($selected_data as $module) {
 
                                 // echo '<pre>'; print_r($selected_data);
@@ -138,15 +137,13 @@
   <td><?php echo number_format($count_value_second); ?></td>
   <td><?php echo number_format($module['order_detention_customer']); ?></td>
   <td><?php echo number_format($module['local_transport']); ?></td>
-  <td><?php echo number_format($module['baying_assigned_rates']); ?></td>
-  
   <td>
     <!-- <?php $grand_total = round($tax_amount);  echo number_format($grand_total);?> -->
      <!-- <?php  
        $ssp_percantage = ($module['ssp_tax_val'] / 100) * $t_with_out_sst;
      ?> -->
     <!--  <input type="text" class="ssp_percantage" name="ssp_percantage[]" value="<?php echo round($ssp_percantage) ?>">  -->
-    <?php $g_total_amount = $module['order_total_amount'] + $module['order_detention_customer'] + $module['baying_assigned_rates'] + $module['local_transport'] + $total_labor + $count_value_second; echo number_format($g_total_amount);?>
+    <?php $g_total_amount = $module['order_total_amount'] + $module['order_detention_customer']  + $module['local_transport'] + $total_labor + $count_value_second; echo number_format($g_total_amount);?>
   </td>
 </tr>
 
@@ -155,7 +152,7 @@
                           $all_total_amount += $g_total_amount;
                           $all_total_labor += $total_labor;
                           $all_total_order_amount += $module['order_total_amount'];
-                          $all_total_buying += $module['baying_assigned_rates'];
+                          
                           $all_total_detention_customer += $module['order_detention_customer'];
                           $all_count_value_second += $count_value_second;
                           } 
@@ -173,7 +170,6 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
                             <td><strong><?php echo number_format(round($all_total_amount)); ?></strong></td>
                           </tr>
                         </tfoot>
@@ -183,7 +179,7 @@
                  
                    <input type="hidden" name="order_detention_customer_total" value="<?php echo round($all_total_detention_customer);?>" class="order_detention_customer_total" readonly>
 
-                   <input type="hidden" name="all_total_buying" value="<?php echo round($all_total_buying);?>" class="all_total_buying" readonly>
+                   <!-- <input type="hidden" name="all_total_buying" value="<?php echo round($all_total_buying);?>" class="all_total_buying" readonly> -->
                    
                    <input type="hidden" name="second_stop_amount_total" value="<?php echo round($all_count_value_second
                    ); ?>" class="second_stop_amount_total" readonly>
@@ -193,15 +189,26 @@
                       <input type="text" id="grand_total" class="form-control" name="grand_total" value="<?php echo round($all_total_amount);?>">
                       <input type="hidden" name="total_amount" value="<?php echo round($all_total_order_amount);?>" readonly>
                     </div>
-                    <div class="form-group col-lg-3">
-                      <label for="" class=""> Tax % </label>
-                      <input type="text" id="tax_per" name="tax_per" value="" class=" form-control tax_per">
+                    <div class="form-group col-lg-2">
+                      <label for="" class=""> Tax Add </label>
+                        <select id="select" class="form-control cd-select" name="role" required="">
+                          <option>Select</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </select>
                       
                     </div>
-                    <div class="form-group col-lg-3">
-                      <label for="" class=""> Tax Amount </label>
-                      <input type="text" id="tax_amount" name="tax_amount" value="" class="form-control tax_amount">
-                      
+                    <div class="tax-form tax_addYes">
+                      <div class="form-group col-lg-2">
+                        <label for="" class=""> Tax % </label>
+                        <input type="number" id="tax_per" name="tax_per" value="" class=" form-control tax_per">
+                        
+                      </div>
+                      <div class="form-group col-lg-2">
+                        <label for="" class=""> Tax Amount </label>
+                        <input type="text" id="tax_amount" name="tax_amount" value="" class="form-control tax_amount">
+                        
+                      </div>
                     </div>
                     <div class="form-group col-lg-3">
                       <label for="" class=""> After Tax </label>
@@ -231,10 +238,19 @@
 <!-- /#page-wrapper -->
 </div><!-- /#wrapper -->
 <!-- START CORE PLUGINS -->
-
+<script type="text/javascript">
+    $(function () {
+  $('.tax-form').hide();
+  // $('.d2').show();
+    
+  $('#select').on("change",function () {
+    $('.tax-form').hide();
+    $('.tax_add'+$(this).val()).show();
+  })
+});
+</script>
 <script type="text/javascript">
   $("#tax_per").keyup(function () {
-   
       var ans = $('#grand_total').val(); 
       var d_ans = ans / 100;
       var tax = d_ans * $('#tax_per').val();

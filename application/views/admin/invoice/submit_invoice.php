@@ -39,7 +39,7 @@
                                         <div class="form-group row ">
                                             <label for="" class="col-sm-3 col-form-label">Date</label>
                                               <div class="col-sm-9">
-                                                    <input class="form-control" name="invoice_paid_date" type="date" value="" id="" placeholder=""  >
+                                                    <input class="form-control" name="invoice_paid_date" type="date" value="" id="" placeholder="" required="" >
                                               </div>
                                         </div>
 
@@ -58,6 +58,18 @@
                                             <label for="" class="col-sm-3 col-form-label">With holding Tax (%)</label>
                                               <div class="col-sm-9">
                                                     <input class="form-control" id="with_holding_tax" name="with_holding_tax" type="number" value="<?php echo $invoice['with_holding_tax']; ?>" id="" placeholder="" <?php if ( $invoice['balance'] !== $invoice['invoice_total_amount']) { echo "readonly";}?> >
+                                              </div>
+                                        </div>
+                                        <div class="form-group row  " style="">
+                                            <label for="" class="col-sm-3 col-form-label">Tax%</label>
+                                              <div class="col-sm-9">
+                                                    <input class="form-control" id="" name="" type="number" value="<?php echo $invoice['tax_per']; ?>" id="" placeholder="" readonly="" >
+                                              </div>
+                                        </div> 
+                                        <div class="form-group row  " style="">
+                                            <label for="" class="col-sm-3 col-form-label">Tax Amount</label>
+                                              <div class="col-sm-9">
+                                                    <input class="form-control" id="" name="" type="number" value="<?php echo $invoice['tax_amount']; ?>" id="" placeholder=""  readonly="">
                                               </div>
                                         </div> 
                                            <div class="form-group row  " >
@@ -133,9 +145,9 @@
                                             </div>
                                         <div class="form-group row">
 
-                                        <label for="" class="col-sm-3 col-form-label">Select Bank</label>
+                                        <label for="" class="col-sm-3 col-form-label">Bank</label>
                                                 <div class="col-sm-9">
-                                                    <select class="form-control bank_id" data-live-search="true" name="bank_id" >
+                                                    <select class="form-control bank_id" data-live-search="true" name="bank_id" required="">
                                                         <option>Select Bank</option>
                                                         <?php foreach ($banks as $bank) : ?>
                                                             <option value="<?php echo $bank['id']; ?>"><?php echo $bank['bank_name']; ?></option>

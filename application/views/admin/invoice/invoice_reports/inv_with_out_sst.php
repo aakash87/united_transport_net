@@ -415,7 +415,6 @@ footer .end {
                 <th class="total">Vehicle Type</th>
                 <th class="total">Builty #</th>
                 <th class="total">Order Amount</th>
-                <th class="total">Buying</th>
                 <th class="total">Local Trans</th>
                 <th class="total">Labor </th>
                 <th class="total">2nd Stop </th>
@@ -435,13 +434,12 @@ footer .end {
                 <td class="qty"><?php echo $invoice_detail[0]['company_name']?></td>
                 <td class="qty"><?php echo  $newDate = date("d-m-Y", strtotime($module['order_date']));?></td>
                 <td class="qty"><?php echo $module['weight']?></td>
-                <td class="qty" style="font-size: 20px !important;"><?php echo $module['pickup_location']?></td>
-                <td class="qty" style="font-size: 20px !important;"><?php echo $module['drop_off_location']?></td>
+                <td class="qty"><?php echo $module['pickup_location']?></td>
+                <td class="qty"><?php echo $module['drop_off_location']?></td>
                 <td class="qty"><?php echo $module['registration_number']?></td>
                 <td class="qty"><?php echo $module['vehicle_type']?></td>
                 <td class="qty"><?php echo $module['builty_num']?></td>
                 <td class="qty"><?php echo number_format($module["order_total_amount"]);?></td>
-                <td class="qty"><?php echo $module['baying_assigned_rates']?></td>
                 <td class="qty"><?php echo number_format($module["local_transport"]);?></td>
                 <td class="qty">
                   <?php
@@ -455,18 +453,18 @@ footer .end {
                 </td>
                 <td class="qty"><?php echo number_format($module["second_stop_amount"]);?></td>
                 <td class="qty"><?php echo number_format($module["order_detention_customer"]);?></td>
-                <td class="qty"><?php $grand_total =  $module['order_total_amount'] + $module['local_transport'] + $module['baying_assigned_rates'] + $module['second_stop_amount'] + $module['order_detention_customer'] + $total_labor; echo number_format($grand_total)?></td>
+                <td class="qty"><?php $grand_total =  $module['order_total_amount'] + $module['local_transport'] + $module['second_stop_amount'] + $module['order_detention_customer'] + $total_labor; echo number_format($grand_total)?></td>
             </tr>
             <?php $total_count+=$grand_total; $i++; } ?>
             
               <tr style=" background-color: #e1e4e6; border-color: #e1e4e6;">
                   
-                <td class="qty" colspan="15"><strong>Grand Total</strong></td>
+                <td class="qty" colspan="14"><strong>Grand Total</strong></td>
                 <td class="qty" colspan="1" ><span style=""><strong><?php echo  number_format($total_count)?></strong>/=</span></td>
               </tr>
               <tr style=" background-color: #e1e4e6; border-color: #c6c9cc;">
                 
-                <td class="qty" colspan="15"><strong><?php echo NumbersToWords::convert($total_count);?> Only</strong></td>
+                <td class="qty" colspan="14"><strong><?php echo NumbersToWords::convert($total_count);?> Only</strong></td>
                 <td class="qty" colspan="1"><span style=""></span></td>
               </tr>
              

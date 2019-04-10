@@ -45,14 +45,16 @@
 
                                         <input class="form-control" name="bank_description" type="text" value="<?php echo $bank["bank_description"] ?>" id="example-text-input" placeholder="" ></div>
 
-                                    </div><div class="form-group row">
+                                    </div>
+                                    <!-- <div class="form-group row">
 
                                 <label for="example-text-input" class="col-sm-3 col-form-label">Amount</label>
                                         <div class="col-sm-9">
 
                                         <input class="form-control" name="amount" type="text" value="<?php echo $bank["amount"] ?>" id="example-text-input" placeholder="" ></div>
 
-                                    </div><div class="form-group row">
+                                    </div> -->
+                                    <div class="form-group row">
 
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary pull-right">Update</button>

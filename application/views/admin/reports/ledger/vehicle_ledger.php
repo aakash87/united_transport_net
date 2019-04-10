@@ -71,11 +71,11 @@
                                                   </div>
 
                             </div>
-                            <div class="form-group row">
+                           <!--  <div class="form-group row">
                                 <div class="col-lg-12">
                                     <button type="submit" class="btn btn-primary pull-right" name="" value="search">Search</button>
                                 </div>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                     <div class="panel-body">

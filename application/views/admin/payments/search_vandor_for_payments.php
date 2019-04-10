@@ -73,13 +73,13 @@
 										<tr>
 											<th><input type="checkbox" class="check_all"> </th>
 											<th>Sr.no</th>
-											<th>Order ID</th>
+											<th>Loading Date</th>
+											<th>Origin / Destination</th>
 											<th>Desc</th>
 											<th>Vehicle Buying</th>
 											<th>Detention</th>
 											<th>Local Transport</th>
 											<th>Labour Charges</th>
-											<th>Date Of Complete</th>
 											<th>Amount</th>
 										</tr>
 									</thead>
@@ -97,13 +97,13 @@
 										<tr>
 											<td><input type="checkbox" class="add_check" name="id[]" value="<?php echo $module['id'] ?>"></td>
 											<td><?php echo $i++;?></td>
-											<td><?php echo $module["order_id"]; ?></td>
+											<td><?php echo $module["pickup_date_and_time"]; ?></td>
+											<td><?php echo $module["drop_off_location"]; ?> To <?php echo $module["pickup_location"]; ?></td>
 											<td><?php echo $module["vendor_type"]; ?></td>
 											<td><?php echo number_format($module["vehicle_buying"]); ?></td>
 											<td><?php echo number_format($module["detention"]); ?></td>
 											<td><?php echo number_format($module["local_transport"]); ?></td>
 											<td><?php echo number_format($module["labour_charges"]); ?></td>
-											<td><?php echo $newDate = date("d-m-Y", strtotime($module["date"]));?></td>
 											<td><?php echo number_format($module["total_cost"]); ?></td>
 											
 										</tr>

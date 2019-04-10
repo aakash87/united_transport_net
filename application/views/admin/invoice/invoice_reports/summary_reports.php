@@ -32,7 +32,10 @@
             <div class="panel panel-bd">
                <div class="panel-heading">
                   <div class="panel-title">
-                     <h4>Summary Reports</h4>
+                     <h4><?php if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                                $get_expense_data = $this->db->query("SELECT * FROM `users` where id='".$_POST['select_sales_person']."' ")->row_array(); echo  $get_expense_data['name']; }
+                                ?> Summary Reports <?php if ($this->input->server('REQUEST_METHOD') == 'POST') { echo $newDate = date("d-m-Y", strtotime($str_current_day_show)); echo " To "; echo $newDate2 = date("d-m-Y", strtotime($str_last_date_show)); }
+                                ?></h4>
                   </div>
                </div>
 
@@ -44,8 +47,10 @@
               
                         <label for="example-text-input" class="col-sm-4 col-form-label">Sales Person</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control selectpicker" data-live-search="true" name="select_sales_person" >
-                                                  <option value="">Select Sales Person</option><?php foreach ($sales_person as $person) {?>
+                                    <select class="form-control selectpicker" data-live-search="true" name="select_sales_person" required="">
+                                                  <option value="">Select Sales Person</option>
+                                                  <option value="All">All</option>
+                                                  <?php foreach ($sales_person as $person) {?>
                                                       <option value="<?php echo $person["id"] ?>"><?php echo $person["name"] ?></option>
                                                  <?php } ?></select>
                                 </div>
@@ -91,10 +96,9 @@
                               <th>Vendor</th>
                               <th>ORIGIN</th>
                               <th>DEST</th>
-                              <th>Invoice </th>
+                              <th>Invoice #</th>
                               <th>Rate </th>
                               <th>Local Transport</th>
-                              <th>Labor Charges C</th>
                               <th>Labor Charges V</th>
                               <th>Detention</th>
                               <th>MISC EXP</th>
@@ -113,6 +117,18 @@
                         <tbody>
                           <?php 
                              $serial_number = 1;
+                             $rate = 0;
+                             $rate_total = 0;
+                             $local_total = 0;
+                             $vend_total = 0;
+                             $detention_total = 0;
+                             $MISC_total = 0;
+                             $bying_total = 0;
+                             $tax_total = 0;
+                             $srb_tax_total = 0;
+                             $GP_total = 0;
+                             $admin_c_total = 0;
+                             $net_profit_total = 0;
                              foreach ($summary_data as $value) { 
                               $get_expense_data = $this->db->query("SELECT * FROM `order_expense` where order_id='".$value['id']."' ")->result_array();
                               $misc_expense_amount = 0;
@@ -122,7 +138,15 @@
                           ?>
 
                           <tr>
-                            <?php  // echo '<pre>'; print_r($misc_expense_amount); ?>
+                            <?php
+                              $total_labor_c = 0;
+                              
+                              $labour_data = $this->db->query("SELECT * FROM `order_labor_charges` where order_id='".$value['id']."' ")->result_array();
+                              foreach ($labour_data as $l_data) {
+                                $total_labor_c += $l_data['labor_charges_customer'];
+                              }
+                              
+                              ?>
                             <td><?php echo $serial_number++; ?></td>
                             <td><?php echo $value['customer_name'];  ?></td>
                             <td><?php echo $newDate = date("d-m-Y", strtotime($value['order_date']));  ?></td>
@@ -132,21 +156,22 @@
                             <td><?php echo $value['vendor_name'];  ?></td>
                             <td><?php echo $value['pickup_location'];  ?></td>
                             <td><?php echo $value['drop_off_location'];  ?></td>
-                            <td><?php echo $value['invoice_voucher_number'];  ?></td>
-                            <td><?php echo number_format($value['order_total_amount']);  ?> </td>
-                            <td><?php echo number_format($value['local_transport']);  ?></td>
-                            <td> 
-                              <?php
-                              $total_labor_c = 0;
-                              $labour_data = $this->db->query("SELECT * FROM `order_labor_charges` where order_id='".$value['id']."' ")->result_array();
-                              foreach ($labour_data as $l_data) {
-                                $total_labor_c += $l_data['labor_charges_customer'];
-                              }
-                              
-                              ?>
-                                <?php echo number_format($total_labor_c);?>
+                            <td>
+                              <?php if ($value['inv_tax_amount'] == 0) {
+                                 ?>
+                                  <a href="<?php echo base_url() ?>admin/invoice/inv_with_out_sst/<?php echo $value["inv_id"] ?>" target="_blank"><?php echo $value['invoice_voucher_number'];  ?></a>
+                                 <?php
+                                }else{?>
+                                <a href="<?php echo base_url() ?>admin/invoice/inv_with_sst/<?php echo $value["inv_id"] ?>" target="_blank"><?php echo $value['invoice_voucher_number'];  ?></a>
+                              <?php } ?>
                             </td>
-                            <td> 
+                            <td><?php $rate = $value['order_total_amount'] + $value['local_transport'] + $total_labor_c + $value['order_detention_customer'] + $misc_expense_amount + $value['inv_tax_amount'] ;
+                              ?> 
+                              <span href="#" data-toggle="tooltip" title="Rate <?php echo $value['order_total_amount'];?> + L.Transport <?php echo $value['local_transport'];?> + L.Charges <?php echo $total_labor_c;?> + Detention <?php echo $value['order_detention_customer'];?> + M.Expense <?php echo $misc_expense_amount;?>"><?php echo number_format($rate);  ?></span>
+                            </td>
+                            <td><?php echo number_format($value['local_transport']);  ?></td>
+                            <!-- <td><?php echo number_format($total_labor_c);?></td> -->
+                             <td> 
                               <?php
                               $total_labor_v = 0;
                               $labour_data = $this->db->query("SELECT * FROM `order_labor_charges` where order_id='".$value['id']."' ")->result_array();
@@ -158,49 +183,55 @@
                               
                               ?>
                                 <?php echo number_format($total_labor_v);?>
-                            </td>
-                            <td><?php echo $value['order_detention_customer']  ?></td>
+                            </td> 
+                            <td><?php echo number_format($value['order_tenstion']);  ?></td>
                             <td><?php echo number_format($misc_expense_amount);  ?></td>
-                            <td><span <span href="#" data-toggle="tooltip" title="Detention <?php echo $value['order_tenstion'];?> + Buying <?php echo $value['baying_assigned_rates'];?>"><?php $total_baying = $value['order_tenstion'] + $value['baying_assigned_rates']; echo number_format($total_baying);  ?></span></td>
+                            <td>
+                             
+                              <?php echo number_format($value['baying_assigned_rates_for_vendor']);  ?>
+                            </td>
                             <td>
                                <?php
-                                  $tax_divide_value = $value['tax'] / 100; 
-                                  $tax = $value['order_total_amount'] * $tax_divide_value; 
+                                  $tax_divide_value = $value['with_holding_tax'] / 100; 
+                                  $tax = $rate * $tax_divide_value; 
                                 ?>
-                               <?php echo number_format($tax);  ?> <small>(<?php echo $value['tax']?>%)</small>
+                               <?php echo number_format($tax);  ?> 
+                               <small style="font-size: 64%;">(<?php echo $value['with_holding_tax']?>%)</small>
                                   
                             </td>
                             <td>
                                <?php 
-                                  $srb_divide_value = $value['srb_tax'] / 100; 
-                                  echo $srb_val = $value['order_total_amount'] * $srb_divide_value; 
+                                  $srb_divide_value = $value['tax_per'] / 100; 
+                                   $srb_val = $value['total_amount'] * $srb_divide_value;  
+                                   echo number_format($srb_val);
                                 ?>
+                                <small style="font-size: 64%;"> (<?php echo $value['tax_per'] ?>%)</small>
                             </td>
-                              <?php $total_incom = $value['order_total_amount'] + $total_labor_c + $value['order_detention_customer'];
-
-                              $total_cost = $total_labor_v + $value['local_transport'] + $total_baying + $misc_expense_amount + $tax +  $srb_val;
-
-                               $gp_total = $total_incom - $total_cost;   ?>
+                              <?php $gp = $rate - $value['local_transport'] - $total_labor_v - $value['order_tenstion'] - $misc_expense_amount - $value['baying_assigned_rates_for_vendor'] - $tax - $srb_val; ?>
 
 
-                              <td><?php echo $total_of_gp = number_format($gp_total);  ?></td>
+                              <td><?php echo number_format($gp);  ?></td>
                               <?php
-                                $multipul_amount = 25 / 100;
+                                $multipul_a_charges = 25 / 100;
                                 
-                                $admin_charges = $total_of_gp * $multipul_amount;
+                                $admin_charges = $gp * $multipul_a_charges;
+                                 $round_admin_charges = round($admin_charges);
                               ?>
-                              <td><?php echo number_format($admin_charges); ?></td>
-                              <td><?php echo number_format($total_of_gp - $admin_charges);  ?></td>
+                              <td><?php echo number_format($round_admin_charges); ?></td>
+                              <?php $net_proft = $gp - $round_admin_charges; ?>
+                              <td><?php echo number_format($net_proft);  ?></td>
                               <td>
                                 <?php
                                       if ($value['invoice_status'] == 1) {
                                           echo "Received";
                                       }
+                                      else if($value['invoice_status'] == 2){
+                                        echo "Partial";
+                                      }
                                       else{
                                         echo 'Not Received';
                                       }
                                    ?>
-                                    
                               </td>
                               <td>
 
@@ -208,9 +239,15 @@
                                       if ($value['invoice_status'] == 1) {
                                           echo $newDate = date("M", strtotime($value['invoice_paid_date']));
                                       }
+                                      else if($value['invoice_status'] == 2){
+                                        echo $newDate = date("M", strtotime($value['invoice_paid_date']));
+                                      }
                                       else{
                                         echo 'Nill';
                                       }
+
+
+                                      
                                    ?>
                                     
                               </td>
@@ -219,17 +256,66 @@
                               </td>
                               
                               <td>
-                                <?php if ($value['inv_created'] == 1) {
-                                  echo 'Created';
-                                }elseif ($value['inv_created'] == 0) {
+                                <?php
+
+                                if ($value['invoice_status'] == 1) {
+                                    echo "Received";
+                                }
+                                else if($value['invoice_status'] == 2){
+                                  echo "Partial";
+                                }
+                                else{
                                   echo 'Not Created';
-                                }  ?>
+                                }
+                                ?>
                                   
                               </td>
 
                            </tr>
-                           <?php } ?>
+                           <?php 
+                            $rate_total += $rate;
+                            $local_total += $value['local_transport'];
+                            $vend_total += $total_labor_c;
+                            $detention_total += $value['order_detention_customer'];
+                            $MISC_total += $misc_expense_amount;
+                            $bying_total += $value['baying_assigned_rates_for_vendor'];
+                            $tax_total += $tax;
+                            $srb_tax_total += $srb_val;
+                            $GP_total += $gp;
+                            $admin_c_total += $round_admin_charges;
+                            $net_profit_total += $net_proft;
+                            } 
+                             ?>
+
                         </tbody>
+                           <tfoot>
+                             <tr>
+                               <td></td>
+                                <td></td> 
+                                <td></td> 
+                                <td></td> 
+                                <td></td> 
+                                <td></td> 
+                                <td></td> 
+                                <td></td> 
+                               <td><strong>Total</strong></td>
+                                <td></td> 
+                               <td><strong><?php echo number_format($rate_total);?></strong></td>
+                               <td><strong><?php echo number_format($local_total);?></strong></td>
+                               <td><strong><?php echo number_format($vend_total);?></strong></td>
+                               <td><strong><?php echo number_format($detention_total);?></strong></td>
+                               <td><strong><?php echo number_format($MISC_total);?></strong></td>
+                               <td><strong><?php echo number_format($bying_total);?></strong></td>
+                               <td><strong><?php echo number_format($tax_total);?></strong></td>
+                               <td><strong><?php echo number_format($srb_tax_total);?></strong></td>
+                               <td><strong><?php echo number_format($GP_total);?></strong></td>
+                               <td><strong><?php echo number_format($admin_c_total);?></strong></td>
+                               <td><strong><?php echo number_format($net_profit_total);?></strong></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                             </tr>
+                           </tfoot>
                      </table>
                   </div>
                </div>
