@@ -60,6 +60,15 @@
             return $this->db->get()->row_array();
 
         }
+        public function edit_vandor_payment_detail($id)
+        {
+            $this->db->select('vendor_payments.* , van.vendor_name , van.vendor_address, van.vendor_type' );
+            $this->db->from('vendor_payments');
+            $this->db->join('vendor van' , 'van.id = vendor_payments.vendor_id' , 'left');
+            $this->db->where('vendor_payments.id' , $id);
+            return $this->db->get()->row_array();
+
+        }
         public function all_create_inv_with_name()
         {
             $this->db->select('vendor_payments.*, van.vendor_name , van.vendor_address, van.vendor_type' );

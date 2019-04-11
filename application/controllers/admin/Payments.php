@@ -162,6 +162,32 @@
 
 			$this->load->template('admin/payments/vendor/create_selected_vandor_payments',$this->data);
 		}
+		public function edit_vandor_payment($id)
+		{
+
+			$this->data['title'] = 'Submit Vandor Payment';
+
+			$this->data['permission'] = $this->permission;
+			$this->data['vendor_payments_detail'] = $this->Payments_model->edit_vandor_payment_detail($id);
+
+			$o_id = explode(',', $this->data['vendor_payments_detail']['order_id']);
+			
+			$selected_data = [];	
+
+			for ($i=0; $i < count($o_id); $i++) { 
+				$this->data['orders'] = $this->Payments_model->get_row_single('orders',array('id'=> $o_id[$i]));
+				array_push($selected_data, $this->data['orders']);
+			}
+			$this->data['selected_data'] = $selected_data;
+
+
+
+			// echo "<pre>";
+			// print_r($this->data['selected_data']);
+
+			// die();
+			$this->load->template('admin/payments/vendor/edit_vandor_payment',$this->data);
+		}
 		public function submit_vandor_payment($id)
 		{
 
