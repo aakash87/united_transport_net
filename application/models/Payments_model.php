@@ -13,10 +13,12 @@
         }
         public function all_rows_with_name_by_id($vendor_id)
         {
-            $this->db->select('vendor_external_cost.* , van.vendor_name , ord.pickup_date_and_time, ord.drop_off_location, ord.pickup_location' );
+            $this->db->select('vendor_external_cost.* , van.vendor_name , ord.pickup_date_and_time, ord.drop_off_location, ord.pickup_location, cus.full_name, veh.registration_number' );
             $this->db->from('vendor_external_cost');
             $this->db->join('vendor van' , 'van.id = vendor_external_cost.vendor_id' , 'left');
             $this->db->join('orders ord' , 'ord.id = vendor_external_cost.order_id' , 'left');
+            $this->db->join('customer cus' , 'cus.id = ord.order_customer' , 'left');
+            $this->db->join('vehicle veh' , 'veh.id = ord.vehicel_of_vendor' , 'left');
 
             $this->db->where("(ord.order_status='Complete' && vendor_external_cost.status='UnPaid')", NULL, FALSE);
             $this->db->where('vendor_external_cost.vendor_id' , $vendor_id );

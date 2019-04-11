@@ -64,6 +64,7 @@
 					        </div>
 					    </form>
 					</div>
+					<?php if ($this->input->server('REQUEST_METHOD') == 'POST') { ?>
 					<form method="post" action="<?php echo base_url(); ?>admin/payments/create_selected_vandor_payments" id="import_forms" enctype="multipart/form-data">
 						<div class="panel-body">
 							
@@ -75,7 +76,8 @@
 											<th>Sr.no</th>
 											<th>Loading Date</th>
 											<th>Origin / Destination</th>
-											<th>Desc</th>
+											<th>Customer Name</th>
+											<th>Vehicle #</th>
 											<th>Vehicle Buying</th>
 											<th>Detention</th>
 											<th>Local Transport</th>
@@ -98,8 +100,9 @@
 											<td><input type="checkbox" class="add_check" name="id[]" value="<?php echo $module['id'] ?>"></td>
 											<td><?php echo $i++;?></td>
 											<td><?php echo $module["pickup_date_and_time"]; ?></td>
-											<td><?php echo $module["drop_off_location"]; ?> To <?php echo $module["pickup_location"]; ?></td>
-											<td><?php echo $module["vendor_type"]; ?></td>
+											<td><?php echo $module["pickup_location"]; ?> To <?php echo $module["drop_off_location"]; ?></td>
+											<td><?php echo $module["full_name"]; ?></td>
+											<td><?php echo $module["registration_number"]; ?></td>
 											<td><?php echo number_format($module["vehicle_buying"]); ?></td>
 											<td><?php echo number_format($module["detention"]); ?></td>
 											<td><?php echo number_format($module["local_transport"]); ?></td>
@@ -121,6 +124,7 @@
 											<td></td>
 											<td></td>
 											<td></td>
+											<td></td>
 											<td><strong><?php echo number_format($total_amount);?></strong></td>
 										</tr>
 									</tfoot>
@@ -130,6 +134,7 @@
 							<button type="submit" class="btn btn-primary pull-right" >Create Invoice</button>
 						</div>
 					</form>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
