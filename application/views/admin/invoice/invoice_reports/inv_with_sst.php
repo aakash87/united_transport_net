@@ -414,8 +414,8 @@ footer .end {
             <div class="date" style="text-align: left">Address: 23-E, E-Market, P.E.C.H.S, </div>
             <div class="date" style="text-align: left"><?php echo $customer['company_name']?></div>
             <div class="date" style="text-align: left"><?php echo $customer['Address']?></div>
-            <div class="date" style="text-align: left">NTN #</div>
-            <div class="date" style="text-align: left">STR #</div>
+            <div class="date" style="text-align: left">NTN # : <?php echo $customer['ntn_no']?></div>
+            <div class="date" style="text-align: left">STR # : <?php echo $customer['str_no']?></div>
             <div class="date" style="text-align: left">Phone # <span><?php echo $customer['Phone_Number']?></span></div>
         </div>
     </div>

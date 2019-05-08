@@ -232,7 +232,7 @@
 				redirect('admin/home');
 			}
 			if ($this->user_type == 1) {
-				$this->data['customer'] = $this->Customer_model->all_rows('customer');;	
+				$this->data['customer'] = $this->Customer_model->all_rows('customer');	
 			}
 			elseif ($this->user_type == 15) {
 				$this->data['customer'] = $this->Customer_model->all_rows('customer');

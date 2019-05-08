@@ -58,6 +58,7 @@
                               <th>Builty #</th>
                               <th>Local Transport</th>
                               <th>Second Stop</th>
+                              <th>Detention C</th>
                               <th>Order Amount</th>
                               <th>Net Amount</th>
                               <th>Status</th>
@@ -93,6 +94,7 @@
                                $total_amount_of_s_stop += $s_stop['sec_stop_amount'];
                                };
                               ?><span href="#" data-toggle="tooltip" title="<?php echo count($second_stop);?> Second Stop On This Order"> <?php echo $total_amount_of_s_stop; ?></span></td>
+                              <td><?php echo number_format($module["order_detention_customer"]) ?></td>
                               <td><?php echo number_format($module["order_total_amount"]) ?></td>
                               <td><?php echo number_format($module["net_amount"]); ?></td>
                               <td><?php echo $module["order_status"] ?></td>

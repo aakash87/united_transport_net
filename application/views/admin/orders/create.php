@@ -103,28 +103,29 @@
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">Origin</label>
                               <div class="col-sm-9">
-                                <select class="form-control selectpicker" data-live-search="true" name="pickup_location">
+                                <input class="form-control" name="pickup_location" type="text" value="" id="" placeholder="" >
+                                <!-- <select class="form-control selectpicker" data-live-search="true" name="">
                                     <option value="">Select Origin City</option>
                                     <?php 
                                     foreach ($city_list as $city) {
                                         echo '<option value="'.$city['CityName'].'">'.$city['CityName'].'</option>';
                                     }
                                 ?>
-                                </select>
+                                </select> -->
                               </div>
                            </div>
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-3 col-form-label">Destination</label>
                               <div class="col-sm-9">
-
-                                <select class="form-control selectpicker" data-live-search="true" name="drop_off_location">
+                                 <input class="form-control" name="drop_off_location" type="text" value="" id="" placeholder="" >
+                                <!-- <select class="form-control selectpicker" data-live-search="true" name="">
                                     <option value="">Select Destination City</option>
                                     <?php 
                                     foreach ($city_list as $city) {
                                         echo '<option value="'.$city['CityName'].'">'.$city['CityName'].'</option>';
                                     }
                                 ?>
-                                </select>
+                                </select> -->
                               </div>
                            </div>
                            <div class="form-group row">
@@ -158,7 +159,7 @@
                                  <div class="col-sm-9">
                                     <input class="form-control" name="vehicel_of_vendorID" type="hidden" value="" id="vehicel_of_vendorID" placeholder=""  >
                                     <select class="form-control" name="vehicel_of_vendor" id="vehicel_of_vendor" value="">
-                                       <option value="">Select Vehicle Vendoraaa</option>
+                                       <option value="">Select Vehicle Vendor</option>
                                     </select>
                                  </div>
                               </div>

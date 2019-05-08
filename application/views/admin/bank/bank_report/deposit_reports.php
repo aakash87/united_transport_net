@@ -135,6 +135,7 @@
                                               <td></td>
                                               <td></td>
                                               <td></td>
+                                              <td></td>
                                               <td>
                                                 <strong><?php if(isset( $total_amount)){
                                                   echo number_format($dep["bank_total_amount"]);}
