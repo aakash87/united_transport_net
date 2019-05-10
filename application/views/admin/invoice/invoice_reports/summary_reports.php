@@ -165,9 +165,9 @@
                                 <a href="<?php echo base_url() ?>admin/invoice/inv_with_sst/<?php echo $value["inv_id"] ?>" target="_blank"><?php echo $value['invoice_voucher_number'];  ?></a>
                               <?php } ?>
                             </td>
-                            <td><?php $rate = $value['order_total_amount'] + $value['local_transport'] + $total_labor_c + $value['order_detention_customer'] + $misc_expense_amount + $value['inv_tax_amount'] ;
+                            <td><?php $rate = $value['order_total_amount'] + $value['local_transport'] + $total_labor_c + $value['order_detention_customer'] + $value['inv_tax_amount'] ;
                               ?> 
-                              <span href="#" data-toggle="tooltip" title="Rate <?php echo $value['order_total_amount'];?> + L.Transport <?php echo $value['local_transport'];?> + L.Charges <?php echo $total_labor_c;?> + Detention <?php echo $value['order_detention_customer'];?> + M.Expense <?php echo $misc_expense_amount;?>"><?php echo number_format($rate);  ?></span>
+                              <span href="#" data-toggle="tooltip" title="Rate <?php echo $value['order_total_amount'];?> + L.Transport <?php echo $value['local_transport'];?> + L.Charges <?php echo $total_labor_c;?> + Detention <?php echo $value['order_detention_customer'];?>"><?php echo number_format($rate);  ?></span>
                             </td>
                             <td><?php echo number_format($value['local_transport']);  ?></td>
                             <!-- <td><?php echo number_format($total_labor_c);?></td> -->
